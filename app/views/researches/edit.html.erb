@@ -1,0 +1,20 @@
+<h1>Editing research</h1>
+
+<% form_for(@research) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :introduction %><br />
+    <%= f.text_field :introduction %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @research %> |
+<%= link_to 'Back', researches_path %>

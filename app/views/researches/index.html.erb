@@ -1,0 +1,22 @@
+<%= title _("Listing Researches") %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Introduction</th>
+  </tr>
+
+<% for research in @researches %>
+  <tr>
+    <td><%=h research.name %></td>
+    <td><%=h research.introduction %></td>
+    <td><%= link_to 'Show', research %></td>
+    <td><%= link_to 'Edit', edit_research_path(research) %></td>
+    <td><%= link_to 'Destroy', research, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New research', new_research_path %>
