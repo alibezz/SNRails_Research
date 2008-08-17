@@ -1,8 +1,8 @@
 class CreateResearches < ActiveRecord::Migration
   def self.up
-    create_table :researches do |t|
+    create_table :researches, :force => true do |t|
       t.string :name
-      t.string :introduction
+      t.text :introduction
 
       t.timestamps
     end

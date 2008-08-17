@@ -48,7 +48,7 @@ Rails::Initializer.run do |config|
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
-    :session_key => '_researchonrails_session',
+    :session_key => '_rails_research_session',
     :secret      => '11a89cf2cd622b055cae084698028aee23affc1c32e4312498da7b15a3d93a79535863cc795e81abd95dc6d2ae6f37bdc96043b74e8114e088b2409b610335c4'
   }
 

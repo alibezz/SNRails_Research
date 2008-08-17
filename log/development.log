@@ -326,3 +326,918 @@ SGFzaHsABjoKQHVzZWR7AA==--a981d7b3cb315ae91a0320312ea1ffc673808e24
 Rendering template within layouts/researches
 Rendering researches/index
 Completed in 0.02000 (49 reqs/sec) | Rendering: 0.00400 (19%) | DB: 0.00000 (0%) | 200 OK [http://localhost/]
+
+
+Processing ResearchesController#index (for 127.0.0.1 at 2008-08-16 00:54:12) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--a981d7b3cb315ae91a0320312ea1ffc673808e24
+  Parameters: {"action"=>"index", "controller"=>"researches"}
+  [4;36;1mResearch Load (0.004000)[0m   [0;1mSELECT * FROM "researches" [0m
+Rendering template within layouts/researches
+Rendering researches/index
+Completed in 0.36802 (2 reqs/sec) | Rendering: 0.00400 (1%) | DB: 0.00400 (1%) | 200 OK [http://localhost/]
+
+
+Processing ResearchesController#new (for 127.0.0.1 at 2008-08-16 00:54:25) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--a981d7b3cb315ae91a0320312ea1ffc673808e24
+  Parameters: {"action"=>"new", "controller"=>"researches"}
+Rendering template within layouts/researches
+Rendering researches/new
+Completed in 0.02800 (35 reqs/sec) | Rendering: 0.01200 (42%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches/new]
+
+
+Processing ResearchesController#create (for 127.0.0.1 at 2008-08-16 00:54:53) [POST]
+  Session ID: BAh7ByIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7ADoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2
+NTljNWU5NzE2NWQ3NmE=--939e4933c0e8348454590bd8001fccfd2b891f8f
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"29ce9825a27d4523a8ba08418a957807b10dda99", "action"=>"create", "research"=>{"name"=>"", "introduction"=>""}, "controller"=>"researches"}
+Rendering template within layouts/researches
+Rendering researches/new
+Completed in 0.04400 (22 reqs/sec) | Rendering: 0.00800 (18%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches]
+
+
+Processing ResearchesController#create (for 127.0.0.1 at 2008-08-16 00:55:30) [POST]
+  Session ID: BAh7ByIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7ADoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2
+NTljNWU5NzE2NWQ3NmE=--939e4933c0e8348454590bd8001fccfd2b891f8f
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"29ce9825a27d4523a8ba08418a957807b10dda99", "action"=>"create", "research"=>{"name"=>"", "introduction"=>""}, "controller"=>"researches"}
+Rendering template within layouts/researches
+Rendering researches/new
+Completed in 0.03600 (27 reqs/sec) | Rendering: 0.00800 (22%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches]
+
+
+Processing ResearchesController#create (for 127.0.0.1 at 2008-08-16 00:55:32) [POST]
+  Session ID: BAh7ByIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7ADoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2
+NTljNWU5NzE2NWQ3NmE=--939e4933c0e8348454590bd8001fccfd2b891f8f
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"29ce9825a27d4523a8ba08418a957807b10dda99", "action"=>"create", "research"=>{"name"=>"", "introduction"=>""}, "controller"=>"researches"}
+Rendering template within layouts/researches
+Rendering researches/new
+Completed in 0.03200 (31 reqs/sec) | Rendering: 0.00800 (25%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches]
+
+
+Processing ResearchesController#create (for 127.0.0.1 at 2008-08-16 00:55:41) [POST]
+  Session ID: BAh7ByIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7ADoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2
+NTljNWU5NzE2NWQ3NmE=--939e4933c0e8348454590bd8001fccfd2b891f8f
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"29ce9825a27d4523a8ba08418a957807b10dda99", "action"=>"create", "research"=>{"name"=>"", "introduction"=>""}, "controller"=>"researches"}
+Rendering template within layouts/researches
+Rendering researches/new
+Completed in 0.03200 (31 reqs/sec) | Rendering: 0.00800 (24%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches]
+
+
+Processing ResearchesController#create (for 127.0.0.1 at 2008-08-16 00:55:50) [POST]
+  Session ID: BAh7ByIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7ADoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2
+NTljNWU5NzE2NWQ3NmE=--939e4933c0e8348454590bd8001fccfd2b891f8f
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"29ce9825a27d4523a8ba08418a957807b10dda99", "action"=>"create", "research"=>{"name"=>"", "introduction"=>""}, "controller"=>"researches"}
+Rendering template within layouts/researches
+Rendering researches/new
+Completed in 0.03600 (27 reqs/sec) | Rendering: 0.00800 (22%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches]
+
+
+Processing ResearchesController#create (for 127.0.0.1 at 2008-08-16 00:55:53) [POST]
+  Session ID: BAh7ByIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7ADoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2
+NTljNWU5NzE2NWQ3NmE=--939e4933c0e8348454590bd8001fccfd2b891f8f
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"29ce9825a27d4523a8ba08418a957807b10dda99", "action"=>"create", "research"=>{"name"=>"", "introduction"=>""}, "controller"=>"researches"}
+Rendering template within layouts/researches
+Rendering researches/new
+Completed in 0.03200 (31 reqs/sec) | Rendering: 0.00800 (25%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches]
+
+
+Processing ResearchesController#create (for 127.0.0.1 at 2008-08-16 00:56:04) [POST]
+  Session ID: BAh7ByIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7ADoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2
+NTljNWU5NzE2NWQ3NmE=--939e4933c0e8348454590bd8001fccfd2b891f8f
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"29ce9825a27d4523a8ba08418a957807b10dda99", "action"=>"create", "research"=>{"name"=>"", "introduction"=>""}, "controller"=>"researches"}
+Rendering template within layouts/researches
+Rendering researches/new
+Completed in 0.02800 (35 reqs/sec) | Rendering: 0.00400 (14%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches]
+
+
+Processing ResearchesController#index (for 127.0.0.1 at 2008-08-16 08:55:03) [GET]
+  Session ID: BAh7ByIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7ADoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2
+NTljNWU5NzE2NWQ3NmE=--939e4933c0e8348454590bd8001fccfd2b891f8f
+  Parameters: {"action"=>"index", "controller"=>"researches"}
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" [0m
+Rendering researches/index
+Completed in 0.14401 (6 reqs/sec) | Rendering: 0.00400 (2%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches]
+
+
+Processing ResearchesController#index (for 127.0.0.1 at 2008-08-16 09:44:16) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--48bc9a4b528aece131d6df84559fd5bc50db00ac
+  Parameters: {"action"=>"index", "controller"=>"researches"}
+  [4;35;1mResearch Load (0.000000)[0m   [0mSELECT * FROM "researches" [0m
+Rendering researches/index
+Completed in 0.02000 (49 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches]
+
+
+Processing ResearchesController#index (for 127.0.0.1 at 2008-08-16 14:45:17) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--48bc9a4b528aece131d6df84559fd5bc50db00ac
+  Parameters: {"action"=>"index", "controller"=>"researches"}
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" [0m
+Rendering researches/index
+Completed in 0.17601 (5 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches]
+
+
+Processing ResearchesController#new (for 127.0.0.1 at 2008-08-16 14:45:19) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--48bc9a4b528aece131d6df84559fd5bc50db00ac
+  Parameters: {"action"=>"new", "controller"=>"researches"}
+Rendering researches/new
+Rendered researches/_form (0.00400)
+Completed in 0.03200 (31 reqs/sec) | Rendering: 0.01200 (37%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches/new]
+
+
+Processing ResearchesController#create (for 127.0.0.1 at 2008-08-16 14:45:37) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--48bc9a4b528aece131d6df84559fd5bc50db00ac
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"29ce9825a27d4523a8ba08418a957807b10dda99", "action"=>"create", "research"=>{"name"=>"pesquisa pais", "introduction"=>"essa é a pesquisa dos pais"}, "controller"=>"researches"}
+  [4;35;1mResearch Create (0.024001)[0m   [0mINSERT INTO "researches" ("name", "created_at", "updated_at", "introduction") VALUES('pesquisa pais', '2008-08-16 17:45:37', '2008-08-16 17:45:37', 'essa é a pesquisa dos pais')[0m
+Redirected to http://localhost:3000/researches/1
+Completed in 0.07600 (13 reqs/sec) | DB: 0.02400 (31%) | 302 Found [http://localhost/researches]
+
+
+Processing ResearchesController#show (for 127.0.0.1 at 2008-08-16 14:45:37) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7BjoLbm90aWNlIhpTdWNjZXNzZnVsbHkgY3JlYXRlZCEGOgpAdXNlZHsG
+OwdG--ba52909371115d9e75623ea19d1f3ea74bf828ee
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"researches"}
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+Rendering researches/show
+Completed in 0.02400 (41 reqs/sec) | Rendering: 0.00400 (16%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches/1]
+
+
+Processing ResearchesController#index (for 127.0.0.1 at 2008-08-16 14:45:39) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7BjoLbm90aWNlIhpTdWNjZXNzZnVsbHkgY3JlYXRlZCEGOgpAdXNlZHsG
+OwdU--d6728d289c08124e2873905f3fe1e3a73f082b26
+  Parameters: {"action"=>"index", "controller"=>"researches"}
+  [4;35;1mResearch Load (0.000000)[0m   [0mSELECT * FROM "researches" [0m
+Rendering researches/index
+Completed in 0.16401 (6 reqs/sec) | Rendering: 0.00800 (4%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches]
+
+
+Processing DocController#index (for 127.0.0.1 at 2008-08-16 14:49:07) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--48bc9a4b528aece131d6df84559fd5bc50db00ac
+  Parameters: {"action"=>"index", "controller"=>"doc"}
+Rendering template within layouts/doc
+Rendering doc/index
+Completed in 0.21601 (4 reqs/sec) | Rendering: 0.10001 (46%) | 200 OK [http://localhost/doc]
+
+
+Processing DocController#api (for 127.0.0.1 at 2008-08-16 14:49:07) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--48bc9a4b528aece131d6df84559fd5bc50db00ac
+  Parameters: {"format"=>"css", "action"=>"api", "id"=>"rdoc-style", "controller"=>"doc"}
+
+
+ActionController::UnknownAction (No action responded to api):
+    /vendor/rails/actionpack/lib/action_controller/filters.rb:580:in `call_filters'
+    /vendor/rails/actionpack/lib/action_controller/filters.rb:573:in `perform_action_without_benchmark'
+    /vendor/rails/actionpack/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    /vendor/rails/actionpack/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /vendor/rails/actionpack/lib/action_controller/rescue.rb:201:in `perform_action'
+    /vendor/rails/actionpack/lib/action_controller/base.rb:529:in `send'
+    /vendor/rails/actionpack/lib/action_controller/base.rb:529:in `process_without_filters'
+    /vendor/rails/actionpack/lib/action_controller/filters.rb:569:in `process_without_session_management_support'
+    /vendor/rails/actionpack/lib/action_controller/session_management.rb:130:in `process'
+    /vendor/rails/actionpack/lib/action_controller/base.rb:389:in `process'
+    /vendor/rails/actionpack/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    /vendor/rails/actionpack/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /vendor/rails/actionpack/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /vendor/rails/actionpack/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /vendor/rails/actionpack/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /vendor/rails/actionpack/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/lib/ruby/1.8/mongrel/rails.rb:76:in `process'
+    /usr/lib/ruby/1.8/mongrel/rails.rb:74:in `synchronize'
+    /usr/lib/ruby/1.8/mongrel/rails.rb:74:in `process'
+    /usr/lib/ruby/1.8/mongrel.rb:159:in `process_client'
+    /usr/lib/ruby/1.8/mongrel.rb:158:in `each'
+    /usr/lib/ruby/1.8/mongrel.rb:158:in `process_client'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `run'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `initialize'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `new'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `run'
+    /usr/lib/ruby/1.8/mongrel.rb:268:in `initialize'
+    /usr/lib/ruby/1.8/mongrel.rb:268:in `new'
+    /usr/lib/ruby/1.8/mongrel.rb:268:in `run'
+    /usr/lib/ruby/1.8/mongrel/configurator.rb:282:in `run'
+    /usr/lib/ruby/1.8/mongrel/configurator.rb:281:in `each'
+    /usr/lib/ruby/1.8/mongrel/configurator.rb:281:in `run'
+    /usr/lib/ruby/1.8/mongrel_rails:129:in `run'
+    /usr/lib/ruby/1.8/mongrel/command.rb:212:in `run'
+    /usr/lib/ruby/1.8/mongrel_rails:282
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:502:in `load'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:502:in `load'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:502:in `load'
+    /vendor/rails/railties/lib/commands/servers/mongrel.rb:64
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:509:in `require'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:509:in `require'
+    /vendor/rails/railties/lib/commands/server.rb:39
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    ./script/server:3
+
+Rendering /home/smurf/projetos/rails_research/vendor/rails/actionpack/lib/action_controller/templates/rescues/layout.erb (not_found)
+
+
+Processing DocController#index (for 127.0.0.1 at 2008-08-16 14:49:28) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--48bc9a4b528aece131d6df84559fd5bc50db00ac
+  Parameters: {"action"=>"index", "controller"=>"doc"}
+Rendering template within layouts/doc
+Rendering doc/index
+Completed in 0.00800 (124 reqs/sec) | Rendering: 0.00400 (49%) | 200 OK [http://localhost/doc]
+
+
+Processing ResearchesController#index (for 127.0.0.1 at 2008-08-16 14:50:52) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--48bc9a4b528aece131d6df84559fd5bc50db00ac
+  Parameters: {"action"=>"index", "controller"=>"researches"}
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" [0m
+Rendering researches/index
+Completed in 0.10001 (9 reqs/sec) | Rendering: 0.01200 (12%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches]
+
+
+Processing ResearchesController#new (for 127.0.0.1 at 2008-08-16 14:50:55) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--48bc9a4b528aece131d6df84559fd5bc50db00ac
+  Parameters: {"action"=>"new", "controller"=>"researches"}
+Rendering researches/new
+Rendered researches/_form (0.00400)
+Completed in 0.03200 (31 reqs/sec) | Rendering: 0.01200 (37%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches/new]
+
+
+Processing ResearchesController#index (for 127.0.0.1 at 2008-08-16 14:53:32) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--48bc9a4b528aece131d6df84559fd5bc50db00ac
+  Parameters: {"action"=>"index", "controller"=>"researches"}
+  [4;35;1mResearch Load (0.000000)[0m   [0mSELECT * FROM "researches" [0m
+Rendering researches/index
+Completed in 0.02400 (41 reqs/sec) | Rendering: 0.00800 (33%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches]
+
+
+Processing ResearchesController#index (for 127.0.0.1 at 2008-08-17 07:48:35) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--48bc9a4b528aece131d6df84559fd5bc50db00ac
+  Parameters: {"action"=>"index", "controller"=>"researches"}
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" [0m
+Rendering researches/index
+Completed in 0.22801 (4 reqs/sec) | Rendering: 0.01200 (5%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches]
+  [4;36;1mSQL (0.004000)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateResearches (20080816110900)
+  [4;35;1mSQL (0.000000)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000000)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.080004)[0m   [0;1mDROP TABLE "researches"[0m
+  [4;35;1mSQL (0.012001)[0m   [0mCREATE TABLE "researches" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) DEFAULT NULL NULL, "introduction" text DEFAULT NULL NULL, "created_at" datetime DEFAULT NULL NULL, "updated_at" datetime DEFAULT NULL NULL) [0m
+  [4;36;1mSQL (0.016001)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20080816110900')[0m
+Migrating to CreateItems (20080816200536)
+  [4;35;1mSQL (0.000000)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.004000)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.028002)[0m   [0mCREATE TABLE "items" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "info" varchar(255) DEFAULT NULL NULL, "type" varchar(255) DEFAULT NULL NULL, "research_id" integer DEFAULT NULL NULL, "created_at" datetime DEFAULT NULL NULL, "updated_at" datetime DEFAULT NULL NULL) [0m
+  [4;36;1mSQL (0.016001)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20080816200536')[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000000)[0m   [0mPRAGMA index_list("items")[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mPRAGMA index_list("researches")[0m
+
+
+Processing ResearchesController#index (for 127.0.0.1 at 2008-08-17 08:43:30) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--48bc9a4b528aece131d6df84559fd5bc50db00ac
+  Parameters: {"action"=>"index", "controller"=>"researches"}
+  [4;36;1mResearch Load (0.004000)[0m   [0;1mSELECT * FROM "researches" [0m
+Rendering researches/index
+Completed in 0.09600 (10 reqs/sec) | Rendering: 0.00400 (4%) | DB: 0.00400 (4%) | 200 OK [http://localhost/researches]
+
+
+Processing ItemsController#index (for 127.0.0.1 at 2008-08-17 08:43:34) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--48bc9a4b528aece131d6df84559fd5bc50db00ac
+  Parameters: {"action"=>"index", "controller"=>"items"}
+  [4;35;1mItem Load (0.000000)[0m   [0mSELECT * FROM "items" [0m
+Rendering items/index
+Completed in 0.12001 (8 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhost/items]
+
+
+Processing ItemsController#index (for 127.0.0.1 at 2008-08-17 08:43:41) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--48bc9a4b528aece131d6df84559fd5bc50db00ac
+  Parameters: {"action"=>"index", "controller"=>"items"}
+  [4;36;1mItem Load (0.004001)[0m   [0;1mSELECT * FROM "items" [0m
+Rendering items/index
+
+
+ActionView::TemplateError (undefined method `new_item_url' for #<ItemsController:0x2aaaacdc6af0>) on line #21 of items/index.html.erb:
+18: </table>
+19: <br/>
+20: 
+21: <%= link_to 'New Item', new_object_url %>
+    vendor/plugins/resource_controller/lib/urligence.rb:35:in `send'
+    vendor/plugins/resource_controller/lib/urligence.rb:35:in `urligence'
+    vendor/plugins/resource_controller/lib/urligence.rb:3:in `smart_url'
+    vendor/plugins/resource_controller/lib/resource_controller/helpers/urls.rb:63:in `new_object_url'
+    (eval):2:in `send'
+    (eval):2:in `new_object_url'
+    app/views/items/index.html.erb:21:in `_run_erb_47app47views47items47index46html46erb'
+    vendor/rails/actionpack/lib/action_view/base.rb:338:in `send'
+    vendor/rails/actionpack/lib/action_view/base.rb:338:in `execute'
+    vendor/rails/actionpack/lib/action_view/template_handlers/compilable.rb:29:in `send'
+    vendor/rails/actionpack/lib/action_view/template_handlers/compilable.rb:29:in `render'
+    vendor/rails/actionpack/lib/action_view/template.rb:35:in `render'
+    vendor/rails/actionpack/lib/action_view/template.rb:22:in `render_template'
+    vendor/rails/actionpack/lib/action_view/base.rb:245:in `render_file_without_locale'
+    /usr/lib/ruby/1.8/gettext/rails.rb:283:in `render_file'
+    vendor/rails/actionpack/lib/action_controller/base.rb:1108:in `render_for_file'
+    vendor/rails/actionpack/lib/action_controller/base.rb:865:in `render_with_no_layout'
+    vendor/rails/actionpack/lib/action_controller/base.rb:880:in `render_with_no_layout'
+    vendor/rails/actionpack/lib/action_controller/layout.rb:259:in `render_without_benchmark'
+    vendor/rails/actionpack/lib/action_controller/benchmarking.rb:51:in `render'
+    vendor/rails/activesupport/lib/active_support/core_ext/benchmark.rb:8:in `realtime'
+    vendor/rails/actionpack/lib/action_controller/benchmarking.rb:51:in `render'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:131:in `send'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:131:in `custom'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:160:in `call'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:160:in `respond'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:154:in `each'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:154:in `respond'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:107:in `respond_to'
+    vendor/plugins/resource_controller/lib/resource_controller/helpers/internal.rb:10:in `response_for'
+    vendor/plugins/resource_controller/lib/resource_controller/actions.rb:7:in `index'
+    vendor/rails/actionpack/lib/action_controller/base.rb:1162:in `send'
+    vendor/rails/actionpack/lib/action_controller/base.rb:1162:in `perform_action_without_filters'
+    vendor/rails/actionpack/lib/action_controller/filters.rb:580:in `call_filters'
+    vendor/rails/actionpack/lib/action_controller/filters.rb:573:in `perform_action_without_benchmark'
+    vendor/rails/actionpack/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    vendor/rails/actionpack/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    vendor/rails/actionpack/lib/action_controller/rescue.rb:201:in `perform_action'
+    vendor/rails/actionpack/lib/action_controller/base.rb:529:in `send'
+    vendor/rails/actionpack/lib/action_controller/base.rb:529:in `process_without_filters'
+    vendor/rails/actionpack/lib/action_controller/filters.rb:569:in `process_without_session_management_support'
+    vendor/rails/actionpack/lib/action_controller/session_management.rb:130:in `process'
+    vendor/rails/actionpack/lib/action_controller/base.rb:389:in `process'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/lib/ruby/1.8/mongrel/rails.rb:76:in `process'
+    /usr/lib/ruby/1.8/mongrel/rails.rb:74:in `synchronize'
+    /usr/lib/ruby/1.8/mongrel/rails.rb:74:in `process'
+    /usr/lib/ruby/1.8/mongrel.rb:159:in `process_client'
+    /usr/lib/ruby/1.8/mongrel.rb:158:in `each'
+    /usr/lib/ruby/1.8/mongrel.rb:158:in `process_client'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `run'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `initialize'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `new'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `run'
+    /usr/lib/ruby/1.8/mongrel.rb:268:in `initialize'
+    /usr/lib/ruby/1.8/mongrel.rb:268:in `new'
+    /usr/lib/ruby/1.8/mongrel.rb:268:in `run'
+    /usr/lib/ruby/1.8/mongrel/configurator.rb:282:in `run'
+    /usr/lib/ruby/1.8/mongrel/configurator.rb:281:in `each'
+    /usr/lib/ruby/1.8/mongrel/configurator.rb:281:in `run'
+    /usr/lib/ruby/1.8/mongrel_rails:129:in `run'
+    /usr/lib/ruby/1.8/mongrel/command.rb:212:in `run'
+    /usr/lib/ruby/1.8/mongrel_rails:282
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:502:in `load'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:502:in `load'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:502:in `load'
+    vendor/rails/railties/lib/commands/servers/mongrel.rb:64
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:509:in `require'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:509:in `require'
+    vendor/rails/railties/lib/commands/server.rb:39
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    script/server:3
+
+Rendering /home/smurf/projetos/rails_research/vendor/rails/actionpack/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
+
+
+Processing ItemsController#index (for 127.0.0.1 at 2008-08-17 08:43:58) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--48bc9a4b528aece131d6df84559fd5bc50db00ac
+  Parameters: {"action"=>"index", "controller"=>"items"}
+  [4;35;1mItem Load (0.000000)[0m   [0mSELECT * FROM "items" [0m
+Rendering items/index
+
+
+ActionView::TemplateError (undefined method `new_item_url' for #<ItemsController:0x2aaaacc06670>) on line #21 of items/index.html.erb:
+18: </table>
+19: <br/>
+20: 
+21: <%= link_to 'New Item', new_object_url %>
+    vendor/plugins/resource_controller/lib/urligence.rb:35:in `send'
+    vendor/plugins/resource_controller/lib/urligence.rb:35:in `urligence'
+    vendor/plugins/resource_controller/lib/urligence.rb:3:in `smart_url'
+    vendor/plugins/resource_controller/lib/resource_controller/helpers/urls.rb:63:in `new_object_url'
+    (eval):2:in `send'
+    (eval):2:in `new_object_url'
+    app/views/items/index.html.erb:21:in `_run_erb_47app47views47items47index46html46erb'
+    vendor/rails/actionpack/lib/action_view/base.rb:338:in `send'
+    vendor/rails/actionpack/lib/action_view/base.rb:338:in `execute'
+    vendor/rails/actionpack/lib/action_view/template_handlers/compilable.rb:29:in `send'
+    vendor/rails/actionpack/lib/action_view/template_handlers/compilable.rb:29:in `render'
+    vendor/rails/actionpack/lib/action_view/template.rb:35:in `render'
+    vendor/rails/actionpack/lib/action_view/template.rb:22:in `render_template'
+    vendor/rails/actionpack/lib/action_view/base.rb:245:in `render_file_without_locale'
+    /usr/lib/ruby/1.8/gettext/rails.rb:283:in `render_file'
+    vendor/rails/actionpack/lib/action_controller/base.rb:1108:in `render_for_file'
+    vendor/rails/actionpack/lib/action_controller/base.rb:865:in `render_with_no_layout'
+    vendor/rails/actionpack/lib/action_controller/base.rb:880:in `render_with_no_layout'
+    vendor/rails/actionpack/lib/action_controller/layout.rb:259:in `render_without_benchmark'
+    vendor/rails/actionpack/lib/action_controller/benchmarking.rb:51:in `render'
+    vendor/rails/activesupport/lib/active_support/core_ext/benchmark.rb:8:in `realtime'
+    vendor/rails/actionpack/lib/action_controller/benchmarking.rb:51:in `render'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:131:in `send'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:131:in `custom'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:160:in `call'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:160:in `respond'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:154:in `each'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:154:in `respond'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:107:in `respond_to'
+    vendor/plugins/resource_controller/lib/resource_controller/helpers/internal.rb:10:in `response_for'
+    vendor/plugins/resource_controller/lib/resource_controller/actions.rb:7:in `index'
+    vendor/rails/actionpack/lib/action_controller/base.rb:1162:in `send'
+    vendor/rails/actionpack/lib/action_controller/base.rb:1162:in `perform_action_without_filters'
+    vendor/rails/actionpack/lib/action_controller/filters.rb:580:in `call_filters'
+    vendor/rails/actionpack/lib/action_controller/filters.rb:573:in `perform_action_without_benchmark'
+    vendor/rails/actionpack/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    vendor/rails/actionpack/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    vendor/rails/actionpack/lib/action_controller/rescue.rb:201:in `perform_action'
+    vendor/rails/actionpack/lib/action_controller/base.rb:529:in `send'
+    vendor/rails/actionpack/lib/action_controller/base.rb:529:in `process_without_filters'
+    vendor/rails/actionpack/lib/action_controller/filters.rb:569:in `process_without_session_management_support'
+    vendor/rails/actionpack/lib/action_controller/session_management.rb:130:in `process'
+    vendor/rails/actionpack/lib/action_controller/base.rb:389:in `process'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/lib/ruby/1.8/mongrel/rails.rb:76:in `process'
+    /usr/lib/ruby/1.8/mongrel/rails.rb:74:in `synchronize'
+    /usr/lib/ruby/1.8/mongrel/rails.rb:74:in `process'
+    /usr/lib/ruby/1.8/mongrel.rb:159:in `process_client'
+    /usr/lib/ruby/1.8/mongrel.rb:158:in `each'
+    /usr/lib/ruby/1.8/mongrel.rb:158:in `process_client'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `run'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `initialize'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `new'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `run'
+    /usr/lib/ruby/1.8/mongrel.rb:268:in `initialize'
+    /usr/lib/ruby/1.8/mongrel.rb:268:in `new'
+    /usr/lib/ruby/1.8/mongrel.rb:268:in `run'
+    /usr/lib/ruby/1.8/mongrel/configurator.rb:282:in `run'
+    /usr/lib/ruby/1.8/mongrel/configurator.rb:281:in `each'
+    /usr/lib/ruby/1.8/mongrel/configurator.rb:281:in `run'
+    /usr/lib/ruby/1.8/mongrel_rails:129:in `run'
+    /usr/lib/ruby/1.8/mongrel/command.rb:212:in `run'
+    /usr/lib/ruby/1.8/mongrel_rails:282
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:502:in `load'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:502:in `load'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:502:in `load'
+    vendor/rails/railties/lib/commands/servers/mongrel.rb:64
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:509:in `require'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:509:in `require'
+    vendor/rails/railties/lib/commands/server.rb:39
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    script/server:3
+
+Rendering /home/smurf/projetos/rails_research/vendor/rails/actionpack/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
+
+
+Processing ResearchesController#index (for 127.0.0.1 at 2008-08-17 08:44:01) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--48bc9a4b528aece131d6df84559fd5bc50db00ac
+  Parameters: {"action"=>"index", "controller"=>"researches"}
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" [0m
+Rendering researches/index
+Completed in 0.02400 (41 reqs/sec) | Rendering: 0.00400 (16%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches]
+
+
+Processing ResearchesController#new (for 127.0.0.1 at 2008-08-17 08:44:04) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--48bc9a4b528aece131d6df84559fd5bc50db00ac
+  Parameters: {"action"=>"new", "controller"=>"researches"}
+Rendering researches/new
+Rendered researches/_form (0.00400)
+Completed in 0.03200 (31 reqs/sec) | Rendering: 0.01200 (37%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches/new]
+
+
+Processing ResearchesController#new (for 127.0.0.1 at 2008-08-17 08:44:05) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--48bc9a4b528aece131d6df84559fd5bc50db00ac
+  Parameters: {"action"=>"new", "controller"=>"researches"}
+Rendering researches/new
+Rendered researches/_form (0.00400)
+Completed in 0.02800 (35 reqs/sec) | Rendering: 0.00800 (28%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches/new]
+
+
+Processing ResearchesController#index (for 127.0.0.1 at 2008-08-17 08:44:10) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--48bc9a4b528aece131d6df84559fd5bc50db00ac
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"29ce9825a27d4523a8ba08418a957807b10dda99", "action"=>"index", "research"=>{"name"=>"fdfs", "introduction"=>"aaaa"}, "controller"=>"researches"}
+  [4;35;1mResearch Load (0.000000)[0m   [0mSELECT * FROM "researches" [0m
+Rendering researches/index
+Completed in 0.02000 (49 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches]
+
+
+Processing ResearchesController#create (for 127.0.0.1 at 2008-08-17 08:46:13) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--48bc9a4b528aece131d6df84559fd5bc50db00ac
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"29ce9825a27d4523a8ba08418a957807b10dda99", "action"=>"create", "research"=>{"name"=>"fdfs", "introduction"=>"aaaa"}, "controller"=>"researches"}
+  [4;36;1mResearch Create (0.000000)[0m   [0;1mINSERT INTO "researches" ("name", "created_at", "updated_at", "introduction") VALUES('fdfs', '2008-08-17 11:46:13', '2008-08-17 11:46:13', 'aaaa')[0m
+Redirected to http://localhost:3000/researches/1
+Completed in 0.14801 (6 reqs/sec) | DB: 0.00000 (0%) | 302 Found [http://localhost/researches]
+
+
+Processing ResearchesController#show (for 127.0.0.1 at 2008-08-17 08:46:13) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7BjoLbm90aWNlIhpTdWNjZXNzZnVsbHkgY3JlYXRlZCEGOgpAdXNlZHsG
+OwdG--ba52909371115d9e75623ea19d1f3ea74bf828ee
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"researches"}
+  [4;35;1mResearch Load (0.000000)[0m   [0mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+Rendering researches/show
+Completed in 0.11201 (8 reqs/sec) | Rendering: 0.00400 (3%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches/1]
+
+
+Processing ResearchesController#index (for 127.0.0.1 at 2008-08-17 08:46:16) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlZGQ0MzRkZGNmMTA3ZDVjMTY2NTljNWU5NzE2NWQ3
+NmEiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7BjoLbm90aWNlIhpTdWNjZXNzZnVsbHkgY3JlYXRlZCEGOgpAdXNlZHsG
+OwdU--d6728d289c08124e2873905f3fe1e3a73f082b26
+  Parameters: {"action"=>"index", "controller"=>"researches"}
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" [0m
+Rendering researches/index
+Completed in 0.02800 (35 reqs/sec) | Rendering: 0.00800 (28%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches]
+
+
+Processing ResearchesController#index (for 127.0.0.1 at 2008-08-17 08:47:40) [GET]
+  Session ID: 341d2c8d56d0ba2f6a3858bbc4a48119
+  Parameters: {"action"=>"index", "controller"=>"researches"}
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" [0m
+Rendering researches/index
+Completed in 0.10401 (9 reqs/sec) | Rendering: 0.01200 (11%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches]
+
+
+Processing ResearchesController#show (for 127.0.0.1 at 2008-08-17 08:50:13) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNzdmYzczNmU1ZWYxMTAxZTEzM2JhNzk1NGM4MGNk
+MzAiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--1d29acfd28f4b937f8b340f3106527fc28c69c5a
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"researches"}
+  [4;35;1mResearch Load (0.000000)[0m   [0mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+Rendering researches/show
+Completed in 0.12001 (8 reqs/sec) | Rendering: 0.00400 (3%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches/1]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2008-08-17 08:50:17) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNzdmYzczNmU1ZWYxMTAxZTEzM2JhNzk1NGM4MGNk
+MzAiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--1d29acfd28f4b937f8b340f3106527fc28c69c5a
+  Parameters: {}
+
+
+ActionController::RoutingError (No route matches "/researches/1/comments" with {:method=>:get}):
+    /vendor/rails/actionpack/lib/action_controller/routing/recognition_optimisation.rb:67:in `recognize_path'
+    /vendor/rails/actionpack/lib/action_controller/routing/route_set.rb:384:in `recognize'
+    /vendor/rails/actionpack/lib/action_controller/dispatcher.rb:148:in `handle_request'
+    /vendor/rails/actionpack/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /vendor/rails/actionpack/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /vendor/rails/actionpack/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /vendor/rails/actionpack/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /vendor/rails/actionpack/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/lib/ruby/1.8/mongrel/rails.rb:76:in `process'
+    /usr/lib/ruby/1.8/mongrel/rails.rb:74:in `synchronize'
+    /usr/lib/ruby/1.8/mongrel/rails.rb:74:in `process'
+    /usr/lib/ruby/1.8/mongrel.rb:159:in `process_client'
+    /usr/lib/ruby/1.8/mongrel.rb:158:in `each'
+    /usr/lib/ruby/1.8/mongrel.rb:158:in `process_client'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `run'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `initialize'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `new'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `run'
+    /usr/lib/ruby/1.8/mongrel.rb:268:in `initialize'
+    /usr/lib/ruby/1.8/mongrel.rb:268:in `new'
+    /usr/lib/ruby/1.8/mongrel.rb:268:in `run'
+    /usr/lib/ruby/1.8/mongrel/configurator.rb:282:in `run'
+    /usr/lib/ruby/1.8/mongrel/configurator.rb:281:in `each'
+    /usr/lib/ruby/1.8/mongrel/configurator.rb:281:in `run'
+    /usr/lib/ruby/1.8/mongrel_rails:129:in `run'
+    /usr/lib/ruby/1.8/mongrel/command.rb:212:in `run'
+    /usr/lib/ruby/1.8/mongrel_rails:282
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:502:in `load'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:502:in `load'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:502:in `load'
+    /vendor/rails/railties/lib/commands/servers/mongrel.rb:64
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:509:in `require'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:509:in `require'
+    /vendor/rails/railties/lib/commands/server.rb:39
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    ./script/server:3
+
+Rendering /home/smurf/projetos/rails_research/vendor/rails/actionpack/lib/action_controller/templates/rescues/layout.erb (not_found)
+
+
+Processing ItemsController#index (for 127.0.0.1 at 2008-08-17 08:50:32) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNzdmYzczNmU1ZWYxMTAxZTEzM2JhNzk1NGM4MGNk
+MzAiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--1d29acfd28f4b937f8b340f3106527fc28c69c5a
+  Parameters: {"action"=>"index", "controller"=>"items", "research_id"=>"1"}
+  [4;36;1mItem Load (0.000000)[0m   [0;1mSELECT * FROM "items" [0m
+Rendering items/index
+
+
+ActionView::TemplateError (undefined method `new_item_url' for #<ItemsController:0x2aaaacd7deb8>) on line #21 of items/index.html.erb:
+18: </table>
+19: <br/>
+20: 
+21: <%= link_to 'New Item', new_object_url %>
+    vendor/plugins/resource_controller/lib/urligence.rb:35:in `send'
+    vendor/plugins/resource_controller/lib/urligence.rb:35:in `urligence'
+    vendor/plugins/resource_controller/lib/urligence.rb:3:in `smart_url'
+    vendor/plugins/resource_controller/lib/resource_controller/helpers/urls.rb:63:in `new_object_url'
+    (eval):2:in `send'
+    (eval):2:in `new_object_url'
+    app/views/items/index.html.erb:21:in `_run_erb_47app47views47items47index46html46erb'
+    vendor/rails/actionpack/lib/action_view/base.rb:338:in `send'
+    vendor/rails/actionpack/lib/action_view/base.rb:338:in `execute'
+    vendor/rails/actionpack/lib/action_view/template_handlers/compilable.rb:29:in `send'
+    vendor/rails/actionpack/lib/action_view/template_handlers/compilable.rb:29:in `render'
+    vendor/rails/actionpack/lib/action_view/template.rb:35:in `render'
+    vendor/rails/actionpack/lib/action_view/template.rb:22:in `render_template'
+    vendor/rails/actionpack/lib/action_view/base.rb:245:in `render_file_without_locale'
+    /usr/lib/ruby/1.8/gettext/rails.rb:283:in `render_file'
+    vendor/rails/actionpack/lib/action_controller/base.rb:1108:in `render_for_file'
+    vendor/rails/actionpack/lib/action_controller/base.rb:865:in `render_with_no_layout'
+    vendor/rails/actionpack/lib/action_controller/base.rb:880:in `render_with_no_layout'
+    vendor/rails/actionpack/lib/action_controller/layout.rb:259:in `render_without_benchmark'
+    vendor/rails/actionpack/lib/action_controller/benchmarking.rb:51:in `render'
+    vendor/rails/activesupport/lib/active_support/core_ext/benchmark.rb:8:in `realtime'
+    vendor/rails/actionpack/lib/action_controller/benchmarking.rb:51:in `render'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:131:in `send'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:131:in `custom'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:160:in `call'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:160:in `respond'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:154:in `each'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:154:in `respond'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:107:in `respond_to'
+    vendor/plugins/resource_controller/lib/resource_controller/helpers/internal.rb:10:in `response_for'
+    vendor/plugins/resource_controller/lib/resource_controller/actions.rb:7:in `index'
+    vendor/rails/actionpack/lib/action_controller/base.rb:1162:in `send'
+    vendor/rails/actionpack/lib/action_controller/base.rb:1162:in `perform_action_without_filters'
+    vendor/rails/actionpack/lib/action_controller/filters.rb:580:in `call_filters'
+    vendor/rails/actionpack/lib/action_controller/filters.rb:573:in `perform_action_without_benchmark'
+    vendor/rails/actionpack/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    vendor/rails/actionpack/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    vendor/rails/actionpack/lib/action_controller/rescue.rb:201:in `perform_action'
+    vendor/rails/actionpack/lib/action_controller/base.rb:529:in `send'
+    vendor/rails/actionpack/lib/action_controller/base.rb:529:in `process_without_filters'
+    vendor/rails/actionpack/lib/action_controller/filters.rb:569:in `process_without_session_management_support'
+    vendor/rails/actionpack/lib/action_controller/session_management.rb:130:in `process'
+    vendor/rails/actionpack/lib/action_controller/base.rb:389:in `process'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/lib/ruby/1.8/mongrel/rails.rb:76:in `process'
+    /usr/lib/ruby/1.8/mongrel/rails.rb:74:in `synchronize'
+    /usr/lib/ruby/1.8/mongrel/rails.rb:74:in `process'
+    /usr/lib/ruby/1.8/mongrel.rb:159:in `process_client'
+    /usr/lib/ruby/1.8/mongrel.rb:158:in `each'
+    /usr/lib/ruby/1.8/mongrel.rb:158:in `process_client'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `run'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `initialize'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `new'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `run'
+    /usr/lib/ruby/1.8/mongrel.rb:268:in `initialize'
+    /usr/lib/ruby/1.8/mongrel.rb:268:in `new'
+    /usr/lib/ruby/1.8/mongrel.rb:268:in `run'
+    /usr/lib/ruby/1.8/mongrel/configurator.rb:282:in `run'
+    /usr/lib/ruby/1.8/mongrel/configurator.rb:281:in `each'
+    /usr/lib/ruby/1.8/mongrel/configurator.rb:281:in `run'
+    /usr/lib/ruby/1.8/mongrel_rails:129:in `run'
+    /usr/lib/ruby/1.8/mongrel/command.rb:212:in `run'
+    /usr/lib/ruby/1.8/mongrel_rails:282
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:502:in `load'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:502:in `load'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:502:in `load'
+    vendor/rails/railties/lib/commands/servers/mongrel.rb:64
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:509:in `require'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:509:in `require'
+    vendor/rails/railties/lib/commands/server.rb:39
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    script/server:3
+
+Rendering /home/smurf/projetos/rails_research/vendor/rails/actionpack/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2008-08-17 08:51:05) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNzdmYzczNmU1ZWYxMTAxZTEzM2JhNzk1NGM4MGNk
+MzAiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--1d29acfd28f4b937f8b340f3106527fc28c69c5a
+  Parameters: {"action"=>"index", "controller"=>"items", "research_id"=>"1"}
+
+
+NoMethodError (undefined method `belongs_to' for ItemsController:Class):
+    /app/controllers/items_controller.rb:2
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:215:in `load_without_new_constant_marking'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:215:in `load_file'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:214:in `load_file'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:95:in `require_or_load'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:260:in `load_missing_constant'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:467:in `const_missing'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:479:in `const_missing'
+    /vendor/rails/activesupport/lib/active_support/inflector.rb:283:in `constantize'
+    /vendor/rails/activesupport/lib/active_support/core_ext/string/inflections.rb:143:in `constantize'
+    /vendor/rails/actionpack/lib/action_controller/routing/route_set.rb:386:in `recognize'
+    /vendor/rails/actionpack/lib/action_controller/dispatcher.rb:148:in `handle_request'
+    /vendor/rails/actionpack/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /vendor/rails/actionpack/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /vendor/rails/actionpack/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /vendor/rails/actionpack/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /vendor/rails/actionpack/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/lib/ruby/1.8/mongrel/rails.rb:76:in `process'
+    /usr/lib/ruby/1.8/mongrel/rails.rb:74:in `synchronize'
+    /usr/lib/ruby/1.8/mongrel/rails.rb:74:in `process'
+    /usr/lib/ruby/1.8/mongrel.rb:159:in `process_client'
+    /usr/lib/ruby/1.8/mongrel.rb:158:in `each'
+    /usr/lib/ruby/1.8/mongrel.rb:158:in `process_client'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `run'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `initialize'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `new'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `run'
+    /usr/lib/ruby/1.8/mongrel.rb:268:in `initialize'
+    /usr/lib/ruby/1.8/mongrel.rb:268:in `new'
+    /usr/lib/ruby/1.8/mongrel.rb:268:in `run'
+    /usr/lib/ruby/1.8/mongrel/configurator.rb:282:in `run'
+    /usr/lib/ruby/1.8/mongrel/configurator.rb:281:in `each'
+    /usr/lib/ruby/1.8/mongrel/configurator.rb:281:in `run'
+    /usr/lib/ruby/1.8/mongrel_rails:129:in `run'
+    /usr/lib/ruby/1.8/mongrel/command.rb:212:in `run'
+    /usr/lib/ruby/1.8/mongrel_rails:282
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:502:in `load'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:502:in `load'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:502:in `load'
+    /vendor/rails/railties/lib/commands/servers/mongrel.rb:64
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:509:in `require'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    /vendor/rails/activesupport/lib/active_support/dependencies.rb:509:in `require'
+    /vendor/rails/railties/lib/commands/server.rb:39
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    ./script/server:3
+
+Rendering /home/smurf/projetos/rails_research/vendor/rails/actionpack/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
+
+
+Processing ItemsController#index (for 127.0.0.1 at 2008-08-17 08:51:36) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNzdmYzczNmU1ZWYxMTAxZTEzM2JhNzk1NGM4MGNk
+MzAiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--1d29acfd28f4b937f8b340f3106527fc28c69c5a
+  Parameters: {"action"=>"index", "controller"=>"items", "research_id"=>"1"}
+  [4;35;1mResearch Load (0.000000)[0m   [0mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;35;1mItem Load (0.000000)[0m   [0mSELECT * FROM "items" WHERE ("items".research_id = 1) [0m
+Rendering items/index
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+Completed in 0.03600 (27 reqs/sec) | Rendering: 0.00400 (11%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches/1/items]
+
+
+Processing ItemsController#new (for 127.0.0.1 at 2008-08-17 08:51:50) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNzdmYzczNmU1ZWYxMTAxZTEzM2JhNzk1NGM4MGNk
+MzAiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--1d29acfd28f4b937f8b340f3106527fc28c69c5a
+  Parameters: {"action"=>"new", "controller"=>"items", "research_id"=>"1"}
+  [4;35;1mResearch Load (0.000000)[0m   [0mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+Rendering items/new
+  [4;35;1mResearch Load (0.000000)[0m   [0mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+Rendered items/_form (0.00000)
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+Completed in 0.04800 (20 reqs/sec) | Rendering: 0.01600 (33%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches/1/items/new]
+
+
+Processing ItemsController#create (for 127.0.0.1 at 2008-08-17 08:51:55) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNzdmYzczNmU1ZWYxMTAxZTEzM2JhNzk1NGM4MGNk
+MzAiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--1d29acfd28f4b937f8b340f3106527fc28c69c5a
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"de807da3eec1efadb8516223c23cc64de381408b", "action"=>"create", "controller"=>"items", "research_id"=>"1", "item"=>{"info"=>"novo item", "research_id"=>"1"}}
+  [4;35;1mResearch Load (0.000000)[0m   [0mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;35;1mItem Create (0.000000)[0m   [0mINSERT INTO "items" ("created_at", "updated_at", "info", "type", "research_id") VALUES('2008-08-17 11:51:55', '2008-08-17 11:51:55', 'novo item', NULL, 1)[0m
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+Redirected to http://localhost:3000/researches/1/items/1
+Completed in 0.14801 (6 reqs/sec) | DB: 0.00000 (0%) | 302 Found [http://localhost/researches/1/items]
+
+
+Processing ItemsController#show (for 127.0.0.1 at 2008-08-17 08:51:55) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNzdmYzczNmU1ZWYxMTAxZTEzM2JhNzk1NGM4MGNk
+MzAiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7BjoLbm90aWNlIhpTdWNjZXNzZnVsbHkgY3JlYXRlZCEGOgpAdXNlZHsG
+OwdG--76b494d79367ed82669c9e7574edb96dc3e8c1c7
+  Parameters: {"action"=>"show", "id"=>"1", "controller"=>"items", "research_id"=>"1"}
+  [4;35;1mResearch Load (0.000000)[0m   [0mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;36;1mResearch Load (0.004000)[0m   [0;1mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;35;1mItem Load (0.000000)[0m   [0mSELECT * FROM "items" WHERE ("items"."id" = 1 AND ("items".research_id = 1)) [0m
+Rendering items/show
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;35;1mResearch Load (0.000000)[0m   [0mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+Completed in 0.04400 (22 reqs/sec) | Rendering: 0.00800 (18%) | DB: 0.00400 (9%) | 200 OK [http://localhost/researches/1/items/1]
+
+
+Processing ItemsController#index (for 127.0.0.1 at 2008-08-17 08:51:58) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlNzdmYzczNmU1ZWYxMTAxZTEzM2JhNzk1NGM4MGNk
+MzAiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7BjoLbm90aWNlIhpTdWNjZXNzZnVsbHkgY3JlYXRlZCEGOgpAdXNlZHsG
+OwdU--cd0eaa3dadf4a4a232096a99fdc58906e7f1485f
+  Parameters: {"action"=>"index", "controller"=>"items", "research_id"=>"1"}
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;35;1mResearch Load (0.000000)[0m   [0mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;36;1mItem Load (0.000000)[0m   [0;1mSELECT * FROM "items" WHERE ("items".research_id = 1) [0m
+Rendering items/index
+  [4;35;1mResearch Load (0.000000)[0m   [0mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;35;1mResearch Load (0.000000)[0m   [0mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+Completed in 0.04000 (24 reqs/sec) | Rendering: 0.01200 (29%) | DB: 0.00000 (0%) | 200 OK [http://localhost/researches/1/items]

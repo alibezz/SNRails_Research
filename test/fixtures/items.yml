@@ -1,0 +1,8 @@
+one:
+  id: 1
+  info: MyString
+  research_id: 1
+two:
+  id: 2
+  info: MyString
+  research_id: 1

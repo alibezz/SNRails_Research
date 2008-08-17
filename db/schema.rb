@@ -9,11 +9,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080816020844) do
+ActiveRecord::Schema.define(:version => 20080816200536) do
+
+  create_table "items", :force => true do |t|
+    t.string   "info"
+    t.string   "type"
+    t.integer  "research_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "researches", :force => true do |t|
     t.string   "name"
-    t.string   "introduction"
+    t.text     "introduction"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

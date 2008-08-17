@@ -1,5 +1,11 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :researches
+
+  map.resources :researches, :has_many => :items
+
+  # Route for admin research
+  map.namespace :admin do |admin|
+    admin.resources :researches
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -33,11 +39,11 @@ ActionController::Routing::Routes.draw do |map|
   #   end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  map.root :controller => "researches"
+#  map.root :controller => "researches"
 
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+#  map.connect ':controller/:action/:id'
+#  map.connect ':controller/:action/:id.:format'
 end
