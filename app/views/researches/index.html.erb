@@ -11,11 +11,8 @@
       <td><%=h research.introduction %></td>
     
       <td><%=link_to 'Show', object_url(research) %></td>
-      <td><%=link_to 'Edit', edit_object_url(research) %></td>
-      <td><%=link_to 'Destroy', object_url(research), :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
 </table>
 <br/>
 
-<%= link_to 'New Research', new_object_url %>

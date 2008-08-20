@@ -5,6 +5,4 @@
   <strong>Introduction:</strong><%=h @research.introduction %>
 </p>
 
-<%= link_to 'Edit', edit_object_url %>
-|
-<%= link_to 'Back', collection_url %>
+<%= link_to _("Questions"), research_items_url(@research) %>

@@ -1,6 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :questions
+
 
   map.resources :researches, :has_many => :items
+  map.resources :researches, :has_many => :questions
 
   # Route for admin research
   map.namespace :admin do |admin|
