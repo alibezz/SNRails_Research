@@ -1,0 +1,17 @@
+<h1>Listing Questions</h1>
+
+<table>
+  <tr>
+  </tr>
+  <%- @questions.each do |question|%>
+    <tr>
+    
+      <td><%=link_to 'Show', object_url(question) %></td>
+      <td><%=link_to 'Edit', edit_object_url(question) %></td>
+      <td><%=link_to 'Destroy', object_url(question), :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<br/>
+
+<%= link_to 'New Question', new_object_url %>
