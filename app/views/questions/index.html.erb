@@ -1,11 +1,12 @@
-<h1>Listing Questions</h1>
+<%= title _("Listing Questions") %>
 
 <table>
   <tr>
+    <th> <%= _("Questions") %> </th>
   </tr>
   <%- @questions.each do |question|%>
     <tr>
-    
+      <td><%=h question.info %></td>
       <td><%=link_to 'Show', object_url(question) %></td>
       <td><%=link_to 'Edit', edit_object_url(question) %></td>
       <td><%=link_to 'Destroy', object_url(question), :confirm => 'Are you sure?', :method => :delete %></td>
