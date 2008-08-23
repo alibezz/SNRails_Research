@@ -1,14 +1,10 @@
-class ItemsController < ApplicationController
-  resource_controller
+class ItemsController < ResourceController::Base
 
   belongs_to :research
 
-#  def index
-#@research = Research.find(params[:research_id])
-#@items = @research.items
-#@items = Item.find(:all, :conditions => {:research_id => params[:research_id]})
-#render :text => @items.inspect
-#render :text => params.inspect
-#  end
-
+  private
+  def collection
+    @research ||= Research.find(params[:research_id])
+    @collection = @research.items.paginate(:per_page => 1, :page => params[:page] )
+  end
 end

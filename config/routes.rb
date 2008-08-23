@@ -1,9 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :questions
 
+  # FIXME see if will be used
+  map.resources :sections
+  map.resources :questions
 
   map.resources :researches, :has_many => :items
   map.resources :researches, :has_many => :questions
+  map.resources :researches, :has_many => :sections
 
   # Route for admin research
   map.namespace :admin do |admin|

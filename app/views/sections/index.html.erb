@@ -1,0 +1,18 @@
+<%= title _("Listing Sections") %>
+
+<table>
+  <tr>
+    <th> <%= _("Sections") %> </th>
+  </tr>
+  <%- @sections.each do |section|%>
+    <tr>
+      <td><%=h section.info %></td>
+      <td><%=link_to 'Show', object_url(section) %></td>
+      <td><%=link_to 'Edit', edit_object_url(section) %></td>
+      <td><%=link_to 'Destroy', object_url(section), :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<br/>
+
+<%= link_to _('New section'), new_object_url %>
