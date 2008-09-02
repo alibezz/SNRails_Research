@@ -12,7 +12,7 @@ module WillPaginate
       class << base
         alias_method_chain :method_missing, :paginate
         # alias_method_chain :find_every,     :paginate
-        define_method(:per_page) { 30 } unless respond_to?(:per_page)
+        define_method(:per_page) { 30 } unless respond_to?(:per_page) and respond_to?(:fixed_page)
       end
     end
 
@@ -63,26 +63,32 @@ module WillPaginate
       # and +count+ calls.
       def paginate(*args, &block)
         options = args.pop
-        page, per_page, total_entries = wp_parse_options(options)
+        page, per_page, total_entries, fixed_page, page_attr = wp_parse_options(options)
         finder = (options[:finder] || 'find').to_s
-
         if finder == 'find'
           # an array of IDs may have been given:
           total_entries ||= (Array === args.first and args.first.size)
           # :all is implicit
           args.unshift(:all) if args.empty?
         end
+        WillPaginate::Collection.create(page, per_page, total_entries, fixed_page, page_attr) do |pager|
+          count_options = options.except :page, :per_page, :total_entries, :finder, :page_attr, :fixed_page
 
-        WillPaginate::Collection.create(page, per_page, total_entries) do |pager|
-          count_options = options.except :page, :per_page, :total_entries, :finder
-          find_options = count_options.except(:count).update(:offset => pager.offset, :limit => pager.per_page) 
+          # magic counting for user convenience:
+          pager.total_entries = wp_count(count_options, args, finder) unless pager.total_entries
+          if fixed_page.nil?
+            find_options = count_options.except(:count).update(:offset => pager.offset, :limit => pager.per_page) 
+          else
+            find_options = count_options.except(:count).update(:conditions => {page_attr => page.to_i}) 
+            count  = wp_count_offset(count_options, args, finder, page.to_i) 
+            pager.offset = count
+          end
           
           args << find_options
           # @options_from_last_find = nil
-          pager.replace send(finder, *args, &block)
+          array = self.send(finder, *args, &block)
+          pager.replace array
           
-          # magic counting for user convenience:
-          pager.total_entries = wp_count(count_options, args, finder) unless pager.total_entries
         end
       end
 
@@ -179,6 +185,13 @@ module WillPaginate
 
       # Does the not-so-trivial job of finding out the total number of entries
       # in the database. It relies on the ActiveRecord +count+ method.
+      # FIXME change the header
+      def wp_count_offset(options, args, finder, page)
+        wp_count(options.merge(:conditions => {:page_id => 1..page-1}), args, finder)
+      end
+
+      # Does the not-so-trivial job of finding out the total number of entries
+      # in the database. It relies on the ActiveRecord +count+ method.
       def wp_count(options, args, finder)
         excludees = [:count, :order, :limit, :offset, :readonly]
         unless options[:select] and options[:select] =~ /^\s*DISTINCT\b/i
@@ -190,10 +203,8 @@ module WillPaginate
         # merge the hash found in :count
         # this allows you to specify :select, :order, or anything else just for the count query
         count_options.update options[:count] if options[:count]
-
         # we may have to scope ...
         counter = Proc.new { count(count_options) }
-
         # we may be in a model or an association proxy!
         klass = (@owner and @reflection) ? @reflection.klass : self
 
@@ -207,9 +218,8 @@ module WillPaginate
                   conditions = construct_attributes_from_arguments(attribute_names, args)
                   with_scope(:find => { :conditions => conditions }, &counter)
                 else
-                  counter.call
+                  klass.count(count_options)
                 end
-
         count.respond_to?(:length) ? count.length : count
       end
 
@@ -222,10 +232,17 @@ module WillPaginate
           raise ArgumentError, ':count and :total_entries are mutually exclusive'
         end
 
+        #FIXME make a test to cover this
+        if options[:per_page] and options[:fixed_page]
+          raise ArgumentError, ':per_page and :fixed_page are mutually exclusive'
+        end
+
         page     = options[:page] || 1
-        per_page = options[:per_page] || self.per_page
+        per_page = (options[:per_page] || self.per_page) if options[:fixed_page].nil?
         total    = options[:total_entries]
-        [page, per_page, total]
+        fixed_page = options[:fixed_page]
+        page_attr = options[:page_attr] || :wp_page
+        [page, per_page, total, fixed_page, page_attr]
       end
 
     private

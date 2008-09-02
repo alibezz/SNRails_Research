@@ -22,19 +22,24 @@ module WillPaginate
   # solutions: see +create+.
   #
   class Collection < Array
-    attr_reader :current_page, :per_page, :total_entries
+    attr_reader :current_page, :per_page, :total_entries, :offset, :page_attr, :fixed_page
 
     # Arguments to this constructor are the current page number, per-page limit
     # and the total number of entries. The last argument is optional because it
     # is best to do lazy counting; in other words, count *conditionally* after
     # populating the collection using the +replace+ method.
     #
-    def initialize(page, per_page, total = nil)
+    def initialize(page, per_page, total = nil, fixed_page=nil, page_attr = nil)
       @current_page = page.to_i
       raise InvalidPage.new(page, @current_page) if @current_page < 1
-      @per_page = per_page.to_i
-      raise ArgumentError, "`per_page` setting cannot be less than 1 (#{@per_page} given)" if @per_page < 1
-      
+ 
+      if fixed_page.nil?
+        @per_page = per_page.to_i
+        raise ArgumentError, "`per_page` setting cannot be less than 1 (#{@per_page} given)" if @per_page < 1
+      else
+        @fixed_page = fixed_page
+        @page_attr = page_attr
+      end 
       self.total_entries = total if total
     end
 
@@ -63,8 +68,8 @@ module WillPaginate
     #     end
     #   end
     #
-    def self.create(page, per_page, total = nil, &block)
-      pager = new(page, per_page, total)
+    def self.create(page, per_page, total = nil, fixed_page = nil, page_attr = nil, &block)
+      pager = new(page, per_page, total, fixed_page, page_attr)
       yield pager
       pager
     end
@@ -87,7 +92,14 @@ module WillPaginate
     # besides your records: simply start with offset + 1.
     #
     def offset
-      (current_page - 1) * per_page
+      @offset ||= fixed_page.nil? ? ((current_page - 1) * per_page) : (total_entries - length - 1 unless total_entries.nil?)
+      @offset
+    end
+
+    #FIXME make this test
+    #Put the variable @wp_offset as private
+    def offset= value
+      @offset = value
     end
 
     # current_page - 1 or nil if there is no previous page
@@ -102,7 +114,11 @@ module WillPaginate
 
     def total_entries=(number)
       @total_entries = number.to_i
-      @total_pages   = (@total_entries / per_page.to_f).ceil
+      if @fixed_page.nil?
+        @total_pages = (@total_entries / per_page.to_f).ceil
+      else
+        @total_pages = @fixed_page
+      end
     end
 
     # This is a magic wrapper for the original Array#replace method. It serves
@@ -122,9 +138,12 @@ module WillPaginate
       
       # The collection is shorter then page limit? Rejoice, because
       # then we know that we are on the last page!
-      if total_entries.nil? and length < per_page and (current_page == 1 or length > 0)
-        self.total_entries = offset + length
-      end
+#raise total_entries.inspect + " " + length.inspect + " " + per_page.inspect + " "
+#      if total_entries.nil? and length < per_page and (current_page == 1 or length > 0)
+#        self.total_entries = offset + length
+#        self.total_entries = offset + length
+#raise total_entries.inspect
+#      end
 
       result
     end

@@ -1,17 +1,29 @@
 ActionController::Routing::Routes.draw do |map|
 
   # FIXME see if will be used
-  map.resources :sections
-  map.resources :questions
+#  map.resources :sections
+#  map.resources :questions
+#  map.resources :researches 
+#do |item|
+#    item.resources :items, :member => {:bli => :get}, :collection => {:bla => :get}
+    #admin.resources :researches, :has_many => :items, :collection => {:nothing => :post, :process_page => :post, :index_test => :get}
+#  end
 
-  map.resources :researches, :has_many => :items
-  map.resources :researches, :has_many => :questions
-  map.resources :researches, :has_many => :sections
+#  map.resources :items
+#  map.resources :items, :collection => {:index_test => :get}
+#  map.resources :researches, :has_many => :questions
+#  map.resources :researches, :has_many => :sections
+
 
   # Route for admin research
   map.namespace :admin do |admin|
-    admin.resources :researches
+    admin.resources :researches, :has_many => :items do |item|
+     item.resources :items, :collection => {:reorder_items => :post, :reorder_pages => :post}
+    end
   end
+ 
+  #Route for doc plugin
+  map.resources :doc
 
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -45,7 +57,7 @@ ActionController::Routing::Routes.draw do |map|
   #   end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-#  map.root :controller => "researches"
+  map.root :controller => "researches"
 
   # See how all your routes lay out with "rake routes"
 

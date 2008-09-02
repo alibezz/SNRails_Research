@@ -1,0 +1,14 @@
+body{
+  background-color: red;
+}
+
+.pagination a{
+  border: 2px black solid;
+#  padding: 20px;
+  margin: 20px;
+  
+}
+
+#draggable{
+  background-color: white;
+}

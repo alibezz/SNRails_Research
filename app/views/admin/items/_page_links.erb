@@ -1,0 +1,16 @@
+<div id="page_links">
+
+  <%= will_paginate nil, :renderer => 'PaginationListLinkRenderer', :id => 'page_items' %>
+
+  <%= sortable_element 'page_items', 
+        :complete => visual_effect(:highlight, 'page_items'), 
+        :url => { :action => "reorder_pages"},
+        :failure => "$('error').innerHTML= request.responseText",
+        :constraint => false,
+        :dropOnEmpty => true,
+        :containment =>  ['page_items']
+  %>
+
+<%= params.inspect %>
+
+</div>

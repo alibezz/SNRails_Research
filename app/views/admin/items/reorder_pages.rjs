@@ -1,0 +1,2 @@
+page.replace('page_links', :partial => 'page_links' )
+page.replace('list_items', :partial => 'list_items')

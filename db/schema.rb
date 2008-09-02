@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(:version => 20080816200536) do
     t.string   "info"
     t.string   "type"
     t.integer  "research_id"
+    t.integer  "page_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

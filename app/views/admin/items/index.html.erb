@@ -1,0 +1,21 @@
+<%= title _("Listing Items") %>
+
+<%= render :partial => 'list_items' %>
+
+
+<%= #will_paginate nil, :container => false, :renderer => 'RemoteLinkRenderer' 
+%>
+
+<%= render :partial => 'page_links' %>
+
+<%= #page_entries_info @items
+%>
+
+<%= #link_to _("Back"), parent_object 
+%>
+
+<%= #link_to 'New Item', new_object_url 
+%>
+
+<div id="error">
+</div>

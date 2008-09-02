@@ -10,6 +10,7 @@
       <td><%=h item.info %></td>
       <td><%=h item.research_id %></td>
     
+      <td><%=link_to 'Bli', {:action => 'bli', :id => item} %></td>
       <td><%=link_to 'Show', object_url(item) %></td>
       <td><%=link_to 'Edit', edit_object_url(item) %></td>
       <td><%=link_to 'Destroy', object_url(item), :confirm => 'Are you sure?', :method => :delete %></td>
@@ -18,8 +19,8 @@
 </table>
 <br/>
 
-<%= link_to _("Back"), parent_object %>
+<%= will_paginate %>
 
 <%= link_to 'New Item', new_object_url %>
 
-<%= will_paginate %>
+<%= link_to 'Action Items', {:controller => 'items', :action => 'bla'} %>
