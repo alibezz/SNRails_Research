@@ -12,3 +12,20 @@ body{
 #draggable{
   background-color: white;
 }
+
+.pagination{
+  background-color: blue;
+}
+.pagination li{
+  background-color: yellow;
+  margin: 10px;
+}
+
+#list_items{
+  background-color: blue;
+}
+
+#list_items li{
+  background-color: yellow;
+  margin: 10px;
+}

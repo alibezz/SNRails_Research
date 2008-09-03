@@ -16,12 +16,14 @@ ActiveRecord::Schema.define(:version => 20080816200536) do
     t.string   "type"
     t.integer  "research_id"
     t.integer  "page_id"
+    t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "researches", :force => true do |t|
     t.string   "name"
+    t.integer  "number_of_pages"
     t.text     "introduction"
     t.datetime "created_at"
     t.datetime "updated_at"

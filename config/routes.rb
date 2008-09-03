@@ -14,11 +14,10 @@ ActionController::Routing::Routes.draw do |map|
 #  map.resources :researches, :has_many => :questions
 #  map.resources :researches, :has_many => :sections
 
-
   # Route for admin research
   map.namespace :admin do |admin|
     admin.resources :researches, :has_many => :items do |item|
-     item.resources :items, :collection => {:reorder_items => :post, :reorder_pages => :post}
+     item.resources :items, :collection => {:reorder_items => :post, :reorder_pages => :post, :set_item_to_page => :post}
     end
   end
  
