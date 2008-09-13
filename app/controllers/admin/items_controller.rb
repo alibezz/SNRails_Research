@@ -19,7 +19,7 @@ class Admin::ItemsController < ResourceController::Base
   # Reorder the pages how the user definition.
   def reorder_pages
     @research ||= Research.find(params[:research_id]) #FIXME put specific user
-    @research.reorder_pages(params[:page_items])
+    @research.reorder_pages(params[:page_links])
 
     @items = @research.items.paginate(:page => params[:page], :fixed_page => @research.number_of_pages, :page_attr => :page_id, :order => :position)
     respond_to do |format|
@@ -30,8 +30,10 @@ class Admin::ItemsController < ResourceController::Base
   # Put the a item on a page.
   def set_item_to_page
     @research ||= Research.find(params[:research_id]) #FIXME put specific user
-
-#    @research.reorder_pages(params[:page_items])
+    item = @research.items.find(params[:id].split("_").last)
+    @page_sent = params[:page_sent].split("_").last
+    item.page_id = @page_sent
+    item.save
 
     @items = @research.items.paginate(:page => params[:page], :fixed_page => @research.number_of_pages, :page_attr => :page_id, :order => :position)
     respond_to do |format|

@@ -1,6 +1,16 @@
-<div id="page_links">
+<%= will_paginate nil, :renderer => 'PaginationListLinkRenderer', :id => 'page_links' %>
 
-  <%= will_paginate nil, :renderer => 'PaginationListLinkRenderer', :id => 'page_items' %>
+<%= 
+  sortable_element 'page_links', 
+      :complete => visual_effect(:highlight, 'page_links'), 
+      :url => { :action => "reorder_pages", :page => params[:page]},
+      :failure => "$('error').innerHTML= request.responseText",
+      :constraint => false,
+      :dropOnEmpty => true,
+      :containment =>  ['page_links']
+%>
 
+<% for page in 1..@research.number_of_pages %>
+  <%= drop_receiving_element "page_#{page}", :url => {:controller => 'items', :action => 'set_item_to_page', :page_sent => "page_#{page}", :page => params[:page]}, :complete => visual_effect(:highlight, "page_#{page}") %>
+<% end %>
 
-</div>

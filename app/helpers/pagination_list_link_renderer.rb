@@ -27,7 +27,20 @@ class PaginationListLinkRenderer < WillPaginate::LinkRenderer
   end
 
   def page_span(page, text, attributes = {})
-    @template.content_tag(:li, text, attributes.merge(:id => "page_#{page}"))
+#      bli = render :inline => 'pagination_list_link_renderer/page'
+    @template.content_tag(:li, 
+       text,
+#      render :template => 'pagination_list_link_renderer/page' ,
+#      text,
+#sortable_element('page_3', 
+#        :complete => visual_effect(:highlight, "page_#{page}"), 
+#        :url => { :action => "set_item_to_page"},
+#        :failure => "$('error').innerHTML= request.responseText",
+#        :constraint => false,
+#        :dropOnEmpty => true,
+#        :containment =>  ['list_items']), 
+      attributes.merge(:id => "page_#{page}")
+    )
   end
 
   def url_options(page)

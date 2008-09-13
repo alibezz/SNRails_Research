@@ -8,11 +8,10 @@
 <%= 
   sortable_element 'list_items', 
         :complete => visual_effect(:highlight, 'list_items'), 
-        :url => { :action => "reorder_items"},
+        :url => { :action => "reorder_items", :page => params[:page]},
         :failure => "$('error').innerHTML= request.responseText",
         :constraint => false,
         :dropOnEmpty => true,
         :containment =>  ['list_items']
 %>
-<%= params.inspect %>
 
