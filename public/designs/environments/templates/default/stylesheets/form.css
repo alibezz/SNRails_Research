@@ -1,0 +1,58 @@
+form {
+  text-align: justify;
+}
+
+.formTable {
+  margin: auto;
+}
+
+.fieldName {
+  text-align: right;
+  padding-right: 20px;
+  font-size: 12px;
+}
+
+.fieldEntry input, .fieldEntry textarea, .fieldEntry select {
+  width: 400px;
+  border: none;
+  border-bottom: 1px solid #642;
+  background-color: transparent;
+}
+
+.fieldEntry textarea {
+  border: 1px solid #DCB;
+  border-right: 2px solid #BA9;
+  border-bottom: 2px solid #BA9;
+  background-color: #F6ECE8;
+  overflow: auto;
+  padding: 3px 6px;
+}
+
+.fieldCommentary {
+  color: #765;
+  width: 400px;
+  text-align: left;
+  font-size: 10px;
+}
+
+.fieldEntry select option {
+  background-color: #F6ECE8;
+}
+
+.fieldEntry textarea {
+  border: 1px solid #DCB;
+  border-right: 2px solid #BA9;
+  border-bottom: 2px solid #BA9;
+  background-color: #F6ECE8;
+  overflow: auto;
+  padding: 3px 6px;
+}
+
+.submitLine {
+  text-align: center;
+}
+
+.btSubmit {
+  border: 1px solid #864;
+  background-color: #EDC;
+}

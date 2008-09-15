@@ -1,0 +1,142 @@
+@import url("form.css");
+@import url("login.css");
+@import url("notice.css");
+
+body {
+  font-family: sans-serif;
+  font-size: 12px;
+  color: #000;
+  background-color: #FFF;
+  margin: 0px;
+  padding: 0px;
+}
+
+#warp {
+  background-image: url("../images/middle.jpg");
+  background-repeat: repeat-y;
+  background-position: 50% 0%;
+  text-align: center;
+}
+
+#header {
+  background-image: url("../images/top.jpg");
+  background-repeat: no-repeat;
+  background-position: 50% 0%;
+  height: 109px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.title{
+  margin: 0px;
+  font-family: serif;
+  font-size: 28px;
+  color: #722;
+  text-align: center;
+}
+
+.subtitle{
+  margin: 0px 0px 40px 0px;
+  font-family: serif;
+  font-size: 14px;
+  color: #722;
+  text-align: center;
+}
+
+#administration_menu {
+  padding: 0px;
+  margin: auto;
+  position: relative;
+}
+
+#administration_menu ul, #administration_menu li {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  display: inline;
+}
+
+#administration_menu a {
+  color: #722;
+  font-size: 16px;
+  font-weight: 800;
+  text-decoration: none;
+  padding: 0px 10px;
+}
+
+#content {
+  z-index: 1;
+  margin: auto;
+  width: 700px;
+  text-align: justify;
+  position: relative;
+}
+
+#content li{
+  list-style: none;
+  margin: 10px;
+}
+
+#content a {
+  color: #000;
+  padding: 2px;
+}
+
+#footer {
+  background-image: url("../images/bottom.jpg");
+  background-repeat: no-repeat;
+  background-position: 50% 100%;
+  margin-top: -25px;
+  height: 100px;
+  max-height: 60px;
+  padding-top: 40px;
+  color: #A77;
+}
+
+#footer a {
+  color: #A77;
+  text-decoration: none;
+}
+
+tr.comment td {
+   padding-bottom: 20px;
+}
+
+td.username {
+   font-weight: bold;
+}
+
+a.viewAllSign {
+  font-weight: 600;
+  font-size: 14px;
+  color: #722;
+  text-align: center;
+  text-decoration: none;
+}
+
+a.button {
+	display: block;
+	background: none;
+	text-indent: 23px;
+	height: 20px;
+}
+
+label {
+	font-size: 1.2em;
+	display: block;
+	font-weight: bold;
+}
+
+ul li a {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+ul li a + a {
+	font-size: 0.9em;
+	font-weight: normal;
+}
+
+ul li a:hover {
+	text-decoration: none;
+}

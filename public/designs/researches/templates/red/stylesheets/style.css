@@ -1,0 +1,31 @@
+body{
+  background-color: red;
+}
+table {
+   border-collapse: collapse;
+   width: 100%;
+}
+tr, td, th {
+   border: 1px solid black;
+}
+input, textarea, select {
+  border: 1px solid black;
+}
+
+.petitionField, .petitionText {
+   display: block;
+   width: 500px;
+}
+.petitionText {
+   height: 200px;
+}
+.defaultField, .defaultArea {
+   display: block;
+   width: 300px;
+}
+.defaultArea {
+   height: 50px;
+}
+.actionBar a {
+   margin: 5px;
+}

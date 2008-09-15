@@ -1,0 +1,70 @@
+form {
+  text-align: center;
+  margin: auto;
+}
+
+.formTable {
+}
+
+.fieldName {
+  padding-right: 20px;
+  font-size: 12px;
+}
+
+label {
+	font-size: 1.2em;
+	font-weight: bold;
+	display: block;
+}
+
+#petition_start_date_1i,#petition_start_date_2i,#petition_start_date_3i,#petition_close_date_1i,#petition_close_date_2i,#petition_close_date_3i {
+	width: 80px;
+	text-align: center;
+}
+
+input, textarea, select {
+  width: 300px;
+  border: none;
+  border-bottom: 1px solid #642;
+  background-color: transparent;
+  margin-bottom: 10px;
+  font-size: 12px !important;
+  text-align: center;
+}
+
+input.button.save {
+	width: 200px;
+	border: 1px solid #333;
+	background-color: #eee;
+}
+
+.field_comment{
+  color: #765;
+  width: 400px;
+  text-align: left;
+  font-size: 10px;
+}
+
+select option {
+  background-color: #F6ECE8;
+}
+
+textarea {
+  border: 1px solid #DCB;
+  border-right: 2px solid #BA9;
+  border-bottom: 2px solid #BA9;
+  background-color: #F6ECE8;
+  overflow: auto;
+  padding: 3px 6px;
+  width: 100px;
+}
+
+.submitLine {
+  text-align: center;
+}
+
+.button_save {
+  border: 1px solid #864;
+  background-color: #EDC;
+  width: 100px;
+}

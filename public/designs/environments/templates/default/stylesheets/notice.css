@@ -1,0 +1,19 @@
+
+#notice {
+  cursor: pointer;
+}
+/* Notice */ 
+
+div#notice {
+  z-index: 20;
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  margin-left: -200px;
+  width: 400px;
+  border: 5px solid #8ac617;
+  color: green;
+  background: #fff url('../images/eng.png') right top no-repeat;
+  padding: 10px;
+}
+

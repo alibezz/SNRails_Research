@@ -1,0 +1,19 @@
+#login_bar {
+  margin: 50px 0px 0px 160px;
+  width: 200px;
+  left: 50%;
+  position: absolute;
+  padding:0px;
+  text-align: right;
+}
+
+#login_bar li{
+  list-style: none;
+  font-size: 12px;
+  display: inline;
+  padding: 5px;
+}
+
+#login_bar a {
+  color: #000;
+}
