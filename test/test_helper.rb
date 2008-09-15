@@ -56,4 +56,14 @@ class Test::Unit::TestCase
       :info => 'some research',
     }.merge(params)
   end
+
+  def create_environment(params = {})
+    Environment.create!(environment_params(params))
+  end
+  
+  def environment_params(params = {})
+    {
+    }.merge(params)
+  end
+
 end

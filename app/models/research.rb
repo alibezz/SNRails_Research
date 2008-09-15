@@ -1,10 +1,21 @@
 class Research < ActiveRecord::Base
 
+  #FIXME this is a hack to works design_data
+  class << self # Class methods
+    alias :all_columns :columns
+
+    def columns
+      all_columns.reject {|c| c.name == 'design_data'}
+    end
+  end 
+
   validates_presence_of :title
   validates_presence_of :introduction
   validates_uniqueness_of :title
 
   has_many :items
+
+  acts_as_design :root => File.join('designs', 'researches')
 
   # Get and array of integer that indicates the pages order and
   # set the item (questions and sections) to the correct order.
