@@ -1,8 +1,8 @@
 one:
   id: 1
-  info: MyString
+  info: some item
   research_id: 1
 two:
   id: 2
-  info: MyString
+  info: another item
   research_id: 1
