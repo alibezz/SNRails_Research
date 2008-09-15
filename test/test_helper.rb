@@ -35,4 +35,25 @@ class Test::Unit::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def create_research(params = {})
+    Research.create!(reserach_params(params))
+  end
+  
+  def reserach_params(params = {})
+    {
+      :name => 'some research',
+      :introduction => 'some research',
+      :number_of_pages => 1,
+    }.merge(params)
+  end
+
+  def create_item(params = {})
+    Item.create!(item_params(params))
+  end
+  
+  def item_params(params = {})
+    {
+      :info => 'some research',
+    }.merge(params)
+  end
 end

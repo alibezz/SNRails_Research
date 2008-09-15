@@ -1,10 +1,9 @@
 class Research < ActiveRecord::Base
+
+  validates_presence_of :name
+  validates_presence_of :introduction
+
   has_many :items
-
-# FIXME See if it's usefull
-#  has_many :questions
-#  has_many :sections
-
 
   # Get and array of integer that indicates the pages order and
   # set the item (questions and sections) to the correct order.

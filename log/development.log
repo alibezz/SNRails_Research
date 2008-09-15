@@ -15012,3 +15012,417 @@ Rendering admin/items/index
 Rendered admin/items/_list_items (0.00800)
 Rendered admin/items/_page_links (0.01600)
 Completed in 0.27202 (3 reqs/sec) | Rendering: 0.04400 (16%) | DB: 0.00400 (1%) | 200 OK [http://localhost/admin/researches/1/items?page=3]
+  [4;36;1mSQL (0.000000)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.004000)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000000)[0m   [0mPRAGMA index_list("items")[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mPRAGMA index_list("researches")[0m
+  [4;35;1mSQL (0.000000)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.100006)[0m   [0mCREATE TABLE "items" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "info" varchar(255) DEFAULT NULL NULL, "type" varchar(255) DEFAULT NULL NULL, "research_id" integer DEFAULT NULL NULL, "page_id" integer DEFAULT NULL NULL, "position" integer DEFAULT NULL NULL, "created_at" datetime DEFAULT NULL NULL, "updated_at" datetime DEFAULT NULL NULL) [0m
+  [4;36;1mSQL (0.000000)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.036002)[0m   [0mCREATE TABLE "researches" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) DEFAULT NULL NULL, "number_of_pages" integer DEFAULT NULL NULL, "introduction" text DEFAULT NULL NULL, "created_at" datetime DEFAULT NULL NULL, "updated_at" datetime DEFAULT NULL NULL) [0m
+  [4;36;1mSQL (0.000000)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.028002)[0m   [0mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;36;1mSQL (0.028001)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (0.000000)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mSELECT version FROM "schema_migrations"[0m
+  [4;35;1mSQL (0.024002)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20080816200536')[0m
+  [4;36;1mSQL (0.024001)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20080816110900')[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.004000)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.004001)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000000)[0m   [0mPRAGMA index_list("items")[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mPRAGMA index_list("researches")[0m
+  [4;35;1mSQL (0.000000)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.052003)[0m   [0mCREATE TABLE "items" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "info" varchar(255) DEFAULT NULL NULL, "type" varchar(255) DEFAULT NULL NULL, "research_id" integer DEFAULT NULL NULL, "page_id" integer DEFAULT NULL NULL, "position" integer DEFAULT NULL NULL, "created_at" datetime DEFAULT NULL NULL, "updated_at" datetime DEFAULT NULL NULL) [0m
+  [4;36;1mSQL (0.000000)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.032002)[0m   [0mCREATE TABLE "researches" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) DEFAULT NULL NULL, "number_of_pages" integer DEFAULT NULL NULL, "introduction" text DEFAULT NULL NULL, "created_at" datetime DEFAULT NULL NULL, "updated_at" datetime DEFAULT NULL NULL) [0m
+  [4;36;1mSQL (0.000000)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.028001)[0m   [0mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;36;1mSQL (0.032002)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (0.000000)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mSELECT version FROM "schema_migrations"[0m
+  [4;35;1mSQL (0.020001)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20080816200536')[0m
+  [4;36;1mSQL (0.020002)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20080816110900')[0m
+
+
+Processing ResearchesController#index (for 127.0.0.1 at 2008-09-15 09:36:04) [GET]
+  Session ID: 8af75b474fedda2bbdb8fe086ea3df58
+  Parameters: {"action"=>"index", "controller"=>"researches"}
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" [0m
+Rendering template within layouts/application
+Rendering researches/index
+
+
+ActionView::TemplateError (undefined method `research_url' for #<ResearchesController:0x2aaaaccb0120>) on line #13 of researches/index.html.erb:
+10:       <td><%=h research.name %></td>
+11:       <td><%=h research.introduction %></td>
+12:     
+13:       <td><%=link_to 'Show', object_url(research) %></td>
+14:     </tr>
+15:   <% end %>
+16: </table>
+
+    vendor/plugins/resource_controller/lib/urligence.rb:35:in `send'
+    vendor/plugins/resource_controller/lib/urligence.rb:35:in `urligence'
+    vendor/plugins/resource_controller/lib/urligence.rb:3:in `smart_url'
+    vendor/plugins/resource_controller/lib/resource_controller/helpers/urls.rb:46:in `object_url'
+    (eval):2:in `send'
+    (eval):2:in `object_url'
+    app/views/researches/index.html.erb:13:in `_run_erb_47app47views47researches47index46html46erb'
+    app/views/researches/index.html.erb:8:in `each'
+    app/views/researches/index.html.erb:8:in `_run_erb_47app47views47researches47index46html46erb'
+    vendor/rails/actionpack/lib/action_view/base.rb:338:in `send'
+    vendor/rails/actionpack/lib/action_view/base.rb:338:in `execute'
+    vendor/rails/actionpack/lib/action_view/template_handlers/compilable.rb:29:in `send'
+    vendor/rails/actionpack/lib/action_view/template_handlers/compilable.rb:29:in `render'
+    vendor/rails/actionpack/lib/action_view/template.rb:35:in `render'
+    vendor/rails/actionpack/lib/action_view/template.rb:22:in `render_template'
+    vendor/rails/actionpack/lib/action_view/base.rb:245:in `render_file_without_locale'
+    /usr/lib/ruby/1.8/gettext/rails.rb:283:in `render_file'
+    vendor/rails/actionpack/lib/action_controller/base.rb:1108:in `render_for_file'
+    vendor/rails/actionpack/lib/action_controller/base.rb:865:in `render_with_no_layout'
+    vendor/rails/actionpack/lib/action_controller/base.rb:880:in `render_with_no_layout'
+    vendor/rails/actionpack/lib/action_controller/layout.rb:251:in `render_without_benchmark'
+    vendor/rails/actionpack/lib/action_controller/benchmarking.rb:51:in `render'
+    vendor/rails/activesupport/lib/active_support/core_ext/benchmark.rb:8:in `realtime'
+    vendor/rails/actionpack/lib/action_controller/benchmarking.rb:51:in `render'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:131:in `send'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:131:in `custom'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:160:in `call'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:160:in `respond'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:154:in `each'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:154:in `respond'
+    vendor/rails/actionpack/lib/action_controller/mime_responds.rb:107:in `respond_to'
+    vendor/plugins/resource_controller/lib/resource_controller/helpers/internal.rb:10:in `response_for'
+    vendor/plugins/resource_controller/lib/resource_controller/actions.rb:7:in `index'
+    vendor/rails/actionpack/lib/action_controller/base.rb:1162:in `send'
+    vendor/rails/actionpack/lib/action_controller/base.rb:1162:in `perform_action_without_filters'
+    vendor/rails/actionpack/lib/action_controller/filters.rb:580:in `call_filters'
+    vendor/rails/actionpack/lib/action_controller/filters.rb:573:in `perform_action_without_benchmark'
+    vendor/rails/actionpack/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    vendor/rails/actionpack/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    vendor/rails/actionpack/lib/action_controller/rescue.rb:201:in `perform_action'
+    vendor/rails/actionpack/lib/action_controller/base.rb:529:in `send'
+    vendor/rails/actionpack/lib/action_controller/base.rb:529:in `process_without_filters'
+    vendor/rails/actionpack/lib/action_controller/filters.rb:569:in `process_without_session_management_support'
+    vendor/rails/actionpack/lib/action_controller/session_management.rb:130:in `process'
+    vendor/rails/actionpack/lib/action_controller/base.rb:389:in `process'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    vendor/rails/actionpack/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/lib/ruby/1.8/mongrel/rails.rb:76:in `process'
+    /usr/lib/ruby/1.8/mongrel/rails.rb:74:in `synchronize'
+    /usr/lib/ruby/1.8/mongrel/rails.rb:74:in `process'
+    /usr/lib/ruby/1.8/mongrel.rb:159:in `process_client'
+    /usr/lib/ruby/1.8/mongrel.rb:158:in `each'
+    /usr/lib/ruby/1.8/mongrel.rb:158:in `process_client'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `run'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `initialize'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `new'
+    /usr/lib/ruby/1.8/mongrel.rb:285:in `run'
+    /usr/lib/ruby/1.8/mongrel.rb:268:in `initialize'
+    /usr/lib/ruby/1.8/mongrel.rb:268:in `new'
+    /usr/lib/ruby/1.8/mongrel.rb:268:in `run'
+    /usr/lib/ruby/1.8/mongrel/configurator.rb:282:in `run'
+    /usr/lib/ruby/1.8/mongrel/configurator.rb:281:in `each'
+    /usr/lib/ruby/1.8/mongrel/configurator.rb:281:in `run'
+    /usr/lib/ruby/1.8/mongrel_rails:129:in `run'
+    /usr/lib/ruby/1.8/mongrel/command.rb:212:in `run'
+    /usr/lib/ruby/1.8/mongrel_rails:282
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:502:in `load'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:502:in `load'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:502:in `load'
+    vendor/rails/railties/lib/commands/servers/mongrel.rb:64
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:509:in `require'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    vendor/rails/activesupport/lib/active_support/dependencies.rb:509:in `require'
+    vendor/rails/railties/lib/commands/server.rb:39
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/lib/ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    script/server:3
+
+Rendering /home/smurf/projetos/rails_research/vendor/rails/actionpack/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
+
+
+Processing ItemsController#index (for 127.0.0.1 at 2008-09-15 09:36:08) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--a981d7b3cb315ae91a0320312ea1ffc673808e24
+  Parameters: {"action"=>"index", "page"=>"1", "controller"=>"admin/items", "research_id"=>"1"}
+  [4;35;1mResearch Load (0.000000)[0m   [0mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;36;1mSQL (0.004000)[0m   [0;1mSELECT count(*) AS count_all FROM "items" [0m
+  [4;35;1mSQL (0.000000)[0m   [0mSELECT count(*) AS count_all FROM "items" WHERE ("items"."page_id" BETWEEN 1 AND 0) [0m
+  [4;36;1mItem Load (0.004000)[0m   [0;1mSELECT * FROM "items" WHERE ("items".research_id = 1 AND ("items"."page_id" = 1)) ORDER BY position[0m
+Rendering template within layouts/application
+Rendering admin/items/index
+Rendered admin/items/_list_items (0.00800)
+Rendered admin/items/_page_links (0.01600)
+Completed in 0.22001 (4 reqs/sec) | Rendering: 0.07200 (32%) | DB: 0.00800 (3%) | 200 OK [http://localhost/admin/researches/1/items?page=1]
+
+
+Processing ItemsController#index (for 127.0.0.1 at 2008-09-15 09:37:50) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlMjBiY2QzMTQwOGMxZDBjY2Q4OGE5NTQ2NjA4ODIx
+NWMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--49df3d648b1a75801c6f562814395c73c4557eae
+  Parameters: {"action"=>"index", "page"=>"2", "controller"=>"admin/items", "research_id"=>"1"}
+  [4;35;1mResearch Load (0.000000)[0m   [0mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mSELECT count(*) AS count_all FROM "items" [0m
+  [4;35;1mSQL (0.000000)[0m   [0mSELECT count(*) AS count_all FROM "items" WHERE ("items"."page_id" BETWEEN 1 AND 1) [0m
+  [4;36;1mItem Load (0.000000)[0m   [0;1mSELECT * FROM "items" WHERE ("items".research_id = 1 AND ("items"."page_id" = 2)) ORDER BY position[0m
+Rendering template within layouts/application
+Rendering admin/items/index
+Rendered admin/items/_list_items (0.00400)
+Rendered admin/items/_page_links (0.01200)
+Completed in 0.06000 (16 reqs/sec) | Rendering: 0.02000 (33%) | DB: 0.00000 (0%) | 200 OK [http://localhost/admin/researches/1/items?page=2]
+
+
+Processing ItemsController#set_item_to_page (for 127.0.0.1 at 2008-09-15 09:37:56) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlMjBiY2QzMTQwOGMxZDBjY2Q4OGE5NTQ2NjA4ODIx
+NWMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--49df3d648b1a75801c6f562814395c73c4557eae
+  Parameters: {"authenticity_token"=>"91651f8580cf6a0b63c5b6135b4952ce747b5436", "action"=>"set_item_to_page", "id"=>"item_3", "page"=>"2", "controller"=>"admin/items", "research_id"=>"1", "page_sent"=>"page_1"}
+  [4;35;1mResearch Load (0.000000)[0m   [0mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;36;1mItem Load (0.000000)[0m   [0;1mSELECT * FROM "items" WHERE ("items"."id" = 3 AND ("items".research_id = 1)) [0m
+  [4;35;1mItem Update (0.084005)[0m   [0mUPDATE "items" SET "updated_at" = '2008-09-15 12:37:56', "page_id" = 1 WHERE "id" = 3[0m
+  [4;36;1mSQL (0.004000)[0m   [0;1mSELECT count(*) AS count_all FROM "items" [0m
+  [4;35;1mSQL (0.000000)[0m   [0mSELECT count(*) AS count_all FROM "items" WHERE ("items"."page_id" BETWEEN 1 AND 1) [0m
+  [4;36;1mItem Load (0.000000)[0m   [0;1mSELECT * FROM "items" WHERE ("items".research_id = 1 AND ("items"."page_id" = 2)) ORDER BY position[0m
+Rendering admin/items/set_item_to_page
+Rendered admin/items/_list_items (0.00400)
+Completed in 0.79204 (1 reqs/sec) | Rendering: 0.01600 (2%) | DB: 0.08801 (11%) | 200 OK [http://localhost/admin/researches/1/items/set_item_to_page?page=2&page_sent=page_1]
+
+
+Processing ItemsController#reorder_items (for 127.0.0.1 at 2008-09-15 09:37:56) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlMjBiY2QzMTQwOGMxZDBjY2Q4OGE5NTQ2NjA4ODIx
+NWMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--49df3d648b1a75801c6f562814395c73c4557eae
+  Parameters: {"authenticity_token"=>"91651f8580cf6a0b63c5b6135b4952ce747b5436", "action"=>"reorder_items", "page"=>"2", "controller"=>"admin/items", "list_items"=>["4", "29", "31", "3"], "research_id"=>"1"}
+  [4;35;1mResearch Load (0.000000)[0m   [0mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;36;1mItem Load (0.000000)[0m   [0;1mSELECT * FROM "items" WHERE ("items"."id" = 4 AND ("items".research_id = 1)) [0m
+  [4;35;1mItem Load (0.000000)[0m   [0mSELECT * FROM "items" WHERE ("items"."id" = 29 AND ("items".research_id = 1)) [0m
+  [4;36;1mItem Load (0.000000)[0m   [0;1mSELECT * FROM "items" WHERE ("items"."id" = 31 AND ("items".research_id = 1)) [0m
+  [4;35;1mQuestion Update (0.204012)[0m   [0mUPDATE "items" SET "updated_at" = '2008-09-15 12:37:56', "position" = 2 WHERE "id" = 31[0m
+  [4;36;1mItem Load (0.000000)[0m   [0;1mSELECT * FROM "items" WHERE ("items"."id" = 3 AND ("items".research_id = 1)) [0m
+  [4;35;1mItem Update (0.000000)[0m   [0mUPDATE "items" SET "updated_at" = '2008-09-15 12:37:57', "position" = 3 WHERE "id" = 3[0m
+  [4;36;1mSQL (0.004001)[0m   [0;1mSELECT count(*) AS count_all FROM "items" [0m
+  [4;35;1mSQL (0.004000)[0m   [0mSELECT count(*) AS count_all FROM "items" WHERE ("items"."page_id" BETWEEN 1 AND 1) [0m
+  [4;36;1mItem Load (0.000000)[0m   [0;1mSELECT * FROM "items" WHERE ("items".research_id = 1 AND ("items"."page_id" = 2)) ORDER BY position[0m
+Rendering admin/items/reorder_items
+Rendered admin/items/_list_items (0.00000)
+Completed in 1.48808 (0 reqs/sec) | Rendering: 0.01200 (0%) | DB: 0.21201 (14%) | 200 OK [http://localhost/admin/researches/1/items/reorder_items?page=2]
+
+
+Processing ItemsController#set_item_to_page (for 127.0.0.1 at 2008-09-15 09:38:01) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlMjBiY2QzMTQwOGMxZDBjY2Q4OGE5NTQ2NjA4ODIx
+NWMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--49df3d648b1a75801c6f562814395c73c4557eae
+  Parameters: {"authenticity_token"=>"91651f8580cf6a0b63c5b6135b4952ce747b5436", "action"=>"set_item_to_page", "id"=>"item_29", "page"=>"2", "controller"=>"admin/items", "research_id"=>"1", "page_sent"=>"page_1"}
+  [4;35;1mResearch Load (0.000000)[0m   [0mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;36;1mItem Load (0.000000)[0m   [0;1mSELECT * FROM "items" WHERE ("items"."id" = 29 AND ("items".research_id = 1)) [0m
+  [4;35;1mQuestion Update (0.000000)[0m   [0mUPDATE "items" SET "updated_at" = '2008-09-15 12:38:01', "page_id" = 1 WHERE "id" = 29[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mSELECT count(*) AS count_all FROM "items" [0m
+  [4;35;1mSQL (0.000000)[0m   [0mSELECT count(*) AS count_all FROM "items" WHERE ("items"."page_id" BETWEEN 1 AND 1) [0m
+  [4;36;1mItem Load (0.000000)[0m   [0;1mSELECT * FROM "items" WHERE ("items".research_id = 1 AND ("items"."page_id" = 2)) ORDER BY position[0m
+Rendering admin/items/set_item_to_page
+Rendered admin/items/_list_items (0.00400)
+Completed in 0.59203 (1 reqs/sec) | Rendering: 0.01600 (2%) | DB: 0.00000 (0%) | 200 OK [http://localhost/admin/researches/1/items/set_item_to_page?page=2&page_sent=page_1]
+
+
+Processing ItemsController#reorder_items (for 127.0.0.1 at 2008-09-15 09:38:02) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlMjBiY2QzMTQwOGMxZDBjY2Q4OGE5NTQ2NjA4ODIx
+NWMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--49df3d648b1a75801c6f562814395c73c4557eae
+  Parameters: {"authenticity_token"=>"91651f8580cf6a0b63c5b6135b4952ce747b5436", "action"=>"reorder_items", "page"=>"2", "controller"=>"admin/items", "list_items"=>["4", "31", "29"], "research_id"=>"1"}
+  [4;35;1mResearch Load (0.000000)[0m   [0mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;36;1mItem Load (0.004000)[0m   [0;1mSELECT * FROM "items" WHERE ("items"."id" = 4 AND ("items".research_id = 1)) [0m
+  [4;35;1mItem Load (0.000000)[0m   [0mSELECT * FROM "items" WHERE ("items"."id" = 31 AND ("items".research_id = 1)) [0m
+  [4;36;1mQuestion Update (0.000000)[0m   [0;1mUPDATE "items" SET "updated_at" = '2008-09-15 12:38:02', "position" = 1 WHERE "id" = 31[0m
+  [4;35;1mItem Load (0.004000)[0m   [0mSELECT * FROM "items" WHERE ("items"."id" = 29 AND ("items".research_id = 1)) [0m
+  [4;36;1mQuestion Update (0.000000)[0m   [0;1mUPDATE "items" SET "updated_at" = '2008-09-15 12:38:02', "position" = 2 WHERE "id" = 29[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSELECT count(*) AS count_all FROM "items" [0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mSELECT count(*) AS count_all FROM "items" WHERE ("items"."page_id" BETWEEN 1 AND 1) [0m
+  [4;35;1mItem Load (0.004000)[0m   [0mSELECT * FROM "items" WHERE ("items".research_id = 1 AND ("items"."page_id" = 2)) ORDER BY position[0m
+Rendering admin/items/reorder_items
+Rendered admin/items/_list_items (0.00000)
+Completed in 1.21207 (0 reqs/sec) | Rendering: 0.01600 (1%) | DB: 0.01200 (0%) | 200 OK [http://localhost/admin/researches/1/items/reorder_items?page=2]
+
+
+Processing ItemsController#set_item_to_page (for 127.0.0.1 at 2008-09-15 09:38:04) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlMjBiY2QzMTQwOGMxZDBjY2Q4OGE5NTQ2NjA4ODIx
+NWMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--49df3d648b1a75801c6f562814395c73c4557eae
+  Parameters: {"authenticity_token"=>"91651f8580cf6a0b63c5b6135b4952ce747b5436", "action"=>"set_item_to_page", "id"=>"item_4", "page"=>"2", "controller"=>"admin/items", "research_id"=>"1", "page_sent"=>"page_3"}
+  [4;36;1mResearch Load (0.004000)[0m   [0;1mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;35;1mItem Load (0.000000)[0m   [0mSELECT * FROM "items" WHERE ("items"."id" = 4 AND ("items".research_id = 1)) [0m
+  [4;36;1mItem Update (0.000000)[0m   [0;1mUPDATE "items" SET "updated_at" = '2008-09-15 12:38:04', "page_id" = 3 WHERE "id" = 4[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSELECT count(*) AS count_all FROM "items" [0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mSELECT count(*) AS count_all FROM "items" WHERE ("items"."page_id" BETWEEN 1 AND 1) [0m
+  [4;35;1mItem Load (0.000000)[0m   [0mSELECT * FROM "items" WHERE ("items".research_id = 1 AND ("items"."page_id" = 2)) ORDER BY position[0m
+Rendering admin/items/set_item_to_page
+Rendered admin/items/_list_items (0.00400)
+Completed in 0.41202 (2 reqs/sec) | Rendering: 0.01600 (3%) | DB: 0.00400 (0%) | 200 OK [http://localhost/admin/researches/1/items/set_item_to_page?page=2&page_sent=page_3]
+
+
+Processing ItemsController#index (for 127.0.0.1 at 2008-09-15 09:38:06) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlMjBiY2QzMTQwOGMxZDBjY2Q4OGE5NTQ2NjA4ODIx
+NWMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--49df3d648b1a75801c6f562814395c73c4557eae
+  Parameters: {"action"=>"index", "page"=>"1", "controller"=>"admin/items", "research_id"=>"1"}
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;35;1mSQL (0.000000)[0m   [0mSELECT count(*) AS count_all FROM "items" [0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mSELECT count(*) AS count_all FROM "items" WHERE ("items"."page_id" BETWEEN 1 AND 0) [0m
+  [4;35;1mItem Load (0.000000)[0m   [0mSELECT * FROM "items" WHERE ("items".research_id = 1 AND ("items"."page_id" = 1)) ORDER BY position[0m
+Rendering template within layouts/application
+Rendering admin/items/index
+Rendered admin/items/_list_items (0.00400)
+Rendered admin/items/_page_links (0.01200)
+Completed in 0.06000 (16 reqs/sec) | Rendering: 0.02000 (33%) | DB: 0.00000 (0%) | 200 OK [http://localhost/admin/researches/1/items?page=1]
+
+
+Processing ItemsController#set_item_to_page (for 127.0.0.1 at 2008-09-15 09:38:10) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlMjBiY2QzMTQwOGMxZDBjY2Q4OGE5NTQ2NjA4ODIx
+NWMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--49df3d648b1a75801c6f562814395c73c4557eae
+  Parameters: {"authenticity_token"=>"91651f8580cf6a0b63c5b6135b4952ce747b5436", "action"=>"set_item_to_page", "id"=>"item_1", "page"=>"1", "controller"=>"admin/items", "research_id"=>"1", "page_sent"=>"page_4"}
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;35;1mItem Load (0.004000)[0m   [0mSELECT * FROM "items" WHERE ("items"."id" = 1 AND ("items".research_id = 1)) [0m
+  [4;36;1mItem Update (0.000000)[0m   [0;1mUPDATE "items" SET "updated_at" = '2008-09-15 12:38:10', "page_id" = 4 WHERE "id" = 1[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSELECT count(*) AS count_all FROM "items" [0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mSELECT count(*) AS count_all FROM "items" WHERE ("items"."page_id" BETWEEN 1 AND 0) [0m
+  [4;35;1mItem Load (0.004000)[0m   [0mSELECT * FROM "items" WHERE ("items".research_id = 1 AND ("items"."page_id" = 1)) ORDER BY position[0m
+Rendering admin/items/set_item_to_page
+Rendered admin/items/_list_items (0.00000)
+Completed in 0.84005 (1 reqs/sec) | Rendering: 0.01200 (1%) | DB: 0.00800 (0%) | 200 OK [http://localhost/admin/researches/1/items/set_item_to_page?page=1&page_sent=page_4]
+
+
+Processing ItemsController#reorder_items (for 127.0.0.1 at 2008-09-15 09:38:11) [POST]
+  Session ID: BAh7BzoMY3NyZl9pZCIlMjBiY2QzMTQwOGMxZDBjY2Q4OGE5NTQ2NjA4ODIx
+NWMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--49df3d648b1a75801c6f562814395c73c4557eae
+  Parameters: {"authenticity_token"=>"91651f8580cf6a0b63c5b6135b4952ce747b5436", "action"=>"reorder_items", "page"=>"1", "controller"=>"admin/items", "list_items"=>["29", "3", "1"], "research_id"=>"1"}
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;35;1mItem Load (0.000000)[0m   [0mSELECT * FROM "items" WHERE ("items"."id" = 29 AND ("items".research_id = 1)) [0m
+  [4;36;1mQuestion Update (0.000000)[0m   [0;1mUPDATE "items" SET "updated_at" = '2008-09-15 12:38:11', "position" = 0 WHERE "id" = 29[0m
+  [4;35;1mItem Load (0.000000)[0m   [0mSELECT * FROM "items" WHERE ("items"."id" = 3 AND ("items".research_id = 1)) [0m
+  [4;36;1mItem Update (0.000000)[0m   [0;1mUPDATE "items" SET "updated_at" = '2008-09-15 12:38:12', "position" = 1 WHERE "id" = 3[0m
+  [4;35;1mItem Load (0.004000)[0m   [0mSELECT * FROM "items" WHERE ("items"."id" = 1 AND ("items".research_id = 1)) [0m
+  [4;36;1mItem Update (0.000000)[0m   [0;1mUPDATE "items" SET "updated_at" = '2008-09-15 12:38:15', "position" = 2 WHERE "id" = 1[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSELECT count(*) AS count_all FROM "items" [0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mSELECT count(*) AS count_all FROM "items" WHERE ("items"."page_id" BETWEEN 1 AND 0) [0m
+  [4;35;1mItem Load (0.004000)[0m   [0mSELECT * FROM "items" WHERE ("items".research_id = 1 AND ("items"."page_id" = 1)) ORDER BY position[0m
+Rendering admin/items/reorder_items
+Rendered admin/items/_list_items (0.00400)
+Completed in 4.58026 (0 reqs/sec) | Rendering: 0.01600 (0%) | DB: 0.00800 (0%) | 200 OK [http://localhost/admin/researches/1/items/reorder_items?page=1]
+
+
+Processing ItemsController#index (for 127.0.0.1 at 2008-09-15 09:38:16) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlMjBiY2QzMTQwOGMxZDBjY2Q4OGE5NTQ2NjA4ODIx
+NWMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--49df3d648b1a75801c6f562814395c73c4557eae
+  Parameters: {"action"=>"index", "page"=>"4", "controller"=>"admin/items", "research_id"=>"1"}
+  [4;36;1mResearch Load (0.004000)[0m   [0;1mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;35;1mSQL (0.000000)[0m   [0mSELECT count(*) AS count_all FROM "items" [0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mSELECT count(*) AS count_all FROM "items" WHERE ("items"."page_id" BETWEEN 1 AND 3) [0m
+  [4;35;1mItem Load (0.000000)[0m   [0mSELECT * FROM "items" WHERE ("items".research_id = 1 AND ("items"."page_id" = 4)) ORDER BY position[0m
+Rendering template within layouts/application
+Rendering admin/items/index
+Rendered admin/items/_list_items (0.00800)
+Rendered admin/items/_page_links (0.01600)
+Completed in 0.08400 (11 reqs/sec) | Rendering: 0.02800 (33%) | DB: 0.00400 (4%) | 200 OK [http://localhost/admin/researches/1/items?page=4]
+
+
+Processing ItemsController#index (for 127.0.0.1 at 2008-09-15 09:38:17) [GET]
+  Session ID: BAh7BzoMY3NyZl9pZCIlMjBiY2QzMTQwOGMxZDBjY2Q4OGE5NTQ2NjA4ODIx
+NWMiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFzaEhh
+c2h7AAY6CkB1c2VkewA=--49df3d648b1a75801c6f562814395c73c4557eae
+  Parameters: {"action"=>"index", "page"=>"1", "controller"=>"admin/items", "research_id"=>"1"}
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" WHERE ("researches"."id" = 1) [0m
+  [4;35;1mSQL (0.004000)[0m   [0mSELECT count(*) AS count_all FROM "items" [0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mSELECT count(*) AS count_all FROM "items" WHERE ("items"."page_id" BETWEEN 1 AND 0) [0m
+  [4;35;1mItem Load (0.000000)[0m   [0mSELECT * FROM "items" WHERE ("items".research_id = 1 AND ("items"."page_id" = 1)) ORDER BY position[0m
+Rendering template within layouts/application
+Rendering admin/items/index
+Rendered admin/items/_list_items (0.00800)
+Rendered admin/items/_page_links (0.00800)
+Completed in 0.06400 (15 reqs/sec) | Rendering: 0.02400 (37%) | DB: 0.00400 (6%) | 200 OK [http://localhost/admin/researches/1/items?page=1]
+  [4;36;1mSQL (0.000000)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000000)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.512029)[0m   [0;1mCREATE TABLE "items" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "info" varchar(255) DEFAULT NULL NULL, "type" varchar(255) DEFAULT NULL NULL, "research_id" integer DEFAULT NULL NULL, "page_id" integer DEFAULT NULL NULL, "position" integer DEFAULT NULL NULL, "created_at" datetime DEFAULT NULL NULL, "updated_at" datetime DEFAULT NULL NULL) [0m
+  [4;35;1mSQL (0.000000)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.832047)[0m   [0;1mCREATE TABLE "researches" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) DEFAULT NULL NULL, "number_of_pages" integer DEFAULT NULL NULL, "introduction" text DEFAULT NULL NULL, "created_at" datetime DEFAULT NULL NULL, "updated_at" datetime DEFAULT NULL NULL) [0m
+  [4;35;1mSQL (0.000000)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.736042)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.564033)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.004000)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (0.324018)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20080816200536')[0m
+  [4;35;1mSQL (0.588034)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20080816110900')[0m
+  [4;36;1mResearch Create (0.000000)[0m   [0;1mINSERT INTO "researches" ("name", "created_at", "updated_at", "introduction", "number_of_pages") VALUES('s', '2008-09-15 13:30:05', '2008-09-15 13:30:05', 'd', NULL)[0m
+  [4;35;1mItem Create (0.000000)[0m   [0mINSERT INTO "items" ("position", "created_at", "updated_at", "page_id", "info", "type", "research_id") VALUES(NULL, '2008-09-15 13:30:34', '2008-09-15 13:30:34', 1, NULL, NULL, 3)[0m
+  [4;36;1mItem Create (0.000000)[0m   [0;1mINSERT INTO "items" ("position", "created_at", "updated_at", "page_id", "info", "type", "research_id") VALUES(NULL, '2008-09-15 13:30:37', '2008-09-15 13:30:37', 1, NULL, NULL, 3)[0m
+  [4;35;1mItem Create (0.000000)[0m   [0mINSERT INTO "items" ("position", "created_at", "updated_at", "page_id", "info", "type", "research_id") VALUES(NULL, '2008-09-15 13:30:40', '2008-09-15 13:30:40', 1, NULL, NULL, 3)[0m
+  [4;36;1mItem Create (0.000000)[0m   [0;1mINSERT INTO "items" ("position", "created_at", "updated_at", "page_id", "info", "type", "research_id") VALUES(NULL, '2008-09-15 13:30:44', '2008-09-15 13:30:44', 2, NULL, NULL, 3)[0m
+  [4;35;1mItem Create (0.000000)[0m   [0mINSERT INTO "items" ("position", "created_at", "updated_at", "page_id", "info", "type", "research_id") VALUES(NULL, '2008-09-15 13:30:45', '2008-09-15 13:30:45', 2, NULL, NULL, 3)[0m
+  [4;36;1mResearch Load (0.000000)[0m   [0;1mSELECT * FROM "researches" WHERE ("researches"."id" = 3) [0m
+  [4;35;1mItem Load (0.004000)[0m   [0mSELECT * FROM "items" WHERE ("items".research_id = 3) [0m
