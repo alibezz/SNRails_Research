@@ -1,10 +1,12 @@
+<%= title _('Research') %>
+
+<%= render :partial => 'research_options' %>
+
 <p>
-  <strong>Name:</strong><%=h @research.name %>
-</p>
-<p>
-  <strong>Introduction:</strong><%=h @research.introduction %>
+  <%=h @research.title %>
 </p>
 
-<%= link_to 'Edit', edit_object_url %>
-|
-<%= link_to 'Back', collection_url %>
+<p>
+  <%=h @research.introduction %>
+</p>
+

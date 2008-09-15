@@ -12,7 +12,7 @@ ActionController::Routing::Routes.draw do |map|
 #  map.resources :items
 #  map.resources :items, :collection => {:index_test => :get}
 #  map.resources :researches, :has_many => :questions
-#  map.resources :researches, :has_many => :sections
+  map.resources :researches, :has_many => :items
 
   # Route for admin research
   map.namespace :admin do |admin|

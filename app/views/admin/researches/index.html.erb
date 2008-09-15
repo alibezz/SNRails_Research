@@ -1,21 +1,11 @@
 <%= title _("Listing Researches") %>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Introduction</th>
-  </tr>
-  <%- @researches.each do |research|%>
-    <tr>
-      <td><%=h research.name %></td>
-      <td><%=h research.introduction %></td>
-    
-      <td><%=link_to 'Show', object_url(research) %></td>
-      <td><%=link_to 'Edit', edit_object_url(research) %></td>
-      <td><%=link_to 'Destroy', object_url(research), :confirm => 'Are you sure?', :method => :delete %></td>
-    </tr>
+<ul>
+  <%- @researches.each do |research| %>
+    <%= link_to research.title, object_url(research) %>
+    <ul>
+      <li> <%= link_to _('Edit') %> </li>
+    </ul>
   <% end %>
-</table>
-<br/>
+</ul>
 
-<%= link_to 'New Research', new_object_url %>

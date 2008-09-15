@@ -41,7 +41,7 @@ class Test::Unit::TestCase
   
   def reserach_params(params = {})
     {
-      :name => 'some research',
+      :title => 'some research',
       :introduction => 'some research',
       :number_of_pages => 1,
     }.merge(params)

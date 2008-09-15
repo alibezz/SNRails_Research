@@ -2,13 +2,13 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class ResearchTest < Test::Unit::TestCase
 
-  def test_presence_of_name
+  def test_presence_of_title
     research = Research.new
     research.valid?
-    assert research.errors.invalid?(:name)
-    research.name = "some"
+    assert research.errors.invalid?(:title)
+    research.title = "some"
     research.valid?
-    assert !research.errors.invalid?(:name)
+    assert !research.errors.invalid?(:title)
   end
 
   def test_presence_of_introduction
@@ -47,6 +47,18 @@ class ResearchTest < Test::Unit::TestCase
    
     assert 2, research.items.find(:all, :conditions => {:page_id => 1})
     assert 3, research.items.find(:all, :conditions => {:page_id => 2})
+  end
+
+  def test_uniqueness_of_title
+    create_research(:title => 'some')
+    research = Research.new(:title => 'some')
+    research.valid?
+    assert research.errors.invalid?(:title)
+    
+    research = Research.new(:title => 'another')
+    research.valid?
+    assert !research.errors.invalid?(:title)
+    
   end
 
 end

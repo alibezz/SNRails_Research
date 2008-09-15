@@ -1,7 +1,8 @@
 class Research < ActiveRecord::Base
 
-  validates_presence_of :name
+  validates_presence_of :title
   validates_presence_of :introduction
+  validates_uniqueness_of :title
 
   has_many :items
 

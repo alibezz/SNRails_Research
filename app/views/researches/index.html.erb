@@ -1,18 +1,8 @@
 <%= title _("Listing Researches") %>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Introduction</th>
-  </tr>
-  <%- @researches.each do |research|%>
-    <tr>
-      <td><%=h research.name %></td>
-      <td><%=h research.introduction %></td>
-    
-      <td><%=link_to 'Show', object_url(research) %></td>
-    </tr>
+<ul>
+  <% @researches.each do |research| %>
+    <li> <%= link_to research.title, object_url(research) %> </li>
   <% end %>
-</table>
-<br/>
+</ul>
 

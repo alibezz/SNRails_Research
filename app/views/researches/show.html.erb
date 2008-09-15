@@ -1,8 +1,13 @@
+<%= title _('Research') %>
+
 <p>
-  <strong>Name:</strong><%=h @research.name %>
-</p>
-<p>
-  <strong>Introduction:</strong><%=h @research.introduction %>
+  <%=h @research.title %>
 </p>
 
-<%= link_to _("Questions"), research_items_url(@research) %>
+<p>
+  <%=h @research.introduction %>
+</p>
+
+<%- @research.items do |item| %>
+  <ul> <%=h item.info %>  </ul>
+<% end %>

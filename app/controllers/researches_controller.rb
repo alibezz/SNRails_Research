@@ -1,5 +1,5 @@
-class ResearchesController < ApplicationController
-  resource_controller
+class ResearchesController < ResourceController::Base
 
-  actions :all, :except => [:new, :edit, :create, :update, :destroy]
+  actions :index, :show
+
 end

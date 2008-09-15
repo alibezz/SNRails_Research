@@ -1,3 +1,2 @@
-class Admin::ResearchesController < ApplicationController
-  resource_controller
+class Admin::ResearchesController < ResourceController::Base
 end
