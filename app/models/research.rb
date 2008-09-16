@@ -14,6 +14,9 @@ class Research < ActiveRecord::Base
   validates_uniqueness_of :title
 
   has_many :items
+  has_many :permissions
+  has_many :users, :through => :permissions
+  has_many :moderators, :through => :permissions, :source => :user
 
   acts_as_design :root => File.join('designs', 'researches')
 

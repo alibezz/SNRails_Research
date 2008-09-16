@@ -1,4 +1,6 @@
 <ul>
-  <li> <%= link_to _('Back'), collection_url %> </li>
+  <li> <%= link_to _('Back'), collection_url if current_user.is_administrator? %> </li>
   <li> <%= link_to _('Edit'), edit_object_url %> </li>
+  <li> <%= link_to _('Moderators'), moderators_admin_research_path %> </li>
+  <li> <%= link_to _('Participants'), participants_admin_research_path %> </li>
 </ul>

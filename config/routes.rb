@@ -1,28 +1,16 @@
 ActionController::Routing::Routes.draw do |map|
+
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'
-  map.register '/register', :controller => 'users', :action => 'create'
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.resources :users
   map.resource :session
 
-    # FIXME see if will be used
-  #  map.resources :sections
-  #  map.resources :questions
-  #  map.resources :researches 
-  #do |item|
-  #    item.resources :items, :member => {:bli => :get}, :collection => {:bla => :get}
-      #admin.resources :researches, :has_many => :items, :collection => {:nothing => :post, :process_page => :post, :index_test => :get}
-  #  end
-
-  #  map.resources :items
-  #  map.resources :items, :collection => {:index_test => :get}
-  #  map.resources :researches, :has_many => :questions
   map.resources :researches, :has_many => :items
 
   # Route for admin research
   map.namespace :admin do |admin|
-    admin.resources :researches, :has_many => :items do |item|
+    admin.resources :researches, :member => {:moderators => :get, :participants => :get}, :has_many => :items do |item|
      item.resources :items, :collection => {:reorder_items => :post, :reorder_pages => :post, :set_item_to_page => :post}
     end
   end

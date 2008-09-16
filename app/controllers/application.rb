@@ -22,6 +22,16 @@ class ApplicationController < ActionController::Base
     @environment = Environment.default
   end
 
+  def load_research
+    login_required
+    self.class.design :holder => 'research' 
+    if current_user.is_administrator?
+      @research = Research.find(params[:id])
+    else
+      @research = current_user.researches.find(params[:id])
+    end
+  end
+
   # See ActionController::Base for details 
   # Uncomment this to filter the contents of submitted sensitive data parameters
   # from your application log (in this case, all fields with names like "password"). 

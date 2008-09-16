@@ -6,3 +6,8 @@ Environment.create!(:is_default => true)
 
 Research.delete_all
 Research.create(:title => 'some title', :introduction => 'some introduction')
+
+
+User.delete_all
+User.create!(:login => 'leandro', :password => 'leandro', :password_confirmation => 'leandro', :email => 'leandronunes@safernet.org.br')
+User.create!(:login => 'admin', :password => '123456', :password_confirmation => '123456', :email => 'admin@safernet.org.br', :is_administrator => true)
