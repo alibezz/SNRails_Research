@@ -7,4 +7,8 @@ class Admin::ResearchesController < ResourceController::Base
     @users = @research.moderators
   end
 
+  #FIXME remove this information
+  def associate_moderator
+  end
+
 end

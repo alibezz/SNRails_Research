@@ -10,9 +10,18 @@ ActionController::Routing::Routes.draw do |map|
 
   # Route for admin research
   map.namespace :admin do |admin|
-    admin.resources :researches, :member => {:moderators => :get, :participants => :get}, :has_many => :items do |item|
+#    admin.resources :researches, :member => {:moderators => :get, :associate_moderator => :put, :participants => :get}, :has_many => :items do |item|
+#     item.resources :items, :collection => {:reorder_items => :post, :reorder_pages => :post, :set_item_to_page => :post}
+#    end
+
+    admin.resources :researches, :has_many => :items do |item|
      item.resources :items, :collection => {:reorder_items => :post, :reorder_pages => :post, :set_item_to_page => :post}
     end
+
+    admin.resources :researches, :has_many => :moderators do |moderator|
+     moderator.resources :moderators
+    end
+
   end
  
   #Route for doc plugin
