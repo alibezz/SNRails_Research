@@ -7,3 +7,6 @@
 [submodule "vendor/plugins/rails_rcov"]
 	path = vendor/plugins/rails_rcov
 	url = gitosis@projects.safernet.org.br:rails_rcov.git
+[submodule "vendor/plugins/resource_controller"]
+	path = vendor/plugins/resource_controller
+	url = gitosis@projects.safernet.org.br:resource_controller.git
