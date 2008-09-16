@@ -6,7 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resource :session
 
-  map.resources :researches, :has_many => :items
+#  map.resources :researches, :has_many => :items
 
   # Route for admin research
   map.namespace :admin do |admin|

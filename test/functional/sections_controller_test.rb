@@ -11,6 +11,8 @@ class SectionsControllerTest < Test::Unit::TestCase
     @controller = SectionsController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
+    env = Environment.new
+    Environment.expects(:default).returns(env)
   end
 
   def test_should_get_index
