@@ -13,3 +13,6 @@
 [submodule "vendor/plugins/doc_browser"]
 	path = vendor/plugins/doc_browser
 	url = gitosis@projects.safernet.org.br:doc_browser.git
+[submodule "vendor/plugins/snsafernet_helpers"]
+	path = vendor/plugins/snsafernet_helpers
+	url = gitosis@projects.safernet.org.br:snsafernet_helpers.git
