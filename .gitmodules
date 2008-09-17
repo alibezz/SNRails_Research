@@ -16,3 +16,6 @@
 [submodule "vendor/plugins/snsafernet_helpers"]
 	path = vendor/plugins/snsafernet_helpers
 	url = gitosis@projects.safernet.org.br:snsafernet_helpers.git
+[submodule "vendor/plugins/populator"]
+	path = vendor/plugins/populator
+	url = gitosis@projects.safernet.org.br:populator.git
