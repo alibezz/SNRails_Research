@@ -58,7 +58,17 @@ class ResearchTest < Test::Unit::TestCase
     research = Research.new(:title => 'another')
     research.valid?
     assert !research.errors.invalid?(:title)
-    
   end
+
+  def test_should_not_be_private_by_default
+    r = Research.new
+    assert_equal false, r.is_private?
+  end
+
+  def test_should_be_private_when_defined
+    r = create_research(:is_private => true)
+    assert_equal true, Research.find(r.id).is_private?
+  end
+
 
 end

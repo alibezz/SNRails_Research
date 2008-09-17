@@ -4,6 +4,7 @@ class CreateResearches < ActiveRecord::Migration
       t.string :title, :subtitle, :design_data
       t.integer :number_of_pages, :default => 1
       t.text :introduction
+      t.boolean :is_private, :default => false
 
       t.timestamps
     end
