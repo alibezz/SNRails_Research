@@ -26,9 +26,9 @@ class ApplicationController < ActionController::Base
     login_required
     self.class.design :holder => 'research' 
     if !current_user.nil? and current_user.is_administrator?
-      @research = Research.find(params[:id])
+      @research = params[:research_id].nil? ? current_user.researches(params[:id]) : current_user.researches(params[:research_id])
     else
-      @research = current_user.researches.find(params[:id])
+      @research = params[:research_id].nil? ? Research.find(params[:id]) : Research.find(params[:research_id])
     end
   end
 

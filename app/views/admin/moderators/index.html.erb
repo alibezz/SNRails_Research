@@ -1,6 +1,17 @@
-<%= title _("%s's Moderators") %>
+<%= title @research.title %>
 
+<%= subtitle @research.title %>
 
 <%= render :partial => 'admin/researches/research_options' %>
 
+<%= inner_title _("Moderators") %>
 
+<%= render :partial => 'moderators_options' %>
+
+<ul>
+<%- @users.each do |user| %>
+  <li> 
+    <%= user.login %>
+  </li>
+<% end %>
+</ul>

@@ -2,11 +2,6 @@
 module ApplicationHelper
  
   #FIXME make this test
-  def title(str)
-    content_tag(:h1, str, :class => 'title')
-  end
-
-  #FIXME make this test
   def login_bar
     content_tag(:ul,
       [

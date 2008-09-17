@@ -16,7 +16,9 @@ class Research < ActiveRecord::Base
   has_many :items
   has_many :permissions
   has_many :users, :through => :permissions
-  has_many :moderators, :through => :permissions, :source => :user
+
+  has_many :moderator_permissions, :conditions => {:is_moderator => true}, :class_name => 'Permission'
+  has_many :moderators, :through => :moderator_permissions, :source => :user
 
   acts_as_design :root => File.join('designs', 'researches')
 

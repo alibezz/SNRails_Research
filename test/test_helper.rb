@@ -32,7 +32,7 @@ class Test::Unit::TestCase
   #
   # Note: You'll currently still have to declare fixtures explicitly in integration tests
   # -- they do not yet inherit this setting
-  fixtures :all
+  #fixtures :all
 
   # Add more helper methods to be used by all tests here...
   def create_research(params = {})
@@ -63,6 +63,19 @@ class Test::Unit::TestCase
   
   def environment_params(params = {})
     {
+    }.merge(params)
+  end
+
+  def create_user(params = {})
+    User.create!(user_params(params))
+  end
+  
+  def user_params(params = {})
+    {
+      :login => 'some',
+      :password => 'somepass',
+      :password_confirmation => 'somepass',
+      :email => params[:login].nil? ? 'myemail@something.com' : params[:login] + '@something.com'
     }.merge(params)
   end
 

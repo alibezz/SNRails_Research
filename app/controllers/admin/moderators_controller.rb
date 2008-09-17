@@ -1,13 +1,31 @@
 class Admin::ModeratorsController < ResourceController::Base
 
+  actions :index, :new, :create
+
+  before_filter :load_research
+
   belongs_to :research
 
-#FIXME remove this informations
-#  private
-#
-#  def collection
-#    @research ||= Research.find(params[:research_id])
-#    @collection = @research.items.paginate(:page => params[:page], :fixed_page => @research.number_of_pages, :page_attr => :page_id, :order => :position )
-#  end
+  create.response do |wants|
+    wants.html {redirect_to collection_url}
+  end
+
+  create.after do
+    @research.moderator_permissions.create(:user => object)
+  end
+
+  private
+
+  def model_name
+    'user'
+  end
+
+  def object_name
+    'user'
+  end
+
+  def collection
+    @collection ||= @research.moderators
+  end
 
 end
