@@ -13,6 +13,9 @@ ActionController::Routing::Routes.draw do |map|
 
     admin.resources :researches, :has_many => :items do |item|
      item.resources :items, :collection => {:reorder_items => :post, :reorder_pages => :post, :set_item_to_page => :post}
+     item.resources :items, :has_many  => :answers do |answer|
+       answer.resources :answers
+     end
     end
 
     admin.resources :researches, :has_many => :moderators do |moderator|
