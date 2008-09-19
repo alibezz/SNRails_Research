@@ -16,7 +16,11 @@
       <div id="frame">
 
         <div id="header">
-          <%= link_to _('See all researches'), researches_url %>
+          <% if !current_user.nil? and current_user.is_administrator? %>
+            <%= link_to _('See all researches'), admin_researches_url %>
+          <% else %>
+            <%= link_to _('See all researches'), researches_url %>
+          <% end %>
           <%= login_bar %>
         </div> <!-- end "header" -->
 

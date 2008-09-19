@@ -55,8 +55,10 @@ class User < ActiveRecord::Base
     self.researches
   end
 
-  protected
-    
 
+  #FIXME make this test
+  def my_researches(params = {})
+    self.is_administrator? ? Research.find(:all, params) : self.researches(research_id)
+  end
 
 end

@@ -22,10 +22,11 @@ class ApplicationController < ActionController::Base
     @environment = Environment.default
   end
 
+  #FIXME make this test
   def load_research
     self.class.design :holder => 'research' 
     if !current_user.nil? and current_user.is_administrator?
-      @research = params[:research_id].nil? ? current_user.researches(params[:id]) : current_user.researches(params[:research_id])
+      @research = params[:research_id].nil? ? current_user.my_researches(params[:id]).first : current_user.my_researches(params[:research_id]).first
     else
       @research = params[:research_id].nil? ? Research.find(params[:id]) : Research.find(params[:research_id])
     end
