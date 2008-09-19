@@ -1,0 +1,15 @@
+<%= title @research.title %>
+
+<%= subtitle @research.title %>
+
+<%= render :partial => 'admin/researches/research_options' %>
+
+<%= inner_title _("Answers") %>
+
+<ul>
+<%- @answers.each do |answer| %>
+  <li> 
+    <%= answer.info %>
+  </li>
+<% end %>
+</ul>
