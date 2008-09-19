@@ -1,0 +1,17 @@
+<%= title @research.title %>
+
+<%= subtitle @research.title %>
+
+<%= render :partial => 'admin/researches/research_options' %>
+
+<%= inner_title _('Adding new moderator user') %>
+
+<%= render :partial => 'moderators_options' %>
+
+<% form_for :user, :url => object_path do |f| -%>
+
+  <%= render :partial => 'users/form', :locals => {:f => f} %>
+
+  <p><%= submit_tag _('Sign up') %></p>
+
+<% end -%>
