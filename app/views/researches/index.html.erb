@@ -2,7 +2,10 @@
 
 <ul>
   <% @researches.each do |research| %>
-    <li> <%= link_to research.title, object_url(research) %> </li>
+    <li> 
+      <%= link_to research.title, object_url(research) %> 
+      <%= research.is_private? ? design_display_icon('private', _('Private')) : '' %>
+    </li>
   <% end %>
 </ul>
 

@@ -23,13 +23,15 @@ class ApplicationController < ActionController::Base
   end
 
   def load_research
-    login_required
     self.class.design :holder => 'research' 
     if !current_user.nil? and current_user.is_administrator?
       @research = params[:research_id].nil? ? current_user.researches(params[:id]) : current_user.researches(params[:research_id])
     else
       @research = params[:research_id].nil? ? Research.find(params[:id]) : Research.find(params[:research_id])
     end
+
+    login_required if @research.is_private?
+
   end
 
   # See ActionController::Base for details 

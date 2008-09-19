@@ -16,6 +16,7 @@ namespace :db do
        research.title = Populator.words(1..4).titleize
        research.subtitle = Populator.words(1.7).titleize
        research.introduction = Populator.sentences(2..10)
+       research.is_private = [true, false]
        User.populate 8 do |user|
          user.login = Populator.words(3)
          user.email = Populator.words(1) + '@localhost.com'
