@@ -18,11 +18,6 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :researches, :has_many => :moderators do |moderator|
      moderator.resources :moderators
     end
-
-    admin.resources :researches, :has_many => :questions do |question|
-     question.resources :questions
-    end
-
   end
  
   #Route for doc plugin

@@ -3,7 +3,7 @@ namespace :db do
   desc 'Erase and fill database'
   task :populate => :environment  do
      require 'populator'
-     [Research, User, Permission].each(&:delete_all)
+     [Research, User, Permission, Item].each(&:delete_all)
      
      User.populate 1 do |user|
        user.login = 'admin'
@@ -17,6 +17,13 @@ namespace :db do
        research.subtitle = Populator.words(1.7).titleize
        research.introduction = Populator.sentences(2..10)
        research.is_private = [true, false]
+       research.number_of_pages = 1..9
+       Item.populate 20 do |item|
+         item.info = Populator.words(5)
+         item.research_id = research.id
+         item.page_id = 1..research.number_of_pages
+         item.type = ['Question', 'Section']
+       end
        User.populate 8 do |user|
          user.login = Populator.words(3)
          user.email = Populator.words(1) + '@localhost.com'
