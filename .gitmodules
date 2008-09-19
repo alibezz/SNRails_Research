@@ -19,3 +19,6 @@
 [submodule "vendor/plugins/populator"]
 	path = vendor/plugins/populator
 	url = gitosis@projects.safernet.org.br:populator.git
+[submodule "vendor/plugins/selenium-on-rails"]
+	path = vendor/plugins/selenium-on-rails
+	url = gitosis@projects.safernet.org.br:selenium-on-rails.git
