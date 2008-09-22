@@ -13,7 +13,14 @@ ActionController::Routing::Routes.draw do |map|
 
     admin.resources :researches, :has_many => :items do |item|
      item.resources :items, :collection => {:reorder_items => :post, :reorder_pages => :post, :set_item_to_page => :post}
-     item.resources :items, :has_many  => :answers do |answer|
+     item.resources :items, :questions, :has_many  => :answers do |answer|
+       answer.resources :answers
+     end
+    end
+
+    admin.resources :researches, :has_many => :questions do |question|
+     question.resources :questions, :collection => {:reorder_questions => :post, :reorder_pages => :post, :set_question_to_page => :post}
+     question.resources :questions, :questions, :has_many  => :answers do |answer|
        answer.resources :answers
      end
     end

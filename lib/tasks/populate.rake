@@ -23,7 +23,9 @@ namespace :db do
          item.research_id = research.id
          item.page_id = 1..research.number_of_pages
          item.type = ['Question', 'Section']
+         #item.type = 'Item'
          if item.type == 'Question'
+         #if item.type == 'Item'
            Answer.populate 4 do |answer|
              answer.info = Populator.words(2)
              answer.item_id = item.id

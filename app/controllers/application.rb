@@ -35,6 +35,12 @@ class ApplicationController < ActionController::Base
 
   end
 
+  #FIXME make this test
+  def load_item
+    @item = @research.items.find(params[:item_id]||params[:question_id])
+
+  end
+
   # See ActionController::Base for details 
   # Uncomment this to filter the contents of submitted sensitive data parameters
   # from your application log (in this case, all fields with names like "password"). 

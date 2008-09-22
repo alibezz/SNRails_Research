@@ -14,6 +14,7 @@ class Research < ActiveRecord::Base
   validates_uniqueness_of :title
 
   has_many :items
+  has_many :questions
   has_many :permissions
   has_many :users, :through => :permissions
 
