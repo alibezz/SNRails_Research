@@ -1,0 +1,68 @@
+#!/usr/bin/env ruby
+require File.dirname(__FILE__) + '/../config/environment'
+
+Research.create(:title => 'Pesquisas.SegurancaPaisForm', :introduction => 'Pesquisas.SegurancaPaisForm') if Research.find_by_title('Pesquisas.SegurancaPaisForm').nil?
+Research.create(:title => 'Pesquisas.SegurancaJovensForm', :introduction => 'Pesquisas.SegurancaJovensForm') if Research.find_by_title('Pesquisas.SegurancaJovensForm').nil?
+
+#Dir.glob('../data/twiki/SegurancaPais*').select do |filename|
+pattern = '../data/twiki/*'
+#puts Dir.glob('../data/twiki/*').inspect
+#puts Dir.glob('../data/twiki/*').inspect
+
+migrate_log = File.open('../data/migrate.log', 'w+')
+log_files_processed = File.open('../data/files_processed.log', 'w+')
+
+Dir.glob(pattern).each do |filename|
+  next if filename.match(/.txt,v|PesquisaPaisForm.lease/)
+
+  file = File.open(filename, 'r')
+
+  migrate_log.write("TWiki File #{filename} open.\n")
+  
+  first_line = file.readline
+  raise 'This line cannot be nil' if first_line.nil?
+  log_filename = first_line.match(/META:TOPICINFO.*date=(.*) format.*/)[1]
+  log_filename = log_filename.gsub('"','')
+
+  migrate_log.write("The log filename should be: #{filename}\n")
+
+  if log_filename.to_i < 1218822785   
+    migrate_log.write("The TWiki topic #{filename} was probably created before the log creation\n")
+    migrate_log.write("\n\n")
+    next 
+  end
+
+  search_for_log = true
+  count = 0
+  log_file = nil
+  while(search_for_log) do 
+    begin
+      log_file = File.open("../data/log/#{log_filename}", 'r')
+       search_for_log = false
+    rescue
+      migrate_log.write("The file #{log_filename} was not found on log directory on search number #{count}.\n")
+      count = count + 1
+      log_filename = log_filename.to_i - 1
+    end
+
+    if count == 3
+      migrate_log.write("DANGEROUS: There is no log file associated to twiki topic #{filename}.\n")
+      break
+    end 
+  end
+
+  unless log_file.nil?
+    log_files_processed.write(log_file.path.split('/').last + "\n")
+  end
+
+  migrate_log.write("\n\n")
+end
+
+#Environment.delete_all
+#Environment.create!(:is_default => true)
+
+
+
+#User.delete_all
+#User.create!(:login => 'leandro', :password => 'leandro', :password_confirmation => 'leandro', :email => 'leandronunes@safernet.org.br')
+#User.create!(:login => 'admin', :password => '123456', :password_confirmation => '123456', :email => 'admin@safernet.org.br', :is_administrator => true)
