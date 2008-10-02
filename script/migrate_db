@@ -1,8 +1,104 @@
 #!/usr/bin/env ruby
 require File.dirname(__FILE__) + '/../config/environment'
 
-Research.create(:title => 'Pesquisas.SegurancaPaisForm', :introduction => 'Pesquisas.SegurancaPaisForm') if Research.find_by_title('Pesquisas.SegurancaPaisForm').nil?
-Research.create(:title => 'Pesquisas.SegurancaJovensForm', :introduction => 'Pesquisas.SegurancaJovensForm') if Research.find_by_title('Pesquisas.SegurancaJovensForm').nil?
+@parent_research = Research.find_by_title('Pesquisas.SegurancaPaisForm')
+@parent_research = Research.create(:title => 'Pesquisas.SegurancaPaisForm', :introduction => 'Pesquisas.SegurancaPaisForm') if @parent_research.nil?
+
+@young_research  = Research.find_by_title('Pesquisas.SegurancaJovensForm')
+@young_research = Research.create(:title => 'Pesquisas.SegurancaJovensForm', :introduction => 'Pesquisas.SegurancaJovensForm') if @young_research.nil?
+
+PESQUISA_JOVENS = %w[ 
+Gnero
+Estado
+Idade
+PrincipaisLocaisdeAcesso
+HorasConectadoporDia
+LimitedeTempoConectado
+TempoDemaisConectado
+PrincipaisAtividadesConectado
+FotologouBlog
+SitesdeRelacionamento
+AmigosVirtuais
+QuantosAnosAprendeuInternet
+OndeAprendeuInternet
+HabilidadeemRelaoaosPais
+ConsideraoSobreInternet
+SenteSeguro
+MaiorRisco
+AmigoJFoiIncomodadoPorAlgoNaInternet
+JVivenciouOnline
+AmigoJEncontrouPessoalmenteUmAmigoVirtual
+ConsideraEncontrarPessoalmenteAmigoVirtual
+PaisAcompanhamaNavegaonaInternet
+OQueSenteQuandoMonitoramNavegao
+ObdeceasRegrasdosPais
+QuandoSeCastastraemSitedeRelacionamentooFaz
+InformaesqueCompartilhanaInternet
+InternetumBomLugarparaSeRelacionar
+OQueAchaSobreMedidasAtuaisParaProtegerJovens
+AchaQueAsInstituiesOuvemosJovensparaElaborarMedidas
+TemasQueJDiscutiu
+MeiosParaAprenderSobreRiscosDaInternet
+MeiosEficazesParaAprenderSobreSegurananaInternet
+EmRelaoaDivulgarDicasdeSegurana
+JFoiVtima
+AmigoJFoiVtima
+JDenunciou
+TipodeCrimeDenunciado
+Email
+GostariadeReceberOrientaesPorEmail
+]
+
+PESQUISA_PAIS = %w[
+Gnero
+Estado
+Idade
+QuantidadedeFilhosMenoresque18AnosqueUsamInternet
+IdadedoFilhoqueMaisUsaInternet
+PrincipaisLocaisdeAcesso
+PrincipaisLocaisdeAcessodosFilhos
+QuantoNavegaPorDia
+QuantooFilhoNavegaPorDia
+HLimiteproTempodeNavegaodosFilhos
+PrincipaisAtividadesOnline
+PrincipaisAtividadesOnlinedosFilhos
+QuantosAmigosVirtuaisPossui
+QuantosAmigosVirtuaisosFilhosPossuem
+HabilidadeemRelaoaosFilhos
+SenteSeguro
+SentequeosFilhosestoSeguros
+AcompanhaaNavegaodosFilhos
+ReaodosFilhosQuandoMonitorados
+MaiorRiscoparaosFilhos
+FrequnciaqueosFilhosManifestamIncmodo
+FilhosJForamVtimas
+JFoiVtima
+ConsideraEncontrarPessoalmenteumAmigoVirtual
+PermitiriaqueoFilhoEncontrassePessoalmenteumAmigoVirtual
+FilhoJEncontrouPessoalmenteumAmigoVirtual
+AcompanhaQuandoFilhoSeCadastraemSitedeRelacionamento
+InformaesqueosFilhosCompartilham
+HabilidadeemManteraSeguranadosFilhosnaInternet
+FilhosFicamTempoDemaisConectados
+OrientaosFilhosemRelaoaInternet
+RegrasInstituidas
+FilhosObedecemRegras
+MeiosEficazesParaAprenderSobreSegurana
+EmRelaoaDivulgarDicas
+JDenunciou
+TipodeCrimequeDenunciou
+ReceberOrientaes
+Email
+]
+
+PESQUISA_JOVENS.each do |question|
+  @young_research.items<< Item.create(:info => question)
+end
+
+PESQUISA_PAIS.each do |question|
+  @parent_research.items<< Item.create(:info => question)
+end
+
 
 #Dir.glob('../data/twiki/SegurancaPais*').select do |filename|
 pattern = '../data/twiki/*'
@@ -24,7 +120,7 @@ Dir.glob(pattern).each do |filename|
   log_filename = first_line.match(/META:TOPICINFO.*date=(.*) format.*/)[1]
   log_filename = log_filename.gsub('"','')
 
-  migrate_log.write("The log filename should be: #{filename}\n")
+  migrate_log.write("The log filename should be: #{log_filename}\n")
 
   if log_filename.to_i < 1218822785   
     migrate_log.write("The TWiki topic #{filename} was probably created before the log creation\n")
@@ -53,15 +149,24 @@ Dir.glob(pattern).each do |filename|
 
   unless log_file.nil?
     log_files_processed.write(log_file.path.split('/').last + "\n")
+    next
   end
+  
+  log_file.readline # There is nothing on line 1.
+  log_file.readline.split(':').last # Research name on line 2.
+  log_file.readline # Nothing important on line 3.
+  log_file.readline # Nothing important on line 4.
+  log_file.readline # Nothing important on line 5.
 
+  # Answers of users.
+  log_file.readline # Nothing important on line 5.
+  
   migrate_log.write("\n\n")
 end
 
+
 #Environment.delete_all
 #Environment.create!(:is_default => true)
-
-
 
 #User.delete_all
 #User.create!(:login => 'leandro', :password => 'leandro', :password_confirmation => 'leandro', :email => 'leandronunes@safernet.org.br')

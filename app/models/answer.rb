@@ -2,6 +2,7 @@ class Answer < ActiveRecord::Base
   #FIXME make this tests
   validates_presence_of:item_id
   validates_presence_of :info
+  belongs_to :item
   validates_uniqueness_of :position, :scope => :item_id
 
   before_save do |answer|
