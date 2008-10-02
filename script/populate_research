@@ -10,6 +10,7 @@ require File.dirname(__FILE__) + '/../config/environment'
 Section.delete_all
 Question.delete_all
 ItemValue.delete_all
+ObjectItemValue.delete_all
 
 User.delete_all
 User.create!(:login => 'leandro', :password => 'leandro', :password_confirmation => 'leandro', :email => 'leandronunes@safernet.org.br')
@@ -31,26 +32,39 @@ research.readlines.each do |line|
     item_count = item_count + 1
     @parent_research.number_of_pages = item_count
     @parent_research.save
+    value = value.strip
     Section.create!(:info => value, :research => @parent_research, :position => item_count, :page_id => page_count)
   elsif type == 'question'
     item_count = item_count + 1
     position, info = value.split('#')
+    info = info.strip
     question = Question.create!(:info => info, :position => item_count, :page_id => page_count, :research => @parent_research)
+    if question.info == 'Email'
+      question.html_type = 'text' 
+      question.save
+      i = ItemValue.create!(:item => question, :info => '', :position => 1)
+    end
     answer_count = 0
   elsif type == 'radio_option'
     question.html_type ||= 'radio'
     question.save
     answer_count = answer_count + 1
+    value = value.strip.gsub(',', '')
+    value = value.strip.gsub('...', '')
     ItemValue.create!(:item => question, :info => value, :position => answer_count)
   elsif type == 'select_option'
     question.html_type ||= 'select'
     question.save
     answer_count = answer_count + 1
+    value = value.strip.gsub(',', '')
+    value = value.strip.gsub('...', '')
     ItemValue.create!(:item => question, :info => value, :position => answer_count)
   elsif type == 'checkbox_option'
     question.html_type ||= 'checkbox'
     question.save
     answer_count = answer_count + 1
+    value = value.strip.gsub(',', '')
+    value = value.strip.gsub('...', '')
     ItemValue.create!(:item => question, :info => value, :position => answer_count)
   end
 end
@@ -71,29 +85,43 @@ research.readlines.each do |line|
     item_count = item_count + 1
     @young_research.number_of_pages = item_count
     @young_research.save
+    value = value.strip
     Section.create!(:info => value, :research => @young_research, :position => item_count, :page_id => page_count)
   elsif type == 'question'
+    position = nil
+    info = nil
     item_count = item_count + 1
     position, info = value.split('#')
+    info = info.strip
     question = Question.create!(:info => info, :position => item_count, :page_id => page_count, :research => @young_research)
+    if question.info == 'Email'
+      question.html_type = 'text' 
+      question.save
+      i = ItemValue.create!(:item => question, :info => '', :position => 1)
+    end
     answer_count = 0
   elsif type == 'radio_option'
     question.html_type ||= 'radio'
     question.save
     answer_count = answer_count + 1
+    value = value.strip.gsub(',', '')
+    value = value.strip.gsub('...', '')
     ItemValue.create!(:item => question, :info => value, :position => answer_count)
   elsif type == 'select_option'
     question.html_type ||= 'select'
     question.save
     answer_count = answer_count + 1
+    value = value.strip.gsub(',', '')
+    value = value.strip.gsub('...', '')
     ItemValue.create!(:item => question, :info => value, :position => answer_count)
   elsif type == 'checkbox_option'
     question.html_type ||= 'checkbox'
     question.save
     answer_count = answer_count + 1
+    value = value.strip.gsub(',', '')
+    value = value.strip.gsub('...', '')
     ItemValue.create!(:item => question, :info => value, :position => answer_count)
   end
-  
   
 end
 
