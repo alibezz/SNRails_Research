@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+require File.dirname(__FILE__) + '/../config/environment'
+
+pattern = '../data/log/*'
+
+processed_logs = File.open('../data/files_processed.log', 'r').readlines
+processed_logs = processed_logs.map{|l|l.strip}
+
+Dir.glob(pattern).each do |filename|
+
+  unless processed_logs.include?(filename.split('/').last)
+    puts "Log %s was not processed" % filename.split('/').last
+  end
+
+end
