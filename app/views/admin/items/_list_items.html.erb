@@ -2,19 +2,19 @@
 <ul id="list_items">
   <% @items.each do |item| %>
     <li id="item_<%= item.id %>"> 
-      <%= item.info + "  id:" + item.id.to_s %> 
+      <%= item.position %> - <%= item.info%> 
       <ul>
         <li> <%= design_display_button 'edit', _('Edit'), edit_admin_research_item_url(@research, item) %> </li>
-        <li> <%= design_display_button 'answer', _('Add Answer Options'), admin_research_item_answers_url(@research, item) %> </li>
+        <li> <%= design_display_button 'item_value', _('Add item_value Options'), admin_research_item_item_values_url(@research, item) %> </li>
       </ul>
       <% if item.kind_of?(Question) %>
         <ul>
-          <% item.answers.map do |answer| %>
+          <% item.item_values.map do |item_value| %>
             <li> 
-              <%= answer.info %> 
+              <%= item_value.info %> 
               <ul>
                 <li>
-                  <%= design_display_button 'edit', _('Edit'), edit_admin_research_item_answer_url(@research, item, answer) %>
+                  <%= design_display_button 'edit', _('Edit'), edit_admin_research_item_item_value_url(@research, item, item_value) %>
                 </li>
               </ul>
             </li>
