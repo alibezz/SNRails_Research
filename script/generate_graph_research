@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+require File.dirname(__FILE__) + '/../config/environment'
+
+research = Research.find_by_title('Pesquisas.SegurancaJovensForm')
+
+count = 0
+puts "Pesquisa %s" % research.title
+Question.find(:all, :conditions => {:research_id => research.id}, :order => "position ASC").map do |question|
+  puts "Questão %s" % question.position
+  next if question.info == 'Email'
+  file = File.open(File.dirname(__FILE__)+"/../caio_graph/PesquisaOpiniao/filhos/question#{count}/question.txt", 'w+')
+  str = '{"' + question.info + '":{'
+  is_first = true
+  question.item_values.find(:all, :order => 'info').each do |answer|
+    value = ObjectItemValue.count(:conditions => {:item_value_id => answer.id, :item_id => question.id})
+    unless is_first
+      str = str + ',' 
+    end
+    str = str + '"' + answer.info + '":{"Total de Respostas":' + value.to_s + '}'
+    is_first = false
+  end
+  str = str + '}}'
+  file.write(str)
+
+  count  = count + 1  
+end
+
+research = Research.find_by_title('Pesquisas.SegurancaPaisForm')
+
+puts "Pesquisa %s" % research.title
+count = 0
+Question.find(:all, :conditions => {:research_id => research.id}, :order => "position ASC").map do |question|
+  puts "Questão %s" % question.position
+  next if question.info == 'Email'
+  file = File.open(File.dirname(__FILE__)+"/../caio_graph/PesquisaOpiniao/pais/question#{count}/question.txt", 'w+')
+  str = '{"' + question.info + '":{'
+  is_first = true
+  question.item_values.find(:all, :order => 'info').each do |answer|
+    value = ObjectItemValue.count(:conditions => {:item_value_id => answer.id, :item_id => question.id})
+    unless is_first
+      str = str + ',' 
+    end
+    str = str + '"' + answer.info + '":{"Total de Respostas":' + value.to_s + '}'
+    is_first = false
+  end
+  str = str + '}}'
+  file.write(str)
+
+  count  = count + 1  
+end
+

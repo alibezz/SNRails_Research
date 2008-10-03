@@ -1,0 +1,188 @@
+#!/usr/bin/env ruby
+require File.dirname(__FILE__) + '/../config/environment'
+
+#ObjectItemValue.delete_all
+#Questionnaire.delete_all
+
+@parent_research = Research.find_by_title('Pesquisas.SegurancaPaisForm')
+@parent_research = Research.create(:title => 'Pesquisas.SegurancaPaisForm', :introduction => 'Pesquisas.SegurancaPaisForm') if @parent_research.nil?
+
+@young_research  = Research.find_by_title('Pesquisas.SegurancaJovensForm')
+@young_research = Research.create(:title => 'Pesquisas.SegurancaJovensForm', :introduction => 'Pesquisas.SegurancaJovensForm') if @young_research.nil?
+
+PESQUISA_JOVENS = {
+"Gnero" => "Gênero",
+"Estado" => "Estado de residência",
+"Idade" => "Sua idade",
+"PrincipaisLocaisdeAcesso" => "Quais os seus 2 (dois) principais locais de acesso à internet?",
+"HorasConectadoporDia" => "Quantas horas <strong>por dia</strong>, em média, você navega na internet?",
+"LimitedeTempoConectado" => "Há algum limite de tempo para sua navegação na internet?",
+"TempoDemaisConectado" => "Você acha que fica tempo demais na internet?",
+"PrincipaisAtividadesConectado" => "Quais as suas 3 (três) atividades on-line preferidas?",
+"FotologouBlog" => "Você possui Fotolog e/ou Blog?",
+"SitesdeRelacionamento" => "Quais sites de relacionamento você acessa?",
+"AmigosVirtuais" => "Quantos amigos virtuais (que conheceu pela internet) você possui?",
+"QuantosAnosAprendeuInternet" => "Com quantos anos você começou a utilizar a internet?",
+"OndeAprendeuInternet" => "Onde você aprendeu a utilizar a internet?",
+"HabilidadeemRelaoaosPais" => "Você é mais habilidoso no uso da internet do que os seus pais?",
+"ConsideraoSobreInternet" => "Sobre a internet, o que você mais concorda?",
+"SenteSeguro" => "Você se sente seguro usando a internet?",
+"MaiorRisco" => "Quais são os 3 (três) riscos mais prováveis quando você está on-line?",
+"AmigoJFoiIncomodadoPorAlgoNaInternet" => "Algum amigo seu já contou que foi incomodado, agredido, envergonhado ou humilhado pela internet?",
+"JVivenciouOnline" => "Qual destas situações você já vivenciou on-line?",
+"AmigoJEncontrouPessoalmenteUmAmigoVirtual" => "Algum amigo seu já se encontrou pessoalmente com um amigo virtual (que conheceu pela internet)?",
+"ConsideraEncontrarPessoalmenteAmigoVirtual" => "Você se encontraria pessoalmente com algum amigo virtual (que conheceu pela internet)?",
+"PaisAcompanhamaNavegaonaInternet" => "Seus pais acompanham sua navegação na internet?",
+"OQueSenteQuandoMonitoramNavegao" => "Quando eles monitoram sua navegação, o que você sente?",
+"ObdeceasRegrasdosPais" => "Você obedece as regras que seus pais colocaram para seu uso da internet?",
+"QuandoSeCastastraemSitedeRelacionamentooFaz" => "Quando você se cadastra em algum site de relacionamento, geralmente, o faz",
+"InformaesqueCompartilhanaInternet" => "Que tipo de informações pessoais você compartilha pela internet?",
+"InternetumBomLugarparaSeRelacionar" => "A internet é um ótimo lugar para aprender e fazer amigos?",
+"OQueAchaSobreMedidasAtuaisParaProtegerJovens" => "O que você acha das medidas atualmente disponíveis para proteger as crianças e jovens na internet?",
+"AchaQueAsInstituiesOuvemosJovensparaElaborarMedidas" => "Você acha que as instituições e os adultos ouvem os jovens para elaborar as dicas de proteção on-line?",
+"TemasQueJDiscutiu" => "Em relação à segurança na internet, quais temas você já discutiu?",
+"MeiosParaAprenderSobreRiscosDaInternet" => "Quais meios você já utilizou para aprender mais sobre prevenção na internet?",
+"MeiosEficazesParaAprenderSobreSegurananaInternet" => "Quais são os 2 (dois) meios mais legais e práticos para aprender sobre segurança on-line?",
+"EmRelaoaDivulgarDicasdeSegurana" => "Em relação ao trabalho de divulgação das dicas de segurança para proteger outras crianças na internet, você",
+"JFoiVtima" => "Você já foi vítima de alguma das situações abaixo?",
+"AmigoJFoiVtima" => "Algum amigo seu já foi vítima das situações abaixo?",
+"JDenunciou" => "Você já denunciou algum crime que viu na internet?",
+"TipodeCrimeDenunciado" => "Que tipo de crime denunciou?",
+"GostariadeReceberOrientaesPorEmail" => "Gostaria de receber orientações por e-mail com mais dicas sobre proteção na internet?",
+"Email" => "Email",
+}
+
+PESQUISA_PAIS = {
+"Gnero" => "Gênero",
+"Estado" => "Estado de residência",
+"Idade" => "Sua idade",
+"Escolaridade" => "Nível de Escolaridade",
+"QuantidadedeFilhosMenoresque18AnosqueUsamInternet" => "Quantos filhos e/ou crianças menores de 18 anos sob sua responsabilidade usam a internet?",
+"IdadedoFilhoqueMaisUsaInternet" => "Qual a idade do seu filho que mais utiliza a internet?",
+"PrincipaisLocaisdeAcesso" => "Quais os SEUS 2 (dois) principais locais de acesso à internet?",
+"PrincipaisLocaisdeAcessodosFilhos" => "Quais os <strong>2</strong> (dois) principais locais de acesso à internet de SEUS FILHOS?",
+"QuantoNavegaPorDia" => "Quantas horas <strong>por dia</strong>, em média, VOCÊ navega na internet?",
+"QuantooFilhoNavegaPorDia" => "Quantas horas <strong>por dia</strong>, em média, SEUS FILHOS navegam na internet?",
+"HLimiteproTempodeNavegaodosFilhos" => "Há algum limite de tempo para SEUS FILHOS usarem a internet?",
+"PrincipaisAtividadesOnline" => "Quais as SUAS <strong>2</strong> (duas) atividades on-line preferidas?",
+"PrincipaisAtividadesOnlinedosFilhos" => "Quais as <strong>2</strong> (duas) atividades on-line preferidas de SEUS FILHOS?",
+"QuantosAmigosVirtuaisPossui" => "Quantos amigos virtuais (que conheceu pela internet) VOCÊ possui?",
+"QuantosAmigosVirtuaisosFilhosPossuem" => "Quantos amigos virtuais (que conheceu pela internet) SEUS FILHOS possuem?",
+"HabilidadeemRelaoaosFilhos" => "Como você compara sua habilidade de utilização da internet  com relação a do seus filhos?",
+"SenteSeguro" => "VOCÊ se sente seguro usando a internet?",
+"SentequeosFilhosestoSeguros" => "Você sente que SEUS FILHOS estão seguros quando usam a internet?",
+"AcompanhaaNavegaodosFilhos" => "Você acompanha a navegação de seus filhos?",
+"ReaodosFilhosQuandoMonitorados" => "Quando monitora a navegação dos filhos, quais as principais reações deles?",
+"MaiorRiscoparaosFilhos" => "Quais você considera os 3 (três) riscos mais prováveis que seus filhos correm quando estão on-line?",
+"FrequnciaqueosFilhosManifestamIncmodo" => "Quantas vezes seus filhos já manifestaram incômodo ou constrangimento por algo que viram ou vivenciaram pela internet?",
+"FilhosJForamVtimas" => "Seu filho já foi vítima de alguma das situações abaixo?",
+"JFoiVtima" => "Você já foi vítima de alguma das situações abaixo?",
+"ConsideraEncontrarPessoalmenteumAmigoVirtual" => "VOCÊ encontraria pessoalmente alguém que conheceu pela internet?",
+"PermitiriaqueoFilhoEncontrassePessoalmenteumAmigoVirtual" => "Você permitiria SEUS FILHOS se encontrarem pessoalmente com alguém que conheceram pela internet?",
+"FilhoJEncontrouPessoalmenteumAmigoVirtual" => "Um de seus filhos já se encontrou pessoalmente com alguém que conheceu pela internet?",
+"AcompanhaQuandoFilhoSeCadastraemSitedeRelacionamento" => "Quando SEUS FILHOS se cadastram em algum site de relacionamento você os acompanha?",
+"InformaesqueosFilhosCompartilham" => "Que tipo de informações pessoais você sabe que SEUS FILHOS compartilham pela internet?",
+"HabilidadeemManteraSeguranadosFilhosnaInternet" => "Como você avalia SUA habilidade para manter a segurança de seus filhos na internet?",
+"FilhosFicamTempoDemaisConectados" => "Você acha que  SEUS FILHOS ficam tempo demais conectados à internet?",
+"OrientaosFilhosemRelaoaInternet" => "Você orienta  SEUS FILHOS em relação aos perigos e comportamentos impróprios na internet?",
+"RegrasInstituidas" => "Quais das regras abaixo você instituiu para prevenir a navegação de  SEUS FILHOS?",
+"FilhosObedecemRegras" => "Você considera que SEUS FILHOS obedecem suas regras quando usam a internet?",
+"MeiosEficazesParaAprenderSobreSegurana" => "Quais os 3 (três) meios mais eficazes e práticos para você aprender dicas sobre segurança na internet que servirão para seus filhos?",
+"EmRelaoaDivulgarDicas" => "Em relação ao trabalho de divulgação de dicas de segurança para proteger outras crianças na internet você",
+"JDenunciou" => "Você já denunciou algum crime que viu na internet?",
+"TipodeCrimequeDenunciou" => "Que tipo de crime denunciou?",
+"ReceberOrientaes" => "Gostaria de receber orientações por e-mail sobre segurança e proteção das crianças na internet?",
+"Email" => "Email",
+}
+
+class Armengue
+  def self.describe(str)
+    {
+      "Atividades na Lan House ou Infocentro ou Telecentro" => "Atividades na Lan House Infocentro ou Telecentro",
+      "Resid�ncia com banda larga" => "Residência com banda larga",
+    }[str] || str
+  end
+end
+
+#Dir.glob('../data/twiki/SegurancaPais*').select do |filename|
+pattern = File.dirname(__FILE__) + '/../data/twiki/Seguranca*'
+
+migrate_log = File.open(File.dirname(__FILE__) + '/../data/migrate.log', 'w+')
+log_files_processed = File.open(File.dirname(__FILE__) + '/../data/files_processed.log', 'w+')
+Dir.glob(pattern).each do |filename|
+  next if filename.match(/.txt,v|PesquisaPaisForm.lease/)
+
+  file = File.open(filename, 'r')
+
+  migrate_log.write("TWiki File #{filename} open.\n")
+  
+  first_line = file.readline # reading line 1
+  raise 'This line cannot be nil' if first_line.nil?
+  log_filename = first_line.match(/META:TOPICINFO.*date=(.*) format.*/)[1]
+  log_filename = log_filename.gsub('"','')
+
+  migrate_log.write("The log filename should be: #{log_filename}\n")
+
+  if log_filename.to_i >= 1218822785   
+    migrate_log.write("The TWiki topic #{filename} was probably created before the log creation\n")
+    migrate_log.write("\n\n")
+    next 
+  end
+
+  file.readline # There is nothing on line 2.
+  file.readline # There is nothing on line 3.
+
+  research_name = file.readline # Research name on line 4.
+  is_parent = research_name.match('Pais').nil? ? false : true
+  
+  research = is_parent == true ? @parent_research : @young_research
+
+  questionnaire = Questionnaire.create!(:research_id => research.id, :created_at => Time.at(log_filename.to_i), :info => log_filename)
+  puts "Questionario: %s" % questionnaire.id
+
+  # Answers of users.
+  file.readlines.each do |line|
+    content = nil
+puts "Arquivo: " + file.path.inspect
+puts "Linha: " + line.inspect
+
+   twiki_question = line.match(/.*name=(.*) attributes.*value=(.*).%.*/)[1].gsub(/"/,'')
+   twiki_answer = line.match(/.*name=(.*) attributes.*value=(.*).%.*/)[2].gsub(/"/,'')
+   next if twiki_question == 'RegDate'
+puts "Questao TWiki: " + twiki_question.inspect
+puts "Reposta TWiki: " + twiki_answer.inspect
+
+    info = is_parent == true ? PESQUISA_PAIS[twiki_question] : PESQUISA_JOVENS[twiki_question]
+    question = Question.find(:first, :conditions => {:info => info, :research_id => research.id})
+puts "É Pai: " + is_parent.inspect
+puts "\n"
+
+    if question.html_type == 'text'
+      answer = ItemValue.find(:first, :conditions => {:item_id => question.id}) 
+      content = twiki_answer
+    else
+    
+      twiki_answer.split(',').each do |t_answer|
+        t_answer = t_answer.strip
+        t_answer = t_answer.gsub(' - ', ' ')
+        t_answer = t_answer.gsub('í­', 'í')
+        t_answer = t_answer.gsub('. ', ' ')
+        t_answer = t_answer.gsub('(', '\\(')
+        t_answer = t_answer.gsub(')', '\\)')
+        answer = question.item_values.detect{|i|i.info.match(Armengue.describe(t_answer))}
+        raise "Something wrong happen\n\tQuestion: %s\n\tAnswer: %s" % [question.inspect, answer.inspect] if question.nil? or answer.nil?
+        ObjectItemValue.create!(:item_id => question.id, :item_value_id => answer.id, :info => content, :questionnaire_id => questionnaire.id )
+      end
+    end
+  end
+  
+  migrate_log.write("\n\n")
+end
+
+
+#Environment.delete_all
+#Environment.create!(:is_default => true)
+
+#User.delete_all
+#User.create!(:login => 'leandro', :password => 'leandro', :password_confirmation => 'leandro', :email => 'leandronunes@safernet.org.br')
+#User.create!(:login => 'admin', :password => '123456', :password_confirmation => '123456', :email => 'admin@safernet.org.br', :is_administrator => true)

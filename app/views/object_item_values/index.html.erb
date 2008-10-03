@@ -1,0 +1,17 @@
+<h1>Listing Object Item Values</h1>
+
+<table>
+  <tr>
+  </tr>
+  <%- @object_item_values.each do |object_item_value|%>
+    <tr>
+    
+      <td><%=link_to 'Show', object_url(object_item_value) %></td>
+      <td><%=link_to 'Edit', edit_object_url(object_item_value) %></td>
+      <td><%=link_to 'Destroy', object_url(object_item_value), :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<br/>
+
+<%= link_to 'New Object Item Value', new_object_url %>
