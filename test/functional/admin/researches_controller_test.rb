@@ -105,6 +105,12 @@ class ResearchesControllerTest < Test::Unit::TestCase
     assert_tag :tag => 'form', :attributes => { :method => 'post' } 
   end
 
+  def test_new_should_have_back_link
+    get :edit, :id => researches(:one).id
+    assert_tag :tag => 'a', :attributes => { :href => admin_research_url(researches(:one).id) }
+  end
+
+
 #create
 
   def test_should_create_research
