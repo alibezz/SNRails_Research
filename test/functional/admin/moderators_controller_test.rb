@@ -80,6 +80,11 @@ class ModeratorsControllerTest < Test::Unit::TestCase
     assert_tag :tag => 'form', :attributes => { :method => 'post' }    
   end
 
+  def test_new_should_have_back_link
+    get :new, :research_id => researches(:one).id
+    assert_tag :tag => 'a', :attributes => { :href => admin_research_moderators_url(researches(:one).id) }    
+  end
+
 #create
 
   def test_should_post_create_successfully
