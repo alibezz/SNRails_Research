@@ -1,10 +1,10 @@
-<%= title @research.title %>
+<%= @research.title %>
 
-<%= subtitle @research.title %>
+<%= @research.subtitle %>
 
 <%= render :partial => 'admin/researches/research_options' %>
 
-<%= inner_title _('Adding new moderator user') %>
+<%=  _('Adding new moderator user') %>
 
 <%= render :partial => 'moderators_options' %>
 

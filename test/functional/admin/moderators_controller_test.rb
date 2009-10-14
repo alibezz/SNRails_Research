@@ -5,7 +5,7 @@ require 'admin/moderators_controller'
 class Admin::ModeratorsController; def rescue_action(e) raise e end; end
 
 class ModeratorsControllerTest < Test::Unit::TestCase
-  fixtures :users
+  fixtures :users, :researches
 
   def setup
     @controller = Admin::ModeratorsController.new
@@ -16,12 +16,19 @@ class ModeratorsControllerTest < Test::Unit::TestCase
     login_as :quentin
   end
 
+#index
+
   def test_should_get_index
-    r = create_research
-    get :index, :research_id => r.id
+    get :index, :research_id => researches(:one).id
     assert_response :success
     assert_template 'index'
     assert assigns(:users)
+  end
+
+  def test_index_should_show_link_to_add_moderators
+    get :index, :research_id => researches(:one).id
+    assert_tag :tag => "ul", :descendant => { :tag => "li" }
+    assert_tag :tag => 'a', :attributes => { :href => new_admin_research_moderator_url(researches(:one).id) }
   end
 
   def test_should_not_get_all_users_on_index
@@ -58,6 +65,8 @@ class ModeratorsControllerTest < Test::Unit::TestCase
     assert_equal 2, assigns(:users).length, "There are 2 moderatores on this research"
   end
 
+#new
+
   def test_should_get_new
     r = create_research
 
@@ -66,13 +75,22 @@ class ModeratorsControllerTest < Test::Unit::TestCase
     assert_template 'new'
   end
 
+  def test_new_should_have_form
+    get :new, :research_id => researches(:one).id
+    assert_tag :tag => 'form', :attributes => { :method => 'post' }    
+  end
+
+#create
+
   def test_should_post_create_successfully
     r = create_research
 
+    assert_equal 0, r.moderator_permissions.length
     post :create, :user => user_params, :research_id => r.id
     assert_response :redirect
     assert_redirected_to admin_research_moderators_url(r)
+    r.reload 
+
+    assert_equal 1, r.moderator_permissions.length
   end
-
-
 end
