@@ -27,6 +27,8 @@ class ResearchesControllerTest < Test::Unit::TestCase
 
   def test_index_should_show_links
     get :index
+    
+    assert_tag :tag => 'a', :attributes => { :href => new_admin_research_url }
     assert_tag :tag => "ul", :descendant => { :tag => "li" }
     assert_tag :tag => 'a', :attributes => { :href => admin_research_url(researches(:one).id) }
     assert_tag :tag => 'a', :attributes => { :href => edit_admin_research_url(researches(:one).id) }
@@ -44,8 +46,71 @@ class ResearchesControllerTest < Test::Unit::TestCase
 #show
 
   def test_should_show_research
-    get :show, :id => 1
+    get :show, :id => researches(:one).id
     assert_response :success
+  end
+
+  def test_should_show_links
+    id = researches(:one).id
+    
+    get :show, :id => id
+    assert_tag :tag => 'a', :attributes => { :href => admin_researches_url }
+    assert_tag :tag => 'a', :attributes => { :href => edit_admin_research_url(id) }
+    assert_tag :tag => 'a', :attributes => { :href => admin_research_moderators_url(id) }
+    assert_tag :tag => 'a', :attributes => { :href => admin_research_items_url(id) }
+  end
+
+#edit
+
+  def test_should_edit_research
+    get :edit, :id => researches(:one).id
+    assert_response :success
+  end
+
+  def test_edit_should_have_form
+    id = researches(:one).id
+
+    get :edit, :id => id
+    assert_tag :tag => 'form', :attributes => { :action => admin_research_url(id), :method => 'post' } 
+  end
+
+  def test_should_have_back_link
+    get :edit, :id => researches(:one).id
+    assert_tag :tag => 'a', :attributes => { :href => admin_research_url(researches(:one).id) }
+  end
+
+#update
+
+  def test_should_change_fields
+    research = create_research
+    post :update, :id => research.id, :research => {:title => 'new title', :introduction => 'new introduction', :subtitle => 'new subtitle'}
+    research.reload
+    assert_equal 'new subtitle', research.subtitle
+    assert_equal 'new title', research.title
+    assert_equal 'new introduction', research.introduction
+  end
+
+#FIXME Action moderators must be better understood 
+
+
+#new
+
+  def test_should_show_new
+    get :new
+    assert_response :success
+  end
+
+  def test_new_should_have_form
+    get :new
+    assert_tag :tag => 'form', :attributes => { :method => 'post' } 
+  end
+
+#create
+
+  def test_should_create_research
+    count = Research.count
+    post :create, :research => {:title => 'new title', :introduction => 'new introduction', :subtitle => 'new subtitle'}
+    assert_equal count + 1, Research.count
   end
 
 end

@@ -16,7 +16,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # Route for admin research
   map.namespace :admin do |admin|
-
+    admin.resources :researches, :collection => { :moderators => :get}
     admin.resources :researches, :has_many => :items do |item|
      item.resources :items, :collection => {:reorder_items => :post, :reorder_pages => :post, :set_item_to_page => :post}
      item.resources :items, :questions, :has_many  => :item_values do |item_value|
