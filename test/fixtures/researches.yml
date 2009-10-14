@@ -1,8 +1,8 @@
 one:
   id: 1
-  title: some string
+  title: someString
   introduction: MyString
 two:
   id: 2
-  title: another string
+  title: anotherString
   introduction: MyString

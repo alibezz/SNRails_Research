@@ -4,7 +4,7 @@
   <%- @researches.each do |research| %>
     <%= link_to research.title, object_url(research) %>
     <ul>
-      <li> <%= link_to _('Edit') %> </li>
+      <li> <%= link_to _('Edit'), edit_admin_research_url(research) %> </li>
     </ul>
   <% end %>
 </ul>

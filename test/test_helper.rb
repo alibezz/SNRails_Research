@@ -36,10 +36,10 @@ class Test::Unit::TestCase
 
   # Add more helper methods to be used by all tests here...
   def create_research(params = {})
-    Research.create!(reserach_params(params))
+    Research.create!(research_params(params))
   end
   
-  def reserach_params(params = {})
+  def research_params(params = {})
     {
       :title => 'some research',
       :introduction => 'some research',

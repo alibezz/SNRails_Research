@@ -19,3 +19,12 @@
 [submodule "vendor/plugins/selenium-on-rails"]
 	path = vendor/plugins/selenium-on-rails
 	url = gitosis@projects.safernet.org.br:selenium-on-rails.git
+[submodule "vendor/plugins/resource_controller"]
+	path = vendor/plugins/resource_controller
+	url = gitosis@projects.safernet.org.br:resource_controller.git
+[submodule "resource_controller"]
+	path = resource_controller
+	url = gitosis@projects.safernet.org.br:resource_controller
+[submodule "restful-authentication"]
+	path = restful-authentication
+	url = gitosis@projects.safernet.org.br:restful-authentication
