@@ -10,7 +10,7 @@ class Admin::ItemsController < ResourceController::Base
       item.position = position
       item.save!
     end
-    @items = @research.items.paginate(:page => params[:page], :fixed_page => @research.number_of_pages, :page_attr => :page_id, :order => :position )
+    @items = @research.items.paginate(:page => params[:page], :per_page => @research.number_of_pages,  :order => :position )
     respond_to do |format|
       format.js 
     end
@@ -21,7 +21,7 @@ class Admin::ItemsController < ResourceController::Base
     @research ||= Research.find(params[:research_id]) #FIXME put specific user
     @research.reorder_pages(params[:page_links])
 
-    @items = @research.items.paginate(:page => params[:page], :fixed_page => @research.number_of_pages, :page_attr => :page_id, :order => :position)
+    @items = @research.items.paginate(:page => params[:page], :per_page => @research.number_of_pages,  :order => :position)
     respond_to do |format|
       format.js 
     end
@@ -35,7 +35,7 @@ class Admin::ItemsController < ResourceController::Base
     item.page_id = @page_sent
     item.save
 
-    @items = @research.items.paginate(:page => params[:page], :fixed_page => @research.number_of_pages, :page_attr => :page_id, :order => :position)
+    @items = @research.items.paginate(:page => params[:page], :per_page => @research.number_of_pages,  :order => :position)
     respond_to do |format|
       format.js 
     end
@@ -45,7 +45,7 @@ class Admin::ItemsController < ResourceController::Base
 
   def collection
     @research ||= Research.find(params[:research_id])
-    @collection = @research.items.paginate(:page => params[:page], :fixed_page => @research.number_of_pages, :page_attr => :page_id, :order => :position )
+    @collection = @research.items.paginate(:page => params[:page], :per_page => @research.number_of_pages,  :order => :position )
   end
 
 end
