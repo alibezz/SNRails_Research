@@ -5,7 +5,7 @@
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.1.0' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.2.0' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -52,7 +52,6 @@ Rails::Initializer.run do |config|
     :secret      => '11a89cf2cd622b055cae084698028aee23affc1c32e4312498da7b15a3d93a79535863cc795e81abd95dc6d2ae6f37bdc96043b74e8114e088b2409b610335c4'
   }
 
-  require 'gettext/rails'
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
   # (create the session table with "rake db:sessions:create")

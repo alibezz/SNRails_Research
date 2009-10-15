@@ -11,9 +11,6 @@ class ApplicationController < ActionController::Base
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '96e3e36e40be10cbdc44d00d4878b676'
 
-  GetText.locale = 'pt_BR'
-  init_gettext 'rails_research'
-
   before_filter :load_environment
 
   design :holder => 'environment' 
