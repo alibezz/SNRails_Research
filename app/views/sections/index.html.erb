@@ -1,8 +1,8 @@
-<%= title _("Listing Sections") %>
+<%= title t("Listing Sections") %>
 
 <table>
   <tr>
-    <th> <%= _("Sections") %> </th>
+    <th> <%= t("Sections") %> </th>
   </tr>
   <%- @sections.each do |section|%>
     <tr>
@@ -15,4 +15,4 @@
 </table>
 <br/>
 
-<%= link_to _('New section'), new_object_url %>
+<%= link_to t('New section'), new_object_url %>

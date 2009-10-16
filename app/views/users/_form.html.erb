@@ -7,15 +7,15 @@
 
 <%= error_messages_for :user %>
 
-<p><%= label_tag _('login') %><br/>
+<p><%= label_tag t('login') %><br/>
 <%= f.text_field :login %></p>
 
-<p><%= label_tag _('email') %><br/>
+<p><%= label_tag t('email') %><br/>
 <%= f.text_field :email %></p>
 
-<p><%= label_tag _('password') %><br/>
+<p><%= label_tag t('password') %><br/>
 <%= f.password_field :password %></p>
 
-<p><%= label_tag 'password_confirmation', _('Confirm Password') %><br/>
+<p><%= label_tag 'password_confirmation', t('Confirm Password') %><br/>
 <%= f.password_field :password_confirmation %></p>
 

@@ -1,13 +1,13 @@
-<%= link_to _('New Research'), new_admin_research_url %>
+<%= link_to t('New Research'), new_admin_research_url %>
 <br><br>
 
-<%= title _("Listing Researches") %>
+<%= title t("Listing Researches") %>
 
 <ul>
   <%- @researches.each do |research| %>
     <%= link_to research.title, object_url(research) %>
     <ul>
-      <li> <%= link_to _('Edit'), edit_admin_research_url(research) %> </li>
+      <li> <%= link_to t('Edit'), edit_admin_research_url(research) %> </li>
     </ul>
   <% end %>
 </ul>
