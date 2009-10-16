@@ -22,9 +22,9 @@
 [submodule "vendor/plugins/resource_controller"]
 	path = vendor/plugins/resource_controller
 	url = gitosis@projects.safernet.org.br:resource_controller.git
-[submodule "resource_controller"]
-	path = resource_controller
-	url = gitosis@projects.safernet.org.br:resource_controller
-[submodule "restful-authentication"]
-	path = restful-authentication
+[submodule "vendor/plugins/restful-authentication"]
+	path = vendor/plugins/restful-authentication
 	url = gitosis@projects.safernet.org.br:restful-authentication
+[submodule "vendor/plugins/will_paginate"]
+	path = vendor/plugins/will_paginate
+	url = gitosis@projects.safernet.org.br:will_paginate.git
