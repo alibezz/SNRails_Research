@@ -1,18 +1,18 @@
-<%= title t("Listing Questions") %>
+<%= title t(:listing_questions) %>
 
 <table>
   <tr>
-    <th> <%= t("Questions") %> </th>
+    <th> <%= t(:questions) %> </th>
   </tr>
   <%- @questions.each do |question|%>
     <tr>
       <td><%=h question.info %></td>
-      <td><%=link_to 'Show', object_url(question) %></td>
-      <td><%=link_to 'Edit', edit_object_url(question) %></td>
-      <td><%=link_to 'Destroy', object_url(question), :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%=link_to t(:show), object_url(question) %></td>
+      <td><%=link_to t(:edit), edit_object_url(question) %></td>
+      <td><%=link_to t(:destroy), object_url(question), :confirm => t(:confirm), :method => :delete %></td>
     </tr>
   <% end %>
 </table>
 <br/>
 
-<%= link_to 'New Question', new_object_url %>
+<%= link_to t(:new_question), new_object_url %>

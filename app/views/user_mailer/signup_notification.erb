@@ -1,8 +1,8 @@
-<%= t('Your account has been created.') %>
+<%= t(:account_created) %>
 
-  <%= t('Username:') <%=h @user.login %>
-  <%= t('Password:') <%=h @user.password %>
+  <%= t(:username) + ":" <%=h @user.login %>
+  <%= t(:password) + ":" <%=h @user.password %>
 
-<%= t('Visit this url to activate your account:') %>
+<%= t(:activate_account) + ":" %>
 
   <%=h @url %>
