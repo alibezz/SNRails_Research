@@ -1,13 +1,13 @@
 class Research < ActiveRecord::Base
 
   #FIXME this is a hack to works design_data
-  class << self # Class methods
-    alias :all_columns :columns
+#   class << self # Class methods
+#     alias :all_columns :columns
 
-    def columns
-      all_columns.reject {|c| c.name == 'design_data'}
-    end
-  end 
+#     def columns
+#       all_columns.reject {|c| c.name == 'design_data'}
+#     end
+#   end
 
   validates_presence_of :title
   validates_presence_of :introduction
