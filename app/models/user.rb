@@ -54,13 +54,13 @@ class User < ActiveRecord::Base
 
   #FIXME make this test
   def is_moderator?(research)
-    self.researches
+    self.researches.member?(research)
   end
 
 
   #FIXME make this test
   def my_researches(params = {})
-    self.is_administrator? ? Research.find(:all, params) : self.researches(research_id)
+    self.is_administrator? ? Research.find(:all, params) : self.researches
   end
 
 end

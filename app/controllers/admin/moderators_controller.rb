@@ -14,6 +14,10 @@ class Admin::ModeratorsController < ResourceController::Base
     @research.moderator_permissions.create(:user => object)
   end
 
+  def index
+    @users = User.find(:all)
+  end
+
   private
 
   def model_name

@@ -8,7 +8,7 @@
 
 <%= render :partial => 'moderators_options' %>
 
-<% form_for :user, :url => object_path do |f| -%>
+<% form_for @user, :url => users_path(:method => :post) do |f| -%>
 
   <%= render :partial => 'users/form', :locals => {:f => f} %>
 
