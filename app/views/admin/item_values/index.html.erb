@@ -1,10 +1,10 @@
-<%= title @research.title %>
+<%= @research.title %>
 
-<%= subtitle @research.title %>
+<%= @research.subtitle %>
 
 <%= render :partial => 'admin/researches/research_options' %>
 
-<%= inner_title _("item_values") %>
+<%=  _("item_values") %>
 
 <ul>
 <%- @item_values.each do |item_value| %>
