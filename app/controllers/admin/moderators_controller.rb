@@ -1,8 +1,9 @@
 class Admin::ModeratorsController < ResourceController::Base
 
-  actions :index, :new, :create
+  actions :index, :new, :create, :show, :edit, :update, :destroy
 
   before_filter :load_research
+  before_filter :find_users, :only => [:index, :show, :edit, :update]
 
   belongs_to :research
 
@@ -14,11 +15,11 @@ class Admin::ModeratorsController < ResourceController::Base
     @research.moderator_permissions.create(:user => object)
   end
 
-  def index
+  private
+
+  def find_users
     @users = User.find(:all)
   end
-
-  private
 
   def model_name
     'user'
