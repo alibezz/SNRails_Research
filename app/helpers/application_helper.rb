@@ -9,9 +9,9 @@ module ApplicationHelper
   def login_bar
     content_tag(:ul,
       [
-        (content_tag(:li, link_to(_('Login'), login_path)) unless logged_in?),
-        (content_tag(:li, link_to(_('Logout'), logout_path)) if logged_in?),
-        (content_tag(:li, link_to(_('Register'), signup_path )) unless logged_in?),
+        (content_tag(:li, link_to(t(:login), login_path)) unless logged_in?),
+        (content_tag(:li, link_to(t(:logout), logout_path)) if logged_in?),
+        (content_tag(:li, link_to(t(:register), signup_path )) unless logged_in?),
       ].join("\n"),
       :class => 'login_bar', :id => 'login_bar'
     )

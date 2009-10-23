@@ -1,9 +1,9 @@
-<%= title _("Research Moderators") %>
+<%= title t(:research_moderators) %>
 
 <%= render :partial => 'research_options' %>
 
 <ul>
-  <li> <%#= link_to _('Add New'), associate_moderator_admin_research_path(@research)%> </li>
+  <li> <%#= link_to t(:add_new), associate_moderator_admin_research_path(@research)%> </li>
 </ul>
 
 <% @research.moderators.each do |user| %>

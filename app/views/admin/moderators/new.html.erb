@@ -4,7 +4,7 @@
 
 <%= render :partial => 'admin/researches/research_options' %>
 
-<%=  _('Adding new moderator user') %>
+<%=  t(:new_moderator) %>
 
 <%= render :partial => 'moderators_options' %>
 
@@ -12,6 +12,6 @@
 
   <%= render :partial => 'users/form', :locals => {:f => f} %>
 
-  <p><%= submit_tag _('Sign up') %></p>
+  <p><%= submit_tag t(:sign_up) %></p>
 
 <% end -%>
