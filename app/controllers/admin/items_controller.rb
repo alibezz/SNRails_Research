@@ -2,7 +2,9 @@ class Admin::ItemsController < ResourceController::Base
 
   belongs_to :research
 
-  # Reorder the items definition according user definition.
+ #FIXME Install ARTS to test methods below
+
+  # Reorder the items definition according to user definition.
   def reorder_items
     @research ||= Research.find(params[:research_id]) #FIXME get the research by user
     params["list_items"].each_with_index do |item_id,position|
@@ -10,7 +12,7 @@ class Admin::ItemsController < ResourceController::Base
       item.position = position
       item.save!
     end
-    @items = @research.items.paginate(:page => params[:page], :per_page => @research.number_of_pages,  :order => :position )
+    collection
     respond_to do |format|
       format.js 
     end
@@ -20,8 +22,7 @@ class Admin::ItemsController < ResourceController::Base
   def reorder_pages
     @research ||= Research.find(params[:research_id]) #FIXME put specific user
     @research.reorder_pages(params[:page_links])
-
-    @items = @research.items.paginate(:page => params[:page], :per_page => @research.number_of_pages,  :order => :position)
+    collection
     respond_to do |format|
       format.js 
     end
@@ -34,8 +35,7 @@ class Admin::ItemsController < ResourceController::Base
     @page_sent = params[:page_sent].split("_").last
     item.page_id = @page_sent
     item.save
-
-    @items = @research.items.paginate(:page => params[:page], :per_page => @research.number_of_pages,  :order => :position)
+    collection
     respond_to do |format|
       format.js 
     end
@@ -44,8 +44,8 @@ class Admin::ItemsController < ResourceController::Base
   private
 
   def collection
-    @research ||= Research.find(params[:research_id])
-    @collection = @research.items.paginate(:page => params[:page], :per_page => @research.number_of_pages,  :order => :position )
+  #  @research ||= Research.find(params[:research_id])
+    @research.items.paginate(:page => params[:page], :per_page => @research.number_of_pages,  :order => :position )
   end
 
 end
