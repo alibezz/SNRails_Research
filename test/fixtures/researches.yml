@@ -1,8 +1,0 @@
-one:
-  id: 1
-  title: someString
-  introduction: MyString
-two:
-  id: 2
-  title: anotherString
-  introduction: MyString

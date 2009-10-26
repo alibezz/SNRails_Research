@@ -5,7 +5,7 @@ require 'admin/moderators_controller'
 class Admin::ModeratorsController; def rescue_action(e) raise e end; end
 
 class ModeratorsControllerTest < Test::Unit::TestCase
-  fixtures :users, :researches
+  fixtures :users
 
   def setup
     @controller = Admin::ModeratorsController.new
@@ -19,16 +19,18 @@ class ModeratorsControllerTest < Test::Unit::TestCase
 #index
 
   def test_should_get_index
-    get :index, :research_id => researches(:one).id
+    research = create_research
+    get :index, :research_id => research.id
     assert_response :success
     assert_template 'index'
     assert assigns(:users)
   end
 
   def test_index_should_show_link_to_add_moderators
-    get :index, :research_id => researches(:one).id
+    research = create_research
+    get :index, :research_id => research.id
     assert_tag :tag => "ul", :descendant => { :tag => "li" }
-    assert_tag :tag => 'a', :attributes => { :href => new_admin_research_moderator_url(researches(:one).id) }
+    assert_tag :tag => 'a', :attributes => { :href => new_admin_research_moderator_url(research.id) }
   end
 
   def test_should_not_get_all_users_on_index
@@ -76,13 +78,15 @@ class ModeratorsControllerTest < Test::Unit::TestCase
   end
 
   def test_new_should_have_form
-    get :new, :research_id => researches(:one).id
+    r = create_research
+    get :new, :research_id => r.id
     assert_tag :tag => 'form', :attributes => { :method => 'post' }    
   end
 
   def test_new_should_have_back_link
-    get :new, :research_id => researches(:one).id
-    assert_tag :tag => 'a', :attributes => { :href => admin_research_moderators_url(researches(:one).id) }    
+    r = create_research
+    get :new, :research_id => r.id
+    assert_tag :tag => 'a', :attributes => { :href => admin_research_moderators_url(r.id) }    
   end
 
 #create
