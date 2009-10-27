@@ -36,7 +36,7 @@ class Test::Unit::TestCase
 
   # Add more helper methods to be used by all tests here...
   def create_research(params = {})
-    Research.create!(research_params(params))
+    Research.create(research_params(params))
   end
   
   def research_params(params = {})
@@ -48,7 +48,7 @@ class Test::Unit::TestCase
   end
 
   def create_item(params = {})
-    Item.create!(item_params(params))
+    Item.create(item_params(params))
   end
   
   def item_params(params = {})
@@ -59,7 +59,7 @@ class Test::Unit::TestCase
   end
 
   def create_environment(params = {})
-    Environment.create!(environment_params(params))
+    Environment.create(environment_params(params))
   end
   
   def environment_params(params = {})
@@ -68,7 +68,7 @@ class Test::Unit::TestCase
   end
 
   def create_user(params = {})
-    User.create!(user_params(params))
+    User.create(user_params(params))
   end
   
   def user_params(params = {})
