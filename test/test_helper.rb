@@ -54,7 +54,18 @@ class Test::Unit::TestCase
   def item_params(params = {})
     {
       :info => 'some research',
+      :html_type => 'pure_text',
       :position => Item.count + 1
+    }.merge(params)
+  end
+
+  def create_item_value(params = {})
+    ItemValue.create(item_value_params(params))
+  end
+  
+  def item_value_params(params = {})
+    {
+      :position => ItemValue.count + 1
     }.merge(params)
   end
 

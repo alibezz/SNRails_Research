@@ -10,6 +10,10 @@ class Item < ActiveRecord::Base
     "pure_text"
   ]
 
+  def is_text?
+    self.html_type == "pure_text"
+  end
+
 protected
   def self.html_types
     HTML_TYPES

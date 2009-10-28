@@ -34,10 +34,21 @@ class ItemTest < Test::Unit::TestCase
    item = create_item(:research_id => research.id, :position => count + 1)
    research.reload
    assert_equal item.position, count + 1
+   assert_equal count + 1, research.items.length
    
    item = create_item(:research_id => research.id, :position => count  + 1)
    research.reload
    assert_equal count + 1, research.items.length #Second item wasn't created
   end
   
+  def test_is_text
+   research = create_research
+   
+   item = create_item(:research_id => research.id, :html_type => "pure_text")
+   assert item.is_text? 
+
+   item = create_item(:research_id => research.id, :html_type => "single_selection")
+   assert_equal false, item.is_text? 
+  end
+
 end
