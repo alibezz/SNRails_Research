@@ -36,7 +36,7 @@ class Test::Unit::TestCase
 
   # Add more helper methods to be used by all tests here...
   def create_research(params = {})
-    Research.create!(research_params(params))
+    Research.create(research_params(params))
   end
   
   def research_params(params = {})
@@ -48,18 +48,29 @@ class Test::Unit::TestCase
   end
 
   def create_item(params = {})
-    Item.create!(item_params(params))
+    Item.create(item_params(params))
   end
   
   def item_params(params = {})
     {
       :info => 'some research',
+      :html_type => 'pure_text',
       :position => Item.count + 1
     }.merge(params)
   end
 
+  def create_item_value(params = {})
+    ItemValue.create(item_value_params(params))
+  end
+  
+  def item_value_params(params = {})
+    {
+      :position => ItemValue.count + 1
+    }.merge(params)
+  end
+
   def create_environment(params = {})
-    Environment.create!(environment_params(params))
+    Environment.create(environment_params(params))
   end
   
   def environment_params(params = {})
@@ -68,7 +79,7 @@ class Test::Unit::TestCase
   end
 
   def create_user(params = {})
-    User.create!(user_params(params))
+    User.create(user_params(params))
   end
   
   def user_params(params = {})
@@ -82,7 +93,8 @@ class Test::Unit::TestCase
 
   # Sets the current user in the session from the user fixtures.
   def login_as(user)
-    @request.session[:user_id] = user ? users(user).id : nil
+    @request.session[:user_id] = user ? users(user).id : nil 
+#? users(user).id : nil
   end
 
   def authorize_as(user)

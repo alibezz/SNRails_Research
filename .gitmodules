@@ -2,9 +2,6 @@
 [submodule "vendor/plugins/restful-authentication"]
 	path = vendor/plugins/restful-authentication
 	url = gitosis@projects.safernet.org.br:restful-authentication.git
-[submodule "vendor/plugins/design"]
-	path = vendor/plugins/design
-	url = gitosis@projects.safernet.org.br:design.git
 [submodule "vendor/plugins/rails_rcov"]
 	path = vendor/plugins/rails_rcov
 	url = gitosis@projects.safernet.org.br:rails_rcov.git
@@ -26,3 +23,6 @@
 [submodule "vendor/plugins/will_paginate"]
 	path = vendor/plugins/will_paginate
 	url = gitosis@projects.safernet.org.br:will_paginate
+[submodule "vendor/plugins/design"]
+	path = vendor/plugins/design
+	url = gitosis@projects.safernet.org.br:design

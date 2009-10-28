@@ -1,10 +1,12 @@
 <p>
-  <strong>Info:</strong><%=h @item.info %>
+  <strong><%= t(:info) %> </strong><%=h @item.info %>
 </p>
 <p>
-  <strong>Position:</strong><%=h @item.position %>
+  <strong><%= t(:position) %> </strong><%=h @item.position %>
 </p>
-
+<p>
+  <strong><%= t(:html_type) %> </strong><%=h @item.html_type %>
+</p>
 <%= link_to 'Edit', edit_object_url %>
 |
 <%= link_to 'Back', collection_url %>

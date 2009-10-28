@@ -2,6 +2,18 @@ class Admin::ItemsController < ResourceController::Base
 
   belongs_to :research
 
+  new_action.before do 
+   @types = Item.html_types
+  end
+
+  edit.before do
+   @types = Item.html_types
+  end
+
+  update.before do
+    @types = Item.html_types
+  end
+
  #FIXME Install ARTS to test methods below
 
   # Reorder the items definition according to user definition.
@@ -44,7 +56,6 @@ class Admin::ItemsController < ResourceController::Base
   private
 
   def collection
-  #  @research ||= Research.find(params[:research_id])
     @research.items.paginate(:page => params[:page], :per_page => @research.number_of_pages,  :order => :position )
   end
 

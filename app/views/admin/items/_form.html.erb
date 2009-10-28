@@ -1,8 +1,15 @@
 <p>
-  <label for="item_info">Info:</label>
+  <label for="item_info"><%= t(:info) %></label>
   <%= f.text_field :info %>
 </p>
 <p>
-  <label for="item_position">Position:</label>
+  <label for="item_position"><%= t(:position) %></label>
   <%= f.text_field :position %>
 </p>
+<p>
+  <label for="html_type"><%= t(:html_type) %></label>
+  <%= select("item", "html_type", @types) %>
+</p>
+
+
+
