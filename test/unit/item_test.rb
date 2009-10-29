@@ -2,6 +2,10 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class ItemTest < Test::Unit::TestCase
   
+  def setup
+    @types = Item.html_types
+  end
+
   def test_should_belong_to_a_research
    count = Item.count 
    item = create_item(:research_id => nil)
@@ -44,11 +48,10 @@ class ItemTest < Test::Unit::TestCase
   def test_is_text
    research = create_research
    
-   item = create_item(:research_id => research.id, :html_type => "pure_text")
+   item = create_item(:research_id => research.id, :html_type => @types.invert["pure_text"])
    assert item.is_text? 
 
-   item = create_item(:research_id => research.id, :html_type => "single_selection")
+   item = create_item(:research_id => research.id, :html_type => @types.invert["single_selection"])
    assert_equal false, item.is_text? 
   end
-
 end

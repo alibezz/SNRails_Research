@@ -54,7 +54,7 @@ class Test::Unit::TestCase
   def item_params(params = {})
     {
       :info => 'some research',
-      :html_type => 'pure_text',
+      :html_type => 2,
       :position => Item.count + 1
     }.merge(params)
   end

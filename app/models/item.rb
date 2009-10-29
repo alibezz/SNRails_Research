@@ -5,13 +5,17 @@ class Item < ActiveRecord::Base
   validates_uniqueness_of :position, :scope => :research_id
   has_many :item_values
 
-   HTML_TYPES = ["multiple_selection",
-    "single_selection",
-    "pure_text"
-  ]
+   HTML_TYPES = { 0 => "multiple_selection",
+    1 => "single_selection",
+    2 => "pure_text"
+  }
 
   def is_text?
-    self.html_type == "pure_text"
+    self.html == "pure_text"
+  end
+
+  def html
+    HTML_TYPES[html_type.to_i]
   end
 
 protected

@@ -17,14 +17,18 @@ ActionController::Routing::Routes.draw do |map|
   # Route for admin research
   map.namespace :admin do |admin|
     admin.resources :researches, :collection => { :moderators => :get}
-    admin.resources :researches, :has_many => :items do |item|
-     item.resources :items, :collection => {:reorder_items => :post, :reorder_pages => :post, :set_item_to_page => :post}
-     item.resources :items, :questions, :has_many  => :item_values do |item_value|
-       item_value.resources :item_values
-     end
+    admin.resources :researches do |researches|
+      researches.resources :items do |items|
+        items.resources :item_values
+      end
     end
 
-    admin.resources :researches, :has_many => :questions do |question|
+
+    admin.resources :researches, :has_many => :items
+    admin.resources :items, :collection => {:reorder_items => :post, :reorder_pages => :post, :set_item_to_page => :post}
+    admin.resources :items, :has_many => :item_values
+ 
+   admin.resources :researches, :has_many => :questions do |question|
      question.resources :questions, :collection => {:reorder_questions => :post, :reorder_pages => :post, :set_question_to_page => :post}
      question.resources :questions, :questions, :has_many  => :item_values do |item_value|
        item_value.resources :item_values

@@ -1,6 +1,5 @@
 class Question < Item
 
-  #FIXME make this tests
   has_many :item_values, :foreign_key => :item_id
   has_many :object_item_values, :foreign_key => :item_id
 

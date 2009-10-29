@@ -17,4 +17,10 @@ module ApplicationHelper
     )
   end
 
+   def select_type
+    @types = Item.html_types.invert.map
+    select("item", "html_type", @types)
+  end
+
+
 end
