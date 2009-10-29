@@ -1,0 +1,49 @@
+---
+en:
+  questions: Questions
+  listing_questions: Listing Questions
+  research_moderators: Research Moderators
+  add_new: Add New
+  new_question: New Question
+  confirm: Are you sure?
+  add: Add
+  show: Show
+  edit: Edit
+  update: Update
+  destroy: Destroy
+  title: Title
+  subtitle: Subtitle
+  introduction: Introduction
+  listing_researches: Listing Researches
+  new_research: New Research
+  editing_research: Editing Research
+  list_all: List All
+  moderators: Moderators
+  new_moderator: Adding new moderator user
+  sign_up: Sign up
+  add_itemvalue: Add item_value Options
+  listing_items: Listing Items
+  back: Back
+  new_item: New Item
+  information: Information
+  item_values: item_values
+  rails_research: Rails Research
+  see_all_researches: See all researches
+  listing_sections: Listing Sections
+  sections: Sections
+  private: Private
+  username: Username
+  password: Password
+  login: Login
+  logout: Logout
+  register: Register
+  email: Email
+  activate_account: Visit this url to activate your account
+  account_created: Your account has been created.
+  account_activated: your account has been activated.  Welcome aboard!
+  confirm_password: Confirm Password
+  sign_up_as: Sign up as a new user
+  sign_up: Sign up
+  login_successful: Logged in successfully
+  logged_out: You have been logged out.
+  couldnt_login: "Couldn't log you in as '{{login}}'"
