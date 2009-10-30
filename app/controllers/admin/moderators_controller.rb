@@ -17,10 +17,6 @@ class Admin::ModeratorsController < ResourceController::Base
 
   private
 
-  def find_users
-    @users = User.find(:all)
-  end
-
   def model_name
     'user'
   end

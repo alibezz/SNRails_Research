@@ -1,13 +1,15 @@
 class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
-  
+
+  actions :index, :show, :edit, :update, :destroy
+  before_filter :find_users, :only => [:index, :show, :edit, :update]  
 
   # render new.rhtml
   def new
     @user = User.new
   end
- 
+
   def create
     logout_keeping_session!
     @user = User.new(params[:user])
