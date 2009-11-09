@@ -12,6 +12,10 @@ class Admin::ItemValuesController < ResourceController::Base
      @item =  Item.find(params[:item_id])
   end    
 
+  create.after do
+   # require 'pp'
+   # pp @item_value
+  end
   show.before do
     @item = Item.find(params[:item_id])
   end
