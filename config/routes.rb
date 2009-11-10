@@ -36,7 +36,7 @@ ActionController::Routing::Routes.draw do |map|
     end
 
     admin.resources :researches, :has_many => :moderators do |moderator|
-     moderator.resources :moderators
+      moderator.resources :moderators, :collection => { :attribute => :put }
     end
   end
  

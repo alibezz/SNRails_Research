@@ -11,11 +11,23 @@ class Admin::ModeratorsController < ResourceController::Base
     wants.html {redirect_to collection_url}
   end
 
-  create.after do
-    @research.moderator_permissions.create(:user => object)
+  def index
+    @moderators = @research.moderators
+  end
+
+  def update
+    params[:moderator_ids].each { |moderat|
+      #XXXcaiotiago: TODO revoke attributes
+      user = User.find(moderat)
+      @research.moderator_permissions.create(:user => user, :is_moderator => true)
+    }
+    redirect_to :action => :index
   end
 
   private
+
+  def attribute
+  end
 
   def model_name
     'user'
