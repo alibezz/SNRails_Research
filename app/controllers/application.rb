@@ -33,6 +33,15 @@ class ApplicationController < ActionController::Base
   end
 
   #FIXME make this test
+  def load_items_position
+    @positions = {}; @positions.merge!({"t(:in_the_beginning)" + "\n" => 1})
+
+    unless @research.items.empty?
+      @research.items.each { |item| @positions.merge!({"t(:after)" + item.info + "\n" => item.position + 1}) }
+    end
+  end
+  
+  #FIXME make this test
   def load_item
     @item = @research.items.find(params[:item_id]||params[:question_id])
 
