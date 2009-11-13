@@ -17,7 +17,7 @@ class Admin::ModeratorsController < ResourceController::Base
       #XXXcaiotiago: TODO revoke attributes
       user = User.find(moderat)
       @research.moderator_permissions.create(:user => user, :is_moderator => true)
-    }
+    } if params[:moderator_ids]
     redirect_to :action => :index
   end
 
