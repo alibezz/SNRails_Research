@@ -8,9 +8,9 @@
 
 <% form_tag attribute_admin_research_moderators_path, :method => :put do %>
   <ul>
-    <% for moderator in (@gusers - @moderators) %>
+    <% for moderator in @gusers %>
       <li>
-        <%= check_box_tag "moderator_ids[]", moderator.id %>
+        <%= check_box_tag "moderator_ids[]", moderator.id, @moderators.member?(moderator) %>
         <%= moderator.login %>
       </li>
     <% end %>

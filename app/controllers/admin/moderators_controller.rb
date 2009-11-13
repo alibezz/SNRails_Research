@@ -13,6 +13,7 @@ class Admin::ModeratorsController < ResourceController::Base
   end
 
   def update
+    @research.moderator_permissions.destroy_all
     params[:moderator_ids].each { |moderat|
       #XXXcaiotiago: TODO revoke attributes
       user = User.find(moderat)
