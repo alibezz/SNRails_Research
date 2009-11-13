@@ -24,6 +24,7 @@ ActionController::Routing::Routes.draw do |map|
     end
 
 
+####
     admin.resources :researches, :has_many => :items
     admin.resources :items, :collection => {:reorder_items => :post, :reorder_pages => :post, :set_item_to_page => :post}
     admin.resources :items, :has_many => :item_values

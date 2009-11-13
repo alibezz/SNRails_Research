@@ -2,11 +2,11 @@
 
 <%= error_messages_for :item_value %>
 
-<% form_for(:item_value, :url => collection_url) do |f| %>
+<% form_for([:admin, @item, @item_value]) do |f| %>
   <%= render :partial => "form", :locals => { :f => f } %>
   <p>
     <%= submit_tag t(:create) %>
   </p>
 <% end %>
 <br/>
-<%= link_to t(:back), collection_url %>
+<%= link_to t(:item_values), admin_research_item_item_values_url(@item.research_id, @item.id) %>

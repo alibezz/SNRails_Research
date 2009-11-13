@@ -4,8 +4,8 @@
     <li id="item_<%= item.id %>"> 
       <%= item.position %> - <%= item.info%> 
       <ul>
-        <li> <%= design_display_button 'edit', t(:edit), edit_admin_research_item_url(@research, item) %> </li>
-        <li> <%= design_display_button 'item_value', t(:add_itemvalue), admin_research_item_item_values_url(@research, item) %> </li>
+        <li> <%= design_display_button 'edit', t(:edit), edit_admin_research_item_url(@research.id, item.id) %> </li>
+        <li> <%= design_display_button 'item_value', t(:add_itemvalue), new_admin_item_item_value_url(item.id) %> </li>
       </ul>
       <% if item.kind_of?(Question) %>
         <ul>

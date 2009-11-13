@@ -4,12 +4,14 @@
 
 <%= render :partial => 'admin/researches/research_options' %>
 
+<%= link_to t(:new_item_value), new_admin_item_item_value_url(@item.id) %><br>
+
 <%=  t(:item_values) %>
 
 <ul>
 <%- @item_values.each do |item_value| %>
   <li> 
-    <%= item_value.info %>
+    <%= link_to item_value.info, admin_item_item_value_url(@item.id, item_value.id) %>
   </li>
 <% end %>
 </ul>
