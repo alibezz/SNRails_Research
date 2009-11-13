@@ -15,12 +15,13 @@ en:
   subtitle: Subtitle
   introduction: Introduction
   listing_researches: Listing Researches
+  is_private: Is private?
   new_research: New Research
   editing_research: Editing Research
   list_all: List All
   moderators: Moderators
   new_moderator: Adding new moderator user
-  add_moderator: Add Moderator
+  edit_moderators: Edit Moderators
   sign_up: Sign up
   add_itemvalue: Add item_value Options
   listing_items: Listing Items
