@@ -3,16 +3,13 @@ class Admin::ModeratorsController < ResourceController::Base
   actions :index, :new, :create, :show, :edit, :update, :destroy
 
   before_filter :load_research
-  before_filter :find_users, :only => [:index, :show, :edit, :update]
+  before_filter :find_users, :only => [:index, :new, :show, :edit, :update]
+  before_filter :load_moderators, :only => [:index, :new]
 
   belongs_to :research
 
   create.response do |wants|
     wants.html {redirect_to collection_url}
-  end
-
-  def index
-    @moderators = @research.moderators
   end
 
   def update
@@ -25,6 +22,10 @@ class Admin::ModeratorsController < ResourceController::Base
   end
 
   private
+
+  def load_moderators
+    @moderators = @research.moderators
+  end
 
   def attribute
   end

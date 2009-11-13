@@ -4,14 +4,16 @@
 
 <%= render :partial => 'admin/researches/research_options' %>
 
-<%=  t(:new_moderator) %>
+<%=  t(:add_moderator) %>
 
-<%= render :partial => 'moderators_options' %>
-
-<% form_for @user, :url => users_path(:method => :post) do |f| -%>
-
-  <%= render :partial => 'users/form', :locals => {:f => f} %>
-
-  <p><%= submit_tag t(:sign_up) %></p>
-
-<% end -%>
+<% form_tag attribute_admin_research_moderators_path, :method => :put do %>
+  <ul>
+    <% for moderator in (@gusers - @moderators) %>
+      <li>
+        <%= check_box_tag "moderator_ids[]", moderator.id %>
+        <%= moderator.login %>
+      </li>
+    <% end %>
+  </ul>
+  <%= submit_tag "Attribute moderators" %>
+<% end %>
