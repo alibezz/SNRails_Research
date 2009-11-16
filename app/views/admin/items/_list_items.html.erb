@@ -5,7 +5,9 @@
       <%= item.info%> 
       <ul>
         <li> <%= design_display_button 'edit', t(:edit), edit_admin_research_item_url(@research.id, item.id) %> </li>
-        <li> <%= design_display_button 'item_value', t(:add_itemvalue), new_admin_item_item_value_url(item.id) %> </li>
+       <% unless item.is_text? %>
+         <li> <%= design_display_button 'item_value', t(:add_itemvalue), new_admin_item_item_value_url(item.id) %> </li>
+       <% end %>
       </ul>
       <% if item.kind_of?(Question) %>
         <ul>

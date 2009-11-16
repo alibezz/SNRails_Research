@@ -12,12 +12,13 @@ class Admin::ItemValuesController < ResourceController::Base
   end
 
   create.before do
+    require 'pp'
+    pp @item
+    pp params
     @item.reorder_item_values(params[:item_value][:position].to_i)
   end
 
   update.before do
-    require 'pp'
-    pp  ItemValue.find(params[:id]).position
     @item.update_positions(params[:item_value][:position].to_i, ItemValue.find(params[:id]).position)
   end
 

@@ -31,6 +31,17 @@ class ItemTest < Test::Unit::TestCase
    assert_equal count + 1, research.items.length
   end
 
+  def test_should_have_an_info
+   count = Item.count 
+   research = create_research
+   
+   create_item(:info => nil, :research_id => research.id)
+   assert_equal count, Item.count
+   
+   item = create_item(:info => "an info", :research_id => research.id)
+   assert_equal count + 1, Item.count
+  end
+  
   def test_is_text
    research = create_research
    

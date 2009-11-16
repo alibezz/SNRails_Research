@@ -34,21 +34,10 @@ class ItemValueTest < Test::Unit::TestCase
   def test_has_info
    research = create_research
 
-   # Pure text item
-   item = create_item(:research_id => research.id, :html_type => @types.invert["pure_text"])
-
-   count = item.item_values.length
-   ivalue = create_item_value(:item_id => item.id, :info => nil)
-   item.reload
-   assert_equal count + 1, item.item_values.length   
-   ivalue = create_item_value(:item_id => item.id, :info => "info")
-   item.reload
-   assert_equal count + 1, item.item_values.length   
-
    # Single selection item
    item = create_item(:research_id => research.id, :html_type => @types.invert["single_selection"])
    count = item.item_values.length
-   ivalue = create_item_value(:item_id => item.id, :info => nil)
+   ivalue = create_item_value(:item_id => item.id, :info => "")
    item.reload
    assert_equal count, item.item_values.length   
    ivalue = create_item_value(:item_id => item.id, :info => "info")

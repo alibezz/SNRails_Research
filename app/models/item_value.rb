@@ -15,10 +15,8 @@ class ItemValue < ActiveRecord::Base
 
   def has_info?
     unless self.item_id.nil?
-      if Item.find(self.item_id).is_text? and self.info
-        errors.add_to_base("Info must be blank.")
-      elsif not Item.find(self.item_id).is_text? and self.info.nil?
-        errors.add_to_base("Info must be blank.")
+      if not Item.find(self.item_id).is_text? and self.info and self.info.empty?
+        errors.add_to_base("Info can't be blank.")
       end
     end
   end
