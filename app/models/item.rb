@@ -17,7 +17,21 @@ class Item < ActiveRecord::Base
     HTML_TYPES[html_type.to_i]
   end
 
-protected
+
+  def reorder_item_values(position)
+    #FIXME Inefficient algorithm; Keep @item.item_values sorted
+    self.item_values.each { |ivalue| if ivalue.position >= position; ivalue.position+= 1; ivalue.save!; end }
+  end
+
+  def update_positions(new_position, old_position)
+    #FIXME Inefficient algorithm; Keep @item.item_values sorted
+    if new_position >  old_position
+      self.item_values.each { |i| if i.position > old_position and i.position <= new_position; i.position -= 1; i.save!; end }
+    elsif new_position <  old_position
+      self.item_values.each { |i| if i.position < old_position and i.position >= new_position; i.position += 1; i.save!; end }
+    end
+  end
+
   def self.html_types
     HTML_TYPES
   end

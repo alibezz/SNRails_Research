@@ -7,7 +7,7 @@ class ItemValue < ActiveRecord::Base
   end
  
   belongs_to :item
-  validates_uniqueness_of :position, :scope => :item_id
+# no longer necessary  validates_uniqueness_of :position, :scope => :item_id
 
   before_save do |item_value|
     item_value.position ||= (item_value.max("item_id = ?" % item_value) || 0) + 1 unless item_value.item.nil?

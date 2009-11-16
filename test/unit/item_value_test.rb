@@ -31,21 +31,6 @@ class ItemValueTest < Test::Unit::TestCase
    assert_equal count + 1, item.item_values.length
   end
 
-  def test_position_should_be_unique
-   research = create_research
-   item = create_item(:research_id => research.id)
-   
-   count = item.item_values.length
-   ivalue = create_item_value(:item_id => item.id, :position => count + 1)
-   item.reload
-   assert_equal ivalue.position, count + 1
-   assert_equal count + 1, item.item_values.length 
-
-   ivalue = create_item_value(:item_id => item.id, :position => count + 1)
-   item.reload
-   assert_equal count + 1, item.item_values.length #Second item_value wasn't created
-  end
-  
   def test_has_info
    research = create_research
 

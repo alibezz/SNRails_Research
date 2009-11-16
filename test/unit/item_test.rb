@@ -40,4 +40,47 @@ class ItemTest < Test::Unit::TestCase
    item = create_item(:research_id => research.id, :html_type => @types.invert["single_selection"])
    assert_equal false, item.is_text? 
   end
+
+  def test_reorder_item_values
+    research = create_research
+    item = create_item(:research_id => research.id)
+    
+    create_item_value(:position => 1, :item_id => item.id)
+    create_item_value(:position => 2, :item_id => item.id)
+    item.reorder_item_values(2); item.reload
+    assert_equal item.item_values.first.position, 1
+    assert_equal item.item_values.last.position, 3
+
+  end
+
+  def test_new_position_is_bigger_than_old_position
+    research = create_research
+    item = create_item(:research_id => research.id)
+    
+    create_item_value(:position => 1, :item_id => item.id)
+    create_item_value(:position => 2, :item_id => item.id)
+    create_item_value(:position => 3, :item_id => item.id)
+    item.update_positions(3,1); item.reload
+
+    assert_equal 1, item.item_values[0].position
+    assert_equal 1, item.item_values[1].position
+    assert_equal 2, item.item_values[2].position
+    #Now, item_value with :position => 1 previously can be updated by the controller
+  end
+
+  def test_new_position_is_smaller_than_old_position
+    research = create_research
+    item = create_item(:research_id => research.id)
+    
+    create_item_value(:position => 1, :item_id => item.id)
+    create_item_value(:position => 2, :item_id => item.id)
+    create_item_value(:position => 3, :item_id => item.id)
+    item.update_positions(1,3); item.reload
+
+    assert_equal 2, item.item_values[0].position
+    assert_equal 3, item.item_values[1].position
+    assert_equal 3, item.item_values[2].position
+    #Now, item_value with :position => 3 previously can be updated by the controller
+  end
+
 end
