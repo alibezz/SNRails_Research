@@ -4,19 +4,12 @@ class Admin::ItemsController < ResourceController::Base
   before_filter :load_research
   before_filter :load_items_position
 
-  new_action.before do
-  end
-
   create.before do
-    #FIXME Inefficient algorithm; Sort @research.items
-    position = params[:item][:position].to_i
-    @research.items.reverse.each { |item| if item.position >= position; item.position+= 1; item.save! end }
-  end
-
-  edit.before do
+    @research.reorder_items(params[:item][:position].to_i)
   end
 
   update.before do
+    @research.update_positions(params[:item][:position].to_i, Item.find(params[:id]).position)
   end
 
  #FIXME Install ARTS to test methods below

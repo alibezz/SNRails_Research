@@ -70,5 +70,40 @@ class ResearchTest < Test::Unit::TestCase
     assert_equal true, Research.find(r.id).is_private?
   end
 
+  def test_reorder_items
+    research = create_research
+    create_item(:position => 1, :research_id => research.id)
+    create_item(:position => 2, :research_id => research.id)
+    research.reorder_items(2); research.reload
+    assert_equal research.items.first.position, 1 
+    assert_equal research.items.last.position, 3 
+    
+  end
+
+  def test_new_position_is_bigger_than_old_position
+    research = create_research
+    create_item(:position => 1, :research_id => research.id)
+    create_item(:position => 2, :research_id => research.id)
+    create_item(:position => 3, :research_id => research.id)
+    research.update_positions(3, 1); research.reload
+    
+    assert_equal 1, research.items[0].position
+    assert_equal 1, research.items[1].position
+    assert_equal 2, research.items[2].position
+    #Now, item with :position => 1 previously can be updated by the controller
+  end
+
+  def test_new_position_is_smaller_than_old_position
+    research = create_research
+    create_item(:position => 1, :research_id => research.id)
+    create_item(:position => 2, :research_id => research.id)
+    create_item(:position => 3, :research_id => research.id)
+    research.update_positions(1, 3); research.reload
+    
+    assert_equal 2, research.items[0].position
+    assert_equal 3, research.items[1].position
+    assert_equal 3, research.items[2].position
+    #Now, item with :position => 3 previously can be updated by the controller
+  end
 
 end
