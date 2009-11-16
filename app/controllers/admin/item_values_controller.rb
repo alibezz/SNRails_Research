@@ -3,23 +3,20 @@ class Admin::ItemValuesController < ResourceController::Base
   belongs_to :item
 
   before_filter :load_research, :only => :index
+  before_filter :load_item
+  
+  before_filter :load_item_values_position
 
   index.before do
-    @item_values = @research.items.find(params[:item_id]).item_values
+    @item_values = @item.item_values
   end
 
-  new_action.before do
-     @item =  Item.find(params[:item_id])
-  end    
+  create.before do
+    require 'pp'
+    pp params
+    @item.reorder_item_values(params[:item_value][:position].to_i)
+  end
 
-  create.after do
-   # require 'pp'
-   # pp @item_value
-  end
-  show.before do
-    @item = Item.find(params[:item_id])
-  end
- 
   def collection
     @collection ||= @research.items.find(params[:item_id]).item_values
   end
