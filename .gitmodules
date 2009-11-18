@@ -26,3 +26,6 @@
 [submodule "vendor/plugins/design"]
 	path = vendor/plugins/design
 	url = gitosis@projects.safernet.org.br:design
+[submodule "vendor/plugins/access_control"]
+	path = vendor/plugins/access_control
+	url = gitosis@projects.safernet.org.br:access_control
