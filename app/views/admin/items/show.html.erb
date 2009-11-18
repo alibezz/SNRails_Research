@@ -2,11 +2,10 @@
   <strong><%= t(:info) %> </strong><%=h @item.info %>
 </p>
 <p>
-  <strong><%= t(:position) %> </strong><%=h @item.position %>
-</p>
-<p>
   <strong><%= t(:html_type) %> </strong><%=h @item.html %>
 </p>
 <%= link_to 'Edit', edit_object_url %>
 |
 <%= link_to 'Back', collection_url %>
+|
+<%= link_to t(:destroy), { :action => "destroy", :id => @item.id }, :confirm => t(:message_confirmation), :method => :delete %>

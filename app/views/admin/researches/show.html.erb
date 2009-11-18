@@ -2,7 +2,7 @@
 
 <%=  @research.subtitle %>
 
-<%= render :partial => 'research_options' %>
+<%= render :partial => 'research_options', :locals => {:research => @research } %>
 
 <p>
   <%=h @research.title %>

@@ -1,10 +1,9 @@
 <p>
   <strong><%= t(:info) %> </strong><%=h @item_value.info %>
 </p>
-<p>
-  <strong><%= t(:position) %> </strong><%=h @item_value.position %>
-</p>
 
 <%= link_to t(:edit), edit_object_url %>
 |
 <%= link_to t(:back), admin_research_item_item_values_url(@item.research_id, @item.id) %>
+|
+<%= link_to t(:destroy), { :action => "destroy", :id => @item_value.id, :item_id => @item.id },                                                                                                             :confirm => t(:message_confirmation), :method => :delete %>

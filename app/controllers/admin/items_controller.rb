@@ -1,21 +1,18 @@
 class Admin::ItemsController < ResourceController::Base
 
   belongs_to :research
+  before_filter :load_research
+  before_filter :load_items_position
 
-  new_action.before do 
-   @types = Item.html_types
-  end
-
-  edit.before do
-   @types = Item.html_types
+  create.before do
+    @research.reorder_items(params[:item][:position].to_i)
   end
 
   update.before do
-    @types = Item.html_types
+    @research.update_positions(params[:item][:position].to_i, Item.find(params[:id]).position)
   end
 
  #FIXME Install ARTS to test methods below
-
   # Reorder the items definition according to user definition.
   def reorder_items
     @research ||= Research.find(params[:research_id]) #FIXME get the research by user

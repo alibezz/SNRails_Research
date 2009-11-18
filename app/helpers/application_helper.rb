@@ -21,6 +21,9 @@ module ApplicationHelper
     @types = Item.html_types.invert.map
     select("item", "html_type", @types)
   end
-
+ 
+  def select_position(object, positions)
+    select(object, "position", positions.map)
+  end
 
 end

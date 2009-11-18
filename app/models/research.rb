@@ -41,4 +41,18 @@ class Research < ActiveRecord::Base
     self.items.update_all("page_id = #{old_page}", :id => new_items_page.map{|i|i.id})
   end
 
+  def reorder_items(position)
+    #FIXME Inefficient algorithm; Keep @research.items sorted
+    self.items.each { |item| if item.position >= position; item.position+= 1; item.save!; end }
+  end
+
+  def update_positions(new_position, old_position)
+    #FIXME Inefficient algorithm; Keep @research.items sorted
+    if new_position >  old_position
+      self.items.each { |i| if i.position > old_position and i.position <= new_position; i.position -= 1; i.save!; end }
+    elsif new_position <  old_position
+      self.items.each { |i| if i.position < old_position and i.position >= new_position; i.position += 1; i.save!; end }
+    end
+  end
+
 end

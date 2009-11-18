@@ -21,7 +21,6 @@ class ApplicationController < ActionController::Base
 
   #FIXME make this test
   def load_research
-    require 'pp'
     self.class.design :holder => 'research' 
     if !current_user.nil? and current_user.is_administrator?
         @research =  params[:research_id].nil? ? current_user.my_researches.find{ |i| i.id == params[:id].to_i }                                                            : current_user.my_researches.find{ |i| i.id == params[:research_id].to_i}
@@ -33,10 +32,29 @@ class ApplicationController < ActionController::Base
   end
 
   #FIXME make this test
+  def load_items_position
+    @positions = {}; @positions.merge!({"t(:in_the_beginning)" + "\n" => 1})
+
+    unless @research.items.empty?
+      @research.items.each { |item| @positions.merge!({"t(:after)" + item.info + "\n" => item.position + 1}) }
+    end
+  end
+  
+  #FIXME make this test
   def load_item
-    @item = @research.items.find(params[:item_id]||params[:question_id])
+    @item = Item.find(params[:item_id]||params[:question_id])
 
   end
+
+  #FIXME make this test
+  def load_item_values_position
+    @positions = {}; @positions.merge!({"t(:in_the_beginning)" + "\n" => 1})
+
+    unless @item.item_values.empty?
+      @item.item_values.each { |ivalue| @positions.merge!({"t(:after)" + ivalue.info + "\n" => ivalue.position + 1}) }
+    end
+  end
+
 
   def find_users
     @gusers = User.find(:all)

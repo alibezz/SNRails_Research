@@ -31,18 +31,15 @@ class ItemTest < Test::Unit::TestCase
    assert_equal count + 1, research.items.length
   end
 
-  def test_position_should_be_unique
+  def test_should_have_an_info
+   count = Item.count 
    research = create_research
-   count = research.items.length 
    
-   item = create_item(:research_id => research.id, :position => count + 1)
-   research.reload
-   assert_equal item.position, count + 1
-   assert_equal count + 1, research.items.length
+   create_item(:info => nil, :research_id => research.id)
+   assert_equal count, Item.count
    
-   item = create_item(:research_id => research.id, :position => count  + 1)
-   research.reload
-   assert_equal count + 1, research.items.length #Second item wasn't created
+   item = create_item(:info => "an info", :research_id => research.id)
+   assert_equal count + 1, Item.count
   end
   
   def test_is_text
@@ -54,4 +51,47 @@ class ItemTest < Test::Unit::TestCase
    item = create_item(:research_id => research.id, :html_type => @types.invert["single_selection"])
    assert_equal false, item.is_text? 
   end
+
+  def test_reorder_item_values
+    research = create_research
+    item = create_item(:research_id => research.id)
+    
+    create_item_value(:position => 1, :item_id => item.id)
+    create_item_value(:position => 2, :item_id => item.id)
+    item.reorder_item_values(2); item.reload
+    assert_equal item.item_values.first.position, 1
+    assert_equal item.item_values.last.position, 3
+
+  end
+
+  def test_new_position_is_bigger_than_old_position
+    research = create_research
+    item = create_item(:research_id => research.id)
+    
+    create_item_value(:position => 1, :item_id => item.id)
+    create_item_value(:position => 2, :item_id => item.id)
+    create_item_value(:position => 3, :item_id => item.id)
+    item.update_positions(3,1); item.reload
+
+    assert_equal 1, item.item_values[0].position
+    assert_equal 1, item.item_values[1].position
+    assert_equal 2, item.item_values[2].position
+    #Now, item_value with :position => 1 previously can be updated by the controller
+  end
+
+  def test_new_position_is_smaller_than_old_position
+    research = create_research
+    item = create_item(:research_id => research.id)
+    
+    create_item_value(:position => 1, :item_id => item.id)
+    create_item_value(:position => 2, :item_id => item.id)
+    create_item_value(:position => 3, :item_id => item.id)
+    item.update_positions(1,3); item.reload
+
+    assert_equal 2, item.item_values[0].position
+    assert_equal 3, item.item_values[1].position
+    assert_equal 3, item.item_values[2].position
+    #Now, item_value with :position => 3 previously can be updated by the controller
+  end
+
 end
