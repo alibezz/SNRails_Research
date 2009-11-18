@@ -8,6 +8,7 @@
        <% unless item.is_text? %>
          <li> <%= design_display_button 'item_value', t(:add_itemvalue), new_admin_item_item_value_url(item.id) %> </li>
        <% end %>
+        <li><%= link_to t(:destroy), { :action => "destroy", :id => item.id }, :confirm => t(:message_confirmation), :method => :delete %></li>
       </ul>
       <% if item.kind_of?(Question) %>
         <ul>

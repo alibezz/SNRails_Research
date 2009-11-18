@@ -7,3 +7,5 @@
 <%= link_to 'Edit', edit_object_url %>
 |
 <%= link_to 'Back', collection_url %>
+|
+<%= link_to t(:destroy), { :action => "destroy", :id => @item.id }, :confirm => t(:message_confirmation), :method => :delete %>
