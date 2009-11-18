@@ -5,6 +5,10 @@
 <% form_for(:research, :url => object_url, :html => { :method => :put }) do |f| %>
   <%= render :partial => "form", :locals => { :f => f } %>
   <p>
+  <label for="research_is_active"> <%= t(:is_active) + ":" %> </label>
+  <%= f.check_box :is_active %>
+  </p>
+  <p>
     <%=submit_tag t(:update) %>
   </p>
 <% end %>

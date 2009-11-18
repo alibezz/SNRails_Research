@@ -106,4 +106,26 @@ class ResearchTest < Test::Unit::TestCase
     #Now, item with :position => 3 previously can be updated by the controller
   end
 
+  def test_should_have_questions_to_be_active
+    research = create_research
+    research.is_active = true
+    assert_equal false, research.save
+  end
+
+  def test_should_add_questions_only_if_inactive
+    research = create_research
+    create_item(:research_id => research.id)
+    research.is_active = true; research.save
+    count = research.items.count
+    item = create_item
+    assert_raise RuntimeError do
+      raise research.items.push(item)
+    end
+    assert_equal count, research.items.count
+    research.is_active = false; research.save
+    create_item(:research_id => research.id)
+    assert_equal count + 1, research.items.count
+
+  end
+
 end

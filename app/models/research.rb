@@ -13,7 +13,7 @@ class Research < ActiveRecord::Base
   validates_presence_of :introduction
   validates_uniqueness_of :title
 
-  has_many :items
+  has_many :items, :before_add => [ Proc.new { |p,d| raise ":active_survey_cant_receive_questions" if p.is_active } ]
   has_many :questions
   has_many :permissions
   has_many :users, :through => :permissions
@@ -22,6 +22,17 @@ class Research < ActiveRecord::Base
   has_many :moderators, :through => :moderator_permissions, :source => :user
 
   acts_as_design :root => File.join('designs', 'researches')
+
+  validate do |b|
+    b.must_have_questions_to_be_active
+  end
+
+  def must_have_questions_to_be_active
+    if self.items.empty? and is_active
+      errors.add_to_base("Survey doesn't have questions. It can't be active.")
+    end
+  end
+
 
   # Get and array of integer that indicates the pages order and
   # set the item (questions and sections) to the correct order.
