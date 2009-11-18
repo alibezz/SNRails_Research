@@ -6,6 +6,9 @@
       <ul>
         <li> <%= design_display_button 'edit', t(:edit), edit_admin_research_item_url(@research.id, item.id) %> </li>
        <% unless item.is_text? %>
+         <% unless item.item_values.empty? %>
+           <li><%= design_display_button 'item_values', t(:item_values), admin_research_item_item_values_url(item.research_id, item.id) %> </li>
+         <% end %>
          <li> <%= design_display_button 'item_value', t(:add_itemvalue), new_admin_item_item_value_url(item.id) %> </li>
        <% end %>
         <li><%= link_to t(:destroy), { :action => "destroy", :id => item.id }, :confirm => t(:message_confirmation), :method => :delete %></li>
