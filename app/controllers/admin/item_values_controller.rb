@@ -22,6 +22,14 @@ class Admin::ItemValuesController < ResourceController::Base
     @item.update_positions(params[:item_value][:position].to_i, ItemValue.find(params[:id]).position)
   end
 
+  #FIXME Change something in the routes, so it can be solved following a pattern.
+  def destroy
+        @item_value = ItemValue.find(params[:id])
+        @item_value.destroy
+        @item = Item.find(params[:item_id])
+        flash[:notice] = t(:successfully_removed) 
+        redirect_to(admin_research_item_item_values_path(@item.research_id, @item.id)) 
+  end
 
   def collection
     @collection ||= @research.items.find(params[:item_id]).item_values

@@ -5,10 +5,7 @@
 
 <ul>
   <%- @researches.each do |research| %>
-    <%= link_to research.title, object_url(research) %>
-    <ul>
-      <li> <%= link_to t(:edit), edit_admin_research_url(research) %> </li>
-    </ul>
+    <%= link_to research.title, object_url(research) %><br>
   <% end %>
 </ul>
 
