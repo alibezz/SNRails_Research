@@ -10,6 +10,7 @@
   <label for="html_type"><%= t(:html_type) %></label>
   <%= select_type %>
 </p>
-
-
-
+<p>
+  <label for="is_optional"> <%= t(:is_optional) + ":" %> </label>
+  <%= f.check_box :is_optional %>
+</p>
