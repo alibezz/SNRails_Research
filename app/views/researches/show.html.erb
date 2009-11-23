@@ -6,6 +6,4 @@
   <%=h @research.introduction %>
 </p>
 
-<% @research.items.each do |item| %>
-  <ul> <%= item.info %>  </ul>
-<% end %>
+<%= link_to t(:subscribe_to_survey), new_research_questionnaire_url(@research.id)%>

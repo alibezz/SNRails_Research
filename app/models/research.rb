@@ -20,6 +20,7 @@ class Research < ActiveRecord::Base
 
   has_many :moderator_permissions, :conditions => {:is_moderator => true}, :class_name => 'Permission'
   has_many :moderators, :through => :moderator_permissions, :source => :user
+  has_many :questionnaires
 
   acts_as_design :root => File.join('designs', 'researches')
 
