@@ -1,11 +1,11 @@
 <h1><%= @research.title %></h1>
 
-<h2><%= @research.title %></h2>
+<h2><%= @research.subtitle %></h2>
 
 <p>
   <%=h @research.introduction %>
 </p>
 
-<%- @research.items do |item| %>
-  <ul> <%=h item.info %>  </ul>
+<% @research.items.each do |item| %>
+  <ul> <%= item.info %>  </ul>
 <% end %>
