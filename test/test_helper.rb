@@ -91,6 +91,17 @@ class Test::Unit::TestCase
     }.merge(params)
   end
 
+  def create_questionnaire(params = {})
+    Questionnaire.create(questionnaire_params(params))
+  end
+
+  def questionnaire_params(params = {})
+    {    
+    }.merge(params)
+  end
+
+
+
   # Sets the current user in the session from the user fixtures.
   def login_as(user)
     @request.session[:user_id] = user ? users(user).id : nil 

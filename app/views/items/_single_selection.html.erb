@@ -1,0 +1,4 @@
+<h2><%= item.position.to_s + " - " + item.info %></h2>
+
+<%= select_tag "object_item_values[#{item.id}]", options_from_collection_for_select(item.item_values, "id", "info") %>
+

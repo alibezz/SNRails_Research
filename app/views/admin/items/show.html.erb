@@ -4,6 +4,15 @@
 <p>
   <strong><%= t(:html_type) %> </strong><%=h @item.html %>
 </p>
+<p>
+  <strong><%= t(:is_optional) %> </strong>
+  <% if @item.is_optional %>
+    <%=h t(:yes) %>
+  <% else %>
+    <%=h t(:no) %>
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_object_url %>
 |
 <%= link_to 'Back', collection_url %>

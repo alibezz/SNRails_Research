@@ -5,6 +5,7 @@ class CreateItems < ActiveRecord::Migration
       t.integer :html_type
       t.references :research
       t.integer :page_id, :position
+      t.boolean :is_optional
       t.timestamps
     end
   end

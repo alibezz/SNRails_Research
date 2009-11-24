@@ -1,3 +1,5 @@
-<ul>
-  <li> <%= design_display_button 'add', t(:add), new_object_url %> </li>
-</ul>
+<% unless @research.is_active %>
+  <ul>
+    <li> <%= design_display_button 'add', t(:add), new_object_url %> </li>
+  </ul>
+<% end %>
