@@ -3,30 +3,21 @@ class Questionnaire < ActiveRecord::Base
   belongs_to :research
 
   def associate(new_answers)
-    new_answers.keys.each do |item_id|
-
-      #destroy old answers
-      self.destroy_old_answers(item_id)
-
-      #create new answers
-      new_answers[item_id].each do |item_value_id|
-        self.associate_new_answer(item_id, item_value_id)
+      new_answers.keys.each do |item_id|
+        unless self.object_item_values.empty?
+          self.destroy_old_answers(item_id)
+        end
+        new_answers[item_id].each do |item_value_id|
+          self.associate_new_answer(item_id, item_value_id)
+        end
       end
-
-    end
-    self.save
   end      
 
 protected
 
-  #TODO Guarantee that an answer is submitted only once, then all these checkings will become unnecessary.
+  #TODO Guarantee that an answer is submitted only once, then all these costful checkings will become unnecessary.
   def destroy_old_answers(item_id)
-    answers = self.object_item_values.each do |answer| 
-      if answer.item_id == item_id.to_i
-        self.object_item_values.delete(answer)
-        self.save!
-      end 
-    end
+    ObjectItemValue.all(:conditions => {:questionnaire_id => self.id, :item_id => item_id.to_i}).each(&:destroy)
   end
 
   def associate_new_answer(item_id, item_value_id)

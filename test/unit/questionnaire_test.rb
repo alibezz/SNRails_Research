@@ -16,5 +16,13 @@ class QuestionnaireTest < Test::Unit::TestCase
     @quest.associate({"1" =>["1", "2"]})
     @quest.reload
     assert_equal 2, @quest.object_item_values.count
+
+    quest2 = create_questionnaire
+    quest2.associate({"1" => ["1", "2"]})
+    quest2.reload
+    @quest.associate({"1" => "2"})
+    @quest.reload
+    assert_equal 1, @quest.object_item_values.count
+    assert_equal 2, quest2.object_item_values.count
   end
 end
