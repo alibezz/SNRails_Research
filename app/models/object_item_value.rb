@@ -3,6 +3,6 @@ class ObjectItemValue < ActiveRecord::Base
   belongs_to :item_value
   belongs_to :questionnaire
 
-  validates_presence_of :questionnaire_id
+  validates_presence_of :questionnaire_id, :item_value_id, :item_id
  
 end

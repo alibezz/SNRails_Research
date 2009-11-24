@@ -3,7 +3,6 @@ class QuestionnairesController < ResourceController::Base
   before_filter :load_research
 
   update.before do
-    require 'pp'
-    pp params
+   @questionnaire.associate(params[:object_item_values])
   end
 end

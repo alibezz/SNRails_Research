@@ -1,14 +1,14 @@
 
-<%= error_messages_for :questionnaire %>
+<%= error_messages_for :questionnaire, :object_item_values %>
 
 <% form_for(:questionnaire, :url => object_url, :html => { :method => :put }) do |f| %>
+
  <%#= #FIXME Instead of @research.items, a loop of pages, each of them keeping a certain number of ordered items %>
+ 
  <%= render :partial => "questions", :locals => { :items => @research.items } %>
   <p>
-    <%=submit_tag "Update"%>
+    <%=submit_tag t(:submit)%>
   </p>
 <% end %>
 
-
-
-<%= link_to 'Back', collection_url %>
+<%= link_to t(:survey), research_url(@research.id) %>
