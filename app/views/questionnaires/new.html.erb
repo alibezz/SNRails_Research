@@ -1,14 +1,16 @@
+
+<%= error_messages_for :questionnaire, :object_item_values %>
+
 <% form_for([:research, @questionnaire]) do |f| %>
-  <h1><%= @research.title %></h1>
 
-  <h2><%= @research.subtitle %></h2>
+  <% @research.items.each do |item| %>
+    <%= render :partial => "items/#{item.html}", :locals => { :item => item } %>
+  <% end %>
+  
+  <p>
+    <%=submit_tag t(:submit)%>
+  </p>
 
-  <p>
-    <%=h @research.introduction %>
-  </p>
-  <p>
-    <%= submit_tag t(:subscribe) %>
-  </p>
 <% end %>
-<br/>
-<%= link_to t(:surveys), researches_url %>
+
+<%= link_to t(:survey), research_url(@research.id) %>
