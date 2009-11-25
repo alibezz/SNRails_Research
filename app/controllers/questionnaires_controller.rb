@@ -5,4 +5,5 @@ class QuestionnairesController < ResourceController::Base
   update.before do
    @questionnaire.associate(params[:object_item_values])
   end
+
 end

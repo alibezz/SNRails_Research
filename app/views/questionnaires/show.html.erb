@@ -5,7 +5,7 @@
 
  <%#= #FIXME Instead of @research.items, a loop of pages, each of them keeping a certain number of ordered items %>
  
- <%= render :partial => "questions", :locals => { :items => @research.items } %>
+ <%= render :partial => "questions", :locals => { :items => @research.ordered_items } %>
   <p>
     <%=submit_tag t(:submit)%>
   </p>

@@ -128,4 +128,19 @@ class ResearchTest < Test::Unit::TestCase
 
   end
 
+  def test_ordered_items
+    research = create_research
+    create_item(:position => 2, :research_id => research.id)
+    create_item(:position => 1, :research_id => research.id)
+    research.reload
+ 
+    assert_equal 2, research.items.first.position
+    assert_equal 1, research.items.last.position
+    
+ 
+    assert_equal 1, research.ordered_items.first.position
+    assert_equal 2, research.ordered_items.last.position
+
+
+  end
 end

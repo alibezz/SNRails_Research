@@ -67,4 +67,10 @@ class Research < ActiveRecord::Base
     end
   end
 
+  def ordered_items
+    #FIXME Inefficient algorithm; Keep @research.items sorted
+    unless self.items.empty?
+      self.items.sort! {|a,b| a.position <=> b.position}
+    end
+  end
 end
