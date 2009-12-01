@@ -94,4 +94,22 @@ class ItemTest < Test::Unit::TestCase
     #Now, item_value with :position => 3 previously can be updated by the controller
   end
 
+  def test_should_add_ivalues_only_if_research_is_inactive
+    research = create_research
+    item = create_item(:research_id => research.id)
+    research.reload
+    research.is_active = true; research.save
+    count = item.item_values.count
+    ivalue = create_item_value
+    assert_raise RuntimeError do
+      raise item.item_values.push(ivalue)
+    end
+    assert_equal count, item.item_values.count
+    research.is_active = false; research.save
+    create_item_value(:item_id => item.id)
+    research.reload; item.reload 
+    assert_equal count + 1, item.item_values.count
+
+  end
+
 end

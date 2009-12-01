@@ -6,7 +6,8 @@
   <% @research.items.each do |item| %>
     <%= render :partial => "items/#{item.html}", :locals => { :item => item } %>
   <% end %>
-  
+  <br>
+  <%= link_to t(:next), :onclick => "#{remote_function(:url  => {:controller => "questionnaires", :action => "update_page"},                                                                                                            :with => "'source='+getSelectedValues(this)")}" %>  
   <p>
     <%=submit_tag t(:submit)%>
   </p>
