@@ -2,6 +2,8 @@ class Questionnaire < ActiveRecord::Base
   has_many :object_item_values
   belongs_to :research
 
+#  before_create :validate_obligatory_questions
+
   def associate(new_answers)
       new_answers.keys.each do |item_id|
         unless self.object_item_values.empty?
@@ -12,6 +14,18 @@ class Questionnaire < ActiveRecord::Base
         end
       end
   end      
+
+  def validate_obligatory_questions(answers, research_id)
+    #Get obligatory items from research
+    obligatory = Research.find(research_id).items.find_all { |item| item.is_optional == false }
+    obligatory.each do |oblig_question|
+      #Check if an answer to every obligatory question was passed
+      #TODO Check if a valid answer is passed.
+      unless answers.has_key?(oblig_question.id.to_s) 
+        errors.add_to_base("Question #{oblig_question.info} must be answered.")
+      end
+    end
+  end
 
 protected
 
@@ -25,4 +39,5 @@ protected
     self.save! 
   end
 
+ 
 end

@@ -74,6 +74,7 @@ class ResearchTest < Test::Unit::TestCase
     research = create_research
     create_item(:position => 1, :research_id => research.id)
     create_item(:position => 2, :research_id => research.id)
+    research.reload
     research.reorder_items(2); research.reload
     assert_equal research.items.first.position, 1 
     assert_equal research.items.last.position, 3 
@@ -85,8 +86,9 @@ class ResearchTest < Test::Unit::TestCase
     create_item(:position => 1, :research_id => research.id)
     create_item(:position => 2, :research_id => research.id)
     create_item(:position => 3, :research_id => research.id)
+    research.reload
     research.update_positions(3, 1); research.reload
-    
+   
     assert_equal 1, research.items[0].position
     assert_equal 1, research.items[1].position
     assert_equal 2, research.items[2].position
@@ -98,6 +100,7 @@ class ResearchTest < Test::Unit::TestCase
     create_item(:position => 1, :research_id => research.id)
     create_item(:position => 2, :research_id => research.id)
     create_item(:position => 3, :research_id => research.id)
+    research.reload
     research.update_positions(1, 3); research.reload
     
     assert_equal 2, research.items[0].position
@@ -127,5 +130,19 @@ class ResearchTest < Test::Unit::TestCase
     assert_equal count + 1, research.items.count
 
   end
-
+  
+  def test_some_items_should_have_alternatives_to_be_active
+    research = create_research
+    item = create_item(:research_id => research.id, :html_type => 1)
+    research.reload
+   
+    research.is_active = true
+    assert_equal false, research.save
+    
+    create_item_value(:item_id => item.id)
+    item.reload; research.reload
+    
+    research.is_active = true
+    assert_equal true, research.save
+  end
 end

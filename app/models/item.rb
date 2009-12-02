@@ -2,7 +2,7 @@ class Item < ActiveRecord::Base
 
   belongs_to :research
   validates_presence_of:research_id, :position, :info
-  has_many :item_values
+  has_many :item_values, :before_add => [ Proc.new { |p,d| raise ":active_survey_cant_receive_alternatives" if Research.find(p.research_id).is_active } ], :order => "position"
 
   HTML_TYPES = { 0 => "multiple_selection",
     1 => "single_selection",
