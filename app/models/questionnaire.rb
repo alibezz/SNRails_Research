@@ -15,6 +15,18 @@ class Questionnaire < ActiveRecord::Base
       end
   end      
 
+  def validate_obligatory_questions(answers, research_id)
+    #Get obligatory items from research
+    obligatory = Research.find(research_id).items.find_all { |item| item.is_optional == false }
+    obligatory.each do |oblig_question|
+      #Check if an answer to every obligatory question was passed
+      #TODO Check if a valid answer is passed.
+      unless answers.has_key?(oblig_question.id.to_s) 
+        errors.add_to_base("Question #{oblig_question.info} must be answered.")
+      end
+    end
+  end
+
 protected
 
   #TODO Guarantee that an answer is submitted only once, then all these costful checkings will become unnecessary.
@@ -27,14 +39,5 @@ protected
     self.save! 
   end
 
-  #FIXME Mind the order: questionnaire is created and then the answers are created. If any answer fails... what happens to the questionnaire?
-  def validate_obligatory_questions
-    obligatory = Research.find(research_id).items.find_all { |item| item.is_optional == false }
-    obligatory.each do |oblig_question|
-      unless answers.has_key?(oblig_question.id.to_s)
-        errors.add_to_base("Question #{oblig_question.info} must be answered.")
-      end
-    end
-  end
-
+ 
 end
