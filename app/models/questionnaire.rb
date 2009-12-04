@@ -2,8 +2,6 @@ class Questionnaire < ActiveRecord::Base
   has_many :object_item_values
   belongs_to :research
 
-#  before_create :validate_obligatory_questions
-
   def associate(new_answers)
       new_answers.keys.each do |item_id|
         unless self.object_item_values.empty?
