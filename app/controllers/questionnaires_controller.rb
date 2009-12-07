@@ -2,24 +2,28 @@ class QuestionnairesController < ResourceController::Base
   belongs_to :research
   before_filter :load_research
 
-  def create
-    require 'pp'
-    pp params[:questionnaire]
+  def new
     @questionnaire = Questionnaire.new
-    @questionnaire.validate_obligatory_questions(params[:object_item_values], params[:research_id].to_i)
-    if @questionnaire.errors.empty?
-      @questionnaire.research_id = params[:research_id].to_i
-      @questionnaire.associate(params[:object_item_values])
-      @questionnaire.incomplete = false
-      if @questionnaire.save
+    @page = params[:page_id].nil? ? 1 : params[:page_id].to_i 
+    flash[:answers] ||= {}
+    flash[:answers] = flash[:answers].merge(params[:object_item_values]) unless params[:object_item_values].nil?
+    @current_items = @research.items.find_all { |i| i.page_id == @page }
+    if request.post? and @page > @research.items.maximum('page_id')
+      create
+    end 
+  end
+
+  def create
+    @questionnaire = Questionnaire.new
+    if @questionnaire.prepare_to_save(flash[:answers], params[:research_id].to_i)
+     if @questionnaire.save
         flash[:notice] = t(:questionnaire_succesfully_saved)
         redirect_to research_url(params[:research_id].to_i)
+      else
+        render :action => 'new'
       end
     else
       render :action => 'new'
     end
-  end
-
-  def update_page
   end
 end

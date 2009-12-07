@@ -2,15 +2,28 @@ class Questionnaire < ActiveRecord::Base
   has_many :object_item_values
   belongs_to :research
 
+  def prepare_to_save(answers, research_id)
+    self.validate_obligatory_questions(answers, research_id)
+    if self.errors.empty?
+      self.save #Now, it has an ID to proper associations
+      self.research_id = research_id
+      self.associate(answers)
+      self.incomplete = false
+      true
+    else
+      false
+    end
+  end
+
   def associate(new_answers)
-      new_answers.keys.each do |item_id|
-        unless self.object_item_values.empty?
-          self.destroy_old_answers(item_id)
-        end
-        new_answers[item_id].each do |item_value_id|
-          self.associate_new_answer(item_id, item_value_id)
-        end
+    new_answers.keys.each do |item_id|
+      unless self.object_item_values.empty?
+        self.destroy_old_answers(item_id)
       end
+      new_answers[item_id].each do |item_value_id|
+        self.associate_new_answer(item_id.to_i, item_value_id.to_i)
+      end
+    end
   end      
 
   def validate_obligatory_questions(answers, research_id)
@@ -33,9 +46,7 @@ protected
   end
 
   def associate_new_answer(item_id, item_value_id)
-    ObjectItemValue.create(:questionnaire_id => self.id, :item_value_id => item_value_id.to_i, :item_id => item_id.to_i)
-    self.save! 
+    ObjectItemValue.create(:questionnaire_id => self.id, :item_value_id => item_value_id, :item_id => item_id)
+    self.save
   end
-
- 
 end

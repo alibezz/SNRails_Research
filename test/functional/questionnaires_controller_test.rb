@@ -5,23 +5,26 @@ require 'questionnaires_controller'
 class QuestionnairesController; def rescue_action(e) raise e end; end
 
 class QuestionnairesControllerTest < Test::Unit::TestCase
-  fixtures :questionnaires
 
   def setup
     @controller = QuestionnairesController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
-  end
-
-  def test_should_get_index
-    get :index
-    assert_response :success
-    assert assigns(:questionnaires)
+    @research = create_research
+    @i1 = create_item(:research_id => @research.id, :page_id => 1)
+    @ivalue1 = create_item_value(:item_id => @i1.id)
+    @i2 = create_item(:research_id => @research.id, :page_id => 2)
+    @ivalue2 = create_item_value(:item_id => @i2.id)
+    @research.reload; @i1.reload; @i2.reload
   end
 
   def test_should_get_new
-    get :new
+    get :new, :research_id => @research.id
     assert_response :success
+    #page_id == 1 ou 2
+    assert_tag :tag => 'form', :attributes => { :action => new_research_questionnaire_url(@research.id), :method => 'post', :url => {:action => 'new'} }
+
+
   end
   
   def test_should_create_questionnaire

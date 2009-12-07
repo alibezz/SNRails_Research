@@ -55,7 +55,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
   def find_users
     @gusers = User.find(:all)
   end

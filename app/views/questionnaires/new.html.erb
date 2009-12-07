@@ -1,16 +1,23 @@
 
 <%= error_messages_for :questionnaire, :object_item_values %>
 
-<% form_for([:research, @questionnaire]) do |f| %>
+<% form_for([:research, @questionnaire], :url => {:action => 'new', :page_id => @page + 1 }) do |f| %>
 
-  <% @research.items.each do |item| %>
+    
+  <% @current_items.each do |item| %>
     <%= render :partial => "items/#{item.html}", :locals => { :item => item } %>
   <% end %>
   <br>
-  <%= link_to t(:next), :onclick => "#{remote_function(:url  => {:controller => "questionnaires", :action => "update_page"},                                                                                                            :with => "'source='+getSelectedValues(this)")}" %>  
+
+  <% if @page < @research.items.maximum('page_id') %>
   <p>
-    <%=submit_tag t(:submit)%>
+    <%=submit_tag t(:next)%>
   </p>
+  <% else %>
+  <p>
+    <%= submit_tag t(:submit) %>
+  </p>
+  <% end %>
 
 <% end %>
 

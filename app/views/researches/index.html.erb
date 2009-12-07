@@ -3,7 +3,7 @@
 <ul>
   <% @researches.each do |research| %>
     <li> 
-      <%= link_to research.title, new_research_questionnaire_url(research.id) %> 
+      <%= link_to research.title, research_url(research.id) %> 
     </li>
   <% end %>
 </ul>
