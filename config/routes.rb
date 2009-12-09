@@ -9,10 +9,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
 
   map.resources :researches, :has_many => :items
-  map.resources :researches, :has_many => :questionnaires
 
   map.resources :researches do |researches|
-    researches.resources :questionnaires
+    researches.resources :questionnaires, :collection => { :new => :post }
   end
 
   # Route for admin research
