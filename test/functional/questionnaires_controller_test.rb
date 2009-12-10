@@ -21,10 +21,8 @@ class QuestionnairesControllerTest < Test::Unit::TestCase
   def test_should_get_new
     get :new, :research_id => @research.id
     assert_response :success
-    #page_id == 1 ou 2
-    assert_tag :tag => 'form', :attributes => { :action => new_research_questionnaire_url(@research.id), :method => 'post', :url => {:action => 'new'} }
-
-
+    #page_id == 2, because it's the first page 
+    assert_tag :tag => 'form', :attributes => { :action => new_research_questionnaire_url(@research.id), :method => 'post', :url => {:action => 'new', :page_id => 2} }
   end
   
   def test_should_create_questionnaire
