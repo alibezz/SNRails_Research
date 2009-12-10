@@ -6,7 +6,8 @@ class Item < ActiveRecord::Base
 
   HTML_TYPES = { 0 => "multiple_selection",
     1 => "single_selection",
-    2 => "pure_text"
+    2 => "pure_text",
+    3 => "radiobutton"
   }
  
   def is_text?

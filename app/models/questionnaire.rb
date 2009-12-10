@@ -7,8 +7,7 @@ class Questionnaire < ActiveRecord::Base
     if self.errors.empty?
       self.save #Now, it has an ID to proper associations
       self.research_id = research_id
-      self.associate(answers)
-      self.incomplete = false
+      self.associate(answers); self.incomplete = false
       true
     else
       false
