@@ -1,0 +1,31 @@
+Interface Adm.
+ 
+  1 - Questões com tipo definido: checkbox (OK), radiobutton (OK), text
+       - Opção de "outros" com texto
+
+  2 - Definir quantidade de respostas para as questões (nenhum, 1, m-n, mais de um) e campos
+       - Se o tipo permite mais de uma resposta, o usuário que define. Senão, é automaticamente definido como 1.
+
+  3 - Subseções do questionário (sections como delimitadores)
+     - No momento de criação do questionário da pesquisa o usuário poderá selecionar se quer adiciionar uma seção ou uma questão numa interface utilizando lightbox. A depender do tipo escolhido será visualizado o partial correspondente ao tipo.
+     - O usuário deve poder escolher a posição da questão em relação às outras delimitadas por uma mesma seção.
+
+  4 - Permitir questões condicionais dependentes de uma variável booleana ou texto
+
+  5 - Rota de saída
+
+  6 - Criar uma nova pesquisa a partir de uma existente.
+
+  7 - Definir temas para cada pesquisa.
+
+Interface do Usuário
+
+  1 - Questões com tipo definido: checkbox, radiobutton, text
+       - Opção de "outros" com texto
+  2 - paginação com validação
+
+
+- Barra de progresso
+- Acesso público ou privado para as pesquisas
+- LOW: cookies para armazenar seção
+- Esquema de autorização: moderador, administrador, usuário
