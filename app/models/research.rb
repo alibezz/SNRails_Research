@@ -27,6 +27,7 @@ class Research < ActiveRecord::Base
   validate do |b|
     b.must_have_questions_to_be_active
     b.some_items_must_have_alternatives_to_be_active
+    b.number_of_max_answers
   end
 
   def must_have_questions_to_be_active
@@ -45,6 +46,17 @@ class Research < ActiveRecord::Base
       end
     end
   end
+
+  def number_of_max_answers
+    if self.is_active
+      self.items.each do |item|
+        if item.invalid_max_answers?
+          errors.add_to_base("#{item.info} has maximum number of answers = #{item.max_answers.to_s}, but only #{item.item_values.count} alternatives. Survey can't be active.")
+        end
+      end
+    end 
+  end
+
 
   # Get and array of integer that indicates the pages order and
   # set the item (questions and sections) to the correct order.

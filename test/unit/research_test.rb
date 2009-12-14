@@ -145,4 +145,21 @@ class ResearchTest < Test::Unit::TestCase
     research.is_active = true
     assert_equal true, research.save
   end
+
+  def test_number_of_max_answers_is_valid_to_be_active
+    research = create_research
+    # multiple selection item
+    item = create_item(:research_id => research.id, :html_type => 0, :min_answers => 1, :max_answers => 2)
+    create_item_value(:item_id => item.id)
+    research.reload
+
+    research.is_active = true
+    assert_equal false, research.save
+
+    create_item_value(:item_id => item.id)
+    research.reload
+    research.is_active = true
+    assert_equal true, research.save
+
+  end
 end
