@@ -5,7 +5,7 @@ class Item < ActiveRecord::Base
   before_save :define_answers_quantity
   validate do |b|
     b.min_before_max_answers
-    b.max_answers_value
+ #   b.max_answers_value
   end
   has_many :item_values, :before_add => [ Proc.new { |p,d| raise ":active_survey_cant_receive_alternatives" if Research.find(p.research_id).is_active } ], :order => "position"
 
@@ -49,11 +49,12 @@ class Item < ActiveRecord::Base
     end 
   end
 
-  def max_answers_value
-    if self.max_answers > self.item_values.count
-      errors.add_to_base("The maximum quantity of expected answers can't be bigger than the maximum quantity of alternatives.") 
-    end 
-  end
+## Relaxing condition below
+#  def max_answers_value
+#    if self.max_answers > self.item_values.count
+#      errors.add_to_base("The maximum quantity of expected answers can't be bigger than the maximum quantity of alternatives.") 
+#    end 
+#  end
  
 private
  

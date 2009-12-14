@@ -138,13 +138,7 @@ class ItemTest < Test::Unit::TestCase
 
     item.max_answers = 2; item.min_answers = 1; item.save; item.reload
     assert_equal 1, item.max_answers
-    assert_equal 1, item.min_answers #No matter what you set, it's gonna be 1,1 because it's a single selection.
+    assert_equal 1, item.min_answers #No matter what you set, it will be (min=1,max=1) because it's a single selection.
   end
 
-  def test_max_answers_value
-     item = create_item(:research_id => @research.id, :html_type => 0)
-     item.max_answers = item.item_values.count + 1
-    
-     assert_equal false, item.save
-  end
 end
