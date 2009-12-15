@@ -126,9 +126,6 @@ class ItemTest < Test::Unit::TestCase
     # :html_type => 1 is equivalent to single selection
     item = create_item(:research_id => @research.id, :html_type => 1)
     
-    assert_equal 0, item.max_answers
-    assert_equal 0, item.min_answers
-
     create_item_value(:item_id => item.id)
     item.reload; item.save
     require 'pp'
@@ -139,6 +136,17 @@ class ItemTest < Test::Unit::TestCase
     item.max_answers = 2; item.min_answers = 1; item.save; item.reload
     assert_equal 1, item.max_answers
     assert_equal 1, item.min_answers #No matter what you set, it will be (min=1,max=1) because it's a single selection.
+  end
+
+  def test_invalid_max_answers
+    # :html_type => 0 is equivalent to multiple_selection
+    item = create_item(:research_id => @research.id, :html_type => 0, :min_answers => 1, :max_answers => 2)
+    assert_equal true, item.invalid_max_answers?
+
+    create_item_value(:item_id => item.id)
+    create_item_value(:item_id => item.id)
+    item.reload
+    assert_equal false, item.invalid_max_answers?
   end
 
 end

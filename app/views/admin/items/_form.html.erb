@@ -7,10 +7,18 @@
   <%= select_position("item", @positions) %>
 </p>
 <p>
+  <label for="is_optional"> <%= t(:is_optional) + ":" %> </label>
+  <%= f.check_box :is_optional %>
+</p>
+<p>
   <label for="html_type"><%= t(:html_type) %></label>
   <%= select_type %>
 </p>
 <p>
-  <label for="is_optional"> <%= t(:is_optional) + ":" %> </label>
-  <%= f.check_box :is_optional %>
+  <label for="min_answers"><%= t(:min_answers) %></label>
+  <%= f.text_field :min_answers %>
+</p>
+<p>
+  <label for="max_answers"><%= t(:max_answers) %></label>
+  <%= f.text_field :max_answers %>
 </p>
