@@ -1,10 +1,10 @@
 Interface Adm.
  
-  1 - Questões com tipo definido: checkbox (OK), radiobutton (OK), text
-       - Opção de "outros" com texto
+  1 - Questões com tipo definido: checkbox (OK), radiobutton (OK)
+       - Opção de "outros" com texto (prioridade mais baixa)
 
   2 - Definir quantidade de respostas para as questões (nenhum, 1, m-n, mais de um) e campos
-       - Se o tipo permite mais de uma resposta, o usuário que define. Senão, é automaticamente definido como 1.
+       - Se o tipo permite mais de uma resposta, o usuário que define. Senão, é automaticamente definido como 1. => Falta fazer javascript na view para isso.
 
   3 - Subseções do questionário (sections como delimitadores)
      - No momento de criação do questionário da pesquisa o usuário poderá selecionar se quer adiciionar uma seção ou uma questão numa interface utilizando lightbox. A depender do tipo escolhido será visualizado o partial correspondente ao tipo.
@@ -20,10 +20,11 @@ Interface Adm.
 
 Interface do Usuário
 
-  1 - Questões com tipo definido: checkbox, radiobutton, text
-       - Opção de "outros" com texto
+  1 - Questões com tipo definido: checkbox (OK), radiobutton (OK)
+       - Opção de "outros" com texto (prioridade mais baixa)
   2 - paginação com validação
-
+	- validação de obrigatoriedade
+	- validação de quantidade de respostas
 
 - Barra de progresso
 - Acesso público ou privado para as pesquisas

@@ -1,13 +1,19 @@
 
 <%= error_messages_for :questionnaire, :object_item_values %>
 
-<% form_for([:research, @questionnaire], :url => {:action => 'new', :page_id => @page + 1 }) do |f| %>
+<% form_for([:research, @questionnaire], :url => {:action => 'new', :page_id => @page }) do |f| %>
 
     
   <% @current_items.each do |item| %>
     <%= render :partial => "items/#{item.html}", :locals => { :item => item } %>
   <% end %>
   <br>
+
+  <% if @page > 1 %>
+  <p>
+    <%= submit_tag t(:back) %>
+  </p>
+  <% end %>
 
   <% if @page < @research.items.maximum('page_id') %>
   <p>
@@ -19,7 +25,7 @@
   </p>
   <% end %>
 
-  <%= link_to t(:back), "javascript:history.back()"  %>
+  <%#= link_to t(:back), "javascript:history.back()"  %>
 <% end %>
 
 <%= link_to t(:survey), research_url(@research.id) %>

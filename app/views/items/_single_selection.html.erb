@@ -1,4 +1,9 @@
 <h2><%= item.info %></h2>
 
-<%= select_tag "object_item_values[#{item.id}]", options_from_collection_for_select(item.item_values, "id", "info") %>
+<% if flash[:answers][item.id.to_s] %>
+  <%= select_tag "object_item_values[#{item.id}]", options_from_collection_for_select(item.item_values, "id", "info", flash[:answers][item.id.to_s].to_i) %>
+<% else %>
+  <%= select_tag "object_item_values[#{item.id}]", options_from_collection_for_select(item.item_values, "id", "info") %>
+<% end %>
+
 
