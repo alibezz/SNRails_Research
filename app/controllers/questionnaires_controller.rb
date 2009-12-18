@@ -11,16 +11,18 @@ class QuestionnairesController < ResourceController::Base
       @page = 1
     elsif /back/i =~ params[:commit]
       @page = params[:page_id].to_i - 1
-    elsif /next/i =~ params[:commit]
+    elsif /next/i =~ params[:commit] or /submit/i =~ params[:commit]
       @page = params[:page_id].to_i + 1
     end 
     
     flash[:answers] ||= {}
     flash[:answers] = flash[:answers].merge(params[:object_item_values]) unless params[:object_item_values].nil?
     pp flash[:answers]
-
+    
     @current_items = @research.items.find_all { |i| i.page_id == @page }
     
+    pp @page
+
     if request.post? and @page > @research.items.maximum('page_id')
       create
     end 
