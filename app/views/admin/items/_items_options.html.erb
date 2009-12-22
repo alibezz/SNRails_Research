@@ -1,5 +1,6 @@
 <% unless @research.is_active %>
   <ul>
-    <li> <%= design_display_button 'add', t(:add), new_object_url %> </li>
+    <li> <%= link_to t(:add_question), new_admin_research_item_path(@research, :type => "question") %> </li>
+    <li> <%= link_to t(:add_section), new_admin_research_item_path(@research, :type => "section") %> </li>
   </ul>
 <% end %>

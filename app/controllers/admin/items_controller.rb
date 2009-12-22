@@ -12,7 +12,8 @@ class Admin::ItemsController < ResourceController::Base
     @research.update_positions(params[:item][:position].to_i, Item.find(params[:id]).position)
   end
 
- #FIXME Install ARTS to test methods below
+
+#FIXME Install ARTS to test methods below
   # Reorder the items definition according to user definition.
   def reorder_items
     @research ||= Research.find(params[:research_id]) #FIXME get the research by user

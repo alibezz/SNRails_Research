@@ -23,7 +23,7 @@ Interface do Usuário
   1 - Questões com tipo definido: checkbox (OK), radiobutton (OK)
        - Opção de "outros" com texto (OK)
 
-  2 - paginação com validação
+  2 - paginação (OK) com validação
 	- validação de obrigatoriedade
 	- validação de quantidade de respostas
 

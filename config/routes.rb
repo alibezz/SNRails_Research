@@ -18,6 +18,7 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
     admin.resources :researches, :collection => { :moderators => :get}
     admin.resources :researches do |researches|
+      researches.resources :items, :collection => {:reorder_items => :post, :reorder_pages => :post, :set_item_to_page => :post}
       researches.resources :items do |items|
         items.resources :item_values
       end
@@ -25,8 +26,7 @@ ActionController::Routing::Routes.draw do |map|
 
 
 ####
-    admin.resources :researches, :has_many => :items
-    admin.resources :items, :collection => {:reorder_items => :post, :reorder_pages => :post, :set_item_to_page => :post}
+    admin.resources :researches, :has_many => :items 
     admin.resources :items, :has_many => :item_values
  
    admin.resources :researches, :has_many => :questions do |question|
