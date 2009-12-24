@@ -7,8 +7,8 @@ class CreateItems < ActiveRecord::Migration
       t.integer :page_id, :default => 1
       t.integer :position
       t.boolean :is_optional
-      t.integer :min_answers
-      t.integer :max_answers
+      t.integer :min_answers, :default => 0
+      t.integer :max_answers, :default => 0
       t.timestamps
     end
   end

@@ -4,6 +4,11 @@ class Admin::ItemsController < ResourceController::Base
   before_filter :load_research
   before_filter :load_items_position
 
+  new_action.before do
+    # @item_type is "question" by default
+    @item_type = params[:item_type].nil? ? "question" : params[:item_type]
+  end
+
   create.before do
     @research.reorder_items(params[:item][:position].to_i)
   end
