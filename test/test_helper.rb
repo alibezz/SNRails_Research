@@ -79,7 +79,7 @@ class Test::Unit::TestCase
   end
 
   def create_user(params = {})
-    User.create(user_params(params))
+    User.create!(user_params(params))
   end
   
   def user_params(params = {})
