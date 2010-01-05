@@ -1,9 +1,12 @@
 <p>
   <strong><%= t(:info) %> </strong><%=h @item.info %>
 </p>
+
+<% if @item.kind_of?(Question) %>
 <p>
   <strong><%= t(:html_type) %> </strong><%=h @item.html %>
 </p>
+<% end %>
 <p>
   <strong><%= t(:is_optional) %> </strong>
   <% if @item.is_optional %>

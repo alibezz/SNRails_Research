@@ -1,6 +1,6 @@
 class Admin::ItemValuesController < ResourceController::Base
 
-  belongs_to :item
+  belongs_to :question
 
   before_filter :load_research, :only => :index
   before_filter :load_item
@@ -12,9 +12,6 @@ class Admin::ItemValuesController < ResourceController::Base
   end
 
   create.before do
-    require 'pp'
-    pp @item
-    pp params
     @item.reorder_item_values(params[:item_value][:position].to_i)
   end
 
@@ -26,13 +23,13 @@ class Admin::ItemValuesController < ResourceController::Base
   def destroy
         @item_value = ItemValue.find(params[:id])
         @item_value.destroy
-        @item = Item.find(params[:item_id])
+        @item = Item.find(params[:question_id])
         flash[:notice] = t(:successfully_removed) 
-        redirect_to(admin_research_item_item_values_path(@item.research_id, @item.id)) 
+        redirect_to(admin_research_item_item_values_path(@item.research_id, @item)) 
   end
 
   def collection
-    @collection ||= @research.items.find(params[:item_id]).item_values
+    @collection ||= @research.questions.find(params[:question_id]).item_values
   end
 
 end

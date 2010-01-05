@@ -5,13 +5,13 @@ class QuestionnaireTest < Test::Unit::TestCase
   def setup
     @research = create_research
   
-    @i1 = create_item(:research_id => @research.id, :info => "q1", :is_optional => false) #obligatory
+    @i1 = create_item(:type => "question", :research_id => @research.id, :info => "q1", :is_optional => false) #obligatory
     @ivalue1 = create_item_value(:item_id => @i1.id)
  
-    @i2 = create_item(:research_id => @research.id, :info => "q2", :is_optional => false) #obligatory
+    @i2 = create_item(:type => "question", :research_id => @research.id, :info => "q2", :is_optional => false) #obligatory
     @ivalue2 = create_item_value(:item_id => @i2.id)
 
-    @i3 = create_item(:research_id => @research.id, :info => "q3", :is_optional => true)
+    @i3 = create_item(:type => "question", :research_id => @research.id, :info => "q3", :is_optional => true)
     @ivalue3 = create_item_value(:item_id => @i3.id)
     @ivalue4 = create_item_value(:item_id => @i3.id)
     

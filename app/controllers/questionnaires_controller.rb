@@ -2,8 +2,6 @@ class QuestionnairesController < ResourceController::Base
   belongs_to :research
   before_filter :load_research
 
-  require 'pp'
-
   def new
     @questionnaire = Questionnaire.new
 
@@ -17,12 +15,9 @@ class QuestionnairesController < ResourceController::Base
     
     flash[:answers] ||= {}
     flash[:answers] = flash[:answers].merge(params[:object_item_values]) unless params[:object_item_values].nil?
-    pp flash[:answers]
     
-    @current_items = @research.items.find_all { |i| i.page_id == @page }
+    @current_items = @research.questions.find_all { |i| i.page_id == @page }
     
-    pp @page
-
     if request.post? and @page > @research.items.maximum('page_id')
       create
     end 

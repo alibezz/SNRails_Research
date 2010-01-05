@@ -12,7 +12,7 @@ class ItemsControllerTest < Test::Unit::TestCase
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
     env = Environment.new
-    Environment.expects(:default).returns(env)
+#    Environment.expects(:default).returns(env)
     login_as :quentin
   end
 
@@ -27,12 +27,28 @@ class ItemsControllerTest < Test::Unit::TestCase
      
   end
 
-  def test_should_show_questions
+  def test_should_show_items
     r = create_research
-    i = create_item_of_a_research(r)
+    text_question = create_item(:type => "question", :research_id => r.id, :html_type => Question.html_types.invert["pure_text"])
+    selection_question = create_item(:type => "question", :research_id => r.id, :html_type => Question.html_types.invert["single_selection"])
+    section = create_item(:type => "section", :research_id => r.id)
+
     get :index, :research_id => r.id
-    assert_tag :tag => "a", :attributes => { :href => edit_admin_research_item_url(i.research_id, i.id) }
-    assert_tag :tag => "a", :attributes => { :href => admin_research_item_item_values_url(i.research_id, i.id)}
+    assert_tag :tag => "a", :attributes => { :href => new_admin_research_item_path(r.id, :item_type => "question") }
+    assert_tag :tag => "a", :attributes => { :href => new_admin_research_item_path(r.id, :item_type => "section") }
+
+    assert_tag :tag => "a", :attributes => { :href => edit_admin_research_item_path(r, text_question, :item_type => text_question.class.to_s.downcase)} 
+    assert_no_tag :tag => "a", :attributes => { :href => new_admin_question_item_value_path(text_question)}
+
+    get :index, :research_id => r.id, :page => 2
+    
+    assert_tag :tag => "a", :attributes => { :href => edit_admin_research_item_path(r, selection_question, :item_type => selection_question.class.to_s.downcase)} 
+    assert_tag :tag => "a", :attributes => { :href => new_admin_question_item_value_path(selection_question)}
+
+    get :index, :research_id => r.id, :page => 3
+
+    assert_tag :tag => "a", :attributes => { :href => edit_admin_research_item_path(r, section, :item_type => section.class.to_s.downcase)} 
+    assert_no_tag :tag => "a", :attributes => { :href => new_admin_question_item_value_path(section)}
   end
 
 #new
@@ -65,6 +81,8 @@ class ItemsControllerTest < Test::Unit::TestCase
     post :create, :item => {"position"=>"1", "info"=>"test1", "html_type"=> 0}, :research_id => r.id
     r.reload 
     assert_equal 1, r.items.length
+
+    post :create, :item => {"position"=>"1", "info"=>"test1", "html_type"=> 0}, :research_id => r.id
   end
 
 #show

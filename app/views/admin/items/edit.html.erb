@@ -3,7 +3,7 @@
 <%= error_messages_for :item %>
 
 <% form_for(:item, :url => object_url, :html => { :method => :put }) do |f| %>
-  <%= render :partial => "form", :locals => { :f => f } %>
+  <%= render :partial => "#{@item_type}_form", :locals => { :f => f } %>
   <p>
     <%=submit_tag "Update"%>
   </p>

@@ -1,5 +1,7 @@
 Interface Adm.
- 
+  0 - Repensar a ordenação dos items e dos item_values
+    - Criar sempre no fim e, facultativamente, ordenar todos os items e item_values
+
   1 - Questões com tipo definido: checkbox (OK), radiobutton (OK)
        - Opção de "outros" com texto (OK) 
 

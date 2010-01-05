@@ -48,7 +48,11 @@ class Test::Unit::TestCase
   end
 
   def create_item(params = {})
-    Item.create(item_params(params))
+    unless params[:type].nil?
+      params[:type].downcase == 'question' ? Question.create(item_params(params)) : Section.create(item_params(params))
+    else
+      Item.create(item_params(params))
+    end
   end
   
   def item_params(params = {})

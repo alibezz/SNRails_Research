@@ -31,17 +31,17 @@ class Research < ActiveRecord::Base
   end
 
   def must_have_questions_to_be_active
-    if self.items.empty? and self.is_active
+    if self.questions.empty? and self.is_active
       errors.add_to_base("Survey doesn't have questions. It can't be active.")
     end
   end
 
   def some_items_must_have_alternatives_to_be_active
-    items = self.items.find_all { |item| item.is_text? == false }
+    questions = self.questions.find_all { |question| question.is_text? == false }
     if self.is_active
-      items.each do |item|
-        if item.item_values.empty?
-          errors.add_to_base("#{item.info} must have alternatives. Survey can't be active.")        
+      questions.each do |question|
+        if question.item_values.empty?
+          errors.add_to_base("#{question.info} must have alternatives. Survey can't be active.")        
         end 
       end
     end
@@ -49,9 +49,9 @@ class Research < ActiveRecord::Base
 
   def number_of_max_answers
     if self.is_active
-      self.items.each do |item|
-        if item.invalid_max_answers?
-          errors.add_to_base("#{item.info} has maximum number of answers = #{item.max_answers.to_s}, but only #{item.item_values.count} alternatives. Survey can't be active.")
+      self.questions.each do |question|
+        if question.invalid_max_answers?
+          errors.add_to_base("#{question.info} has maximum number of answers = #{question.max_answers.to_s}, but only #{question.item_values.count} alternatives. Survey can't be active.")
         end
       end
     end 

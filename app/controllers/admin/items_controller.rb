@@ -9,8 +9,22 @@ class Admin::ItemsController < ResourceController::Base
     @item_type = params[:item_type].nil? ? "question" : params[:item_type]
   end
 
-  create.before do
+  def create
     @research.reorder_items(params[:item][:position].to_i)
+   
+    params[:item_type] == "question" ? @item = Question.new(params[:item]) : @item = Section.new(params[:item])
+    @item.research_id = params[:research_id].to_i
+     
+    if request.post? and @item.save
+      redirect_to admin_research_item_path(@research, @item) 
+    else
+      #TODO Render an action
+      render :text => "error"
+    end
+  end
+
+  edit.before do
+    @item_type = params[:item_type].nil? ? "question" : params[:item_type]
   end
 
   update.before do
