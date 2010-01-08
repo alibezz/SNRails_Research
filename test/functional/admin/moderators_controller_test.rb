@@ -11,8 +11,8 @@ class ModeratorsControllerTest < Test::Unit::TestCase
     @controller = Admin::ModeratorsController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
-    env = Environment.new
-    Environment.expects(:default).returns(env)
+    @environment = Environment.create(:is_default => true)
+#    Environment.expects(:default).returns(env)
     login_as :quentin
   end
 

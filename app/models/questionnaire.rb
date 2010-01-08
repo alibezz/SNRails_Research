@@ -3,12 +3,16 @@ class Questionnaire < ActiveRecord::Base
   belongs_to :research
 
   def prepare_to_save(answers, research_id)
-    self.validate_obligatory_questions(answers, research_id)
-    if self.errors.empty?
-      self.save #Now, it has an ID to proper associations
-      self.research_id = research_id
-      self.associate(answers); self.incomplete = false
-      true
+    unless answers.nil? 
+      self.validate_obligatory_questions(answers, research_id)
+      if self.errors.empty?
+        self.save #Now, it has an ID to proper associations
+        self.research_id = research_id
+        self.associate(answers); self.incomplete = false
+        true
+      else
+        false
+      end
     else
       false
     end
@@ -16,19 +20,20 @@ class Questionnaire < ActiveRecord::Base
 
   def associate(new_answers)
     new_answers.keys.each do |item_id|
-     unless Item.find(item_id.to_i).is_text?
+      unless Item.find(item_id.to_i).is_text?
         new_answers[item_id].each do |item_value_id|
           self.associate_new_ivalue(item_id.to_i, item_value_id.to_i)
         end
       else
-	self.associate_new_text(item_id.to_i, new_answers[item_id]["info"])      
+        self.associate_new_text(item_id.to_i, new_answers[item_id]["info"])      
       end
     end
   end      
 
   def validate_obligatory_questions(answers, research_id)
-    #Get obligatory items from research
-    obligatory = Research.find(research_id).items.find_all { |item| item.is_optional == false }
+    #Get obligatory questions from research
+    obligatory = Research.find(research_id).questions.find_all { |question| question.is_optional == false }
+
     obligatory.each do |oblig_question|
       #Check if an answer to every obligatory question was passed
       #TODO Check if a valid answer is passed.

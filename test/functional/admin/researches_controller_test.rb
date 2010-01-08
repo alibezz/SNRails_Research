@@ -11,8 +11,8 @@ class ResearchesControllerTest < Test::Unit::TestCase
     @controller = Admin::ResearchesController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
-    env = Environment.new
-    Environment.expects(:default).returns(env)
+    @environment = Environment.create(:is_default => true)
+   # Environment.expects(:default).returns(env)
     login_as :quentin
 
   end
@@ -31,8 +31,7 @@ class ResearchesControllerTest < Test::Unit::TestCase
     get :index
     assert_tag :tag => 'a', :attributes => { :href => new_admin_research_url }
     assert_tag :tag => "ul", :descendant => { :tag => "li" }
-    assert_tag :tag => 'a', :attributes => { :href => admin_research_url(r.id) }
-    assert_tag :tag => 'a', :attributes => { :href => edit_admin_research_url(r.id) }
+    assert_tag :tag => 'a', :attributes => { :href => admin_research_url(r) }
   end
 
   def test_index_should_not_show_links

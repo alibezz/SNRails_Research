@@ -6,7 +6,7 @@ class CreateItems < ActiveRecord::Migration
       t.references :research
       t.integer :page_id, :default => 1
       t.integer :position
-      t.boolean :is_optional
+      t.boolean :is_optional, :default => false
       t.integer :min_answers, :default => 0
       t.integer :max_answers, :default => 0
       t.timestamps

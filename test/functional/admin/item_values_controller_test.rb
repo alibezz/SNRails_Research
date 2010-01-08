@@ -11,7 +11,7 @@ class ItemValuesControllerTest < Test::Unit::TestCase
     @controller = Admin::ItemValuesController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
-    env = Environment.create(:is_default => true)
+    @environment = Environment.create(:is_default => true)
 #    Environment.expects(:default).returns(env)
     login_as :quentin
     @research = create_research
@@ -51,21 +51,20 @@ class ItemValuesControllerTest < Test::Unit::TestCase
 
   def test_new_should_have_back_link
     get :new, :question_id => @item.id 
-    assert_tag :tag => 'a', :attributes => { :href => 
-						admin_research_question_item_values_url(@item.research_id, @item.id) }
+    assert_tag :tag => 'a', :attributes => { :href => admin_research_question_item_values_url(@item.research_id, @item.id) }
   end
 
 #show
 
  def test_should_get_show
-    ivalue = create_item_value(:item_id => @item.id)
+    ivalue = create_item_value(:info => "info", :item_id => @item.id)
     get :show, :question_id => @item.id, :id => ivalue.id
     assert_response :success
     assert_template 'show'
   end
 
   def test_should_show_links
-    ivalue = create_item_value(:question_id => @item.id)
+    ivalue = create_item_value(:info => "info", :item_id => @item.id)
     get :show, :question_id => @item.id, :id => ivalue.id
     assert_tag :tag => 'a', :attributes => { :href => edit_admin_item_item_value_url(ivalue.item_id, ivalue.id) }
     assert_tag :tag => 'a', :attributes => { :href => 
@@ -75,24 +74,23 @@ class ItemValuesControllerTest < Test::Unit::TestCase
 #edit
 
   def test_should_get_edit
-    ivalue = create_item_value(:question_id => @item.id)
+    ivalue = create_item_value(:info => "info", :item_id => @item.id)
     get :edit, :question_id => @item.id, :id => ivalue.id
     assert_response :success
     assert_template 'edit'
-
   end
 
   def test_edit_should_have_form
-    ivalue = create_item_value(:question_id => @item.id)
+    ivalue = create_item_value(:info => "info", :item_id => @item.id)
     get :edit, :question_id => @item.id, :id => ivalue.id
-    assert_tag :tag => 'form', :attributes => { :action =>                                                                                                                             admin_item_item_value_url(ivalue.item_id, ivalue.id),                                                                      :method => 'post' }  
+    assert_tag :tag => 'form', :attributes => { :action =>                                                                                                                             admin_question_item_value_url(ivalue.item_id, ivalue.id), :method => 'post' }  
   end
 
   def test_edit_should_show_links
-    ivalue = create_item_value(:question_id => @item.id)
+    ivalue = create_item_value(:info => "info", :item_id => @item.id)
     get :edit, :question_id => @item.id, :id => ivalue.id
-    assert_tag :tag => 'form', :attributes => {:action => admin_item_item_value_url(ivalue.item_id, ivalue.id),  :method => 'post' }  
+    assert_tag :tag => 'form', :attributes => {:action => admin_question_item_value_url(ivalue.item_id, ivalue.id),  :method => 'post' }  
     assert_tag :tag => 'a', :attributes => { :href => 
-						admin_research_item_item_values_url(@item.research_id, @item.id) }
+						admin_research_question_item_values_url(@item.research_id, @item.id) }
   end
 end

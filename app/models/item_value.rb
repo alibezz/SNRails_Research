@@ -1,6 +1,6 @@
 class ItemValue < ActiveRecord::Base
 
-  validates_presence_of:item_id, :position
+  validates_presence_of :item_id, :position
   
   validate do |b|
     b.has_info?

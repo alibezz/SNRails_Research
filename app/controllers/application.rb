@@ -49,7 +49,6 @@ class ApplicationController < ActionController::Base
   #FIXME make this test
   def load_item_values_position
     @positions = {}; @positions.merge!({"t(:in_the_beginning)" + "\n" => 1})
-
     unless @item.item_values.empty?
       @item.item_values.each { |ivalue| @positions.merge!({"t(:after)" + ivalue.info + "\n" => ivalue.position + 1}) }
     end
