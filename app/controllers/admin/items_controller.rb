@@ -18,8 +18,8 @@ class Admin::ItemsController < ResourceController::Base
     if request.post? and @item.save
       redirect_to admin_research_item_path(@research, @item) 
     else
-      #TODO Render an action
-      render :text => "error"
+      #TODO: error message
+      redirect_to :action => "new"
     end
   end
 
