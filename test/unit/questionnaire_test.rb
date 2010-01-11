@@ -4,46 +4,52 @@ class QuestionnaireTest < Test::Unit::TestCase
   
   def setup
     @research = create_research
-  
-    @i1 = create_item(:type => "question", :research_id => @research.id, :info => "q1", :is_optional => false) #obligatory
-    @ivalue1 = create_item_value(:item_id => @i1.id)
- 
-    @i2 = create_item(:type => "question", :research_id => @research.id, :info => "q2", :is_optional => false) #obligatory
-    @ivalue2 = create_item_value(:item_id => @i2.id)
 
-    @i3 = create_item(:type => "question", :research_id => @research.id, :info => "q3", :is_optional => true)
+    @i1 = create_item(:type => 'Question', :research_id => @research.id, :info => "q1", :is_optional => false,                                     :html_type => Question.html_types.invert["single_selection"])
+    @ivalue1 = create_item_value(:item_id => @i1.id)
+    @i1.reload; @i1.save 
+
+ 
+    @i2 = create_item(:type => 'Question', :research_id => @research.id, :info => "q2", :is_optional => false,                                     :html_type => Question.html_types.invert["single_selection"])
+    @ivalue2 = create_item_value(:item_id => @i2.id)
+    @i2.reload; @i2.save 
+
+
+    @i3 = create_item(:type => 'Question', :research_id => @research.id, :info => "q3", :is_optional => true,                                     :html_type => Question.html_types.invert["single_selection"])
     @ivalue3 = create_item_value(:item_id => @i3.id)
     @ivalue4 = create_item_value(:item_id => @i3.id)
-    
-    @i1.reload; @i2.reload; @i3.reload; @research.reload
+    @i3.reload; @i3.save 
+    @research.reload
     
   end
 
   def test_validate_obligatory_questions
+    obligatory = @research.questions.find_all { |q| q.is_optional == false}
     quest = Questionnaire.new
-    quest.validate_obligatory_questions({}, @research.id)
+    quest.validate_obligatory_questions(obligatory, {})
     assert_equal 2, quest.errors.length
 
     quest2 = Questionnaire.new
-    quest2.validate_obligatory_questions({@i1.id.to_s => @ivalue1.id.to_s}, @research.id)
+    quest2.validate_obligatory_questions(obligatory, {@i1.id.to_s => @ivalue1.id.to_s})
     assert_equal 1, quest2.errors.length
 
     quest3 = Questionnaire.new
-    quest3.validate_obligatory_questions({@i1.id.to_s => @ivalue1.id.to_s, @i2.id.to_s => @ivalue2.id.to_s}, @research.id)
+    quest3.validate_obligatory_questions(obligatory, {@i1.id.to_s => @ivalue1.id.to_s, @i2.id.to_s => @ivalue2.id.to_s})
     assert_equal 0, quest3.errors.length
 
     quest4 = Questionnaire.new
-    quest4.validate_obligatory_questions({@i1.id.to_s => @ivalue1.id.to_s, @i2.id.to_s => @ivalue2.id.to_s, @i3.id.to_s => @ivalue3.id.to_s}, @research.id)
+    quest4.validate_obligatory_questions(obligatory, {@i1.id.to_s => @ivalue1.id.to_s, @i2.id.to_s => @ivalue2.id.to_s, @i3.id.to_s => @ivalue3.id.to_s})
     assert_equal 0, quest4.errors.length
 
   end
  
   def test_associate_answers
+    @i1.html_type = Question.html_types.invert["pure_text"]
+    @i3.html_type = Question.html_types.invert["multiple_selection"]
+    @i2.html_type = Question.html_types.invert["single_selection"]
 
-    @i3.html_type = 0 #multiple selection
-    @i2.html_type = 1 #single selection
-
-    @i2.save; @i3.save; @i2.reload; @i3.reload
+    @i1.save; @i2.save; @i3.save
+    @i1.reload; @i2.reload; @i3.reload
 
     quest = create_questionnaire(:research_id => @research.id)
     assert_equal 0, quest.object_item_values.count

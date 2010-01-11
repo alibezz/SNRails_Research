@@ -90,7 +90,7 @@ class QuestionTest < Test::Unit::TestCase
     assert item.save
   end
 
-  def test_define_answers_quantity
+   def test_define_answers_quantity
     # :html_type => 1 is equivalent to single selection
     item = create_item(:type => 'Question', :research_id => @research.id, :html_type => 1)
 
@@ -113,6 +113,26 @@ class QuestionTest < Test::Unit::TestCase
     create_item_value(:item_id => item.id)
     item.reload
     assert_equal false, item.invalid_max_answers?
+  end
+
+  def test_validate_answers
+    # :html_type => 1 is equivalent to single selection
+    question = create_item(:type => 'Question', :research_id => @research.id,                                                                           :html_type => Question.html_types.invert["single_selection"])
+    create_item_value(:item_id => question.id)
+    question.reload; question.save
+
+    assert_equal false, question.validate_answers({question.id.to_s =>  ["1", "2"]}) #more than one answer
+    assert_equal false, question.validate_answers({question.id.to_s =>  []}) #less than one answer
+    assert_equal false, question.validate_answers({}) #no keys
+    assert_equal true, question.validate_answers({question.id.to_s => "1"}) #one answer
+    
+    text_question = create_item(:type => 'Question', :research_id => @research.id,                                                                           :html_type => Question.html_types.invert["pure_text"])
+  
+    assert_equal false, text_question.validate_answers({text_question.id.to_s => {"info" => nil}}) #no answer
+    assert_equal false, text_question.validate_answers({text_question.id.to_s => {"info" => ""}}) #no answer
+    assert_equal false, text_question.validate_answers({text_question.id.to_s => {"info" => "        "}}) #no answer
+    assert_equal true, text_question.validate_answers({text_question.id.to_s => {"info" => "    info    "}}) #answer
+
   end
 
 end

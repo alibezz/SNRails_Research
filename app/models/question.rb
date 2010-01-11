@@ -55,7 +55,30 @@ class Question < Item
     self.max_answers > self.item_values.count
   end
 
-private
+
+  def validate_answers(answers)
+    if answers.has_key?(self.id.to_s)
+      if self.is_text?
+        valid = self.validate_text_content(answers[self.id.to_s]["info"])
+      else
+        valid = self.validate_alternatives(answers[self.id.to_s])
+      end
+      valid
+    else
+      false
+    end
+  end
+
+protected
+
+  def validate_text_content(text_answer)
+    not text_answer.nil? and not text_answer.gsub(/[" "]/, "").empty?
+  end
+
+  def validate_alternatives(alternatives)
+    alternatives = [alternatives] if alternatives.kind_of?(String)
+    alternatives.count <= self.max_answers and alternatives.count >= self.min_answers
+  end 
 
   def define_answers_quantity
     #Types that accept only one answer, or no answers if there are no alternatives
