@@ -29,3 +29,6 @@
 [submodule "vendor/plugins/access_control"]
 	path = vendor/plugins/access_control
 	url = gitosis@projects.safernet.org.br:access_control
+[submodule "vendor/plugins/i18n_parser"]
+	path = vendor/plugins/i18n_parser
+	url = gitosis@projects.safernet.org.br:i18n_parser.git

@@ -52,6 +52,9 @@ Rails::Initializer.run do |config|
     :secret      => '11a89cf2cd622b055cae084698028aee23affc1c32e4312498da7b15a3d93a79535863cc795e81abd95dc6d2ae6f37bdc96043b74e8114e088b2409b610335c4'
   }
 
+  config.i18n.default_locale = 'en'
+  config.i18n.load_path = Dir[File.join(RAILS_ROOT, 'lang', '*.{rb,yml}'), File.join(RAILS_ROOT, 'vendor', 'plugins', '*','lang', '*.{rb,yml}')]
+
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
   # (create the session table with "rake db:sessions:create")
@@ -65,3 +68,5 @@ Rails::Initializer.run do |config|
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
 end
+
+I18nParserConfig.locales= ['en','pt-br'] # I18nParser plugin stuff
