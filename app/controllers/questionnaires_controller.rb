@@ -27,7 +27,7 @@ class QuestionnairesController < ResourceController::Base
     @questionnaire = Questionnaire.new
     if @questionnaire.prepare_to_save(flash[:answers], params[:research_id].to_i)
      if @questionnaire.save
-        flash[:notice] = t(:questionnaire_succesfully_saved)
+        flash[:notice] = t(:succesfully_saved)
         redirect_to research_url(params[:research_id].to_i)
       else
         render :action => 'new'
