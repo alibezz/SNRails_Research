@@ -25,13 +25,17 @@ namespace :db do
 
      Research.populate 20 do |research|
        research.title = Populator.words(1..4).titleize
+       research.design_data = {:template => 'default', :theme => 'default', :icon_theme => 'default'}
        research.subtitle = Populator.words(1.7).titleize
        research.introduction = Populator.sentences(2..10)
        research.is_private = [true, false]
        research.number_of_pages = 1..9
+       count = 0 
        Item.populate 5 do |item|
+         count += 1
          item.info = Populator.words(5)
          item.research_id = research.id
+         item.position = count
          item.page_id = 1..research.number_of_pages
          item.type = ['Question', 'Section']
          #item.type = 'Item'
@@ -53,7 +57,7 @@ namespace :db do
 
 
   def erase
-     [Research, User, Permission, Item, ObjectItemValue, Questionnaire].each(&:delete_all)
+     [Environment, Research, User, Permission, Item, ObjectItemValue, Questionnaire].each(&:delete_all)
   end
 
 
