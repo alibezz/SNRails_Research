@@ -1,12 +1,23 @@
 
 namespace :db do 
+
+  desc 'Erase database'
+  task :erase => :environment  do
+    erase
+  end
+
   desc 'Erase and fill database'
   task :populate => :environment  do
      require 'populator'
-     [Research, User, Permission, Item, Answer].each(&:delete_all)
-     
+
+     erase
+    
+    env = Environment.new(:is_default => true)
+    env.design_data = {:template => 'default', :theme => 'default', :icon_theme => 'default'}
+    env.save!
+ 
      User.populate 1 do |user|
-       user.login = 'admin'
+     user.login = 'admin'
        user.is_administrator = true
        user.crypted_password = '44d5d03bfe8570fbfaa630a3520b33724c397ea9' #encriptation for 123456 password
        user.email = 'admin@localhost'
@@ -26,10 +37,6 @@ namespace :db do
          #item.type = 'Item'
          if item.type == 'Question'
          #if item.type == 'Item'
-           Answer.populate 4 do |answer|
-             answer.info = Populator.words(2)
-             answer.item_id = item.id
-           end
          end
        end
        User.populate 8 do |user|
@@ -42,6 +49,12 @@ namespace :db do
          end
        end
      end
-
   end
+
+
+  def erase
+     [Research, User, Permission, Item, ObjectItemValue, Questionnaire].each(&:delete_all)
+  end
+
+
 end
