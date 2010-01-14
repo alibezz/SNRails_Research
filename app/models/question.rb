@@ -83,7 +83,7 @@ protected
   def define_answers_quantity
     #Types that accept only one answer, or no answers if there are no alternatives
     if self.html != "checkbox" and self.html != "multiple_selection"
-      self.min_answers = self.item_values.empty? ? 0 : 1
+      self.min_answers = self.is_text? ? 0 : 1
       self.max_answers = self.min_answers
     end
   end

@@ -16,7 +16,7 @@ class QuestionnairesControllerTest < Test::Unit::TestCase
     @question2 = create_item(:type => "question", :research_id => @research.id, :html_type => Question.html_types.invert["single_selection"], :page_id => 2, :is_optional => false)
     @ivalue1 = create_item_value(:item_id => @question2.id, :info => "info")
     @ivalue2 = create_item_value(:item_id => @question2.id, :info => "info2")
-    @research.reload; @question1.reload; @question2.reload
+    @research.reload; @question2.reload
   end
 
 #new
@@ -26,10 +26,10 @@ class QuestionnairesControllerTest < Test::Unit::TestCase
     assert_response :success
     #page_id == 1, because it's the first page 
     assert_tag :tag => 'form', :attributes => {:action => "/researches/#{@research.id}/questionnaires/new?page_id=1", :method => 'post'}
-    assert_tag :tag => "input", :attributes => {:type => "submit", :value => /next/}
+    assert_tag :tag => "input", :attributes => {:type => "submit", :value => /Next/}
 
 
-    post :new, :research_id => @research.id, :commit => "<span class=\"translation_missing\">en, next</span>",                        :page_id => 1
+    post :new, :research_id => @research.id, :commit => "Next", :page_id => 1
     assert_response :success
     assert_tag :tag => 'form', :attributes => {:action => "/researches/#{@research.id}/questionnaires/new?page_id=2", :method => 'post'}
     
@@ -40,13 +40,13 @@ class QuestionnairesControllerTest < Test::Unit::TestCase
      
     # Some questions weren't answered.
      
-     post :new, :research_id => @research.id, :commit => "<span class=\"translation_missing\">en, submit</span>",                      :page_id => 2, :object_item_values => {}
+     post :new, :research_id => @research.id, :commit => "Submit", :page_id => 2, :object_item_values => {}
 
      assert_equal count, Questionnaire.count
 
      # All questions were answered. 
 
-     post :new, :research_id => @research.id, :commit => "<span class=\"translation_missing\">en, submit</span>",                      :page_id => 2, :object_item_values => {@question1.id.to_s => {:info => "test"},                                                                                     @question2.id.to_s => @ivalue1.id.to_s}
+     post :new, :research_id => @research.id, :commit => "Submit",                                                                           :page_id => 2, :object_item_values => {@question1.id.to_s => {:info => "test"},                                                                                     @question2.id.to_s => @ivalue1.id.to_s}
     
      assert_equal count + 1, Questionnaire.count
 

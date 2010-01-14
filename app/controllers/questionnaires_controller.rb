@@ -24,6 +24,7 @@ class QuestionnairesController < ResourceController::Base
   end
 
   def create
+    require 'pp'
     @questionnaire = Questionnaire.new
     if @questionnaire.prepare_to_save(flash[:answers], params[:research_id].to_i)
      if @questionnaire.save

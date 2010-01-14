@@ -91,8 +91,7 @@ class QuestionTest < Test::Unit::TestCase
   end
 
    def test_define_answers_quantity
-    # :html_type => 1 is equivalent to single selection
-    item = create_item(:type => 'Question', :research_id => @research.id, :html_type => 1)
+    item = create_item(:type => 'Question', :research_id => @research.id,                                                                           :html_type => Question.html_types.invert["single_selection"])
 
     create_item_value(:item_id => item.id)
     item.reload; item.save
@@ -102,6 +101,10 @@ class QuestionTest < Test::Unit::TestCase
     item.max_answers = 2; item.min_answers = 1; item.save; item.reload
     assert_equal 1, item.max_answers
     assert_equal 1, item.min_answers #No matter what you set, it will be (min=1,max=1) because it's a single selection.
+
+    item2 = create_item(:type => 'Question', :research_id => @research.id,                                                                           :html_type => Question.html_types.invert["pure_text"])
+    assert_equal 0, item2.max_answers
+    assert_equal 0, item2.min_answers
   end
 
   def test_invalid_max_answers
