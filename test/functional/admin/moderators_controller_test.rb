@@ -62,18 +62,25 @@ class ModeratorsControllerTest < Test::Unit::TestCase
     assert_tag :tag => 'form', :attributes => { :method => 'post' }    
   end
 
+  def test_new_should_show_all_users
+    get :new, :research_id => @research.id
+    assert_response :success
+    assert assigns(:gusers)
+    assert_equal User.count, assigns(:gusers).count
+  end
+
 #update
 
   def test_should_update_moderators_properly
     user1 = create_user(:login => 'user1')
     user2 = create_user(:login => 'user2')
-    user3 = create_user(:login => 'user3')
     
     assert_equal 0, @research.moderator_permissions.count
     post :update, :moderator_ids => [user1.id.to_s, user2.id.to_s], :research_id => @research.id
-    
+    assert_response :redirect
+    assert_redirected_to :action => "index" 
+  
     @research.reload 
-
     assert_equal 2, @research.moderator_permissions.length
   end
 end
