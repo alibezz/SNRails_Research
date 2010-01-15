@@ -65,9 +65,9 @@ class ItemValuesControllerTest < Test::Unit::TestCase
 
   def test_should_show_links
     get :show, :question_id => @item.id, :id => @ivalue.id
-    assert_tag :tag => 'a', :attributes => { :href => edit_admin_item_item_value_url(@ivalue.item_id, @ivalue.id) }
+    assert_tag :tag => 'a', :attributes => { :href => edit_admin_question_item_value_url(@ivalue.item_id, @ivalue.id) }
     assert_tag :tag => 'a', :attributes => { :href => 
-						admin_research_item_item_values_url(@item.research_id, @item.id) }
+						admin_research_question_item_values_url(@item.research_id, @item.id) }
   end
 
 #edit

@@ -12,7 +12,7 @@ class ResearchesControllerTest < Test::Unit::TestCase
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
     @environment = Environment.create(:is_default => true)
-   # Environment.expects(:default).returns(env)
+    #Environment.expects(:default).returns(@environment)
     login_as :quentin
 
   end

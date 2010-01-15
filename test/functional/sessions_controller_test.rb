@@ -11,8 +11,14 @@ class SessionsControllerTest < ActionController::TestCase
 
   fixtures :users
 
+  def setup
+    @environment = Environment.create(:is_default => true)
+  #  Environment.expects(:default).returns(@environment)
+  end
+
   def test_should_login_and_redirect
-    post :create, :login => 'quentin', :password => 'monkey'
+    user = create_user
+    post :create, :login => user.login, :password => user.password
     assert session[:user_id]
     assert_response :redirect
   end
