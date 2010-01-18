@@ -47,7 +47,7 @@ class Question < Item
 
   def min_before_max_answers
     if self.min_answers > self.max_answers
-      errors.add_to_base("The minimum quantity of expected answers must be smaller than the maximum quantity of expected answers.")
+      errors.add_to_base("#{t(:minimum_quantity_answers_must_be_smaller_than_maximum_expected)}")
     end
   end
 

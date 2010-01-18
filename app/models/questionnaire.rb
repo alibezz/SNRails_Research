@@ -39,8 +39,12 @@ class Questionnaire < ActiveRecord::Base
 
   def validate_answers(questions, answers)
     questions.each do |question|
-      unless question.validate_answers(answers) 
-        errors.add_to_base("Number of answers to question #{question.info} must be between                                                               #{question.min_answers.to_s} and #{question.max_answers.to_s}.")
+      unless question.validate_answers(answers)
+        if question.is_text?
+          errors.add_to_base("#{question.info} #{t(:must_be_answered)}")
+        else 
+          errors.add_to_base("#{t(:number_of_answers_to)} #{question.info} #{t(:must_be_between)}                                                               #{question.min_answers.to_s} #{t(:and)} #{question.max_answers.to_s}")
+        end
       end
     end
   end
@@ -48,7 +52,7 @@ class Questionnaire < ActiveRecord::Base
   def validate_obligatory_questions(obligatory, answers)
     obligatory.each do |question|
       unless answers.has_key?(question.id.to_s) 
-        errors.add_to_base("Question #{question.info} is obligatory.")
+        errors.add_to_base("#{t(:question)} #{question.info} #{t(:is_obligatory)}")
       end
     end
   end

@@ -11,7 +11,6 @@ class Admin::ItemsController < ResourceController::Base
 
   def create
     @research.reorder_items(params[:item][:position].to_i)
-   
     params[:item_type] == "question" ? @item = Question.new(params[:item]) : @item = Section.new(params[:item])
     @item.research_id = params[:research_id].to_i
      
