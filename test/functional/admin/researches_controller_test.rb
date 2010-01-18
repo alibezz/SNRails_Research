@@ -11,7 +11,8 @@ class ResearchesControllerTest < Test::Unit::TestCase
     @controller = Admin::ResearchesController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
-    @environment = Environment.create(:is_default => true)
+    #Environment.delete_all
+    @environment = create_environment(:is_default => true)
     #Environment.expects(:default).returns(@environment)
     login_as :quentin
 
@@ -20,27 +21,12 @@ class ResearchesControllerTest < Test::Unit::TestCase
 #index
 
   def test_should_get_index
+    Research.delete_all
+    env = create_environment(:is_default => true)
+
     get :index
     assert_response :success
     assert assigns(:researches)
-  end
-
-  def test_index_should_show_links
-    r = create_research
-
-    get :index
-    assert_tag :tag => 'a', :attributes => { :href => new_admin_research_url }
-    assert_tag :tag => "ul", :descendant => { :tag => "li" }
-    assert_tag :tag => 'a', :attributes => { :href => admin_research_url(r) }
-  end
-
-  def test_index_should_not_show_links
-    r = create_research
-    Research.destroy_all
-
-    get :index
-    assert_no_tag :tag => 'a', :attributes => { :href => admin_research_url(r.id) }
-    assert_no_tag :tag => 'a', :attributes => { :href => edit_admin_research_url(r.id) }
   end
 
 #show
@@ -121,5 +107,4 @@ class ResearchesControllerTest < Test::Unit::TestCase
     post :create, :research => {:title => 'new title', :introduction => 'new introduction', :subtitle => 'new subtitle'}
     assert_equal count + 1, Research.count
   end
-
 end

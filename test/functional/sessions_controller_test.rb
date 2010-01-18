@@ -12,7 +12,7 @@ class SessionsControllerTest < ActionController::TestCase
   fixtures :users
 
   def setup
-    @environment = Environment.create(:is_default => true)
+    @environment = create_environment(:is_default => true)
   #  Environment.expects(:default).returns(@environment)
   end
 

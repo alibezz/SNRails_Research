@@ -12,7 +12,7 @@ class UsersControllerTest < ActionController::TestCase
   fixtures :users
 
   def setup
-    @environment = Environment.create(:is_default => true)
+    @environment = create_environment(:is_default => true)
   end
 
   def test_should_allow_signup

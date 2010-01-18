@@ -74,14 +74,15 @@ class Test::Unit::TestCase
   end
 
   def create_environment(params = {})
-    Environment.create(environment_params(params))
+    @environment = Environment.new({ :is_default => false,
+                                     :design_data => {
+                                       :template => "default",
+                                       :theme => "default",
+                                       :icon_theme => "default" }}.merge(params))
+    @environment.save!
+    @environment
   end
   
-  def environment_params(params = {})
-    {
-    }.merge(params)
-  end
-
   def create_user(params = {})
     User.create!(user_params(params))
   end

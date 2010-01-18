@@ -11,7 +11,7 @@ class ItemsControllerTest < Test::Unit::TestCase
     @controller = Admin::ItemsController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
-    env = Environment.new
+    @environment = create_environment(:is_default => true)
 #    Environment.expects(:default).returns(env)
     login_as :quentin
   end

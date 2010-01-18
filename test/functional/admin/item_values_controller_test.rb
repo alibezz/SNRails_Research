@@ -12,7 +12,7 @@ class ItemValuesControllerTest < Test::Unit::TestCase
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
     @environment = Environment.create(:is_default => true)
-    Environment.expects(:default).returns(@environment)
+#    Environment.expects(:default).returns(@environment)
     login_as :quentin
     @research = create_research
     @item = create_item(:research_id => @research.id, :type => "question", :html_type => Question.html_types.invert["single_selection"])

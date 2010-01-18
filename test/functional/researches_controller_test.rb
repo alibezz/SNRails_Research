@@ -12,8 +12,8 @@ class ResearchesControllerTest < Test::Unit::TestCase
     @controller = ResearchesController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
-    env = Environment.new
-    Environment.expects(:default).returns(env)
+    @environment = create_environment(:is_default => true)
+    #Environment.expects(:default).returns(env)
   end
 
 #index

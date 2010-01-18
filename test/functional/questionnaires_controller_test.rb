@@ -10,6 +10,8 @@ class QuestionnairesControllerTest < Test::Unit::TestCase
     @controller = QuestionnairesController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
+    @environment = create_environment(:is_default => true)
+
     @research = create_research
     @section1 = create_item(:type => "section", :research_id => @research.id, :page_id => 1)
     @question1 = create_item(:type => "question", :research_id => @research.id, :html_type => Question.html_types.invert["pure_text"], :page_id => 1, :is_optional => false)
