@@ -4,32 +4,21 @@ require 'admin/researches_controller'
 # Re-raise errors caught by the controller.
 class Admin::ResearchesController; def rescue_action(e) raise e end; end
 
-class ResearchesControllerTest < Test::Unit::TestCase
+class Admin::ResearchesControllerTest < ActionController::TestCase
+
   fixtures :users
 
   def setup
-    @controller = Admin::ResearchesController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
-    #Environment.delete_all
     @environment = create_environment(:is_default => true)
-    #Environment.expects(:default).returns(@environment)
     login_as :quentin
-
   end
 
-#index
-
   def test_should_get_index
-    Research.delete_all
     env = create_environment(:is_default => true)
-
     get :index
     assert_response :success
     assert assigns(:researches)
   end
-
-#show
 
   def test_should_show_research
     r = create_research
@@ -46,8 +35,6 @@ class ResearchesControllerTest < Test::Unit::TestCase
     assert_tag :tag => 'a', :attributes => { :href => admin_research_moderators_url(r.id) }
     assert_tag :tag => 'a', :attributes => { :href => admin_research_items_url(r.id) }
   end
-
-#edit
 
   def test_should_edit_research
     r = create_research
@@ -67,8 +54,6 @@ class ResearchesControllerTest < Test::Unit::TestCase
     assert_tag :tag => 'a', :attributes => { :href => admin_research_url(r.id) }
   end
 
-#update
-
   def test_should_change_fields
     research = create_research
     post :update, :id => research.id, :research => {:title => 'new title', :introduction => 'new introduction', :subtitle => 'new subtitle'}
@@ -79,9 +64,6 @@ class ResearchesControllerTest < Test::Unit::TestCase
   end
 
 #FIXME Action moderators must be better understood 
-
-
-#new
 
   def test_should_show_new
     get :new
@@ -98,9 +80,6 @@ class ResearchesControllerTest < Test::Unit::TestCase
     get :edit, :id => r.id
     assert_tag :tag => 'a', :attributes => { :href => admin_research_url(r.id) }
   end
-
-
-#create
 
   def test_should_create_research
     count = Research.count

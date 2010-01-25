@@ -4,19 +4,13 @@ require 'researches_controller'
 # Re-raise errors caught by the controller.
 class ResearchesController; def rescue_action(e) raise e end; end
 
-class ResearchesControllerTest < Test::Unit::TestCase
+class ResearchesControllerTest < ActionController::TestCase
 
   fixtures :users
 
   def setup
-    @controller = ResearchesController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
     @environment = create_environment(:is_default => true)
-    #Environment.expects(:default).returns(env)
   end
-
-#index
 
   def test_should_get_index
     get :index
@@ -26,7 +20,7 @@ class ResearchesControllerTest < Test::Unit::TestCase
 
   def test_index_should_not_show_inactive_researches
     #Inactive researches
-    r1 = create_research
+    r1 = create_research(:is_active => false)
 
     get :index
     assert_response :success

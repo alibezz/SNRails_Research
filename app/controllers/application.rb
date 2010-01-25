@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
   design :holder => 'environment' 
 
   def load_environment
+    self.class.design :holder => 'environment' 
     @environment = Environment.default
   end
 

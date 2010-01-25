@@ -8,10 +8,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resource :session
 
-  map.resources :researches, :has_many => :items
-
   map.resources :researches do |researches|
     researches.resources :questionnaires, :collection => { :new => :post }
+    researches.resources :items
   end
 
   # Route for admin research
@@ -28,16 +27,6 @@ ActionController::Routing::Routes.draw do |map|
     end
   
     admin.resources :questions, :controller => 'items', :has_many => :item_values
-
-#    admin.resources :researches, :has_many => :items 
-#    admin.resources :items, :has_many => :item_values
- 
-#   admin.resources :researches, :has_many => :questions do |question|
-#     question.resources :questions, :collection => {:reorder_questions => :post, :reorder_pages => :post, :set_question_to_page => :post}
-#     question.resources :questions, :questions, :has_many  => :item_values do |item_value|
-#       item_value.resources :item_values
-#     end
-#    end
 
     admin.resources :researches, :has_many => :moderators do |moderator|
       moderator.resources :moderators, :collection => { :attribute => :put }
