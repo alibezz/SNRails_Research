@@ -119,23 +119,52 @@ class QuestionTest < Test::Unit::TestCase
   end
 
   def test_validate_answers
-    # :html_type => 1 is equivalent to single selection
-    question = create_item(:type => 'Question', :research_id => @research.id,                                                                           :html_type => Question.html_types.invert["single_selection"])
-    create_item_value(:item_id => question.id)
-    question.reload; question.save
+    ob_question = create_item(:type => 'Question', :research_id => @research.id,                                                                           :html_type => Question.html_types.invert["single_selection"])
+    create_item_value(:item_id => ob_question.id)
+    ob_question.reload; ob_question.save
 
-    assert_equal false, question.validate_answers({question.id.to_s =>  ["1", "2"]}) #more than one answer
-    assert_equal false, question.validate_answers({question.id.to_s =>  []}) #less than one answer
-    assert_equal false, question.validate_answers({}) #no keys
-    assert_equal true, question.validate_answers({question.id.to_s => "1"}) #one answer
+    assert_equal false, ob_question.validate_answers(["1", "2"]) #more than one answer
+    assert_equal false, ob_question.validate_answers([]) #less than one answer
+    assert_equal false, ob_question.validate_answers(nil) #less than one answer
+    assert_equal true, ob_question.validate_answers("1") #one answer
     
+    op_question =  create_item(:type => 'Question', :research_id => @research.id, :is_optional => true,                                                                          :html_type => Question.html_types.invert["single_selection"])
+    create_item_value(:item_id => op_question.id)
+    op_question.reload; op_question.save
+
+    assert_equal false, op_question.validate_answers(["1", "2"]) #more than one answer
+    assert_equal true, op_question.validate_answers([]) #less than one answer
+    assert_equal true, op_question.validate_answers(nil) #less than one answer
+    assert_equal true, op_question.validate_answers("1") #one answer
+    
+
     text_question = create_item(:type => 'Question', :research_id => @research.id,                                                                           :html_type => Question.html_types.invert["pure_text"])
   
-    assert_equal false, text_question.validate_answers({text_question.id.to_s => {"info" => nil}}) #no answer
-    assert_equal false, text_question.validate_answers({text_question.id.to_s => {"info" => ""}}) #no answer
-    assert_equal false, text_question.validate_answers({text_question.id.to_s => {"info" => "        "}}) #no answer
-    assert_equal true, text_question.validate_answers({text_question.id.to_s => {"info" => "    info    "}}) #answer
+    assert_equal false, text_question.validate_answers({"info" => nil}) #no answer
+    assert_equal false, text_question.validate_answers({"info" => ""}) #no answer
+    assert_equal false, text_question.validate_answers({"info" => "        "}) #no answer
+    assert_equal true, text_question.validate_answers({"info" => "    info    "}) #answer
 
+    op_text_question = create_item(:type => 'Question', :research_id => @research.id, :is_optional => true,                                                                         :html_type => Question.html_types.invert["pure_text"])
+  
+    assert_equal true, op_text_question.validate_answers({"info" => nil}) #no answer
+    assert_equal true, op_text_question.validate_answers({"info" => ""}) #no answer
+    assert_equal true, op_text_question.validate_answers({"info" => "        "}) #no answer
+    assert_equal true, op_text_question.validate_answers({"info" => "    info    "}) #answer
   end
 
+  def test_validate_answers_presence
+    text_question = create_item(:type => 'Question', :research_id => @research.id)
+
+    assert_equal false, text_question.validate_answers_presence({"info" => ""})
+    assert_equal false, text_question.validate_answers_presence({})
+    assert_equal false, text_question.validate_answers_presence(nil)
+    assert_equal true, text_question.validate_answers_presence({"info" => "an answer"})
+
+    ss_question = create_item(:type => 'Question', :research_id => @research.id,                                                                           :html_type => Question.html_types.invert["single_selection"])
+    assert_equal false, ss_question.validate_answers_presence([])
+    assert_equal false, ss_question.validate_answers_presence(nil)
+    assert_equal false, ss_question.validate_answers_presence("")
+    assert_equal true, ss_question.validate_answers_presence("1")
+  end
 end

@@ -14,10 +14,10 @@ class QuestionnairesController < ResourceController::Base
     end 
 
     flash[:answers] ||= {}
+    #create a method called invalid? that evaluates the result
     flash[:answers] = flash[:answers].merge(params[:object_item_values]) unless params[:object_item_values].nil?
    
     @current_items = @research.questions.find_all { |i| i.page_id == @page }
-    
     if request.post? and /submit/i =~ params[:commit]
       create
     end 
@@ -36,4 +36,5 @@ class QuestionnairesController < ResourceController::Base
       render :action => 'new'
     end
   end
+
 end

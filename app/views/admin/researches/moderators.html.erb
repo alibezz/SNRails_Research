@@ -2,10 +2,10 @@
 
 <%= render :partial => 'research_options' %>
 
-<ul>
-  <li> <%#= link_to t(:add_new), associate_moderator_admin_research_path(@research)%> </li>
-</ul>
-
 <% @research.moderators.each do |user| %>
   <%= user.login %>
 <% end %>
+
+<ul>
+  <li><%= link_to session[:back] %></li>
+</ul>

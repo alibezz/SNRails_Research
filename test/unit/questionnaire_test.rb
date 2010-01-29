@@ -24,23 +24,29 @@ class QuestionnaireTest < Test::Unit::TestCase
   end
 
   def test_validate_obligatory_questions
+    @i1.html_type = Question.html_types.invert["pure_text"]
+    @i1.save; @i1.reload
+
     obligatory = @research.questions.find_all { |q| q.is_optional == false}
     quest = Questionnaire.new
     quest.validate_obligatory_questions(obligatory, {})
     assert_equal 2, quest.errors.length
 
     quest2 = Questionnaire.new
-    quest2.validate_obligatory_questions(obligatory, {@i1.id.to_s => @ivalue1.id.to_s})
+    quest2.validate_obligatory_questions(obligatory, {@i1.id.to_s => {"info" => "an info"}})
     assert_equal 1, quest2.errors.length
 
     quest3 = Questionnaire.new
-    quest3.validate_obligatory_questions(obligatory, {@i1.id.to_s => @ivalue1.id.to_s, @i2.id.to_s => @ivalue2.id.to_s})
+    quest3.validate_obligatory_questions(obligatory, {@i1.id.to_s =>  {"info" => "an info"}, @i2.id.to_s => @ivalue2.id.to_s})
     assert_equal 0, quest3.errors.length
 
     quest4 = Questionnaire.new
-    quest4.validate_obligatory_questions(obligatory, {@i1.id.to_s => @ivalue1.id.to_s, @i2.id.to_s => @ivalue2.id.to_s, @i3.id.to_s => @ivalue3.id.to_s})
+    quest4.validate_obligatory_questions(obligatory, {@i1.id.to_s => {"info" => "an info"}, @i2.id.to_s => @ivalue2.id.to_s, @i3.id.to_s => @ivalue3.id.to_s})
     assert_equal 0, quest4.errors.length
 
+    quest5 = Questionnaire.new
+    quest5.validate_obligatory_questions(obligatory, {@i1.id.to_s => {"info" => ""}, @i2.id.to_s => @ivalue2.id.to_s})
+    assert_equal 1, quest5.errors.length
   end
  
   def test_associate_answers
@@ -72,5 +78,16 @@ class QuestionnaireTest < Test::Unit::TestCase
     quest2 = Questionnaire.new    
     assert_equal false, quest2.prepare_to_save({@i1.id.to_s => @ivalue1.id.to_s, @i3.id.to_s => @ivalue3.id.to_s}, @research.id)
   end 
- 
+
+  def test_validate_questions
+    quest = create_questionnaire(:research_id => @research.id)
+    quest.validate_questions({}, @research.id)
+    quest.reload
+    assert_equal quest.errors.count, 1 
+    
+    quest2 = create_questionnaire(:research_id => @research.id)
+    quest2.validate_questions({@i1.id.to_s => @ivalue1.id.to_s, @i2.id.to_s => @ivalue2.id.to_s, @i3.id.to_s => @ivalue3.id.to_s}, @research.id)
+    quest2.reload
+    assert_equal quest2.errors.count, 0 
+  end 
 end

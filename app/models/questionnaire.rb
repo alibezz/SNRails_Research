@@ -2,17 +2,14 @@ class Questionnaire < ActiveRecord::Base
   has_many :object_item_values
   belongs_to :research
 
+  #FIXME This should be a transaction
   def prepare_to_save(answers, research_id)
-    unless answers.nil? 
-      self.validate_questions(answers, research_id)
-      if self.errors.empty?
-        self.save 
-        self.research_id = research_id
-        self.associate(answers); self.incomplete = false
-        true
-      else
-        false
-      end
+    self.validate_questions(answers, research_id)
+    if self.errors.empty?
+      self.save 
+      self.research_id = research_id
+      self.associate(answers); self.incomplete = false
+      true
     else
       false
     end
@@ -31,15 +28,19 @@ class Questionnaire < ActiveRecord::Base
   end      
 
   def validate_questions(answers, research_id)
-    questions = Research.find(research_id).questions
-    self.validate_answers(questions, answers)
-    obligatory = questions.find_all { |question| question.is_optional == false }
-    self.validate_obligatory_questions(obligatory, answers)
+    unless answers.blank?
+      questions = Research.find(research_id).questions
+      self.validate_answers(questions, answers)
+      obligatory = questions.find_all { |question| question.is_optional == false }
+      self.validate_obligatory_questions(obligatory, answers)
+    else
+      errors.add_to_base("#{t(:no_answers)}")
+    end
   end    
 
   def validate_answers(questions, answers)
     questions.each do |question|
-      unless question.validate_answers(answers)
+      unless question.validate_answers(answers[question.id.to_s])
         if question.is_text?
           errors.add_to_base("#{question.info} #{t(:must_be_answered)}")
         else 
@@ -51,7 +52,7 @@ class Questionnaire < ActiveRecord::Base
 
   def validate_obligatory_questions(obligatory, answers)
     obligatory.each do |question|
-      unless answers.has_key?(question.id.to_s) 
+      unless question.validate_answers_presence(answers[question.id.to_s]) 
         errors.add_to_base("#{t(:question)} #{question.info} #{t(:is_obligatory)}")
       end
     end
