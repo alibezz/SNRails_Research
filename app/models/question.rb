@@ -72,11 +72,8 @@ class Question < Item
 protected
 
   def validate_text_content(text_answer)
-    unless self.is_optional #if the question is optional, its content doesnt matter
-      not text_answer.blank?
-    else
-      true
-    end
+    return true if self.is_optional #if the question is optional, its content doesnt matter
+    not text_answer.blank?
   end
 
   def validate_alternatives(alternatives)

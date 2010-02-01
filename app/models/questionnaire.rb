@@ -5,14 +5,12 @@ class Questionnaire < ActiveRecord::Base
   #FIXME This should be a transaction
   def prepare_to_save(answers, research_id)
     self.validate_questions(answers, research_id)
-    if self.errors.empty?
-      self.save 
-      self.research_id = research_id
-      self.associate(answers); self.incomplete = false
-      true
-    else
-      false
-    end
+    return false unless self.errors.empty?
+    
+    self.save 
+    self.research_id = research_id
+    self.associate(answers); self.incomplete = false
+    true
   end
 
   def associate(new_answers)
