@@ -40,6 +40,7 @@ namespace :db do
          item.type = ['Question', 'Section']
          #item.type = 'Item'
          if item.type == 'Question'
+           item.max_answers = item.min_answers = 0
          #if item.type == 'Item'
          end
        end
