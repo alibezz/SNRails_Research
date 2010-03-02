@@ -10,7 +10,7 @@ class Admin::ItemsController < ResourceController::Base
   end
 
   def create
-    @research.reorder_items(params[:item][:position].to_i)
+    #@research.reorder_items(params[:item][:position].to_i)
     params[:item_type] == "question" ? @item = Question.new(params[:item]) : @item = Section.new(params[:item])
     @item.research_id = params[:research_id].to_i
      
@@ -26,12 +26,7 @@ class Admin::ItemsController < ResourceController::Base
     @item_type = params[:item_type].nil? ? "question" : params[:item_type]
   end
 
-  update.before do
-    @research.update_positions(params[:item][:position].to_i, Item.find(params[:id]).position)
-  end
 
-
-#FIXME Install ARTS to test methods below
   # Reorder the items definition according to user definition.
   def reorder_items
     @research ||= Research.find(params[:research_id]) #FIXME get the research by user
@@ -56,23 +51,24 @@ class Admin::ItemsController < ResourceController::Base
     end
   end
 
-  # Put the a item on a page.
-  def set_item_to_page
-    @research ||= Research.find(params[:research_id]) #FIXME put specific user
-    item = @research.items.find(params[:id].split("_").last)
-    @page_sent = params[:page_sent].split("_").last
-    item.page_id = @page_sent
-    item.save
-    collection
-    respond_to do |format|
-      format.js 
-    end
-  end
+#  # Put an item on a page.
+#  def set_item_to_page
+#    @research ||= Research.find(params[:research_id]) #FIXME put specific user
+#    item = @research.items.find(params[:id].split("_").last)
+#    @page_sent = params[:page_sent].split("_").last
+#    item.page_id = @page_sent
+#    item.save
+#    collection
+#    respond_to do |format|
+#      format.js 
+#    end
+#  end
 
   private
 
   def collection
-    @research.items.paginate(:page => params[:page], :per_page => @research.number_of_pages,  :order => :position )
+    page = params[:page] || 1
+    @research.items.find(:all, :conditions => {:page_id => page}, :order => :position)
   end
 
 end

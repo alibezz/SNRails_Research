@@ -38,4 +38,19 @@ class ItemTest < Test::Unit::TestCase
    item = create_item(:info => "an info", :research_id => @research.id)
    assert_equal count + 1, Item.count
   end
+
+  def test_should_update_research_max_pages
+   item = create_item(:info => "an info", :research_id => @research.id)
+   max_pages = @research.number_of_pages
+
+   item.page_id = max_pages + 1
+   item.save; @research.reload
+
+   assert_equal @research.number_of_pages, item.page_id
+   
+   item.page_id = max_pages
+   item.save; @research.reload
+   
+   assert_equal @research.number_of_pages,max_pages
+  end
 end

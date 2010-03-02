@@ -38,16 +38,35 @@ class ResearchTest < Test::Unit::TestCase
 
     create_item(:page_id => 2, :research => research) 
     create_item(:page_id => 2, :research => research) 
+    
+    create_item(:page_id => 3, :research => research) 
+    
+    create_item(:page_id => 4, :research => research) 
+    create_item(:page_id => 4, :research => research) 
+    create_item(:page_id => 4, :research => research) 
+    create_item(:page_id => 4, :research => research) 
+    
 
-    assert_equal 5, research.items.find(:all).count
     assert 3, research.items.find(:all, :conditions => {:page_id => 1})
     assert 2, research.items.find(:all, :conditions => {:page_id => 2})
-    
-    research.reorder_pages([2,1])
+    assert 1, research.items.find(:all, :conditions => {:page_id => 3})
+    assert 4, research.items.find(:all, :conditions => {:page_id => 4})
+
+    research.reorder_pages([4,3,2,1])
    
-    assert 2, research.items.find(:all, :conditions => {:page_id => 1})
     assert 3, research.items.find(:all, :conditions => {:page_id => 2})
+    assert 2, research.items.find(:all, :conditions => {:page_id => 3})
+    assert 1, research.items.find(:all, :conditions => {:page_id => 4})
+    assert 4, research.items.find(:all, :conditions => {:page_id => 1})
+    
+    research.reorder_pages([2,3,4,1])
+
+    assert 3, research.items.find(:all, :conditions => {:page_id => 1})
+    assert 2, research.items.find(:all, :conditions => {:page_id => 2})
+    assert 1, research.items.find(:all, :conditions => {:page_id => 3})
+    assert 4, research.items.find(:all, :conditions => {:page_id => 4})
   end
+
 
   def test_uniqueness_of_title
     create_research(:title => 'some')
@@ -68,45 +87,6 @@ class ResearchTest < Test::Unit::TestCase
   def test_should_be_private_when_defined
     r = create_research(:is_private => true)
     assert_equal true, Research.find(r.id).is_private?
-  end
-
-  def test_reorder_items
-    research = create_research
-    create_item(:position => 1, :research_id => research.id)
-    create_item(:position => 2, :research_id => research.id)
-    research.reload
-    research.reorder_items(2); research.reload
-    assert_equal research.items.first.position, 1 
-    assert_equal research.items.last.position, 3 
-    
-  end
-
-  def test_new_position_is_bigger_than_old_position
-    research = create_research
-    create_item(:position => 1, :research_id => research.id)
-    create_item(:position => 2, :research_id => research.id)
-    create_item(:position => 3, :research_id => research.id)
-    research.reload
-    research.update_positions(3, 1); research.reload
-   
-    assert_equal 1, research.items[0].position
-    assert_equal 1, research.items[1].position
-    assert_equal 2, research.items[2].position
-    #Now, item with :position => 1 previously can be updated by the controller
-  end
-
-  def test_new_position_is_smaller_than_old_position
-    research = create_research
-    create_item(:position => 1, :research_id => research.id)
-    create_item(:position => 2, :research_id => research.id)
-    create_item(:position => 3, :research_id => research.id)
-    research.reload
-    research.update_positions(1, 3); research.reload
-    
-    assert_equal 2, research.items[0].position
-    assert_equal 3, research.items[1].position
-    assert_equal 3, research.items[2].position
-    #Now, item with :position => 3 previously can be updated by the controller
   end
 
   def test_should_have_questions_to_be_active
@@ -160,6 +140,18 @@ class ResearchTest < Test::Unit::TestCase
     research.reload
     research.is_active = true
     assert_equal true, research.save
+  end
 
+  def test_load_correct_number_of_items_per_page
+    r = create_research
+    i1 = create_item(:research_id => r.id, :page_id => 1)   
+    i2 = create_item(:research_id => r.id, :page_id => 1)   
+    i3 = create_item(:research_id => r.id, :page_id => 2)
+    
+    assert_equal r.how_many_items(0), nil
+    assert_equal r.how_many_items(nil), 2
+    assert_equal r.how_many_items(1), 2
+    assert_equal r.how_many_items(2), 1   
+    assert_equal r.how_many_items(3), nil   
   end
 end

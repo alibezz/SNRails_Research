@@ -1,14 +1,5 @@
 class Research < ActiveRecord::Base
 
-  #FIXME this is a hack to works design_data
-#   class << self # Class methods
-#     alias :all_columns :columns
-
-#     def columns
-#       all_columns.reject {|c| c.name == 'design_data'}
-#     end
-#   end
-
   validates_presence_of :title
   validates_presence_of :introduction
   validates_uniqueness_of :title
@@ -17,7 +8,6 @@ class Research < ActiveRecord::Base
   has_many :questions
   has_many :permissions
   has_many :users, :through => :permissions
-
   has_many :moderator_permissions, :conditions => {:is_moderator => true}, :class_name => 'Permission'
   has_many :moderators, :through => :moderator_permissions, :source => :user
   has_many :questionnaires
@@ -58,36 +48,55 @@ class Research < ActiveRecord::Base
   end
 
 
-  # Get and array of integer that indicates the pages order and
-  # set the item (questions and sections) to the correct order.
-  def reorder_pages(pages_order = [])
-    pages_order = pages_order.map{|o|o.to_i}
-    for i in 1..self.number_of_pages do 
-      if (pages_order[i-1] != i) 
-        new_page = (pages_order[i-1] == i + 1) ? pages_order.index(i) + 1 : pages_order[i-1]
-        old_page = i
+  def reorder_pages(pages_order =[])
+    new_order = pages_order.map{|o|o.to_i}
+    old_order = self.page_ids
+    first = select_position(0, self.number_of_pages-1) {|i| new_order[i] != old_order[i]}
+    last = select_position(first+1,self.number_of_pages-1) {|i| new_order[i] == old_order[i]} - 1
+    if new_order[last] < new_order[last-1]
+      update_pages(first, last, -1, old_order, "upto")
+    else
+      update_pages(last, first, 1, old_order, "downto")
+    end
+    self.reload
+  end
+
+  def how_many_items(page)
+    num_items = self.items.find(:all, :conditions => {:page_id => page.to_i}).count
+    return num_items if num_items > 0
+    return self.items.find(:all, :conditions => {:page_id => 1}).count if page.blank?
+    nil
+  end
+
+  def page_ids
+    self.items.all(:select => 'DISTINCT page_id').map(&:page_id).sort
+  end
+
+protected 
+
+  def number_of_pages
+    self.page_ids.count
+  end
+
+  def select_position(ind1, ind2, &block)
+    position = self.number_of_pages
+    for i in ind1..ind2 do
+      if yield i
+        position = i
         break
       end
     end
-
-    new_items_page = self.items.find_all_by_page_id(new_page)
-    
-    self.items.update_all("page_id = #{new_page}", :page_id => old_page)
-    self.items.update_all("page_id = #{old_page}", :id => new_items_page.map{|i|i.id})
+    position
   end
 
-  # Methods related to position question's switching.
-  def reorder_items(position)
-    #FIXME Inefficient algorithm; Keep @research.items sorted
-    self.items.each { |item| if item.position >= position; item.position+= 1; item.save!; end }
-  end
-
-  def update_positions(new_position, old_position)
-    #FIXME Inefficient algorithm; Keep @research.items sorted
-    if new_position >  old_position
-      self.items.each { |i| if i.position > old_position and i.position <= new_position; i.position -= 1; i.save!; end }
-    elsif new_position <  old_position
-      self.items.each { |i| if i.position < old_position and i.position >= new_position; i.position += 1; i.save!; end }
+  def update_pages(pos1, pos2, offset, old_order, for_type)
+    pos1_items = self.items.find_all {|item| item.page_id == old_order[pos1]}
+    (pos1 - offset).send for_type, pos2 do |i|
+      new_id = old_order[i + offset]
+      self.items.each {|item| item.page_id = new_id if item.page_id == old_order[i]; item.save!} 
+      self.reload
     end
+    pos1_items.each {|item| item.page_id = old_order[pos2]; item.save!}
   end
-end
+end 
+

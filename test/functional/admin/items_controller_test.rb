@@ -30,8 +30,8 @@ class ItemsControllerTest < Test::Unit::TestCase
   def test_should_show_items
     r = create_research
     text_question = create_item(:type => "question", :research_id => r.id, :html_type => Question.html_types.invert["pure_text"])
-    selection_question = create_item(:type => "question", :research_id => r.id, :html_type => Question.html_types.invert["single_selection"])
-    section = create_item(:type => "section", :research_id => r.id)
+    selection_question = create_item(:type => "question", :research_id => r.id, :html_type => Question.html_types.invert["single_selection"], :page_id => 2)
+    section = create_item(:type => "section", :research_id => r.id, :page_id => 3)
 
     get :index, :research_id => r.id
     assert_tag :tag => "a", :attributes => { :href => new_admin_research_item_path(r.id, :item_type => "question") }
@@ -144,6 +144,42 @@ class ItemsControllerTest < Test::Unit::TestCase
     assert_equal position + 1, i.position
     assert_equal 'new info', i.info
     assert_equal 1, i.html_type
+  end
+
+#reorder items
+  def test_should_reorder_items
+    r = create_research
+    i1 = create_item(:research_id => r.id, :position => 0)
+    i2 = create_item(:research_id => r.id, :position => 1)
+    i3 = create_item(:research_id => r.id, :position => 2)
+    get :index, :research_id => r.id
+    post :reorder_items, :list_items => ["3", "1", "2"], :page => nil, :research_id => r.id
+    r.reload; i1.reload; i2.reload; i3.reload
+    assert_equal i1.position, 1
+    assert_equal i2.position, 2
+    assert_equal i3.position, 0
+    
+    post :reorder_items, :list_items => ["1", "2", "3"], :page => nil, :research_id => r.id
+    r.reload; i1.reload; i2.reload; i3.reload
+    assert_equal i1.position, 0
+    assert_equal i2.position, 1
+    assert_equal i3.position, 2
+  end
+
+#reorder_pages
+
+  def test_should_reorder_pages
+    r = create_research
+    i1 = create_item(:research_id => r.id, :page_id => 1)
+    i2 = create_item(:research_id => r.id, :page_id => 2)
+    i3 = create_item(:research_id => r.id, :page_id => 3)
+    get :index, :research_id => r.id
+    post :reorder_pages, :page_links => ["3", "1", "2"], :page => nil, :research_id => r.id
+    r.reload; i1.reload; i2.reload; i3.reload
+    assert_equal i1.page_id, 2
+    assert_equal i2.page_id, 3
+    assert_equal i3.page_id, 1
+    
   end
 
  protected

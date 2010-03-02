@@ -3,8 +3,8 @@
   <%= f.text_field :info %>
 </p>
 <p>
-  <label for="item_position"><%= t(:position) %></label>
-  <%= select_position("item", @positions) %>
+  <label for="item_page_id"><%= t(:page) %></label>
+  <%= f.text_field :page_id %>
 </p>
 <p>
   <label for="is_optional"> <%= t(:is_optional) + ":" %> </label>
