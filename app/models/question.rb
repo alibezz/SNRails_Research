@@ -5,7 +5,6 @@ class Question < Item
   validates_numericality_of :min_answers, :integer_only => true, :gte => 0
   validates_numericality_of :max_answers, :integer_only => true, :gte => 0
 
-
   before_save :define_answers_quantity
   validate do |b|
     b.min_before_max_answers

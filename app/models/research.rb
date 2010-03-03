@@ -72,11 +72,12 @@ class Research < ActiveRecord::Base
     self.items.all(:select => 'DISTINCT page_id').map(&:page_id).sort
   end
 
-protected 
-
   def number_of_pages
     self.page_ids.count
   end
+
+protected 
+
 
   def select_position(ind1, ind2, &block)
     position = self.number_of_pages

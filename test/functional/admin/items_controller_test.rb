@@ -179,7 +179,6 @@ class ItemsControllerTest < Test::Unit::TestCase
     assert_equal i1.page_id, 2
     assert_equal i2.page_id, 3
     assert_equal i3.page_id, 1
-    
   end
 
  protected
