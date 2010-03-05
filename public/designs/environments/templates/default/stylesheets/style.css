@@ -152,10 +152,14 @@ a:active {
   z-index: 1;
   margin-bottom: 8px; }
 
+#list_items {
+  margin-left: 160px !important; }
+
 #column-1 {
   position: relative;
   left: 0px;
   width: 170px;
+  height: 100%;
   margin-bottom: 19px;
   float: left;
   font-size: 110%; }
