@@ -1,11 +1,11 @@
 <%= link_to t(:new_research), new_admin_research_url %>
 <br><br>
 
-<%= title t(:listing_researches) %>
+<h1><%= title t(:listing_researches) %></h1>
 
 <ul>
   <%- @researches.each do |research| %>
-    <%= link_to research.title, object_url(research) %><br>
+    <li><%= link_to research.title, object_url(research) %>
   <% end %>
 </ul>
 

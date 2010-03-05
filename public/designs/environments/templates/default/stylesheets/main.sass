@@ -20,6 +20,49 @@ body
   text-align: center
   padding: 8px 20px
 
+=main-h
+  font-weight: bold
+  color = !secondarya1
+  text-align: center
+  margin: 0 auto
+  position: relative
+  width: 50%
+
+h1
+  font:
+    size: 26px
+  +main-h
+  padding-bottom: 5px
+
+h2
+  font:
+    size: 20px
+  +main-h
+
+p.title
+  font:
+    size: 18px
+    weigth: bold
+  color = !secondarya2
+
+p.intro
+  font-align: justified
+
+li
+  padding-left: 18px
+  list-style-type: none
+
+a:link, a:visited
+  color = !primary1
+
+a:hover
+  background-color = !complement2
+  color: white
+
+a:active
+  font-weigth: bold
+  
+
 =center-window
   position: relative
   margin: 0 auto
@@ -33,6 +76,7 @@ body
 #header
   display: block
   height: 80px
+  margin-bottom: 3px
   background-color = !primary4
   padding: 20px
   span
@@ -45,17 +89,47 @@ body
     float: left
     color = !primary2
 
+#all_researches
+  float: left
+  display: block
+  text-align: center
+  width: 10em
+  font-size: 18px
+  margin: 0 auto
+  border-width: 2px
+  border-style: solid
+  border-color = !secondarya3
+  -moz-border-radius: 3px
+  background-color = !secondarya5
+  a
+    color = !secondarya3
+    text-decoration: none
+  color = !secondarya3
+  &:hover
+    background-color = !secondarya3
+    color = !secondarya5
+    a
+      background-color: inherit
+      color = !secondarya5
+
 #loginb
-  background-color = !complement1
+  background-color: lightgray
   color = !complement3
   float: right
   font-size: 18px
+  border-width: 2px
+  border-style: solid
+  border-color = !complement3
+  -moz-border-radius: 3px
   a:link, a:hover, a:visited
     color = !complement3
+    background-color: inherit
+    text-decoration: none
   ul
     list-style-type: none
     li
       display: inline
+      padding-left: 0
       &:first-child
         padding-left: 8px
       &:after
@@ -67,11 +141,10 @@ body
         content: ""
 
 #content
-  padding-top: 40px !important
+  margin-top: 34px !important
   _height: 1%
   display: block
   background-color: white
-
   &:after
     content: "."
     display: block
@@ -99,21 +172,23 @@ body
     border:
       style: solid
       width: 0px 0px 2px
-      color = !secondaryb1
+      color = !secondaryb4
+    li
+      padding-left: 0
     a
       border:
         style: solid
         width: 2px 2px 0px
-        color = !secondaryb1
+        color = !secondaryb4
       padding: 2px 20px
       display: block
       text-decoration: none
     a:link, a:visited
-      background-color = !secondaryb4
+      background-color = !secondaryb5
       color = !secondaryb3
     a:hover
       background-color = !secondaryb3
-      color: white
+      color = !secondaryb5
 
 #right
   padding-left: 25px
