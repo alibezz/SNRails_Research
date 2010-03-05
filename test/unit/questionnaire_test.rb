@@ -89,5 +89,14 @@ class QuestionnaireTest < Test::Unit::TestCase
     quest2.validate_questions({@i1.id.to_s => @ivalue1.id.to_s, @i2.id.to_s => @ivalue2.id.to_s, @i3.id.to_s => @ivalue3.id.to_s}, @research.id)
     quest2.reload
     assert_equal quest2.errors.count, 0 
+  end
+
+  def test_validate_answers
+    @i1.html_type = Question.html_types.invert["pure_text"]
+    @i1.save; @i1.reload
+    quest = create_questionnaire(:research_id => @research.id)
+    quest.validate_answers([@i1, @i2], {@i1.id.to_s => {:info => ""}, @i2.id.to_s => ""})
+    quest.reload
+    assert_equal quest.errors.count, 2
   end 
 end

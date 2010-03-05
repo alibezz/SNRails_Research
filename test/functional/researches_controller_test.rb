@@ -43,4 +43,12 @@ class ResearchesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  def test_moderator_should_see_research
+    r = create_research
+    r.moderators << users(:quentin); r.reload
+    login_as :quentin
+    get :show, :id => r.id
+    assert_response :redirect
+    assert_redirected_to admin_research_path(r)
+  end
 end

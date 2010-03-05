@@ -51,14 +51,10 @@ class User < ActiveRecord::Base
     write_attribute :email, (value ? value.downcase : nil)
   end
 
-
-  #FIXME make this test
   def is_moderator?(research)
     self.researches.member?(research)
   end
 
-
-  #FIXME make this test
   def my_researches(params = {})
     self.is_administrator? ? Research.find(:all, params) : self.researches
   end

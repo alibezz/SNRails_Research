@@ -6,7 +6,7 @@ class Admin::ItemsController < ResourceController::Base
 
   new_action.before do
     # @item_type is "question" by default
-    @item_type = params[:item_type].nil? ? "question" : params[:item_type]
+    @item_type = params[:item_type].blank? ? "question" : params[:item_type]
   end
 
   def create
@@ -19,14 +19,22 @@ class Admin::ItemsController < ResourceController::Base
       redirect_to admin_research_item_path(@research, @item) 
     else
       #TODO: error message
-      redirect_to :action => "new"
+      redirect_to :action => "new", :item_type => params[:item_type]
     end
   end
 
   edit.before do
-    @item_type = params[:item_type].nil? ? "question" : params[:item_type]
+    @item_type = params[:item_type].blank? ? "question" : params[:item_type]
   end
 
+  def update
+    @item = Item.find(params[:id])
+    if @item.update_attributes(params[:item])
+      redirect_to admin_research_item_path(@research, @item) 
+    else
+      redirect_to :action => "edit", :item_type => @item.type.blank? ? "question" : @item.type.downcase
+    end
+  end
 
   # Reorder the items definition according to user definition.
   def reorder_items
