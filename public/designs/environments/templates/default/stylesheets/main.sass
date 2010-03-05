@@ -1,0 +1,131 @@
+@import colors.sass
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td
+  margin: 0
+  padding: 0
+  border: 0
+  outline: 0
+  font-weight: inherit
+  font-style: inherit
+  font-size: 100%
+  font-family: inherit
+  vertical-align: baseline
+
+body
+  z-index: 1
+  background-color = !primary5
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Lucida, Helvetica, Verdana, Arial, Sans-serif
+  font-size: 16px
+  margin: 0 auto
+  text-align: center
+  padding: 8px 20px
+
+=center-window
+  position: relative
+  margin: 0 auto
+  text-align: center
+  min-width: 300px
+  width: 90%
+
+#frame
+  +center-window
+
+#header
+  display: block
+  height: 80px
+  background-color = !primary4
+  padding: 20px
+  span
+    color: white
+    font-size: 55px
+    float: right
+  span.title
+    font-style: bold
+    font-size: 66px
+    float: left
+    color = !primary2
+
+#loginb
+  background-color = !complement1
+  color = !complement3
+  float: right
+  font-size: 18px
+  a:link, a:hover, a:visited
+    color = !complement3
+  ul
+    list-style-type: none
+    li
+      display: inline
+      &:first-child
+        padding-left: 8px
+      &:after
+        font-decoration: bold
+        padding-left: 5px
+        content: "|"
+      &:last-child:after
+        padding-right: 5px
+        content: ""
+
+#content
+  padding-top: 40px !important
+  _height: 1%
+  display: block
+  background-color: white
+
+  &:after
+    content: "."
+    display: block
+    height: 0
+    clear: both
+    visibility: hidden
+
+#content, #footer
+  margin: 0 auto
+  text-align: left
+  padding: 10px 6px 5px 7px
+  z-index: 1
+  margin-bottom: 8px
+
+#column-1
+  position: relative
+  left: 0px
+  width: 170px
+  margin-bottom: 19px
+  float: left
+  font-size: 110%
+  ul#admin_research_menu
+    list-style-type: none
+    margin-right: 20px
+    border:
+      style: solid
+      width: 0px 0px 2px
+      color = !secondaryb1
+    a
+      border:
+        style: solid
+        width: 2px 2px 0px
+        color = !secondaryb1
+      padding: 2px 20px
+      display: block
+      text-decoration: none
+    a:link, a:visited
+      background-color = !secondaryb4
+      color = !secondaryb3
+    a:hover
+      background-color = !secondaryb3
+      color: white
+
+#right
+  padding-left: 25px
+  position: relative
+  padding-top: 0
+  overflow-x: hidden
+
+#main
+  position: relative
+
+
+div.left
+  position: relative
+  float: left
+  left: 0
