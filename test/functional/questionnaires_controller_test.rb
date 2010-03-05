@@ -24,7 +24,7 @@ class QuestionnairesControllerTest < Test::Unit::TestCase
 #new
 
   def test_should_get_new
-    post :new, :research_id => @research.id
+     post :new, :research_id => @research.id
     assert_response :success
     #page_id == 1, because it's the first page 
     assert_tag :tag => 'form', :attributes => {:action => "/researches/#{@research.id}/questionnaires/new?page_id=1", :method => 'post'}
@@ -34,8 +34,14 @@ class QuestionnairesControllerTest < Test::Unit::TestCase
     post :new, :research_id => @research.id, :commit => "Next", :page_id => 1
     assert_response :success
     assert_tag :tag => 'form', :attributes => {:action => "/researches/#{@research.id}/questionnaires/new?page_id=2", :method => 'post'}
-    
+   
+    post :new, :research_id => @research.id, :commit => "Back", :page_id => 2
+    assert_response :success
+    assert_tag :tag => 'form', :attributes => {:action => "/researches/#{@research.id}/questionnaires/new?page_id=1", :method => 'post'}
+ 
  end
+
+#create
   
   def test_should_create_questionnaire
      count = Questionnaire.count

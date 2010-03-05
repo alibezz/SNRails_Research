@@ -15,6 +15,11 @@ class UsersControllerTest < ActionController::TestCase
     @environment = create_environment(:is_default => true)
   end
 
+  def test_should_get_new
+    get :new
+    assert assigns(:user)
+  end
+
   def test_should_allow_signup
     assert_difference 'User.count' do
       create_user

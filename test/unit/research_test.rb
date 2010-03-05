@@ -25,9 +25,8 @@ class ResearchTest < Test::Unit::TestCase
     research.valid?
     assert !research.errors.invalid?(:number_of_pages)
     
-    # Default number is 1
-    research.number_of_pages = 1
-    assert_equal 1, research.number_of_pages
+    # Default number is 0; a research is created without pages
+    assert_equal 0, research.number_of_pages
   end
 
   def test_reorder_pages
@@ -52,20 +51,23 @@ class ResearchTest < Test::Unit::TestCase
     assert 1, research.items.find(:all, :conditions => {:page_id => 3})
     assert 4, research.items.find(:all, :conditions => {:page_id => 4})
 
-    research.reorder_pages([4,3,2,1])
-   
+    #downto
+
+    research.reorder_pages([3,1,2,4])
+    assert 1, research.items.find(:all, :conditions => {:page_id => 1})
     assert 3, research.items.find(:all, :conditions => {:page_id => 2})
     assert 2, research.items.find(:all, :conditions => {:page_id => 3})
-    assert 1, research.items.find(:all, :conditions => {:page_id => 4})
-    assert 4, research.items.find(:all, :conditions => {:page_id => 1})
-    
-    research.reorder_pages([2,3,4,1])
+    assert 4, research.items.find(:all, :conditions => {:page_id => 4})
 
+    #upto
+    research.reorder_pages([2,3,4,1])
+   
     assert 3, research.items.find(:all, :conditions => {:page_id => 1})
     assert 2, research.items.find(:all, :conditions => {:page_id => 2})
-    assert 1, research.items.find(:all, :conditions => {:page_id => 3})
-    assert 4, research.items.find(:all, :conditions => {:page_id => 4})
-  end
+    assert 4, research.items.find(:all, :conditions => {:page_id => 3})
+    assert 1, research.items.find(:all, :conditions => {:page_id => 4})
+    
+    end
 
 
   def test_uniqueness_of_title

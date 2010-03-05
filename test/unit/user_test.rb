@@ -102,4 +102,24 @@ class UserTest < ActiveSupport::TestCase
     assert @user.remember_token_expires_at.between?(before, after)
   end
 
+  def test_user_is_moderator
+    r = create_research
+    assert_equal false, @user.is_moderator?(r)
+    @user.researches << r; @user.reload
+    r.moderators << @user; r.reload
+    assert @user.is_moderator?(r)
+  end
+
+  def test_my_researches
+    admin = create_user(:is_administrator => true)
+    r1 = create_research  
+    r2 = create_research  
+    r3 = create_research 
+
+    @user.researches << r1; @user.reload
+    r1.moderators << @user; r1.reload
+
+    assert_equal Research.find(:all).count, admin.my_researches.count 
+    assert_equal @user.researches.count, @user.my_researches.count 
+  end 
 end

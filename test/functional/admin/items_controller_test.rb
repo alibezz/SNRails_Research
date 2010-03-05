@@ -82,7 +82,9 @@ class ItemsControllerTest < Test::Unit::TestCase
     r.reload 
     assert_equal 1, r.items.length
 
-    post :create, :item => {"position"=>"1", "info"=>"test1", "html_type"=> 0}, :research_id => r.id
+    post :create, :item => {"position"=>"1", "info"=>"", "html_type"=> 0}, :research_id => r.id
+    assert_response :redirect
+    assert_redirected_to new_admin_research_item_path(r.id)
   end
 
 #show
@@ -100,7 +102,7 @@ class ItemsControllerTest < Test::Unit::TestCase
     r = create_research
     i = create_item_of_a_research(r)
     get :show, :research_id => i.research_id, :id => i.id
-    assert_tag :tag => 'a', :attributes => { :href => edit_admin_research_item_url(i.research_id, i.id) } 
+    assert_tag :tag => 'a', :attributes => { :href => edit_admin_research_item_url(i.research_id, i.id,                                                                   :item_type => "question") } 
     assert_tag :tag => 'a', :attributes => { :href => admin_research_items_url(i.research_id) } 
   end
 
@@ -144,6 +146,10 @@ class ItemsControllerTest < Test::Unit::TestCase
     assert_equal position + 1, i.position
     assert_equal 'new info', i.info
     assert_equal 1, i.html_type
+    
+    post :update, :id => i.id, :research_id => i.research_id, :item => {:position => i.position + 1, :info => '',                                                                                    :html_type => nil}
+    assert_response :redirect
+    assert_redirected_to edit_admin_research_item_url(i.research_id, i.id, :item_type => "question") 
   end
 
 #reorder items

@@ -25,7 +25,7 @@ class Admin::ItemValuesController < ResourceController::Base
         @item_value.destroy
         @item = Item.find(params[:question_id])
         flash[:notice] = t(:successfully_removed) 
-        redirect_to(admin_research_item_item_values_path(@item.research_id, @item)) 
+        redirect_to(admin_research_question_item_values_path(@item.research_id, @item)) 
   end
 
   def collection

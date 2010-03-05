@@ -16,7 +16,7 @@
   <% end %>
 </p>
 
-<%= link_to 'Edit', edit_object_url %>
+<%= link_to 'Edit', edit_object_url(:item_type => @item.type.blank? ? "question" : @item.type.downcase) %>
 |
 <%= link_to 'Back', collection_url %>
 |

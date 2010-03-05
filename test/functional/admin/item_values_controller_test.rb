@@ -55,6 +55,20 @@ class ItemValuesControllerTest < Test::Unit::TestCase
     assert_tag :tag => 'a', :attributes => { :href => admin_research_question_item_values_url(@item.research_id, @item.id) }
   end
 
+#create
+  def test_should_reorder_item_values
+    i1 = create_item_value(:item_id => @item.id, :position => 1)
+    i2 = create_item_value(:item_id => @item.id, :position => 2)
+    i3 = create_item_value(:item_id => @item.id, :position => 3)
+    post :create, :item_value => {"position"=>"1", "info"=>"test1"}, :item_id => @item.id
+
+    @item.reload; i1.reload; i2.reload; i3.reload
+    assert_equal @item.item_values.count, 4
+    assert_equal i1.position, 2 
+    assert_equal i2.position, 3 
+    assert_equal i3.position, 4 
+  end
+
 #show
 
  def test_should_get_show
@@ -88,5 +102,37 @@ class ItemValuesControllerTest < Test::Unit::TestCase
     assert_tag :tag => 'form', :attributes => {:action => admin_question_item_value_url(@ivalue.item_id, @ivalue.id),  :method => 'post' }  
     assert_tag :tag => 'a', :attributes => { :href => 
 						admin_research_question_item_values_url(@item.research_id, @item.id) }
+  end
+
+#update
+
+  def test_should_update_positions
+    @item.item_values.delete_all; @item.reload
+
+    i1 = create_item_value(:item_id => @item.id, :position => 1)
+    i2 = create_item_value(:item_id => @item.id, :position => 2)
+    i3 = create_item_value(:item_id => @item.id, :position => 3)
+    post :update, :id => i2.id, :question_id => @item.id, :item_value => {:position => 1, :info => i2.info}
+    @item.reload; i1.reload; i2.reload; i3.reload
+    
+    assert_equal i1.position, 2 
+    assert_equal i2.position, 1 
+    assert_equal i3.position, 3
+  end
+
+#destroy
+
+  def test_should_destroy_item_value
+    @item.item_values.delete_all; @item.reload
+    i1 = create_item_value(:item_id => @item.id, :position => 1)
+    @item.reload
+    assert_equal @item.item_values.count, 1
+
+    post :destroy, :question_id => @item.id, :id => i1.id
+    assert flash[:notice]
+   
+    @item.reload
+    assert_equal @item.item_values.count, 0
+    
   end
 end
