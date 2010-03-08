@@ -18,7 +18,7 @@ namespace :db do
  
      User.populate 1 do |user|
      user.login = 'admin'
-       user.is_administrator = true
+       user.administrator = true
        user.crypted_password = '44d5d03bfe8570fbfaa630a3520b33724c397ea9' #encriptation for 123456 password
        user.email = 'admin@localhost'
      end 

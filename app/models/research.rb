@@ -14,6 +14,12 @@ class Research < ActiveRecord::Base
 
   acts_as_design :root => File.join('designs', 'researches')
 
+  acts_as_accessible
+
+  PERMISSIONS['research'] = {                                                                                                    'research_editing' => I18n.t(:research_editing),
+    'research_answering' => I18n.t(:research_answering),
+    'research_erasing' => I18n.t(:research_erasing) } 
+ 
   validate do |b|
     b.must_have_questions_to_be_active
     b.some_items_must_have_alternatives_to_be_active

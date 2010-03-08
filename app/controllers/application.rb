@@ -4,7 +4,7 @@
 class ApplicationController < ActionController::Base
 
   include AuthenticatedSystem
-
+  include PermissionCheck
   helper :all # include all helpers, all the time
 
   # See ActionController::RequestForgeryProtection for details
@@ -59,6 +59,15 @@ class ApplicationController < ActionController::Base
     @gusers = User.find(:all)
   end
 
+  def check_permission?
+    current_user.nil? ? true : !self.current_user.administrator?
+  end
+
+private
+
+  def user
+    self.current_user
+  end
   # See ActionController::Base for details 
   # Uncomment this to filter the contents of submitted sensitive data parameters
   # from your application log (in this case, all fields with names like "password"). 

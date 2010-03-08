@@ -13,7 +13,7 @@ class CreateUsers < ActiveRecord::Migration
       t.column :activation_code,           :string, :limit => 40
       t.column :activated_at,              :datetime
 
-      t.column :is_administrator, :boolean
+      t.column :administrator, :boolean
     end
     add_index :users, :login, :unique => true
   end

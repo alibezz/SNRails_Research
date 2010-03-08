@@ -111,7 +111,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   def test_my_researches
-    admin = create_user(:is_administrator => true)
+    admin = create_user(:administrator => true)
     r1 = create_research  
     r2 = create_research  
     r3 = create_research 
@@ -122,4 +122,12 @@ class UserTest < ActiveSupport::TestCase
     assert_equal Research.find(:all).count, admin.my_researches.count 
     assert_equal @user.researches.count, @user.my_researches.count 
   end 
+
+  def test_is_administrator
+    admin = create_user(:administrator => true)
+    assert admin.is_administrator?
+    User.destroy_all
+    user = create_user
+    assert_equal false, user.is_administrator?    
+  end
 end

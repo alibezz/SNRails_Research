@@ -28,9 +28,9 @@ class User < ActiveRecord::Base
   attr_accessible :login, :email, :name, :password, :password_confirmation
 
 #XXXcaiotiago: is there any security implication?
-  attr_accessible :is_administrator
+  attr_accessible :administrator
 
-
+  acts_as_accessor
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   #
   # uff.  this is really an authorization, not authentication routine.  
@@ -59,4 +59,7 @@ class User < ActiveRecord::Base
     self.is_administrator? ? Research.find(:all, params) : self.researches
   end
 
+  def is_administrator?
+    self.administrator?
+  end
 end
