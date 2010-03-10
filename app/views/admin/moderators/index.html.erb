@@ -4,11 +4,11 @@
 
 <%= render :partial => 'admin/researches/research_options' %>
 
-<%=  t(:moderators) %>
+<div class="title"><%=  t(:moderators) %></div>
 
 <%= render :partial => 'moderators_options' %>
 
-<ul>
+<ul class="listing">
 <%- @moderators.each do |user| %>
   <li> 
     <%= user.login %>

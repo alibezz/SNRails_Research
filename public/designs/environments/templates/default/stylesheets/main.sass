@@ -22,11 +22,16 @@ body
 
 =main-h
   font-weight: bold
-  color = !secondarya1
+  color = !secondarya3
   text-align: center
   margin: 0 auto
   position: relative
   width: 50%
+
+=diamond(!color=black)
+  content: "\2666\a0"
+  color = !color
+  font-size: 12px
 
 h1
   font:
@@ -48,12 +53,17 @@ p.title
 p.intro
   font-align: justified
 
+div.title
+  font:
+    size: 18px
+  color = !secondarya4
+
 li
   padding-left: 18px
   list-style-type: none
 
 a:link, a:visited
-  color = !primary1
+  color = !complement1
 
 a:hover
   background-color = !complement2
@@ -98,31 +108,31 @@ a:active
   margin: 0 auto
   border-width: 2px
   border-style: solid
-  border-color = !secondarya3
+  border-color = !secondaryb3
   -moz-border-radius: 3px
-  background-color = !secondarya5
+  background-color = !secondaryb5
   a
-    color = !secondarya3
+    color = !secondaryb3
     text-decoration: none
-  color = !secondarya3
+  color = !secondaryb3
   &:hover
-    background-color = !secondarya3
-    color = !secondarya5
+    background-color = !secondaryb3
+    color = !secondaryb5
     a
       background-color: inherit
-      color = !secondarya5
+      color = !secondaryb5
 
 #loginb
   background-color: lightgray
-  color = !complement3
+  color = !primary3
   float: right
   font-size: 18px
   border-width: 2px
   border-style: solid
-  border-color = !complement3
+  border-color = !primary3
   -moz-border-radius: 3px
   a:link, a:hover, a:visited
-    color = !complement3
+    color = !primary3
     background-color: inherit
     text-decoration: none
   ul
@@ -176,23 +186,34 @@ a:active
     border:
       style: solid
       width: 0px 0px 2px
-      color = !secondaryb4
+      color = !primary2
     li
       padding-left: 0
+      list-style-position: inside
     a
       border:
         style: solid
-        width: 2px 2px 0px
-        color = !secondaryb4
+        width: 2px 2px 0
+        color = !primary2
       padding: 2px 20px
       display: block
       text-decoration: none
     a:link, a:visited
-      background-color = !secondaryb5
-      color = !secondaryb3
+      background-color = !primary4
+      color = !primary3
     a:hover
-      background-color = !secondaryb3
-      color = !secondaryb5
+      background-color = !primary3
+      color = !primary5
+
+ul.listing
+  li:before
+    +diamond
+
+ul.link
+  li:before
+    +diamond(!primary1)
+  a
+    padding-left: 4px
 
 #right
   padding-left: 25px

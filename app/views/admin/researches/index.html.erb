@@ -3,7 +3,7 @@
 
 <h1><%= title t(:listing_researches) %></h1>
 
-<ul>
+<ul class="listing link">
   <%- @researches.each do |research| %>
     <li><%= link_to research.title, object_url(research) %>
   <% end %>
