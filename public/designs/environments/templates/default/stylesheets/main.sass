@@ -71,7 +71,6 @@ a:hover
 
 a:active
   font-weigth: bold
-  
 
 =center-window
   position: relative
@@ -229,3 +228,37 @@ div.left
   position: relative
   float: left
   left: 0
+
+=break-left
+  float: left
+  clear: left
+
+ul#list_items
+  li
+    +break-left
+
+ul#page_links
+  li
+    +break-left
+
+ul#list_items
+  li
+    ul
+      li
+        display: inline !important
+        float: left !important
+
+ul#list_items
+  li
+    ul
+      display: block !important
+      float: right !important
+      clear: both
+
+ul#list_items
+  li
+    ul
+      li
+        a.button
+          display: none
+
