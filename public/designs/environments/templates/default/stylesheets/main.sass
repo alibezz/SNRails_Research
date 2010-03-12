@@ -245,20 +245,33 @@ ul#list_items
   li
     ul
       li
-        display: inline !important
-        float: left !important
+        display: inline
+        float: left
+        clear: none
 
 ul#list_items
   li
     ul
-      display: block !important
-      float: right !important
+      display: block
+      float: right
       clear: both
 
 ul#list_items
   li
     ul
       li
-        a.button
-          display: none
-
+        a.edit, a.item_value
+          span
+            display: none
+        a.destroy
+          width: 16px !important
+          height: 16px !important
+          display: block
+          float: left
+          overflow: hidden !important
+        a.edit:before
+          content: url("../images/edit.png")
+        a.item_value:before
+          content: url("../images/list-add.png")
+        a.destroy:before
+          content: url("../images/list-remove.png")
