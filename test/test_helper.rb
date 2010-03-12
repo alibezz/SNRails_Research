@@ -105,12 +105,18 @@ class Test::Unit::TestCase
     }.merge(params)
   end
 
-
+  def create_role(params = {})
+    Role.create!({:name => "testrole"}.merge(params))
+  end
 
   # Sets the current user in the session from the user fixtures.
-  def login_as(user)
-    @request.session[:user_id] = user ? users(user).id : nil 
-#? users(user).id : nil
+  def login_as(login)
+    user = User.find_by_login(login)
+    unless user.nil?
+      @request.session[:user_id] = login ? user.id : nil
+    else
+      @request.session[:user_id] = login ? users(login).id : nil
+    end
   end
 
   def authorize_as(user)

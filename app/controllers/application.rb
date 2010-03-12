@@ -63,6 +63,9 @@ class ApplicationController < ActionController::Base
     current_user.nil? ? true : !self.current_user.administrator?
   end
 
+  def load_roles
+    @roles = Role.find(:all)
+  end
 private
 
   def user

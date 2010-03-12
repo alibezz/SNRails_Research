@@ -11,6 +11,12 @@ class Environment < ActiveRecord::Base
 
   acts_as_design :root => File.join('designs', 'environments')
 
+  acts_as_accessible
+
+  PERMISSIONS['environment'] = {
+    'administrator' => I18n.t(:permission_administrator)
+  }
+
   def self.default
     self.find_by_is_default(true)
   end

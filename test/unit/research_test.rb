@@ -156,4 +156,71 @@ class ResearchTest < Test::Unit::TestCase
     assert_equal r.how_many_items(2), 1   
     assert_equal r.how_many_items(3), nil   
   end
+
+  def test_select_members_of_a_research
+    r = create_research
+    User.destroy_all
+
+    user1 = create_user(:login => 'susan', :administrator => true)
+    user2 = create_user(:login => 'julia', :administrator => false)
+    user3 = create_user(:login => 'peter', :administrator => false)
+    user4 = create_user(:login => 'samuel', :administrator => false)
+
+    role = create_role(:name => "Moderator",                                              :permissions => ['research_viewing', 'research_editing',                       'research_erasing']) 
+  
+    user2.add_role(role, r); user2.reload; r.reload
+
+    assert_equal r.members, [user2]
+    assert_equal r.members(user2), []
+    assert_equal r.non_members, [user3, user4]
+    assert_equal r.non_members(user4), [user3]
+  end
+
+  def test_add_member
+    r = create_research
+    User.destroy_all
+
+    user1 = create_user(:login => 'julia', :administrator => false)
+
+    role = create_role(:name => "Moderator",                                              :permissions => ['research_viewing', 'research_editing',                       'research_erasing']) 
+  
+    assert r.add_member(user1.id, role.id)
+    assert_equal false, r.add_member(user1.id, role.id)
+    assert_equal false, r.add_member(nil, role.id)
+    assert_equal false, r.add_member(user1.id, nil)
+  end
+
+  def test_change_member_role
+    r = create_research
+    User.destroy_all
+
+    user2 = create_user(:login => 'julia', :administrator => false)
+    user3 = create_user(:login => 'peter', :administrator => false)
+
+    role = create_role(:name => "Moderator",                                              :permissions => ['research_viewing', 'research_editing',                       'research_erasing']) 
+    
+    role2 = create_role(:name => "Editor",                                                 :permissions => ['research_viewing', 'research_editing']) 
+    
+    r.add_member(user2.id, role.id); r.reload; user2.reload
+    assert r.change_member_role(user2.id, role2.id)
+    assert_equal false, r.change_member_role(nil, role2.id)
+    assert_equal false, r.change_member_role(user2.id, nil)
+    assert r.change_member_role(user3.id, role.id)
+  end
+
+  def test_remove_member
+    r = create_research
+    User.destroy_all
+
+    user1 = create_user(:login => 'julia', :administrator => false)
+    user2 = create_user(:login => 'peter', :administrator => false)
+    
+    role = create_role(:name => "Moderator",                                              :permissions => ['research_viewing', 'research_editing',                       'research_erasing']) 
+    r.add_member(user1.id, role.id); r.reload; user1.reload
+
+    assert r.remove_member(user1.id)
+    assert_equal false, r.remove_member(nil)
+    assert_equal false, r.remove_member(user2.id)
+
+  end
 end

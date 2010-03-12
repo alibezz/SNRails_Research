@@ -47,11 +47,12 @@ namespace :db do
        User.populate 8 do |user|
          user.login = Populator.words(3)
          user.email = Populator.words(1) + '@localhost.com'
-         Permission.populate 1 do |permission|
-           permission.user_id = user.id
-           permission.research_id = research.id
-           permission.is_moderator = [true, false]
-         end
+         user.administrator = false
+        # Permission.populate 1 do |permission|
+        #   permission.user_id = user.id
+        #   permission.research_id = research.id
+        #   permission.is_moderator = [true, false]
+        # end
        end
      end
   end

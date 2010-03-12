@@ -1,0 +1,31 @@
+<h1><%= t(label) %></h1>
+
+<% form_for([:admin, role]) do |f| %>
+
+<%= f.error_messages %>
+
+<p>
+  <%= f.label t(:label_role_name) %>
+  <%= f.text_field :name %>
+</p>
+
+<div id="rights-list">
+  <%if @perms %>
+    <% @perms.each do |from, perms| %>
+    <div>
+      <h2><%= t(from.to_sym) %></h2>
+      <ul>
+        <% perms.keys.each do |p| %>  
+        <li><%= check_box_tag "role[permissions][]", p, role.has_permission?(p) %><%= p %></li>  
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+  <% end %>
+</div>
+
+<p>
+  <%= f.submit t(label_commit) %>
+</p>
+
+<% end %>

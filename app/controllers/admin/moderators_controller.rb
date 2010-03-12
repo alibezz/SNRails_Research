@@ -6,7 +6,11 @@ class Admin::ModeratorsController < ResourceController::Base
   before_filter :find_users, :only => [:index, :new, :show, :edit, :update]
   before_filter :load_moderators, :only => [:index, :new]
 
-  belongs_to :research
+#  belongs_to :research
+
+#  create.after do
+#    @research.add_moderator(params[:user])
+#  end
 
   create.response do |wants|
     wants.html {redirect_to collection_url}

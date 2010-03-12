@@ -4,16 +4,16 @@
 
 <%= render :partial => 'admin/researches/research_options' %>
 
-<%=  t(:edit_moderators) %>
+<%#=  t(:edit_moderators) %>
 
-<% form_tag attribute_admin_research_moderators_path, :method => :put do %>
+<%# form_tag attribute_admin_research_moderators_path, :method => :put do %>
   <ul>
-    <% for moderator in @gusers %>
+    <%# for moderator in @gusers %>
       <li>
-        <%= check_box_tag "moderator_ids[]", moderator.id, @moderators.member?(moderator) %>
-        <%= moderator.login %>
+        <%#= check_box_tag "moderator_ids[]", moderator.id, @moderators.member?(moderator) %>
+        <%#= moderator.login %>
       </li>
-    <% end %>
+    <%# end %>
   </ul>
-  <%= submit_tag t(:attribute_moderators) %>
-<% end %>
+  <%#= submit_tag t(:attribute_moderators) %>
+<%# end %>

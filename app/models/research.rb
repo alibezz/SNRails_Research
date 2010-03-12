@@ -17,7 +17,7 @@ class Research < ActiveRecord::Base
   acts_as_accessible
 
   PERMISSIONS['research'] = {                                                                                                    'research_editing' => I18n.t(:research_editing),
-    'research_answering' => I18n.t(:research_answering),
+    'research_viewing' => I18n.t(:research_viewing),
     'research_erasing' => I18n.t(:research_erasing) } 
  
   validate do |b|
@@ -82,6 +82,55 @@ class Research < ActiveRecord::Base
     self.page_ids.count
   end
 
+  def members(current_user=nil)
+    select_members("IN") { current_user.nil? ? self.role_assignments.map(&:accessor_id) :                                                               self.role_assignments.map(&:accessor_id) - [current_user.id]}
+  end
+
+  def non_members(current_user=nil)
+    select_members("NOT IN") {current_user.nil? ? self.role_assignments.map(&:accessor_id) :                                                               self.role_assignments.map(&:accessor_id) | [current_user.id]}
+  end
+
+  def add_member(user_id, role_id)
+    return false if user_id.blank? or role_id.blank?     
+    role = Role.find(role_id); user = User.find(user_id)
+    return user.add_role(role, self)
+  end
+
+  def change_member_role(user_id, new_role_id)
+    return false if user_id.blank? or new_role_id.blank?  
+    user = User.find(user_id)
+    old_assignment = user.role_assignments.detect {|role| role.resource_id == self.id }
+    old_role = Role.find(old_assignment.role_id) if old_assignment
+
+    #an user has only a single role over a research
+    user.remove_role(old_role, self) if old_role; user.reload
+    new_role = Role.find(new_role_id)
+    return user.add_role(new_role, self)
+  end
+   
+  def remove_member(user_id)
+    user = User.find(user_id) unless user_id.blank?
+    
+    unless user.blank?
+      old_assignment = user.role_assignments.detect {|role| role.resource_id == self.id }
+      old_role = Role.find(old_assignment.role_id) if old_assignment
+      return user.remove_role(old_role, self) unless old_role.blank?
+    end
+    false
+  end
+ 
+ # Maybe this will be necessary later
+ # def find_relevant_roles
+ #   require 'set'
+ #   
+ #   roles = Role.find(:all)
+ #   relevant_roles = []
+ #   roles.each do  |role|
+ #     relevant_roles << role if role.permissions.to_set.subset? PERMISSIONS['research'].to_set
+ #   end
+ #   relevant_roles
+ # end 
+
 protected 
 
 
@@ -104,6 +153,12 @@ protected
       self.reload
     end
     pos1_items.each {|item| item.page_id = old_order[pos2]; item.save!}
+  end
+
+  def select_members(operator, &block)
+    ids = yield 
+    cond = User.merge_conditions({ :administrator => false }, ["id #{operator} (#{ids.join(',')})"])
+    User.find(:all, :conditions => cond)
   end
 end 
 
