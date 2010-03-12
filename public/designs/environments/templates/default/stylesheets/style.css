@@ -216,35 +216,32 @@ div.left {
   float: left;
   left: 0; }
 
-ul#list_items li {
-  float: left;
-  clear: left; }
-
 ul#page_links li {
   float: left;
   clear: left; }
 
-ul#list_items li ul li {
-  display: inline;
+ul#list_items li {
   float: left;
-  clear: none; }
-
-ul#list_items li ul {
-  display: block;
-  float: right;
-  clear: both; }
-
-ul#list_items li ul li a.edit span, ul#list_items li ul li a.item_value span {
-  display: none; }
-ul#list_items li ul li a.destroy {
-  width: 16px !important;
-  height: 16px !important;
-  display: block;
-  float: left;
-  overflow: hidden !important; }
-ul#list_items li ul li a.edit:before {
-  content: url("../images/edit.png"); }
-ul#list_items li ul li a.item_value:before {
-  content: url("../images/list-add.png"); }
-ul#list_items li ul li a.destroy:before {
-  content: url("../images/list-remove.png"); }
+  clear: left; }
+  ul#list_items li ul {
+    display: block;
+    float: right;
+    clear: both; }
+    ul#list_items li ul li {
+      display: inline;
+      float: left;
+      clear: none; }
+      ul#list_items li ul li a.edit span, ul#list_items li ul li a.item_value span {
+        display: none; }
+      ul#list_items li ul li a.destroy {
+        width: 16px !important;
+        height: 16px !important;
+        display: block;
+        float: left;
+        overflow: hidden !important; }
+      ul#list_items li ul li a.edit:before {
+        content: url("../images/edit.png"); }
+      ul#list_items li ul li a.item_value:before {
+        content: url("../images/list-add.png"); }
+      ul#list_items li ul li a.destroy:before {
+        content: url("../images/list-remove.png"); }

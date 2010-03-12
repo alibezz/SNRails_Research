@@ -13,7 +13,7 @@
         <li><%= link_to t(:destroy), { :action => "destroy", :id => item.id }, :confirm => t(:message_confirmation), :method => :delete, :class => "button destroy" %></li>
       </ul>
       <% if item.kind_of?(Question) %>
-        <ul>
+        <ul class="question">
           <% item.item_values.map do |item_value| %>
             <li> 
               <%= item_value.info %> 
