@@ -1,8 +1,5 @@
 <%= error_messages_for :item_value %>
 <%#= FIXME The next field shouldn't appear if :item_id is text %> 
-<p><%= label_tag t(:information) + ":" %><br/>
+<p><%= label_tag t(:item_value) + ":" %>
   <%= f.text_field :info %>
-</p>
-<p><%= label_tag t(:position) + ":" %><br/>
-  <%= select_position("item_value", @positions) %>
 </p>

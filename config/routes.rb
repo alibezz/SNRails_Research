@@ -21,7 +21,7 @@ ActionController::Routing::Routes.draw do |map|
 #        items.resources :item_values
 #      end
       researches.resources :questions do |questions|
-        questions.resources :item_values
+        questions.resources :item_values, :collection => {:reorder_item_values => :post }
       end
     end
   

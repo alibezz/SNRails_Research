@@ -7,26 +7,12 @@
         <li> <%= design_display_button 'edit', t(:edit), edit_admin_research_item_path(@research, item, :item_type => item.class.to_s.downcase) %> </li>
        <% if item.kind_of?(Question) and not item.is_text? %>
          <% unless @research.is_active %> 
-           <li> <%= design_display_button 'item_value', t(:add_itemvalue), new_admin_question_item_value_path(item) %> </li>
+           <li> <%= design_display_button 'item_value', t(:item_values), new_admin_question_item_value_path(item) %> </li>
          <% end %>
        <% end %>
         <li><%= link_to t(:destroy), { :action => "destroy", :id => item.id }, :confirm => t(:message_confirmation), :method => :delete %></li>
       </ul>
-      <% if item.kind_of?(Question) %>
-        <ul>
-          <% item.item_values.map do |item_value| %>
-            <li> 
-              <%= item_value.info %> 
-              <ul>
-                <li>
-                  <%= design_display_button 'edit', t(:edit), edit_admin_question_item_value_path(item, item_value) %>
-                </li>
-              </ul>
-            </li>
-          <% end %>
-        </ul>
-      <% end %>
-    </li>
+   </li>
   <% end %>
 </ul>
 

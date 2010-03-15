@@ -11,8 +11,30 @@ class Admin::ItemValuesController < ResourceController::Base
     @item_values = @item.item_values.sort { |a,b| a.position <=> b.position }
   end
 
-  create.before do
-    @item.reorder_item_values(params[:item_value][:position].to_i)
+  new_action.before do
+    @item_values = @item.item_values
+  end
+
+  def create
+   #   @item.reorder_item_values(params[:item_value][:position].to_i)
+    @item_value = ItemValue.new(params[:item_value].merge({:position => (@item.item_values.blank? ? 1 :                                        @item.item_values.maximum(:position) + 1)}))
+    @item_value.item_id = params[:question_id]
+    if @item_value.save
+      flash[:notice] = I18n.t(:succesfully_saved)
+    end
+    redirect_to :action => 'new'
+  end
+
+  def reorder_item_values
+    params["list_item_values"].each_with_index do |ivalue_id,position|
+      ivalue = @item.item_values.find(ivalue_id)
+      ivalue.position = position
+      ivalue.save!
+    end
+    collection
+    respond_to do |format|
+      format.js
+    end
   end
 
   update.before do
@@ -25,7 +47,7 @@ class Admin::ItemValuesController < ResourceController::Base
         @item_value.destroy
         @item = Item.find(params[:question_id])
         flash[:notice] = t(:successfully_removed) 
-        redirect_to(admin_research_question_item_values_path(@item.research_id, @item)) 
+        redirect_to :action => 'new' 
   end
 
   def collection
