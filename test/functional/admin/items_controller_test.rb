@@ -97,15 +97,6 @@ class ItemsControllerTest < Test::Unit::TestCase
     assert_template 'show'
   end
 
-
-  def test_should_show_links
-    r = create_research
-    i = create_item_of_a_research(r)
-    get :show, :research_id => i.research_id, :id => i.id
-    assert_tag :tag => 'a', :attributes => { :href => edit_admin_research_item_url(i.research_id, i.id,                                                                   :item_type => "question") } 
-    assert_tag :tag => 'a', :attributes => { :href => admin_research_items_url(i.research_id) } 
-  end
-
 #edit
 
   def test_should_get_edit
@@ -122,14 +113,6 @@ class ItemsControllerTest < Test::Unit::TestCase
     i = create_item_of_a_research(r)
     get :edit, :research_id => i.research_id, :id => i.id
     assert_tag :tag => 'form', :attributes => {:action => admin_research_item_url(i.research_id, i.id),  :method => 'post' }    
-  end
-
-  def test_edit_should_show_links
-    r = create_research
-    i = create_item_of_a_research(r)
-    get :edit, :research_id => i.research_id, :id => i.id
-    assert_tag :tag => 'form', :attributes => {:action => admin_research_item_url(i.research_id, i.id),  :method => 'post' }    
-    assert_tag :tag => 'a', :attributes => { :href => admin_research_items_url(i.research_id) }    
   end
 
 #update

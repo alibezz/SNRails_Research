@@ -76,7 +76,11 @@ class Admin::ItemsController < ResourceController::Base
   private
 
   def collection
-    page = params[:page] || 1
+    unless params[:page].blank?
+      page = params[:page]
+    else
+      page = @research.items.blank? ? 1 : @research.items.minimum(:page_id)
+    end  
     @research.items.find(:all, :conditions => {:page_id => page}, :order => :position)
   end
 

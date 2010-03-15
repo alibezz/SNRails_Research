@@ -6,5 +6,4 @@ class ResearchesController < ResourceController::Base
   def collection
      Research.find(:all, :conditions => {:is_active => true})
   end
-#
 end
