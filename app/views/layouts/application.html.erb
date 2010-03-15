@@ -16,24 +16,34 @@
       <div id="frame">
 
         <div id="header">
-          <% if !current_user.nil? and current_user.is_administrator? %>
-            <%= link_to t(:see_all_researches), admin_researches_url %>
-          <% else %>
-            <%= link_to t(:see_all_researches), researches_url %>
-          <% end %>
+          <span class="title">Safernet</span>
+          <span>Sistema de Pesquisas</span>
+        </div>
+        
+        <div id="loginb">
           <%= login_bar %>
-        </div> <!-- end "header" -->
+        </div>
+          <div id="all_researches">
+            <% if !current_user.nil? and current_user.is_administrator? %>
+              <%= link_to t(:see_all_researches), admin_researches_url %>
+            <% else %>
+              <%= link_to t(:see_all_researches), researches_url %>
+            <% end %>
+          </div>
 
-        <%= flash[:notice] %>
-        <%= flash[:error] %>
+        <div id="content">
+
+        <div class="info">
+          <%= flash[:notice] %>
+          <%= flash[:error] %>
+        </div>
 
         <%= 
 #administration_menu 
 %>
 
-        <div id="content">
           <%= design_display(yield) %>
-        </div> <!-- end "content" -->
+        </div>
 
         <div id="footer">
           <%= 

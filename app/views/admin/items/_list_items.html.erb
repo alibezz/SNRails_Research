@@ -10,9 +10,8 @@
            <li> <%= design_display_button 'item_value', t(:item_values), new_admin_question_item_value_path(item) %> </li>
          <% end %>
        <% end %>
-        <li><%= link_to t(:destroy), { :action => "destroy", :id => item.id }, :confirm => t(:message_confirmation), :method => :delete %></li>
+        <li><%= link_to t(:destroy), { :action => "destroy", :id => item.id }, :confirm => t(:message_confirmation), :method => :delete, :class => "button destroy" %></li>
       </ul>
-   </li>
   <% end %>
 </ul>
 

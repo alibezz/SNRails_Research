@@ -36,6 +36,9 @@ ActionController::Routing::Routes.draw do |map|
   #Route for doc plugin
   map.resources :doc
 
+  #Mapping design block routes
+  map.design_plugin
+
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   map.root :controller => "researches"
 

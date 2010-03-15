@@ -67,6 +67,7 @@ Rails::Initializer.run do |config|
 
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
+#config.gem 'metric_fu', :version => '1.3.0', :lib => 'metric_fu'
 end
 
 I18nParserConfig.locales= ['en','pt-br'] # I18nParser plugin stuff
