@@ -6,10 +6,10 @@ class Research < ActiveRecord::Base
 
   has_many :items, :before_add => [ Proc.new { |p,d| raise "#{t(:active_survey_cant_receive_questions)}" if p.is_active } ], :order => "position"
   has_many :questions
-  has_many :permissions
-  has_many :users, :through => :permissions
-  has_many :moderator_permissions, :conditions => {:is_moderator => true}, :class_name => 'Permission'
-  has_many :moderators, :through => :moderator_permissions, :source => :user
+#  has_many :permissions
+#  has_many :users, :through => :permissions
+#  has_many :moderator_permissions, :conditions => {:is_moderator => true}, :class_name => 'Permission'
+#  has_many :moderators, :through => :moderator_permissions, :source => :user
   has_many :questionnaires
 
   acts_as_design :root => File.join('designs', 'researches')

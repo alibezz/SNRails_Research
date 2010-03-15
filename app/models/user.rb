@@ -18,10 +18,6 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :email
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
 
-  has_many :permissions
-  has_many :researches, :through => :permissions
-  
-
 #  # HACK HACK HACK -- how to do attr_accessible from here?
 #  # prevents a user from submitting a crafted form that bypasses activation
 #  # anything else you want your user to change should be added here.
@@ -51,12 +47,13 @@ class User < ActiveRecord::Base
     write_attribute :email, (value ? value.downcase : nil)
   end
 
-  def is_moderator?(research)
-    self.researches.member?(research)
-  end
-
   def my_researches(params = {})
-    self.is_administrator? ? Research.find(:all, params) : self.researches
+    if self.is_administrator? 
+      Research.find(:all, params) 
+    else
+      research_ids = self.role_assignments.map(&:resource_id).uniq
+      Research.find(:all, :conditions => ["id IN (#{research_ids.join(',')})"])
+    end
   end
 
   def is_administrator?

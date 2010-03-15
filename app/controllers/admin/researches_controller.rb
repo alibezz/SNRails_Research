@@ -26,8 +26,6 @@ class Admin::ResearchesController < ResourceController::Base
   end
 
   def remove_member
-    require 'pp'
-    pp params
     unless @research.remove_member(params[:user_id])
       flash[:error] = I18n.t(:member_not_removed)
     end
