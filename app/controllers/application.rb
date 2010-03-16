@@ -31,28 +31,15 @@ class ApplicationController < ActionController::Base
     login_required if @research.is_private?
 
   end
-
-  #FIXME make this test
-  def load_items_position
-    @positions = {}; @positions.merge!({"#{t(:in_the_beginning)}\n" => 1})
-
-    unless @research.items.empty?
-      @research.items.each { |item| @positions.merge!({"#{t(:after)} #{item.info} \n" => item.position + 1}) }
-    end
-  end
-  
+ 
   #FIXME make this test
   def load_item
     @item = Item.find(params[:item_id]||params[:question_id])
-
   end
 
-  #FIXME make this test
-  def load_item_values_position
-    @positions = {}; @positions.merge!({"#{t(:in_the_beginning)}\n" => 1})
-    unless @item.item_values.empty?
-      @item.item_values.each { |ivalue| @positions.merge!({"#{t(:after)} #{ivalue.info}\n" => ivalue.position + 1}) }
-    end
+  def load_item_values
+    load_item
+    @item_values = @item.item_values
   end
 
   def find_users

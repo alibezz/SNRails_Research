@@ -2,7 +2,6 @@ class Admin::ItemsController < ResourceController::Base
 
   belongs_to :research
   before_filter :load_research
-  before_filter :load_items_position
 
   new_action.before do
     # @item_type is "question" by default

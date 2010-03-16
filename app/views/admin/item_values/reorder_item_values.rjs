@@ -1,0 +1,2 @@
+page.replace('list_item_values', :partial => 'list_item_values')
+

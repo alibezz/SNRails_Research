@@ -1,18 +1,15 @@
-<h1><%= @research.title %></h1>
+<h2><%= t(:item_values) %></h2>
 
-<h2><%= @research.subtitle %></h2>
+<%= error_messages_for :item_value %>
 
-<%= render :partial => 'admin/researches/research_options' %>
-<% unless @research.is_active %>
-  <%= link_to t(:new_item_value), new_admin_question_item_value_url(@item) %><br>
+<%= render :partial => "list_item_values", :locals => {:item => @item} %>
+
+<% form_for([:admin, @item, @item_value]) do |f| %>
+  <%= render :partial => "form", :locals => { :f => f } %>
+  <p>
+    <%= submit_tag t(:create) %>
+  </p>
 <% end %>
+<br/>
+<%= link_to t(:item), admin_research_items_path(@item.research_id, :page => @item.page_id) %>
 
-<%=  t(:item_values) %>
-
-<ul>
-<%- @item_values.each do |item_value| %>
-  <li> 
-    <%= link_to item_value.info, admin_question_item_value_url(@item, item_value) %>
-  </li>
-<% end %>
-</ul>

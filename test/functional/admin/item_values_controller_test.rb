@@ -27,61 +27,28 @@ class ItemValuesControllerTest < Test::Unit::TestCase
     assert_template 'index'
   end
 
-  def test_index_should_show_items
-    get :index, :research_id => @item.research_id, :question_id => @item.id 
-    assert_tag :tag => "ul", :descendant => { :tag => "li" }
-  end
-
-  def test_index_should_allow_new
-    get :index, :research_id => @item.research_id, :question_id => @item.id 
-    assert_tag :tag => "a", :attributes => { :href => new_admin_question_item_value_url(@item.id)}
-  end
-
-#new
-
-  def test_should_get_new
-    get :new, :question_id => @item.id 
-    assert_response :success
-    assert_template 'new'
-  end
-
-  def test_new_should_have_form
-    get :new, :question_id => @item.id 
-    assert_tag :tag => 'form', :attributes => { :method => 'post' }
-  end
-
-  def test_new_should_have_back_link
-    get :new, :question_id => @item.id 
-    assert_tag :tag => 'a', :attributes => { :href => admin_research_question_item_values_url(@item.research_id, @item.id) }
-  end
-
 #create
-  def test_should_reorder_item_values
-    i1 = create_item_value(:item_id => @item.id, :position => 1)
-    i2 = create_item_value(:item_id => @item.id, :position => 2)
-    i3 = create_item_value(:item_id => @item.id, :position => 3)
-    post :create, :item_value => {"position"=>"1", "info"=>"test1"}, :item_id => @item.id
 
-    @item.reload; i1.reload; i2.reload; i3.reload
-    assert_equal @item.item_values.count, 4
-    assert_equal i1.position, 2 
-    assert_equal i2.position, 3 
-    assert_equal i3.position, 4 
-  end
+  def test_should_create_item
+    count = @item.item_values.count
+    last_position = @item.item_values.maximum(:position)
 
-#show
+    #creates
+    post :create, :question_id => @item.id, :item_value => {:info => "test"}
+    @item.reload
 
- def test_should_get_show
-    get :show, :question_id => @item.id, :id => @ivalue.id
-    assert_response :success
-    assert_template 'show'
-  end
-
-  def test_should_show_links
-    get :show, :question_id => @item.id, :id => @ivalue.id
-    assert_tag :tag => 'a', :attributes => { :href => edit_admin_question_item_value_url(@ivalue.item_id, @ivalue.id) }
-    assert_tag :tag => 'a', :attributes => { :href => 
-						admin_research_question_item_values_url(@item.research_id, @item.id) }
+    assert_equal count + 1, @item.item_values.count
+    assert_equal last_position + 1, @item.item_values.maximum(:position)
+    assert_response :redirect
+    assert_redirected_to admin_research_question_item_values_path(@item.research_id, @item)
+    assert flash[:notice]
+    
+    #doesnt create
+    post :create, :question_id => @item.id, :item_value => {:info => ""}
+    @item.reload
+    assert_equal count + 1, @item.item_values.count
+    assert_response :redirect
+    assert_redirected_to admin_research_question_item_values_path(@item.research_id, @item)
   end
 
 #edit
@@ -94,32 +61,28 @@ class ItemValuesControllerTest < Test::Unit::TestCase
 
   def test_edit_should_have_form
     get :edit, :question_id => @item.id, :id => @ivalue.id
-    assert_tag :tag => 'form', :attributes => { :action =>                                                                                                                             admin_question_item_value_url(@ivalue.item_id, @ivalue.id), :method => 'post' }  
-  end
-
-  def test_edit_should_show_links
-    get :edit, :question_id => @item.id, :id => @ivalue.id
-    assert_tag :tag => 'form', :attributes => {:action => admin_question_item_value_url(@ivalue.item_id, @ivalue.id),  :method => 'post' }  
-    assert_tag :tag => 'a', :attributes => { :href => 
-						admin_research_question_item_values_url(@item.research_id, @item.id) }
-  end
+    assert_tag :tag => 'form'  
+ end
 
 #update
 
-  def test_should_update_positions
-    @item.item_values.delete_all; @item.reload
+  def test_should_update
+    ivalue = create_item_value(:item_id => @item.id, :info => "test")
+   
+    #updates 
+    post :update, :question_id => @item.id, :id => ivalue.id, :item_value => {:info => "new_test"}
+    ivalue.reload
 
-    i1 = create_item_value(:item_id => @item.id, :position => 1)
-    i2 = create_item_value(:item_id => @item.id, :position => 2)
-    i3 = create_item_value(:item_id => @item.id, :position => 3)
-    post :update, :id => i2.id, :question_id => @item.id, :item_value => {:position => 1, :info => i2.info}
-    @item.reload; i1.reload; i2.reload; i3.reload
-    
-    assert_equal i1.position, 2 
-    assert_equal i2.position, 1 
-    assert_equal i3.position, 3
+    assert_equal ivalue.info, "new_test"
+    assert_response :redirect
+    assert_redirected_to admin_research_question_item_values_path(@item.research_id, @item)
+ 
+    #doesnt update
+    post :update, :question_id => @item.id, :id => ivalue.id, :item_value => {:info => ""}
+    ivalue.reload
+
+    assert_equal ivalue.info, "new_test"
   end
-
 #destroy
 
   def test_should_destroy_item_value
@@ -135,4 +98,27 @@ class ItemValuesControllerTest < Test::Unit::TestCase
     assert_equal @item.item_values.count, 0
     
   end
+
+#reorder_item_values
+#
+#  def test_should_reorder_item_values
+#    i1 = create_item_value(:item_id => @item.id, :position => 1)
+#    i2 = create_item_value(:item_id => @item.id, :position => 2)
+#    i3 = create_item_value(:item_id => @item.id, :position => 3)
+#    @item.reload
+#
+#    post :reorder_item_values, :list_item_values => ["3", "1", "2"], :research_id => @item.research_id,                               :question_id => @item.id
+#    @item.reload; i1.reload; i2.reload; i3.reload
+#    
+#    assert_equal i1.position, 2
+#    assert_equal i2.position, 3
+#    assert_equal i3.position, 1
+#
+#    post :reorder_item_values, :list_item_values => ["1", "2", "3"], :research_id => @item.research_id,                               :question_id => @item.id
+#    @item.reload; i1.reload; i2.reload; i3.reload
+#    assert_equal i1.position, 1
+#    assert_equal i2.position, 2
+#    assert_equal i3.position, 3
+#
+#  end
 end

@@ -27,30 +27,6 @@ class ItemsControllerTest < Test::Unit::TestCase
      
   end
 
-  def test_should_show_items
-    r = create_research
-    text_question = create_item(:type => "question", :research_id => r.id, :html_type => Question.html_types.invert["pure_text"])
-    selection_question = create_item(:type => "question", :research_id => r.id, :html_type => Question.html_types.invert["single_selection"], :page_id => 2)
-    section = create_item(:type => "section", :research_id => r.id, :page_id => 3)
-
-    get :index, :research_id => r.id
-    assert_tag :tag => "a", :attributes => { :href => new_admin_research_item_path(r.id, :item_type => "question") }
-    assert_tag :tag => "a", :attributes => { :href => new_admin_research_item_path(r.id, :item_type => "section") }
-
-    assert_tag :tag => "a", :attributes => { :href => edit_admin_research_item_path(r, text_question, :item_type => text_question.class.to_s.downcase)} 
-    assert_no_tag :tag => "a", :attributes => { :href => new_admin_question_item_value_path(text_question)}
-
-    get :index, :research_id => r.id, :page => 2
-    
-    assert_tag :tag => "a", :attributes => { :href => edit_admin_research_item_path(r, selection_question, :item_type => selection_question.class.to_s.downcase)} 
-    assert_tag :tag => "a", :attributes => { :href => new_admin_question_item_value_path(selection_question)}
-
-    get :index, :research_id => r.id, :page => 3
-
-    assert_tag :tag => "a", :attributes => { :href => edit_admin_research_item_path(r, section, :item_type => section.class.to_s.downcase)} 
-    assert_no_tag :tag => "a", :attributes => { :href => new_admin_question_item_value_path(section)}
-  end
-
 #new
 
   def test_should_get_new
