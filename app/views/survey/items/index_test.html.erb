@@ -1,0 +1,82 @@
+<%= title t(:listing_items) %>
+
+
+<ul id="items_list">
+  <% @items.each do |item| %>
+    <li id="item_<%= item.id %>"> <%= item.info %> </li>
+  <% end %>
+</ul>
+
+<div id="list-info">
+bli
+</div>
+
+
+<ul id="items_list_2">
+  <li id="page_1" > Page 1 </li>
+</ul>
+
+<div id="list-info-2">
+bla
+</div>
+
+<ul id="items_list_3">
+  <li id="page_3" > Page 3 </li>
+</ul>
+
+<div id="list-info-3">
+blo
+</div>
+
+
+<%= 
+sortable_element 'items_list', 
+      :update => 'list-info',  
+      :complete => visual_effect(:highlight, 'items_list'), 
+      :url => { :action => "nothing"},
+      :failure => "$('list-failure').innerHTML= request.responseText",
+      :constraint => false,
+      :dropOnEmpty => true,
+      :containment =>  ['items_list', 'items_list_2', 'items_list_3']
+%>
+
+<%= sortable_element 'items_list_2', 
+      :update => 'list-info-2',
+      :complete => visual_effect(:highlight, 'items_list_2'), 
+      :url => { :action => "nothing", :page => 2},
+      :failure => "$('list-failure').innerHTML= request.responseText",
+      :constraint => false,
+      :dropOnEmpty => true,
+      :containment =>  ['items_list', 'items_list_2', 'items_list_3']
+%>
+
+<%= sortable_element 'items_list_3', 
+      :update => 'items_list_3',
+      :complete => visual_effect(:highlight, 'items_list_3'), 
+      :url => { :action => "process_page", :page => 3},
+      :failure => "$('list-failure').innerHTML= request.responseText",
+      :constraint => false,
+      :dropOnEmpty => true,
+      :containment =>  ['items_list', 'items_list_2', 'items_list_3']
+%>
+
+
+<%= 
+#will_paginate 
+%>
+
+<%= 
+#page_entries_info @items 
+%>
+
+<%= 
+#link_to t(:back), parent_object 
+%>
+
+<%= 
+#link_to t(:new_item), new_object_url 
+%>
+<div id="list-failure">
+Em caso de falha isso daqui muda
+</div>
+

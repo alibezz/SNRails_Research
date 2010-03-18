@@ -1,0 +1,16 @@
+<h1>Editing Item</h1>
+
+<%= error_messages_for :item %>
+
+<% form_for(:item, :url => object_url, :html => { :method => :put }) do |f| %>
+  <%= render :partial => "#{@item_type}_form", :locals => { :f => f } %>
+  <p>
+    <%=submit_tag "Update"%>
+  </p>
+<% end %>
+
+<br/>
+
+<%= link_to 'Show', object_url %>
+|
+<%= link_to 'Back', survey_research_items_path(@research, :page => @item.page_id) %>

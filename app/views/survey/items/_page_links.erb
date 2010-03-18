@@ -1,0 +1,12 @@
+<%= paginate_research(@research, params[:page] || 1) %>
+
+<%= 
+  sortable_element 'page_links', 
+      :url => { :action => 'reorder_pages', :page => params[:page]},
+      :failure => "$('error').innerHTML= request.responseText",
+      :constraint => false,
+      :dropOnEmpty => true,
+      :complete => visual_effect(:highlight, 'page_links'), 
+      :containment =>  ['page_links']
+%>
+

@@ -25,9 +25,9 @@
         </div>
           <div id="all_researches">
             <% if !current_user.nil? and current_user.is_administrator? %>
-              <%= link_to t(:see_all_researches), admin_researches_url %>
+              <%= link_to t(:see_all_researches), survey_researches_url %>
             <% else %>
-              <%= link_to t(:see_all_researches), researches_url %>
+              <%= link_to t(:see_all_researches), public_index_url %>
             <% end %>
           </div>
 
