@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   def load_research
     id = params[:research_id] || params[:public_id]
 
-    self.class.design :holder => 'research' 
+    self.class.design :holder => 'environment' 
     if !current_user.nil? and current_user.is_administrator?
         @research =  id.nil? ? current_user.my_researches.find{ |i| i.id == params[:id].to_i }                                                            : current_user.my_researches.find{ |i| i.id == id.to_i}
     else
