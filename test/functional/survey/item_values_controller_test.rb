@@ -78,11 +78,13 @@ class ItemValuesControllerTest < Test::Unit::TestCase
     assert_redirected_to survey_research_question_item_values_path(@item.research_id, @item)
  
     #doesnt update
+    get :edit, :question_id => @item.id, :id => @ivalue.id
     post :update, :question_id => @item.id, :id => ivalue.id, :item_value => {:info => ""}
     ivalue.reload
 
     assert_equal ivalue.info, "new_test"
   end
+
 #destroy
 
   def test_should_destroy_item_value

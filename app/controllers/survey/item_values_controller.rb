@@ -2,7 +2,7 @@ class Survey::ItemValuesController < ResourceController::Base
 
   belongs_to :question
 
-  before_filter :load_research, :only => [:index, :reorder_item_values]
+  before_filter :load_research, :only => [:index, :reorder_item_values, :edit]
   before_filter :load_item
   before_filter :load_item_values, :only => [:index, :reorder_item_values]
   

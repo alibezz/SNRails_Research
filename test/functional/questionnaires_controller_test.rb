@@ -45,16 +45,18 @@ class QuestionnairesControllerTest < Test::Unit::TestCase
   
   def test_should_create_questionnaire
      count = Questionnaire.count
-     
+
+     require 'pp'
     # Some questions weren't answered.
      
-     post :new, :research_id => @research.id, :commit => "Submit", :page_id => 2, :object_item_values => {}
+     post :new, :public_id => @research.id, :commit => "Submit", :page_id => 2, :object_item_values => {}
 
      assert_equal count, Questionnaire.count
 
      # All questions were answered. 
 
-     post :new, :research_id => @research.id, :commit => "Submit",                                                                           :page_id => 2, :object_item_values => {@question1.id.to_s => {:info => "test"},                                                                                     @question2.id.to_s => @ivalue1.id.to_s}
+     pp @research     
+     post :new, :public_id => @research.id, :commit => "Submit",                                                                           :page_id => 2, :object_item_values => {@question1.id.to_s => {:info => "test"},                                                                                     @question2.id.to_s => @ivalue1.id.to_s}
     
      assert_equal count + 1, Questionnaire.count
 

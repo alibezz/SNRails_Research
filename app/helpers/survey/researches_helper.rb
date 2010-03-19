@@ -1,4 +1,4 @@
-module Admin::ResearchesHelper
+module Survey::ResearchesHelper
 
   def role_id(user, research)
     assignment = user.role_assignments.detect{|r| r.resource_id == research.id}

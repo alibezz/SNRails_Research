@@ -4,7 +4,7 @@
 
 <%= render :partial => "list_item_values", :locals => {:item => @item} %>
 
-<% form_for([:survey, @item, @item_value]) do |f| %>
+<% form_for([:survey, @research, @item, @item_value]) do |f| %>
   <%= render :partial => "form", :locals => { :f => f } %>
   <p>
     <%= submit_tag t(:create) %>

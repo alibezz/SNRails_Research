@@ -13,24 +13,26 @@ ActionController::Routing::Routes.draw do |map|
     p.resources :items
   end
 
+  map.resources :questions, :controller => 'items', :has_many => :item_values
+
+  # Route for survey
   map.namespace :survey do |survey|
     survey.resources :researches, :member => { :role_management => :get, :new_member => :put, :edit_member => :put, :remove_member => :get }
     survey.resources :researches do |researches|
       researches.resources :items, :collection => {:reorder_items => :post, :reorder_pages => :post,                                                                            :set_item_to_page => :post}
       researches.resources :questions do |questions|
-          questions.resources :item_values, :collection => {:reorder_item_values => :post }
+        questions.resources :item_values, :collection => {:reorder_item_values => :post }
       end
-
     end
-  end
+ end
 
-  map.resources :questions, :controller => 'items', :has_many => :item_values
-  # Route for admin research
+ # Route for admin
   map.namespace :admin do |admin|
+  #  admin.resources :researches, :member => { :role_management => :get, :new_member => :put, :edit_member => :put, :remove_member => :get }
     admin.resources :roles
   end
  
-  #Route for doc plugin
+   #Route for doc plugin
   map.resources :doc
 
   #Mapping design block routes

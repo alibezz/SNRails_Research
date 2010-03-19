@@ -32,4 +32,9 @@ class Survey::ResearchesController < ResourceController::Base
     redirect_to role_management_survey_research_path(@research)
   end
 
+private
+
+  def collection
+    current_user.my_researches
+  end
 end
