@@ -1,0 +1,9 @@
+<h1><%= @research.title %></h1>
+
+<h2><%= @research.subtitle %></h2>
+
+<p>
+  <%=h @research.introduction %>
+</p>
+
+<%= link_to t(:subscribe_to_survey), new_public_questionnaire_path(@research) %>
