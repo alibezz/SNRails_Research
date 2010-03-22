@@ -21,6 +21,15 @@ class SessionsControllerTest < ActionController::TestCase
     post :create, :login => user.login, :password => user.password
     assert session[:user_id]
     assert_response :redirect
+    assert_redirected_to survey_researches_path
+
+    user2 = create_user(:login => 'Susan', :administrator => true)
+    post :create, :login => user2.login, :password => user2.password
+    assert session[:user_id]
+    assert_response :redirect
+    assert_redirected_to admin_roles_path
+
+
   end
 
   def test_should_fail_login_and_not_redirect

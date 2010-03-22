@@ -92,7 +92,8 @@ class Test::Unit::TestCase
       :login => 'some',
       :password => 'somepass',
       :password_confirmation => 'somepass',
-      :email => params[:login].nil? ? 'myemail@something.com' : params[:login] + '@something.com'
+      :email => params[:login].nil? ? 'myemail@something.com' : params[:login] + '@something.com',
+      :administrator => false
     }.merge(params)
   end
 
