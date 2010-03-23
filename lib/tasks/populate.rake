@@ -15,7 +15,11 @@ namespace :db do
     env = Environment.new(:is_default => true)
     env.design_data = {:template => 'default', :theme => 'default', :icon_theme => 'default'}
     env.save!
- 
+
+    Role.create!(:name => 'Moderator', :permissions => ['research_viewing', 'research_editing', 'research_erasing'])  
+    Role.create!(:name => 'Editor', :permissions => ['research_viewing', 'research_editing'])  
+    Role.create!(:name => 'Collaborator', :permissions => ['research_viewing'])  
+
      User.populate 1 do |user|
      user.login = 'admin'
        user.administrator = true
@@ -23,7 +27,7 @@ namespace :db do
        user.email = 'admin@localhost'
      end 
 
-     Research.populate 20 do |research|
+     Research.populate 10 do |research|
        research.title = Populator.words(1..4).titleize
        research.design_data = {:template => 'default', :theme => 'default', :icon_theme => 'default'}
        research.subtitle = Populator.words(1.7).titleize
@@ -44,16 +48,37 @@ namespace :db do
          #if item.type == 'Item'
          end
        end
-       User.populate 8 do |user|
-         user.login = Populator.words(3)
-         user.email = Populator.words(1) + '@localhost.com'
-         user.administrator = false
-        # Permission.populate 1 do |permission|
-        #   permission.user_id = user.id
-        #   permission.research_id = research.id
-        #   permission.is_moderator = [true, false]
-        # end
-       end
+     end
+     User.populate 30 do |user|
+       user.administrator = false
+       user.crypted_password = '44d5d03bfe8570fbfaa630a3520b33724c397ea9' #encriptation for 123456 password
+     end
+     
+     @users = User.find(:all, :conditions => {:administrator => false})
+     Research.find(:all).each do |research|
+       moderator = @users.first
+       moderator.add_role(Role.find_by_name('Moderator'), research)
+       moderator.login = "moderator_#{research.id}"
+       moderator.name = moderator.login
+       moderator.email = moderator.login + '@localhost.com'
+       moderator.save!; moderator.reload
+       @users.delete_at(0)
+
+       editor = @users.first
+       editor.add_role(Role.find_by_name('Editor'), research)
+       editor.login = "editor_#{research.id}"
+       editor.name = editor.login
+       editor.email = editor.login + '@localhost.com'
+       editor.save!; editor.reload
+       @users.delete_at(0)
+
+       collaborator = @users.first
+       collaborator.add_role(Role.find_by_name('Collaborator'), research)
+       collaborator.login = "collaborator_#{research.id}"
+       collaborator.name = collaborator.login
+       collaborator.email = collaborator.login + '@localhost.com'       
+       collaborator.save!; collaborator.reload
+       @users.delete_at(0)
      end
   end
 
