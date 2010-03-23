@@ -5,21 +5,24 @@ require 'survey/items_controller'
 class Survey::ItemsController; def rescue_action(e) raise e end; end
 
 class Survey::ItemsControllerTest < Test::Unit::TestCase
-  fixtures :users
+  #fixtures :users
 
   def setup
     @controller = Survey::ItemsController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
     @environment = Environment.create(:is_default => true)
-    login_as :quentin
+    role = create_role(:name => 'Moderator', :permissions => ActiveRecord::Base::PERMISSIONS['research'].keys)
+    user = create_user(:login => "Susan")
+    @research = create_research
+    user.add_role(role, @research)
+    login_as(user.login)
   end
 
 #index
 
   def test_should_get_index
-    r = create_research
-    get :index, :research_id => r.id
+    get :index, :research_id => @research.id
     assert_response :success
     assert_template 'index'
     assert_tag :tag => "ul", :descendant => { :tag => "li" }
@@ -29,44 +32,39 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
 #new
 
   def test_should_get_new
-    r = create_research
-    get :new, :research_id => r.id
+    get :new, :research_id => @research.id
     assert_response :success
     assert_template 'new'
   end
 
   def test_new_should_have_form
-    r = create_research
-    get :new, :research_id => r.id
+    get :new, :research_id => @research.id
     assert_tag :tag => 'form', :attributes => { :method => 'post' }    
   end
 
   def test_new_should_have_back_link
-    r = create_research
-    get :new, :research_id => r.id
-    assert_tag :tag => 'a', :attributes => { :href => survey_research_items_url(r.id) }    
+    get :new, :research_id => @research.id
+    assert_tag :tag => 'a', :attributes => { :href => survey_research_items_url(@research.id) }    
   end
 
 #create
 
   def test_should_post_create_successfully
-    r = create_research
-    assert_equal 0, r.items.length
+    assert_equal 0, @research.items.length
 
-    post :create, :item => {"position"=>"1", "info"=>"test1", "html_type"=> 0}, :research_id => r.id
-    r.reload 
-    assert_equal 1, r.items.length
+    post :create, :item => {"position"=>"1", "info"=>"test1", "html_type"=> 0}, :research_id => @research.id
+    @research.reload 
+    assert_equal 1, @research.items.length
 
-    post :create, :item => {"position"=>"1", "info"=>"", "html_type"=> 0}, :research_id => r.id
+    post :create, :item => {"position"=>"1", "info"=>"", "html_type"=> 0}, :research_id => @research.id
     assert_response :redirect
-    assert_redirected_to new_survey_research_item_path(r.id)
+    assert_redirected_to new_survey_research_item_path(@research.id)
   end
 
 #show
 
   def test_should_get_show
-    r = create_research
-    i = create_item_of_a_research(r)
+    i = create_item_of_a_research(@research)
     get :show, :research_id => i.research_id, :id => i.id
     assert_response :success
     assert_template 'show'
@@ -75,8 +73,7 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
 #edit
 
   def test_should_get_edit
-    r = create_research
-    i = create_item_of_a_research(r)
+    i = create_item_of_a_research(@research)
     get :edit, :research_id => i.research_id, :id => i.id
     assert_response :success
     assert_template 'edit'
@@ -84,8 +81,7 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
   end
 
   def test_edit_should_have_form
-    r = create_research
-    i = create_item_of_a_research(r)
+    i = create_item_of_a_research(@research)
     get :edit, :research_id => i.research_id, :id => i.id
     assert_tag :tag => 'form', :attributes => {:action => survey_research_item_url(i.research_id, i.id),  :method => 'post' }    
   end
@@ -93,8 +89,7 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
 #update
 
   def test_should_change_fields
-    r = create_research
-    i = create_item_of_a_research(r); i.html_type = 0; i.save!
+    i = create_item_of_a_research(@research); i.html_type = 0; i.save!
 
     position = i.position
 
@@ -112,19 +107,18 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
 
 #reorder items
   def test_should_reorder_items
-    r = create_research
-    i1 = create_item(:research_id => r.id, :position => 0)
-    i2 = create_item(:research_id => r.id, :position => 1)
-    i3 = create_item(:research_id => r.id, :position => 2)
-    get :index, :research_id => r.id
-    post :reorder_items, :list_items => ["3", "1", "2"], :page => nil, :research_id => r.id
-    r.reload; i1.reload; i2.reload; i3.reload
+    i1 = create_item(:research_id => @research.id, :position => 0)
+    i2 = create_item(:research_id => @research.id, :position => 1)
+    i3 = create_item(:research_id => @research.id, :position => 2)
+    get :index, :research_id => @research.id
+    post :reorder_items, :list_items => ["3", "1", "2"], :page => nil, :research_id => @research.id
+    @research.reload; i1.reload; i2.reload; i3.reload
     assert_equal i1.position, 1
     assert_equal i2.position, 2
     assert_equal i3.position, 0
     
-    post :reorder_items, :list_items => ["1", "2", "3"], :page => nil, :research_id => r.id
-    r.reload; i1.reload; i2.reload; i3.reload
+    post :reorder_items, :list_items => ["1", "2", "3"], :page => nil, :research_id => @research.id
+    @research.reload; i1.reload; i2.reload; i3.reload
     assert_equal i1.position, 0
     assert_equal i2.position, 1
     assert_equal i3.position, 2
@@ -133,13 +127,12 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
 #reorder_pages
 
   def test_should_reorder_pages
-    r = create_research
-    i1 = create_item(:research_id => r.id, :page_id => 1)
-    i2 = create_item(:research_id => r.id, :page_id => 2)
-    i3 = create_item(:research_id => r.id, :page_id => 3)
-    get :index, :research_id => r.id
-    post :reorder_pages, :page_links => ["3", "1", "2"], :page => nil, :research_id => r.id
-    r.reload; i1.reload; i2.reload; i3.reload
+    i1 = create_item(:research_id => @research.id, :page_id => 1)
+    i2 = create_item(:research_id => @research.id, :page_id => 2)
+    i3 = create_item(:research_id => @research.id, :page_id => 3)
+    get :index, :research_id => @research.id
+    post :reorder_pages, :page_links => ["3", "1", "2"], :page => nil, :research_id => @research.id
+    @research.reload; i1.reload; i2.reload; i3.reload
     assert_equal i1.page_id, 2
     assert_equal i2.page_id, 3
     assert_equal i3.page_id, 1
