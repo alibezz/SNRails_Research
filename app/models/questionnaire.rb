@@ -1,14 +1,14 @@
 class Questionnaire < ActiveRecord::Base
   has_many :object_item_values
-  belongs_to :research
+  belongs_to :survey
 
   #FIXME This should be a transaction
-  def prepare_to_save(answers, research_id)
-    self.validate_questions(answers, research_id)
+  def prepare_to_save(answers, survey_id)
+    self.validate_questions(answers, survey_id)
     return false unless self.errors.empty?
     
     self.save 
-    self.research_id = research_id
+    self.survey_id = survey_id
     self.associate(answers); self.incomplete = false
     true
   end
@@ -25,9 +25,9 @@ class Questionnaire < ActiveRecord::Base
     end
   end      
 
-  def validate_questions(answers, research_id)
+  def validate_questions(answers, survey_id)
     unless answers.blank?
-      questions = Research.find(research_id).questions
+      questions = Survey.find(survey_id).questions
       self.validate_answers(questions, answers)
       obligatory = questions.find_all { |question| question.is_optional == false }
       self.validate_obligatory_questions(obligatory, answers)

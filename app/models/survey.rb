@@ -1,4 +1,4 @@
-class Research < ActiveRecord::Base
+class Survey < ActiveRecord::Base
 
   validates_presence_of :title
   validates_presence_of :introduction
@@ -8,13 +8,13 @@ class Research < ActiveRecord::Base
   has_many :questions
   has_many :questionnaires
 
-  acts_as_design :root => File.join('designs', 'researches')
+  acts_as_design :root => File.join('designs', 'surveys')
 
   acts_as_accessible
 
-  PERMISSIONS['research'] = {                                                                                                    'research_editing' => I18n.t(:research_editing),
-    'research_viewing' => I18n.t(:research_viewing),
-    'research_erasing' => I18n.t(:research_erasing) } 
+  PERMISSIONS['survey'] = {                                                                                                    'survey_editing' => I18n.t(:survey_editing),
+    'survey_viewing' => I18n.t(:survey_viewing),
+    'survey_erasing' => I18n.t(:survey_erasing) } 
  
   validate do |b|
     b.must_have_questions_to_be_active
@@ -98,7 +98,7 @@ class Research < ActiveRecord::Base
     old_assignment = user.role_assignments.detect {|role| role.resource_id == self.id }
     old_role = Role.find(old_assignment.role_id) if old_assignment
 
-    #an user has only a single role over a research
+    #an user has only a single role over a survey
     user.remove_role(old_role, self) if old_role; user.reload
     new_role = Role.find(new_role_id)
     return user.add_role(new_role, self)
@@ -149,7 +149,7 @@ protected
   end
 
   def moderator_role
-    Role.find_by_name("Moderator") || Role.find_by_name("moderator") ||                                                          Role.create!(:name => "Moderator", :permissions => PERMISSIONS['research'].keys)
+    Role.find_by_name("Moderator") || Role.find_by_name("moderator") ||                                                          Role.create!(:name => "Moderator", :permissions => PERMISSIONS['survey'].keys)
   end
 end 
 

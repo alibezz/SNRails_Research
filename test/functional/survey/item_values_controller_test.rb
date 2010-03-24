@@ -12,19 +12,19 @@ class ItemValuesControllerTest < Test::Unit::TestCase
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
     @environment = Environment.create(:is_default => true)
-    role = create_role(:name => 'Moderator', :permissions => ActiveRecord::Base::PERMISSIONS['research'].keys)
+    role = create_role(:name => 'Moderator', :permissions => ActiveRecord::Base::PERMISSIONS['survey'].keys)
     user = create_user
-    @research = create_research
-    @item = create_item(:research_id => @research.id, :type => "question", :html_type => Question.html_types.invert["single_selection"])
+    @survey = create_survey
+    @item = create_item(:survey_id => @survey.id, :type => "question", :html_type => Question.html_types.invert["single_selection"])
     @ivalue = create_item_value(:info => "info", :item_id => @item.id)
-    user.add_role(role, @research)
+    user.add_role(role, @survey)
     login_as(user.login)
   end
 
 #index
 
   def test_should_get_index
-    get :index, :research_id => @item.research_id, :question_id => @item.id 
+    get :index, :survey_id => @item.survey_id, :question_id => @item.id 
     assert_response :success
     assert_template 'index'
   end
@@ -42,7 +42,7 @@ class ItemValuesControllerTest < Test::Unit::TestCase
     assert_equal count + 1, @item.item_values.count
     assert_equal last_position + 1, @item.item_values.maximum(:position)
     assert_response :redirect
-    assert_redirected_to survey_research_question_item_values_path(@item.research_id, @item)
+    assert_redirected_to survey_survey_question_item_values_path(@item.survey_id, @item)
     assert flash[:notice]
     
     #doesnt create
@@ -50,7 +50,7 @@ class ItemValuesControllerTest < Test::Unit::TestCase
     @item.reload
     assert_equal count + 1, @item.item_values.count
     assert_response :redirect
-    assert_redirected_to survey_research_question_item_values_path(@item.research_id, @item)
+    assert_redirected_to survey_survey_question_item_values_path(@item.survey_id, @item)
   end
 
 #edit
@@ -77,7 +77,7 @@ class ItemValuesControllerTest < Test::Unit::TestCase
 
     assert_equal ivalue.info, "new_test"
     assert_response :redirect
-    assert_redirected_to survey_research_question_item_values_path(@item.research_id, @item)
+    assert_redirected_to survey_survey_question_item_values_path(@item.survey_id, @item)
  
     #doesnt update
     get :edit, :question_id => @item.id, :id => @ivalue.id
@@ -111,14 +111,14 @@ class ItemValuesControllerTest < Test::Unit::TestCase
 #    i3 = create_item_value(:item_id => @item.id, :position => 3)
 #    @item.reload
 #
-#    post :reorder_item_values, :list_item_values => ["3", "1", "2"], :research_id => @item.research_id,                               :question_id => @item.id
+#    post :reorder_item_values, :list_item_values => ["3", "1", "2"], :survey_id => @item.survey_id,                               :question_id => @item.id
 #    @item.reload; i1.reload; i2.reload; i3.reload
 #    
 #    assert_equal i1.position, 2
 #    assert_equal i2.position, 3
 #    assert_equal i3.position, 1
 #
-#    post :reorder_item_values, :list_item_values => ["1", "2", "3"], :research_id => @item.research_id,                               :question_id => @item.id
+#    post :reorder_item_values, :list_item_values => ["1", "2", "3"], :survey_id => @item.survey_id,                               :question_id => @item.id
 #    @item.reload; i1.reload; i2.reload; i3.reload
 #    assert_equal i1.position, 1
 #    assert_equal i2.position, 2

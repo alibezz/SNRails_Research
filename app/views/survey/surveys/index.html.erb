@@ -1,0 +1,11 @@
+<%= link_to t(:new_survey), new_object_url %>
+<br><br>
+
+<h1><%= title t(:listing_surveys) %></h1>
+
+<ul class="listing link">
+  <%- @surveys.each do |survey| %>
+    <li><%= link_to survey.title, object_url(survey) %>
+  <% end %>
+</ul>
+

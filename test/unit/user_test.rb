@@ -102,23 +102,23 @@ class UserTest < ActiveSupport::TestCase
     assert @user.remember_token_expires_at.between?(before, after)
   end
 
-  def test_my_researches
+  def test_my_surveys
     admin = create_user(:administrator => true)
-    assert_equal Research.find(:all).count, admin.my_researches.count 
+    assert_equal Survey.find(:all).count, admin.my_surveys.count 
     
-    r1 = create_research  
-    r2 = create_research(:title => "other test")  
-    role = create_role(:name => "Collaborator", :permissions => ['research_viewing'])
-    role2 = create_role(:name => "Editor", :permissions => ['research_viewing', 'research_editing'])
+    r1 = create_survey  
+    r2 = create_survey(:title => "other test")  
+    role = create_role(:name => "Collaborator", :permissions => ['survey_viewing'])
+    role2 = create_role(:name => "Editor", :permissions => ['survey_viewing', 'survey_editing'])
 
     @user.add_role(role, r1)
     @user.add_role(role, r2)
     @user.reload
-    assert_equal @user.my_researches.count, 2
+    assert_equal @user.my_surveys.count, 2
     @user.add_role(role2, r2)
     @user.reload
 
-    assert_equal @user.my_researches.count, 2
+    assert_equal @user.my_surveys.count, 2
 
   end 
 
@@ -131,10 +131,10 @@ class UserTest < ActiveSupport::TestCase
   end
 
   def test_has_role
-    r1 = create_research  
-    r2 = create_research(:title => "other test")  
-    role = create_role(:name => "Collaborator", :permissions => ['research_viewing'])
-    role2 = create_role(:name => "Moderator", :permissions => ['research_viewing', 'research_editing', 'research_erasing'])
+    r1 = create_survey  
+    r2 = create_survey(:title => "other test")  
+    role = create_role(:name => "Collaborator", :permissions => ['survey_viewing'])
+    role2 = create_role(:name => "Moderator", :permissions => ['survey_viewing', 'survey_editing', 'survey_erasing'])
     
     @user.add_role(role, r1)
     @user.add_role(role2, r2)
@@ -143,7 +143,7 @@ class UserTest < ActiveSupport::TestCase
     assert @user.is_moderator?(r2)
     assert @user.is_collaborator?(r1)
 
-    r3 = create_research(:title => "test3")
+    r3 = create_survey(:title => "test3")
     assert !@user.is_moderator?(r1)
     assert !@user.is_collaborator?(r2)
     assert !@user.is_moderator?(r3)

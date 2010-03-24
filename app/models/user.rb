@@ -47,12 +47,12 @@ class User < ActiveRecord::Base
     write_attribute :email, (value ? value.downcase : nil)
   end
 
-  def my_researches(params = {})
+  def my_surveys(params = {})
     if self.is_administrator? 
-      Research.find(:all, params) 
+      Survey.find(:all, params) 
     else
-      research_ids = self.role_assignments.map(&:resource_id).uniq
-      Research.find(:all, :conditions => ["id IN (#{research_ids.join(',')})"])
+      survey_ids = self.role_assignments.map(&:resource_id).uniq
+      Survey.find(:all, :conditions => ["id IN (#{survey_ids.join(',')})"])
     end
   end
 

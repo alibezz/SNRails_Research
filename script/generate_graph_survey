@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 require File.dirname(__FILE__) + '/../config/environment'
 
-research = Research.find_by_title('Pesquisas.SegurancaJovensForm')
+survey = Survey.find_by_title('Pesquisas.SegurancaJovensForm')
 
 count = 0
-puts "Pesquisa %s" % research.title
-Question.find(:all, :conditions => {:research_id => research.id}, :order => "position ASC").map do |question|
+puts "Pesquisa %s" % survey.title
+Question.find(:all, :conditions => {:survey_id => survey.id}, :order => "position ASC").map do |question|
   puts "Questão %s" % question.position
   next if question.info == 'Email'
   file = File.open(File.dirname(__FILE__)+"/../caio_graph/PesquisaOpiniao/filhos/question#{count}/question.txt", 'w+')
@@ -25,11 +25,11 @@ Question.find(:all, :conditions => {:research_id => research.id}, :order => "pos
   count  = count + 1  
 end
 
-research = Research.find_by_title('Pesquisas.SegurancaPaisForm')
+survey = Survey.find_by_title('Pesquisas.SegurancaPaisForm')
 
-puts "Pesquisa %s" % research.title
+puts "Pesquisa %s" % survey.title
 count = 0
-Question.find(:all, :conditions => {:research_id => research.id}, :order => "position ASC").map do |question|
+Question.find(:all, :conditions => {:survey_id => survey.id}, :order => "position ASC").map do |question|
   puts "Questão %s" % question.position
   next if question.info == 'Email'
   file = File.open(File.dirname(__FILE__)+"/../caio_graph/PesquisaOpiniao/pais/question#{count}/question.txt", 'w+')

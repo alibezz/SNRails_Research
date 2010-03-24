@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 require File.dirname(__FILE__) + '/../config/environment'
 
-@parent_research = Research.find_by_title('Pesquisas.SegurancaPaisForm')
-@parent_research = Research.create(:title => 'Pesquisas.SegurancaPaisForm', :introduction => 'Pesquisas.SegurancaPaisForm') if @parent_research.nil?
+@parent_survey = Survey.find_by_title('Pesquisas.SegurancaPaisForm')
+@parent_survey = Survey.create(:title => 'Pesquisas.SegurancaPaisForm', :introduction => 'Pesquisas.SegurancaPaisForm') if @parent_survey.nil?
 
-@young_research  = Research.find_by_title('Pesquisas.SegurancaJovensForm')
-@young_research = Research.create(:title => 'Pesquisas.SegurancaJovensForm', :introduction => 'Pesquisas.SegurancaJovensForm') if @young_research.nil?
+@young_survey  = Survey.find_by_title('Pesquisas.SegurancaJovensForm')
+@young_survey = Survey.create(:title => 'Pesquisas.SegurancaJovensForm', :introduction => 'Pesquisas.SegurancaJovensForm') if @young_survey.nil?
 
 Section.delete_all
 Question.delete_all
@@ -16,12 +16,12 @@ User.delete_all
 User.create!(:login => 'leandro', :password => 'leandro', :password_confirmation => 'leandro', :email => 'leandronunes@safernet.org.br')
 User.create!(:login => 'admin', :password => '123456', :password_confirmation => '123456', :email => 'admin@safernet.org.br', :is_administrator => true)
 
-research = File.open(File.dirname(__FILE__)+'/../data/pais', 'r')
+survey = File.open(File.dirname(__FILE__)+'/../data/pais', 'r')
 page_count = 0 
 item_count = 0
 question = nil
 answer_count = 0
-research.readlines.each do |line|
+survey.readlines.each do |line|
   line = line.strip
   next if line.empty?
   type, value = line.split(':')
@@ -30,15 +30,15 @@ research.readlines.each do |line|
   if type == 'section'
     page_count = page_count + 1
     item_count = item_count + 1
-    @parent_research.number_of_pages = item_count
-    @parent_research.save
+    @parent_survey.number_of_pages = item_count
+    @parent_survey.save
     value = value.strip
-    Section.create!(:info => value, :research => @parent_research, :position => item_count, :page_id => page_count)
+    Section.create!(:info => value, :survey => @parent_survey, :position => item_count, :page_id => page_count)
   elsif type == 'question'
     item_count = item_count + 1
     position, info = value.split('#')
     info = info.strip
-    question = Question.create!(:info => info, :position => item_count, :page_id => page_count, :research => @parent_research)
+    question = Question.create!(:info => info, :position => item_count, :page_id => page_count, :survey => @parent_survey)
     if question.info == 'Email'
       question.html_type = 'text' 
       question.save
@@ -69,12 +69,12 @@ research.readlines.each do |line|
   end
 end
 
-research = File.open(File.dirname(__FILE__) + '/../data/jovens', 'r')
+survey = File.open(File.dirname(__FILE__) + '/../data/jovens', 'r')
 page_count = 0 
 item_count = 0
 question = nil
 answer_count = 0
-research.readlines.each do |line|
+survey.readlines.each do |line|
   line = line.strip
   next if line.empty?
   type, value = line.split(':')
@@ -83,17 +83,17 @@ research.readlines.each do |line|
   if type == 'section'
     page_count = page_count + 1
     item_count = item_count + 1
-    @young_research.number_of_pages = item_count
-    @young_research.save
+    @young_survey.number_of_pages = item_count
+    @young_survey.save
     value = value.strip
-    Section.create!(:info => value, :research => @young_research, :position => item_count, :page_id => page_count)
+    Section.create!(:info => value, :survey => @young_survey, :position => item_count, :page_id => page_count)
   elsif type == 'question'
     position = nil
     info = nil
     item_count = item_count + 1
     position, info = value.split('#')
     info = info.strip
-    question = Question.create!(:info => info, :position => item_count, :page_id => page_count, :research => @young_research)
+    question = Question.create!(:info => info, :position => item_count, :page_id => page_count, :survey => @young_survey)
     if question.info == 'Email'
       question.html_type = 'text' 
       question.save

@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
       if self.current_user.is_administrator?
         redirect_to admin_roles_path
       else
-        redirect_to survey_researches_path
+        redirect_to survey_surveys_path
       end
       flash[:notice] = t(:login_successful)
     else

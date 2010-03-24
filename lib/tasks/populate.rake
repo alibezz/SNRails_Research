@@ -16,9 +16,9 @@ namespace :db do
     env.design_data = {:template => 'default', :theme => 'default', :icon_theme => 'default'}
     env.save!
 
-    Role.create!(:name => 'Moderator', :permissions => ['research_viewing', 'research_editing', 'research_erasing'])  
-    Role.create!(:name => 'Editor', :permissions => ['research_viewing', 'research_editing'])  
-    Role.create!(:name => 'Collaborator', :permissions => ['research_viewing'])  
+    Role.create!(:name => 'Moderator', :permissions => ['survey_viewing', 'survey_editing', 'survey_erasing'])  
+    Role.create!(:name => 'Editor', :permissions => ['survey_viewing', 'survey_editing'])  
+    Role.create!(:name => 'Collaborator', :permissions => ['survey_viewing'])  
 
      User.populate 1 do |user|
      user.login = 'admin'
@@ -27,20 +27,20 @@ namespace :db do
        user.email = 'admin@localhost'
      end 
 
-     Research.populate 10 do |research|
-       research.title = Populator.words(1..4).titleize
-       research.design_data = {:template => 'default', :theme => 'default', :icon_theme => 'default'}
-       research.subtitle = Populator.words(1.7).titleize
-       research.introduction = Populator.sentences(2..10)
-       research.is_private = [true, false]
-       research.number_of_pages = 1..9
+     Survey.populate 10 do |survey|
+       survey.title = Populator.words(1..4).titleize
+       survey.design_data = {:template => 'default', :theme => 'default', :icon_theme => 'default'}
+       survey.subtitle = Populator.words(1.7).titleize
+       survey.introduction = Populator.sentences(2..10)
+       survey.is_private = [true, false]
+       survey.number_of_pages = 1..9
        count = 0 
        Item.populate 5 do |item|
          count += 1
          item.info = Populator.words(5)
-         item.research_id = research.id
+         item.survey_id = survey.id
          item.position = count
-         item.page_id = 1..research.number_of_pages
+         item.page_id = 1..survey.number_of_pages
          item.type = ['Question', 'Section']
          #item.type = 'Item'
          if item.type == 'Question'
@@ -55,26 +55,26 @@ namespace :db do
      end
      
      @users = User.find(:all, :conditions => {:administrator => false})
-     Research.find(:all).each do |research|
+     Survey.find(:all).each do |survey|
        moderator = @users.first
-       moderator.add_role(Role.find_by_name('Moderator'), research)
-       moderator.login = "moderator_#{research.id}"
+       moderator.add_role(Role.find_by_name('Moderator'), survey)
+       moderator.login = "moderator_#{survey.id}"
        moderator.name = moderator.login
        moderator.email = moderator.login + '@localhost.com'
        moderator.save!; moderator.reload
        @users.delete_at(0)
 
        editor = @users.first
-       editor.add_role(Role.find_by_name('Editor'), research)
-       editor.login = "editor_#{research.id}"
+       editor.add_role(Role.find_by_name('Editor'), survey)
+       editor.login = "editor_#{survey.id}"
        editor.name = editor.login
        editor.email = editor.login + '@localhost.com'
        editor.save!; editor.reload
        @users.delete_at(0)
 
        collaborator = @users.first
-       collaborator.add_role(Role.find_by_name('Collaborator'), research)
-       collaborator.login = "collaborator_#{research.id}"
+       collaborator.add_role(Role.find_by_name('Collaborator'), survey)
+       collaborator.login = "collaborator_#{survey.id}"
        collaborator.name = collaborator.login
        collaborator.email = collaborator.login + '@localhost.com'       
        collaborator.save!; collaborator.reload
@@ -84,7 +84,7 @@ namespace :db do
 
 
   def erase
-     [Environment, Research, User, Permission, Item, ObjectItemValue, Questionnaire].each(&:delete_all)
+     [Environment, Survey, User, Permission, Item, ObjectItemValue, Questionnaire].each(&:delete_all)
   end
 
 

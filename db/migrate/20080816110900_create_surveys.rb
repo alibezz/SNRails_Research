@@ -1,6 +1,6 @@
-class CreateResearches < ActiveRecord::Migration
+class CreateSurveys < ActiveRecord::Migration
   def self.up
-    create_table :researches, :force => true do |t|
+    create_table :surveys, :force => true do |t|
       t.string :title, :subtitle
       t.integer :number_of_pages, :default => 0
       t.text :introduction, :design_data
@@ -11,6 +11,6 @@ class CreateResearches < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :researches
+    drop_table :surveys
   end
 end

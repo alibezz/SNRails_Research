@@ -1,14 +1,14 @@
 #!/usr/bin/env ruby
 require File.dirname(__FILE__) + '/../config/environment'
 
-#ObjectItemValue.delete_all
-#Questionnaire.delete_all
+ObjectItemValue.delete_all
+Questionnaire.delete_all
 
-@parent_research = Research.find_by_title('Pesquisas.SegurancaPaisForm')
-@parent_research = Research.create(:title => 'Pesquisas.SegurancaPaisForm', :introduction => 'Pesquisas.SegurancaPaisForm') if @parent_research.nil?
+@parent_survey = Survey.find_by_title('Pesquisas.SegurancaPaisForm')
+@parent_survey = Survey.create(:title => 'Pesquisas.SegurancaPaisForm', :introduction => 'Pesquisas.SegurancaPaisForm') if @parent_survey.nil?
 
-@young_research  = Research.find_by_title('Pesquisas.SegurancaJovensForm')
-@young_research = Research.create(:title => 'Pesquisas.SegurancaJovensForm', :introduction => 'Pesquisas.SegurancaJovensForm') if @young_research.nil?
+@young_survey  = Survey.find_by_title('Pesquisas.SegurancaJovensForm')
+@young_survey = Survey.create(:title => 'Pesquisas.SegurancaJovensForm', :introduction => 'Pesquisas.SegurancaJovensForm') if @young_survey.nil?
 
 PESQUISA_JOVENS = {
 "Gnero" => "Gênero",
@@ -56,7 +56,6 @@ PESQUISA_PAIS = {
 "Gnero" => "Gênero",
 "Estado" => "Estado de residência",
 "Idade" => "Sua idade",
-"Escolaridade" => "Nível de Escolaridade",
 "QuantidadedeFilhosMenoresque18AnosqueUsamInternet" => "Quantos filhos e/ou crianças menores de 18 anos sob sua responsabilidade usam a internet?",
 "IdadedoFilhoqueMaisUsaInternet" => "Qual a idade do seu filho que mais utiliza a internet?",
 "PrincipaisLocaisdeAcesso" => "Quais os SEUS 2 (dois) principais locais de acesso à internet?",
@@ -99,7 +98,6 @@ class Armengue
   def self.describe(str)
     {
       "Atividades na Lan House ou Infocentro ou Telecentro" => "Atividades na Lan House Infocentro ou Telecentro",
-      "Resid�ncia com banda larga" => "Residência com banda larga",
     }[str] || str
   end
 end
@@ -116,44 +114,75 @@ Dir.glob(pattern).each do |filename|
 
   migrate_log.write("TWiki File #{filename} open.\n")
   
-  first_line = file.readline # reading line 1
+  first_line = file.readline
   raise 'This line cannot be nil' if first_line.nil?
   log_filename = first_line.match(/META:TOPICINFO.*date=(.*) format.*/)[1]
   log_filename = log_filename.gsub('"','')
 
   migrate_log.write("The log filename should be: #{log_filename}\n")
 
-  if log_filename.to_i >= 1218822785   
+  if log_filename.to_i < 1218822785   
     migrate_log.write("The TWiki topic #{filename} was probably created before the log creation\n")
     migrate_log.write("\n\n")
     next 
   end
 
-  file.readline # There is nothing on line 2.
-  file.readline # There is nothing on line 3.
+  search_for_log = true
+  count = 0
+  log_file = nil
+  while(search_for_log) do 
+    begin
+       log_file = File.open(File.dirname(__FILE__) + "/../data/log/#{log_filename}", 'r')
+       search_for_log = false
+    rescue
+      migrate_log.write("The file #{log_filename} was not found on log directory on search number #{count}.\n")
+      count = count + 1
+      log_filename = log_filename.to_i - 1
+    end
 
-  research_name = file.readline # Research name on line 4.
-  is_parent = research_name.match('Pais').nil? ? false : true
+    if count == 3
+      migrate_log.write("DANGEROUS: There is no log file associated to twiki topic #{filename}.\n")
+      break
+    end 
+  end
+
+  next if log_file.nil?
+puts log_file.path.inspect
+#  log_files_processed.write(log_file.path.split('/').last + "\n")
+#    next
+#  end
+#puts log_file.inspect  
+  log_file.readline # There is nothing on line 1.
+
+  survey_name = log_file.readline.split(':').last # Survey name on line 2.
+  is_parent = survey_name.match('Pais').nil? ? false : true
   
-  research = is_parent == true ? @parent_research : @young_research
+  log_file.readline # Nothing important on line 3.
+  line = log_file.readline # Nothing important on line 4. If It's not Anglo
+  unless line.match('Origem').nil?
+#FIXME keep the group
+    log_file.readline # Nothing important on line 5.
+  end
+  log_file.readline # Nothing important on line 5 or 6.
+ 
+  survey = is_parent == true ? @parent_survey : @young_survey
 
-  questionnaire = Questionnaire.create!(:research_id => research.id, :created_at => Time.at(log_filename.to_i), :info => log_filename)
-  puts "Questionario: %s" % questionnaire.id
+  @questionnaire = Questionnaire.create!(:survey_id => survey.id, :created_at => Time.at(log_filename.to_i), :info => log_filename)
+  puts "Questionario: %s" % @questionnaire.id
 
   # Answers of users.
-  file.readlines.each do |line|
+  log_file.readlines.each do |line|
     content = nil
-puts "Arquivo: " + file.path.inspect
+puts "Questionario: %s" % @questionnaire.id
+puts "Arquivo: " + log_file.path.inspect
 puts "Linha: " + line.inspect
-
-   twiki_question = line.match(/.*name=(.*) attributes.*value=(.*).%.*/)[1].gsub(/"/,'')
-   twiki_answer = line.match(/.*name=(.*) attributes.*value=(.*).%.*/)[2].gsub(/"/,'')
-   next if twiki_question == 'RegDate'
+    twiki_question, twiki_answer = line.split(':') 
+    twiki_answer = twiki_answer.strip
+    twiki_answer = twiki_answer.gsub(' - ', ' ')
 puts "Questao TWiki: " + twiki_question.inspect
 puts "Reposta TWiki: " + twiki_answer.inspect
-
     info = is_parent == true ? PESQUISA_PAIS[twiki_question] : PESQUISA_JOVENS[twiki_question]
-    question = Question.find(:first, :conditions => {:info => info, :research_id => research.id})
+    question = Question.find(:first, :conditions => {:info => info, :survey_id => survey.id})
 puts "É Pai: " + is_parent.inspect
 puts "\n"
 
@@ -161,20 +190,17 @@ puts "\n"
       answer = ItemValue.find(:first, :conditions => {:item_id => question.id}) 
       content = twiki_answer
     else
-    
-      twiki_answer.split(',').each do |t_answer|
-        t_answer = t_answer.strip
-        t_answer = t_answer.gsub(' - ', ' ')
-        t_answer = t_answer.gsub('í­', 'í')
-        t_answer = t_answer.gsub('. ', ' ')
-        t_answer = t_answer.gsub('(', '\\(')
-        t_answer = t_answer.gsub(')', '\\)')
-        answer = question.item_values.detect{|i|i.info.match(Armengue.describe(t_answer))}
-        raise "Something wrong happen\n\tQuestion: %s\n\tAnswer: %s" % [question.inspect, answer.inspect] if question.nil? or answer.nil?
-        ObjectItemValue.create!(:item_id => question.id, :item_value_id => answer.id, :info => content, :questionnaire_id => questionnaire.id )
-      end
+      answer_info = twiki_answer.gsub('(', '\\(')
+      answer_info = answer_info.gsub(')', '\\)')
+      answer_info = answer_info.gsub('. ', ' ')
+puts "Comparou com: %s" %  answer_info
+      answer = question.item_values.detect{|i|i.info.match(Armengue.describe(answer_info))}
+#      answer = ItemValue.find(:first, :conditions => {:item_id => question, :info => twiki_answer}) 
     end
+    raise "Something wrong happen\n\tQuestion: %s\n\tAnswer: %s" % [question.inspect, answer.inspect] if question.nil? or answer.nil?
+    o = ObjectItemValue.create!(:item_id => question.id, :item_value_id => answer.id, :info => content, :questionnaire_id => @questionnaire.id )
   end
+  questionnaire = nil
   
   migrate_log.write("\n\n")
 end

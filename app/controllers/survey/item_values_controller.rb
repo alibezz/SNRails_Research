@@ -2,12 +2,12 @@ class Survey::ItemValuesController < ResourceController::Base
 
   belongs_to :question
 
-  before_filter :load_research, :only => [:index, :reorder_item_values, :edit]
+  before_filter :load_survey, :only => [:index, :reorder_item_values, :edit]
   before_filter :load_item
   before_filter :load_item_values, :only => [:index, :reorder_item_values]
 
-  protect 'research_viewing', :research, :only => [:index, :show]
-  protect 'research_editing', :research, :only => [:reorder_item_values, :edit, :update, :destroy, :new, :create]  
+  protect 'survey_viewing', :survey, :only => [:index, :show]
+  protect 'survey_editing', :survey, :only => [:reorder_item_values, :edit, :update, :destroy, :new, :create]  
  
   index.before do
     @item_value = ItemValue.new
@@ -19,7 +19,7 @@ class Survey::ItemValuesController < ResourceController::Base
     if @item_value.save
       flash[:notice] = I18n.t(:succesfully_saved)
     end
-    redirect_to survey_research_question_item_values_path(@item.research_id, @item)
+    redirect_to survey_survey_question_item_values_path(@item.survey_id, @item)
   end
 
   def reorder_item_values
@@ -38,7 +38,7 @@ class Survey::ItemValuesController < ResourceController::Base
   def update
     @item_value = ItemValue.find(params[:id])
     if @item_value.update_attributes(params[:item_value])
-       redirect_to survey_research_question_item_values_path(@item.research_id, @item)
+       redirect_to survey_survey_question_item_values_path(@item.survey_id, @item)
     else
        render :action => 'edit', :question_id => @item.id, :id => @item_value.id 
     end
@@ -56,10 +56,10 @@ class Survey::ItemValuesController < ResourceController::Base
 protected
 
   def collection
-    @collection ||= @research.questions.find(params[:question_id]).item_values
+    @collection ||= @survey.questions.find(params[:question_id]).item_values
   end
 
-  def research
-    Research.find(@item.research_id)
+  def survey
+    Survey.find(@item.survey_id)
   end
 end

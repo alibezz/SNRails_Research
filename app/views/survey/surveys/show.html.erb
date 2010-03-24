@@ -1,0 +1,14 @@
+<h1><%=  @survey.title %></h1>
+
+<h2><%=  @survey.subtitle %></h2>
+
+<%= render :partial => 'survey_options', :locals => {:survey => @survey } %>
+
+<p class="title">
+  <%=h @survey.title %>
+</p>
+
+<p class="intro">
+  <%=h @survey.introduction %>
+</p>
+

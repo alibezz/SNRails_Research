@@ -15,30 +15,30 @@ class PublicControllerTest < ActionController::TestCase
   def test_should_get_index
     get :index
     assert_response :success
-    assert assigns(:researches)
+    assert assigns(:surveys)
   end
 
-  def test_index_should_not_show_inactive_researches
-    #Inactive researches
-    r1 = create_research(:is_active => false)
+  def test_index_should_not_show_inactive_surveys
+    #Inactive surveys
+    r1 = create_survey(:is_active => false)
 
     get :index
     assert_response :success
-    assert_equal 0, assigns(:researches).count
+    assert_equal 0, assigns(:surveys).count
   end
 
-  def test_index_should_show_active_researches
-    r1 = create_research
-    i1 = create_item(:type => "Question", :html_type => Question.html_types.invert["pure_text"], :research_id => r1)
+  def test_index_should_show_active_surveys
+    r1 = create_survey
+    i1 = create_item(:type => "Question", :html_type => Question.html_types.invert["pure_text"], :survey_id => r1)
     r1.reload; r1.is_active = true; r1.save; r1.reload
 
     get :index
     assert_response :success
-    assert_equal 1, assigns(:researches).count
+    assert_equal 1, assigns(:surveys).count
   end
 
-  def test_should_show_research
-    r = create_research
+  def test_should_show_survey
+    r = create_survey
     get :show, :id => r.id
     assert_response :success
   end

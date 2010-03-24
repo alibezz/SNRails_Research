@@ -3,12 +3,12 @@
 <table>
   <tr>
     <th>Info</th>
-    <th>Research</th>
+    <th>Survey</th>
   </tr>
   <%- @items.each do |item|%>
     <tr>
       <td><%=h item.info %></td>
-      <td><%=h item.research_id %></td>
+      <td><%=h item.survey_id %></td>
     
       <td><%=link_to 'Bli', {:action => 'bli', :id => item} %></td>
       <td><%=link_to 'Show', object_url(item) %></td>

@@ -3,7 +3,7 @@ class CreateItems < ActiveRecord::Migration
     create_table :items, :force => true do |t|
       t.string :info, :type
       t.integer :html_type
-      t.references :research
+      t.references :survey
       t.integer :page_id, :default => 1
       t.integer :position
       t.boolean :is_optional, :default => false

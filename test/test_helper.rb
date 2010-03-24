@@ -35,14 +35,14 @@ class Test::Unit::TestCase
   #fixtures :all
 
   # Add more helper methods to be used by all tests here...
-  def create_research(params = {})
-    Research.create(research_params(params))
+  def create_survey(params = {})
+    Survey.create(survey_params(params))
   end
   
-  def research_params(params = {})
+  def survey_params(params = {})
     {
-      :title => 'some research',
-      :introduction => 'some research',
+      :title => 'some survey',
+      :introduction => 'some survey',
       :number_of_pages => 1,
     }.merge(params)
   end
@@ -57,7 +57,7 @@ class Test::Unit::TestCase
   
   def item_params(params = {})
     {
-      :info => 'some research',
+      :info => 'some survey',
       :html_type => 2,
       :position => Item.count + 1
     }.merge(params)
