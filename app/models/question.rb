@@ -10,7 +10,7 @@ class Question < Item
     b.min_before_max_answers
   end
 
-  has_many :item_values, :foreign_key => :item_id, :before_add => [ Proc.new { |p,d| raise "#{t(:active_survey_cant_receive_alternatives)}" if Research.find(p.research_id).is_active } ], :order => "position"
+  has_many :item_values, :foreign_key => :item_id, :before_add => [ Proc.new { |p,d| raise "#{t(:active_survey_cant_receive_alternatives)}" if Survey.find(p.survey_id).is_active } ], :order => "position"
 
   HTML_TYPES = { 0 => "multiple_selection",
     1 => "single_selection",

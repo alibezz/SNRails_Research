@@ -1,14 +1,14 @@
 class PublicController < ResourceController::Base
 
-  before_filter :load_research, :only => :show
+  before_filter :load_survey, :only => :show
 
   private
 
   def model_name
-    'research'
+    'survey'
   end
 
   def collection
-     @researches = Research.find(:all, :conditions => {:is_active => true})
+     @surveys = Survey.find(:all, :conditions => {:is_active => true})
   end
 end

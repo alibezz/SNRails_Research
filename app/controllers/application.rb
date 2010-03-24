@@ -21,17 +21,17 @@ class ApplicationController < ActionController::Base
   end
 
   #FIXME make this test
-  def load_research
-    id = params[:research_id] || params[:public_id]
+  def load_survey
+    id = params[:survey_id] || params[:public_id]
 
     self.class.design :holder => 'environment' 
     if !current_user.nil? and current_user.is_administrator?
-        @research =  id.nil? ? current_user.my_researches.find{ |i| i.id == params[:id].to_i }                                                            : current_user.my_researches.find{ |i| i.id == id.to_i}
+        @survey =  id.nil? ? current_user.my_surveys.find{ |i| i.id == params[:id].to_i }                                                            : current_user.my_surveys.find{ |i| i.id == id.to_i}
     else
-      @research = id.nil? ? Research.find(params[:id]) : Research.find(id)
+      @survey = id.nil? ? Survey.find(params[:id]) : Survey.find(id)
     end
-    login_required if @research.is_private?
-
+    login_required if @survey.is_private?
+    @m_survey = @survey
   end
  
   #FIXME make this test

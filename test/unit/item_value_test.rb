@@ -11,15 +11,15 @@ class ItemValueTest < Test::Unit::TestCase
    ivalue = create_item_value(:item_id => nil)
    assert_equal count, ItemValue.count
    
-   research = create_research
-   item = create_item(:type => "question", :research_id => research.id)
+   survey = create_survey
+   item = create_item(:type => "question", :survey_id => survey.id)
    ivalue = create_item_value(:item_id => item.id)
    assert_equal count + 1, ItemValue.count
   end  
 
   def test_should_have_a_position
-   research = create_research
-   item = create_item(:type => "question", :research_id => research.id)
+   survey = create_survey
+   item = create_item(:type => "question", :survey_id => survey.id)
    
    count = item.item_values.length
    ivalue = create_item_value(:item_id => item.id, :position => nil)
@@ -32,10 +32,10 @@ class ItemValueTest < Test::Unit::TestCase
   end
 
   def test_has_info
-   research = create_research
+   survey = create_survey
 
    # Single selection item
-   item = create_item(:type => "question", :research_id => research.id, :html_type => @types.invert["single_selection"])
+   item = create_item(:type => "question", :survey_id => survey.id, :html_type => @types.invert["single_selection"])
    count = item.item_values.length
    ivalue = create_item_value(:item_id => item.id, :info => "")
    item.reload

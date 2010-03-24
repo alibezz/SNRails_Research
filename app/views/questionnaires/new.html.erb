@@ -15,7 +15,7 @@
   </p>
   <% end %>
 
-  <% if @page < @research.page_ids.count - 1 %>
+  <% if @page < @survey.page_ids.count - 1 %>
   <p>
     <%=submit_tag t(:next)%>
   </p>
@@ -27,4 +27,4 @@
 
 <% end %>
 
-<%= link_to t(:survey), public_path(@research) %>
+<%= link_to t(:survey), public_path(@survey) %>

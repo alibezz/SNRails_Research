@@ -4,11 +4,11 @@ require File.dirname(__FILE__) + '/../config/environment'
 #ObjectItemValue.delete_all
 #Questionnaire.delete_all
 
-@parent_research = Research.find_by_title('Pesquisas.SegurancaPaisForm')
-@parent_research = Research.create(:title => 'Pesquisas.SegurancaPaisForm', :introduction => 'Pesquisas.SegurancaPaisForm') if @parent_research.nil?
+@parent_survey = Survey.find_by_title('Pesquisas.SegurancaPaisForm')
+@parent_survey = Survey.create(:title => 'Pesquisas.SegurancaPaisForm', :introduction => 'Pesquisas.SegurancaPaisForm') if @parent_survey.nil?
 
-@young_research  = Research.find_by_title('Pesquisas.SegurancaJovensForm')
-@young_research = Research.create(:title => 'Pesquisas.SegurancaJovensForm', :introduction => 'Pesquisas.SegurancaJovensForm') if @young_research.nil?
+@young_survey  = Survey.find_by_title('Pesquisas.SegurancaJovensForm')
+@young_survey = Survey.create(:title => 'Pesquisas.SegurancaJovensForm', :introduction => 'Pesquisas.SegurancaJovensForm') if @young_survey.nil?
 
 PESQUISA_JOVENS = {
 "Gnero" => "Gênero",
@@ -132,12 +132,12 @@ Dir.glob(pattern).each do |filename|
   file.readline # There is nothing on line 2.
   file.readline # There is nothing on line 3.
 
-  research_name = file.readline # Research name on line 4.
-  is_parent = research_name.match('Pais').nil? ? false : true
+  survey_name = file.readline # Survey name on line 4.
+  is_parent = survey_name.match('Pais').nil? ? false : true
   
-  research = is_parent == true ? @parent_research : @young_research
+  survey = is_parent == true ? @parent_survey : @young_survey
 
-  questionnaire = Questionnaire.create!(:research_id => research.id, :created_at => Time.at(log_filename.to_i), :info => log_filename)
+  questionnaire = Questionnaire.create!(:survey_id => survey.id, :created_at => Time.at(log_filename.to_i), :info => log_filename)
   puts "Questionario: %s" % questionnaire.id
 
   # Answers of users.
@@ -153,7 +153,7 @@ puts "Questao TWiki: " + twiki_question.inspect
 puts "Reposta TWiki: " + twiki_answer.inspect
 
     info = is_parent == true ? PESQUISA_PAIS[twiki_question] : PESQUISA_JOVENS[twiki_question]
-    question = Question.find(:first, :conditions => {:info => info, :research_id => research.id})
+    question = Question.find(:first, :conditions => {:info => info, :survey_id => survey.id})
 puts "É Pai: " + is_parent.inspect
 puts "\n"
 

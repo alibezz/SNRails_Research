@@ -4,39 +4,39 @@ class QuestionTest < Test::Unit::TestCase
 
   def setup
     @types = Question.html_types
-    @research = create_research
+    @survey = create_survey
   end
 
 
   def test_is_text
-   question = create_item(:type => 'Question', :research_id => @research.id, :html_type => @types.invert["pure_text"])
+   question = create_item(:type => 'Question', :survey_id => @survey.id, :html_type => @types.invert["pure_text"])
    assert question.is_text?
 
-   question = create_item(:type => 'Question', :research_id => @research.id, :html_type => @types.invert["single_selection"])
+   question = create_item(:type => 'Question', :survey_id => @survey.id, :html_type => @types.invert["single_selection"])
    assert_equal false, question.is_text?
   end
 
-  def test_should_add_ivalues_only_if_research_is_inactive
+  def test_should_add_ivalues_only_if_survey_is_inactive
 
-    item = create_item(:type => 'Question', :research_id => @research.id)
-    @research.reload
-    @research.is_active = true; @research.save
+    item = create_item(:type => 'Question', :survey_id => @survey.id)
+    @survey.reload
+    @survey.is_active = true; @survey.save
     count = item.item_values.count
     ivalue = create_item_value
     assert_raise RuntimeError do
       raise item.item_values.push(ivalue)
     end
     assert_equal count, item.item_values.count
-    @research.is_active = false; @research.save
+    @survey.is_active = false; @survey.save
     create_item_value(:item_id => item.id)
-    @research.reload; item.reload
+    @survey.reload; item.reload
     assert_equal count + 1, item.item_values.count
 
   end
 
   def test_min_before_max_answers
     # :html_type => 0 is equivalent to multiple_selection
-    item = create_item(:type => 'Question', :research_id => @research.id, :html_type => 0)
+    item = create_item(:type => 'Question', :survey_id => @survey.id, :html_type => 0)
     create_item_value(:item_id => item.id)
     create_item_value(:item_id => item.id)
     item.reload
@@ -48,7 +48,7 @@ class QuestionTest < Test::Unit::TestCase
   end
 
    def test_define_answers_quantity
-    item = create_item(:type => 'Question', :research_id => @research.id,                                                                           :html_type => Question.html_types.invert["single_selection"])
+    item = create_item(:type => 'Question', :survey_id => @survey.id,                                                                           :html_type => Question.html_types.invert["single_selection"])
 
     create_item_value(:item_id => item.id)
     item.reload; item.save
@@ -59,14 +59,14 @@ class QuestionTest < Test::Unit::TestCase
     assert_equal 1, item.max_answers
     assert_equal 1, item.min_answers #No matter what you set, it will be (min=1,max=1) because it's a single selection.
 
-    item2 = create_item(:type => 'Question', :research_id => @research.id,                                                                           :html_type => Question.html_types.invert["pure_text"])
+    item2 = create_item(:type => 'Question', :survey_id => @survey.id,                                                                           :html_type => Question.html_types.invert["pure_text"])
     assert_equal 0, item2.max_answers
     assert_equal 0, item2.min_answers
   end
 
   def test_invalid_max_answers
     # :html_type => 0 is equivalent to multiple_selection
-    item = create_item(:type => 'Question', :research_id => @research.id, :html_type => 0, :min_answers => 1, :max_answers => 2)
+    item = create_item(:type => 'Question', :survey_id => @survey.id, :html_type => 0, :min_answers => 1, :max_answers => 2)
     assert_equal true, item.invalid_max_answers?
 
     create_item_value(:item_id => item.id)
@@ -76,7 +76,7 @@ class QuestionTest < Test::Unit::TestCase
   end
 
   def test_validate_answers
-    ob_question = create_item(:type => 'Question', :research_id => @research.id,                                                                           :html_type => Question.html_types.invert["single_selection"])
+    ob_question = create_item(:type => 'Question', :survey_id => @survey.id,                                                                           :html_type => Question.html_types.invert["single_selection"])
     create_item_value(:item_id => ob_question.id)
     ob_question.reload; ob_question.save
 
@@ -85,7 +85,7 @@ class QuestionTest < Test::Unit::TestCase
     assert_equal false, ob_question.validate_answers(nil) #less than one answer
     assert_equal true, ob_question.validate_answers("1") #one answer
     
-    op_question =  create_item(:type => 'Question', :research_id => @research.id, :is_optional => true,                                                                          :html_type => Question.html_types.invert["single_selection"])
+    op_question =  create_item(:type => 'Question', :survey_id => @survey.id, :is_optional => true,                                                                          :html_type => Question.html_types.invert["single_selection"])
     create_item_value(:item_id => op_question.id)
     op_question.reload; op_question.save
 
@@ -95,14 +95,14 @@ class QuestionTest < Test::Unit::TestCase
     assert_equal true, op_question.validate_answers("1") #one answer
     
 
-    text_question = create_item(:type => 'Question', :research_id => @research.id,                                                                           :html_type => Question.html_types.invert["pure_text"])
+    text_question = create_item(:type => 'Question', :survey_id => @survey.id,                                                                           :html_type => Question.html_types.invert["pure_text"])
   
     assert_equal false, text_question.validate_answers({"info" => nil}) #no answer
     assert_equal false, text_question.validate_answers({"info" => ""}) #no answer
     assert_equal false, text_question.validate_answers({"info" => "        "}) #no answer
     assert_equal true, text_question.validate_answers({"info" => "    info    "}) #answer
 
-    op_text_question = create_item(:type => 'Question', :research_id => @research.id, :is_optional => true,                                                                         :html_type => Question.html_types.invert["pure_text"])
+    op_text_question = create_item(:type => 'Question', :survey_id => @survey.id, :is_optional => true,                                                                         :html_type => Question.html_types.invert["pure_text"])
   
     assert_equal true, op_text_question.validate_answers({"info" => nil}) #no answer
     assert_equal true, op_text_question.validate_answers({"info" => ""}) #no answer
@@ -111,14 +111,14 @@ class QuestionTest < Test::Unit::TestCase
   end
 
   def test_validate_answers_presence
-    text_question = create_item(:type => 'Question', :research_id => @research.id)
+    text_question = create_item(:type => 'Question', :survey_id => @survey.id)
 
     assert_equal false, text_question.validate_answers_presence({"info" => ""})
     assert_equal false, text_question.validate_answers_presence({})
     assert_equal false, text_question.validate_answers_presence(nil)
     assert_equal true, text_question.validate_answers_presence({"info" => "an answer"})
 
-    ss_question = create_item(:type => 'Question', :research_id => @research.id,                                                                           :html_type => Question.html_types.invert["single_selection"])
+    ss_question = create_item(:type => 'Question', :survey_id => @survey.id,                                                                           :html_type => Question.html_types.invert["single_selection"])
     assert_equal false, ss_question.validate_answers_presence([])
     assert_equal false, ss_question.validate_answers_presence(nil)
     assert_equal false, ss_question.validate_answers_presence("")

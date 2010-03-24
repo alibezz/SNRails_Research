@@ -86,7 +86,7 @@ a:active {
     float: left;
     color: #407080; }
 
-#all_researches {
+#all_surveys {
   float: left;
   display: block;
   text-align: center;
@@ -99,13 +99,13 @@ a:active {
   -moz-border-radius: 3px;
   background-color: #e6fff6;
   color: #004d32; }
-  #all_researches a {
+  #all_surveys a {
     color: #004d32;
     text-decoration: none; }
-  #all_researches:hover {
+  #all_surveys:hover {
     background-color: #004d32;
     color: #e6fff6; }
-    #all_researches:hover a {
+    #all_surveys:hover a {
       background-color: inherit;
       color: #e6fff6; }
 
@@ -167,26 +167,26 @@ a:active {
   margin-bottom: 19px;
   float: left;
   font-size: 110%; }
-  #column-1 ul#admin_research_menu {
+  #column-1 ul#admin_survey_menu {
     list-style-type: none;
     margin-right: 20px;
     border-style: solid;
     border-width: 0px 0px 2px;
     border-color: #407080; }
-    #column-1 ul#admin_research_menu li {
+    #column-1 ul#admin_survey_menu li {
       padding-left: 0;
       list-style-position: inside; }
-    #column-1 ul#admin_research_menu a {
+    #column-1 ul#admin_survey_menu a {
       border-style: solid;
       border-width: 2px 2px 0;
       border-color: #407080;
       padding: 2px 20px;
       display: block;
       text-decoration: none; }
-    #column-1 ul#admin_research_menu a:link, #column-1 ul#admin_research_menu a:visited {
+    #column-1 ul#admin_survey_menu a:link, #column-1 ul#admin_survey_menu a:visited {
       background-color: #80dfff;
       color: #00394d; }
-    #column-1 ul#admin_research_menu a:hover {
+    #column-1 ul#admin_survey_menu a:hover {
       background-color: #00394d;
       color: #e6f9ff; }
 

@@ -17,10 +17,9 @@ ActionController::Routing::Routes.draw do |map|
 
   # Route for survey
   map.namespace :survey do |survey|
-    survey.resources :researches, :member => { :role_management => :get, :new_member => :put, :edit_member => :put, :remove_member => :get }
-    survey.resources :researches do |researches|
-      researches.resources :items, :collection => {:reorder_items => :post, :reorder_pages => :post,                                                                            :set_item_to_page => :post}
-      researches.resources :questions do |questions|
+    survey.resources :surveys, :member => { :role_management => :get, :new_member => :put, :edit_member => :put, :remove_member => :get } do |surveys|
+      surveys.resources :items, :collection => {:reorder_items => :post, :reorder_pages => :post,                                                                            :set_item_to_page => :post}
+      surveys.resources :questions do |questions|
         questions.resources :item_values, :collection => {:reorder_item_values => :post }
       end
     end
@@ -28,7 +27,7 @@ ActionController::Routing::Routes.draw do |map|
 
  # Route for admin
   map.namespace :admin do |admin|
-  #  admin.resources :researches, :member => { :role_management => :get, :new_member => :put, :edit_member => :put, :remove_member => :get }
+  #  admin.resources :surveys, :member => { :role_management => :get, :new_member => :put, :edit_member => :put, :remove_member => :get }
     admin.resources :roles
   end
  

@@ -1,8 +1,8 @@
-<h1><%=t(:new_research)%></h1>
+<h1><%=t(:new_survey)%></h1>
 
-<%= error_messages_for :research %>
+<%= error_messages_for :survey %>
 
-<% form_for(:research, :url => collection_url) do |f| %>
+<% form_for(:survey, :url => collection_url) do |f| %>
   <%= render :partial => "form", :locals => { :f => f } %>
   <p>
     <%= submit_tag "Create" %>

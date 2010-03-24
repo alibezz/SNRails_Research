@@ -1,7 +1,7 @@
-require 'rails_research'
+require 'rails_survey'
 require 'rake/packagetask'
 
-Rake::PackageTask.new('rails_research', RailsResearch::VERSION) do |p|
+Rake::PackageTask.new('rails_survey', RailsSurvey::VERSION) do |p|
   p.need_tar_gz = true
   p.package_files.include('app/**/*')
   p.package_files.include('components/**/*')

@@ -4,8 +4,8 @@ require File.dirname(__FILE__) + '/../config/environment'
 Environment.delete_all
 Environment.create!(:is_default => true)
 
-Research.delete_all
-Research.create(:title => 'some title', :introduction => 'some introduction')
+Survey.delete_all
+Survey.create(:title => 'some title', :introduction => 'some introduction')
 
 
 User.delete_all

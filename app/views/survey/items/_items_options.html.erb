@@ -1,6 +1,6 @@
-<% unless @research.is_active or current_user.is_collaborator?(@research) %>
+<% unless @survey.is_active or current_user.is_collaborator?(@survey) %>
   <ul>
-    <li> <%= link_to t(:add_question), new_survey_research_item_path(@research, :item_type => "question") %> </li>
-    <li> <%= link_to t(:add_section), new_survey_research_item_path(@research, :item_type => "section") %> </li>
+    <li> <%= link_to t(:add_question), new_survey_survey_item_path(@survey, :item_type => "question") %> </li>
+    <li> <%= link_to t(:add_section), new_survey_survey_item_path(@survey, :item_type => "section") %> </li>
   </ul>
 <% end %>

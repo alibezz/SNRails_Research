@@ -1,9 +1,9 @@
-<h1><%= title t(:listing_researches) %></h1>
+<h1><%= title t(:listing_surveys) %></h1>
 
 <ul class="listing link">
-  <% @researches.each do |research| %>
+  <% @surveys.each do |survey| %>
     <li> 
-      <%= link_to research.title, :action => 'show', :id => research.id %> 
+      <%= link_to survey.title, :action => 'show', :id => survey.id %> 
     </li>
   <% end %>
 </ul>

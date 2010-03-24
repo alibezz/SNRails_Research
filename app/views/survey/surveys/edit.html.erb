@@ -1,11 +1,11 @@
-<h1><%= title t(:editing_research) %></h1>
+<h1><%= title t(:editing_survey) %></h1>
 
-<%= error_messages_for :research %>
+<%= error_messages_for :survey %>
 
-<% form_for(:research, :url => object_url, :html => { :method => :put }) do |f| %>
+<% form_for(:survey, :url => object_url, :html => { :method => :put }) do |f| %>
   <%= render :partial => "form", :locals => { :f => f } %>
   <p>
-  <label for="research_is_active"> <%= t(:is_active) + ":" %> </label>
+  <label for="survey_is_active"> <%= t(:is_active) + ":" %> </label>
   <%= f.check_box :is_active %>
   </p>
   <p>

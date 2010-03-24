@@ -4,12 +4,12 @@
 
 <%= render :partial => "list_item_values", :locals => {:item => @item} %>
 
-<% form_for([:survey, @research, @item, @item_value]) do |f| %>
+<% form_for([:survey, @survey, @item, @item_value]) do |f| %>
   <%= render :partial => "form", :locals => { :f => f } %>
   <p>
     <%= submit_tag t(:create) %>
   </p>
 <% end %>
 <br/>
-<%= link_to t(:item), survey_research_items_path(@item.research_id, :page => @item.page_id) %>
+<%= link_to t(:item), survey_survey_items_path(@item.survey_id, :page => @item.page_id) %>
 

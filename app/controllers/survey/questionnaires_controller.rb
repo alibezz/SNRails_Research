@@ -1,14 +1,13 @@
 class QuestionnairesController < ResourceController::Base
-  belongs_to :research
-  before_filter :load_research
+  belongs_to :survey
+  before_filter :load_survey
 
   def new
 
     @questionnaire = Questionnaire.new
 
     if params[:commit].nil?
-     # @page = 1
-       @page = 0
+      @page = 1
     elsif /back/i =~ params[:commit]
       @page = params[:page_id].to_i - 1
     elsif /next/i =~ params[:commit] or /submit/i =~ params[:commit]
@@ -18,7 +17,7 @@ class QuestionnairesController < ResourceController::Base
     #FIXME create a method called invalid? that evaluates the result
     flash[:answers] = flash[:answers].merge(params[:object_item_values]) unless params[:object_item_values].nil?
 
-    @current_items = @research.questions.find_all { |i| i.page_id == @research.page_ids[@page] }
+    @current_items = @survey.questions.find_all { |i| i.page_id == @page }
    if request.post? and /submit/i =~ params[:commit]
       create
     end 
