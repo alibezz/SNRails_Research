@@ -9,13 +9,13 @@
   <% end %>
   <br>
 
-  <% if @page > 1 %>
+  <% if @page > 0 %>
   <p>
     <%= submit_tag t(:back) %>
   </p>
   <% end %>
 
-  <% if @page < @research.items.maximum('page_id') %>
+  <% if @page < @research.page_ids.count - 1 %>
   <p>
     <%=submit_tag t(:next)%>
   </p>

@@ -6,7 +6,7 @@
     <li> <%= link_to t(:edit), edit_object_url(@research) %> </li>
   <% end %>
 
-  <% if current_user.is_moderator?(@research) %>
+  <% if current_user.is_moderator?(@research) or current_user.is_administrator? %>
     <li> <%= link_to t(:destroy), { :action => "destroy", :id => @research.id }, :confirm => t(:message_confirmation), :method => :delete %></li>
     <li> <%= link_to t(:role_management), role_management_survey_research_url(@research) %> </li> 
   <% end %>
