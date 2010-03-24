@@ -3,8 +3,20 @@ class Survey::ResearchesController < ResourceController::Base
   before_filter :login_required
 
   before_filter :load_research, :except => [:index, :new, :create]
-#  protect 'research_editing', :research, :only => [:edit, :update]
-#  protect 'research_erasing', :research, :only => [:destroy]
+
+  protect 'research_viewing', :research, :only => [:show]
+  protect 'research_editing', :research, :only => [:edit, :update]
+  protect 'research_erasing', :research, :only => [:destroy, :role_management, :new_member, :edit_member, :remove_member]
+
+  def create
+    @research = Research.new(params[:research])
+    if @research.save
+      @research.set_moderator(current_user)
+      redirect_to object_path(@research)
+    else
+      render :action => 'new'
+    end
+  end
 
   def role_management
     @members = @research.members(current_user)

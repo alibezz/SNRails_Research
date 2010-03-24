@@ -223,4 +223,32 @@ class ResearchTest < Test::Unit::TestCase
     assert_equal false, r.remove_member(user2.id)
 
   end
+
+  def test_set_moderator
+    r = create_research
+    user1 = create_user(:login => 'julia', :administrator => false)
+    Role.destroy_all
+    count = Role.find(:all).count
+    r.set_moderator(user1)
+    assert_equal Role.find(:all).count, count + 1
+
+    Role.destroy_all
+    role = create_role(:name => "Moderator",                                              :permissions => ['research_viewing', 'research_editing',                       'research_erasing']) 
+
+    user2 = create_user(:login => 'peter', :administrator => false)
+    r.set_moderator(user2)
+    user2.reload
+
+    assert_equal user2.role_assignments.first.role_id, role.id 
+  
+    Role.destroy_all
+    role2 = create_role(:name => "moderator",                                              :permissions => ['research_viewing', 'research_editing',                       'research_erasing']) 
+
+    user3 = create_user(:login => 'frankie', :administrator => false)
+    r.set_moderator(user3)
+    user3.reload
+
+    assert_equal user3.role_assignments.first.role_id, role2.id 
+ 
+  end
 end

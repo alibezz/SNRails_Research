@@ -6,10 +6,6 @@ class Research < ActiveRecord::Base
 
   has_many :items, :before_add => [ Proc.new { |p,d| raise "#{t(:active_survey_cant_receive_questions)}" if p.is_active } ], :order => "position"
   has_many :questions
-#  has_many :permissions
-#  has_many :users, :through => :permissions
-#  has_many :moderator_permissions, :conditions => {:is_moderator => true}, :class_name => 'Permission'
-#  has_many :moderators, :through => :moderator_permissions, :source => :user
   has_many :questionnaires
 
   acts_as_design :root => File.join('designs', 'researches')
@@ -118,21 +114,12 @@ class Research < ActiveRecord::Base
     end
     false
   end
- 
- # Maybe this will be necessary later
- # def find_relevant_roles
- #   require 'set'
- #   
- #   roles = Role.find(:all)
- #   relevant_roles = []
- #   roles.each do  |role|
- #     relevant_roles << role if role.permissions.to_set.subset? PERMISSIONS['research'].to_set
- #   end
- #   relevant_roles
- # end 
+
+  def set_moderator(user)
+    user.add_role(moderator_role, self)
+  end 
 
 protected 
-
 
   def select_position(ind1, ind2, &block)
     position = self.number_of_pages
@@ -159,6 +146,10 @@ protected
     ids = yield 
     cond = User.merge_conditions({ :administrator => false }, ["id #{operator} (#{ids.join(',')})"])
     User.find(:all, :conditions => cond)
+  end
+
+  def moderator_role
+    Role.find_by_name("Moderator") || Role.find_by_name("moderator") ||                                                          Role.create!(:name => "Moderator", :permissions => PERMISSIONS['research'].keys)
   end
 end 
 

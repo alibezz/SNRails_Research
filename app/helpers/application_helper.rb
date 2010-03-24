@@ -17,8 +17,17 @@ module ApplicationHelper
     )
   end
 
-   def select_type
+  def select_type
     @types = Question.html_types.invert.map
     select("item", "html_type", @types)
+  end
+
+  def admin_bar
+    content_tag(:ul,
+      [
+        (content_tag(:li, link_to(t(:system_roles), admin_roles_path)))
+      ].join("\n"),
+      :class => 'admin_bar', :id => 'admin_bar'
+    )
   end
 end

@@ -5,7 +5,11 @@ class Survey::ItemValuesController < ResourceController::Base
   before_filter :load_research, :only => [:index, :reorder_item_values, :edit]
   before_filter :load_item
   before_filter :load_item_values, :only => [:index, :reorder_item_values]
-  
+
+  protect 'research_viewing', :research, :only => [:index, :show]
+  protect 'research_editing', :research, :only => [:reorder_item_values, :edit, :update]  
+  protect 'research_erasing', :research, :only => [:destroy, :new, :create]  
+ 
   index.before do
     @item_value = ItemValue.new
   end
@@ -20,8 +24,6 @@ class Survey::ItemValuesController < ResourceController::Base
   end
 
   def reorder_item_values
-    require 'pp'
-    pp params
     item = Item.find(params[:question_id])
     params["list_item_values"].each_with_index do |ivalue_id,position|
       ivalue = @item.item_values.find(ivalue_id)
@@ -52,8 +54,13 @@ class Survey::ItemValuesController < ResourceController::Base
         redirect_to :action => 'index' 
   end
 
+protected
+
   def collection
     @collection ||= @research.questions.find(params[:question_id]).item_values
   end
 
+  def research
+    Research.find(@item.research_id)
+  end
 end
