@@ -59,4 +59,21 @@ class User < ActiveRecord::Base
   def is_administrator?
     self.administrator?
   end
+
+  def is_collaborator?(survey)
+    self.has_role("Collaborator", survey)
+  end
+
+  def is_moderator?(survey)
+    self.has_role("Moderator", survey)
+  end
+
+protected
+
+  def has_role(role, survey)
+    assignment = self.role_assignments.find_by_resource_id(survey.id)
+    unless assignment.blank?
+      return Role.find(assignment.role_id).name == role ||                                                                         Role.find(assignment.role_id).name == role.downcase 
+    end
+  end
 end
