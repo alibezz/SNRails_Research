@@ -2,9 +2,7 @@ class QuestionnairesController < ResourceController::Base
   belongs_to :research
   before_filter :load_research
 
-    require 'pp'
   def new
-    pp flash[:answers]
     @questionnaire = Questionnaire.new
 
     if params[:commit].nil?
@@ -19,9 +17,6 @@ class QuestionnairesController < ResourceController::Base
     flash[:answers] ||= {}  
     #FIXME create a method called invalid? that evaluates the result
     flash[:answers] = flash[:answers].merge(params[:object_item_values]) unless params[:object_item_values].nil?
-    pp 'flash'
-    pp flash[:answers]
-
 
     @current_items = @research.questions.find_all { |i| i.page_id == @research.page_ids[@page] }
    if request.post? and /submit/i =~ params[:commit]
