@@ -129,4 +129,24 @@ class UserTest < ActiveSupport::TestCase
     user = create_user
     assert_equal false, user.is_administrator?    
   end
+
+  def test_has_role
+    r1 = create_research  
+    r2 = create_research(:title => "other test")  
+    role = create_role(:name => "Collaborator", :permissions => ['research_viewing'])
+    role2 = create_role(:name => "Moderator", :permissions => ['research_viewing', 'research_editing', 'research_erasing'])
+    
+    @user.add_role(role, r1)
+    @user.add_role(role2, r2)
+    @user.reload
+
+    assert @user.is_moderator?(r2)
+    assert @user.is_collaborator?(r1)
+
+    r3 = create_research(:title => "test3")
+    assert !@user.is_moderator?(r1)
+    assert !@user.is_collaborator?(r2)
+    assert !@user.is_moderator?(r3)
+    assert !@user.is_collaborator?(r3)
+  end
 end

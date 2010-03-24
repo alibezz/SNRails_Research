@@ -4,9 +4,7 @@ class Survey::ItemsController < ResourceController::Base
   before_filter :load_research
   
   protect 'research_viewing', :research, :only => [:index, :show]
-  protect 'research_editing', :research, :only => [:new, :create, :edit, :update, :reorder_items, :reorder_pages]
-  protect 'research_erasing', :research, :only => [:destroy]
-
+  protect 'research_editing', :research, :only => [:new, :create, :edit, :update, :reorder_items, :reorder_pages, :destroy]
 
   new_action.before do
     # @item_type is "question" by default

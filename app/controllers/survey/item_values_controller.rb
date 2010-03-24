@@ -7,8 +7,7 @@ class Survey::ItemValuesController < ResourceController::Base
   before_filter :load_item_values, :only => [:index, :reorder_item_values]
 
   protect 'research_viewing', :research, :only => [:index, :show]
-  protect 'research_editing', :research, :only => [:reorder_item_values, :edit, :update]  
-  protect 'research_erasing', :research, :only => [:destroy, :new, :create]  
+  protect 'research_editing', :research, :only => [:reorder_item_values, :edit, :update, :destroy, :new, :create]  
  
   index.before do
     @item_value = ItemValue.new
