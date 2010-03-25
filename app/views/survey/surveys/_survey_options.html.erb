@@ -3,7 +3,7 @@
   <li> <%= link_to t(:list_all), collection_url %> </li>
 
   <% unless current_user.is_collaborator?(@survey) %>
-    <li> <%= link_to t(:edit), edit_object_url(@survey) %> </li>
+    <li> <%= link_to t(:edit), edit_survey_survey_url(@survey) %> </li>
   <% end %>
 
   <% if current_user.is_moderator?(@survey) or current_user.is_administrator? %>
