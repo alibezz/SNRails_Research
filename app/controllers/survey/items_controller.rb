@@ -67,6 +67,12 @@ class Survey::ItemsController < ResourceController::Base
     end
   end
 
+  def destroy
+    @item = Item.find(params[:id])
+    @item.destroy
+    redirect_to :action => 'index'
+  end
+
 #  # Put an item on a page.
 #  def set_item_to_page
 #    @survey ||= Survey.find(params[:survey_id]) #FIXME put specific user

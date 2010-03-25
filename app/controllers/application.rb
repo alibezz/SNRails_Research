@@ -31,7 +31,6 @@ class ApplicationController < ActionController::Base
       @survey = id.nil? ? Survey.find(params[:id]) : Survey.find(id)
     end
     login_required if @survey.is_private?
-    @m_survey = @survey
   end
  
   #FIXME make this test
