@@ -25,7 +25,12 @@ class Survey::ItemsController < ResourceController::Base
     end
   end
 
+  show.before do
+    @item = Item.find(params[:id])
+  end
+
   edit.before do
+    @item = Item.find(params[:id])
     @item_type = params[:item_type].blank? ? "question" : params[:item_type]
   end
 
