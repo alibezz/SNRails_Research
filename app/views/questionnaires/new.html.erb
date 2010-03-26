@@ -2,7 +2,6 @@
 <%= error_messages_for :questionnaire, :object_item_values %>
 
 <% form_for([:public, @questionnaire], :url => {:action => 'new', :page_id => @page }) do |f| %>
-
     
   <% @current_items.each do |item| %>
     <%= render :partial => "items/#{item.html}", :locals => { :item => item } %>

@@ -18,10 +18,10 @@ class QuestionnairesController < ResourceController::Base
     #FIXME create a method called invalid? that evaluates the result
     flash[:answers] = flash[:answers].merge(params[:object_item_values]) unless params[:object_item_values].nil?
 
-    @current_items = @survey.questions.find_all { |i| i.page_id == @page }
+    @current_items = @survey.items.find_all { |i| i.page_id == @survey.page_ids[@page] }
    if request.post? and /submit/i =~ params[:commit]
       create
-    end 
+   end 
   end
 
   def create

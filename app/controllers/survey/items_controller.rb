@@ -12,11 +12,10 @@ class Survey::ItemsController < ResourceController::Base
   end
 
   def create
-    #@survey.reorder_items(params[:item][:position].to_i)
     params[:item_type] == "question" ? @item = Question.new(params[:item]) : @item = Section.new(params[:item])
     @item.survey_id = params[:survey_id].to_i
     @item.define_position
-     
+    
     if request.post? and @item.save
       redirect_to survey_survey_item_path(@survey, @item) 
     else

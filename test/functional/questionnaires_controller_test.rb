@@ -30,7 +30,6 @@ class QuestionnairesControllerTest < Test::Unit::TestCase
     assert_tag :tag => 'form', :attributes => {:action => "/questionnaires/new?page_id=0", :method => 'post'}
     assert_tag :tag => "input", :attributes => {:type => "submit", :value => /Next/}
 
-
     post :new, :survey_id => @survey.id, :commit => "Next", :page_id => 0
     assert_response :success
     assert_tag :tag => 'form', :attributes => {:action => "/questionnaires/new?page_id=1", :method => 'post'}

@@ -12,24 +12,8 @@ class Question < Item
 
   has_many :item_values, :foreign_key => :item_id, :before_add => [ Proc.new { |p,d| raise "#{t(:active_survey_cant_receive_alternatives)}" if Survey.find(p.survey_id).is_active } ], :order => "position"
 
-  HTML_TYPES = { 0 => "multiple_selection",
-    1 => "single_selection",
-    2 => "pure_text",
-    3 => "radiobutton",
-    4 => "checkbox"
-  }
-
   def is_text?
     self.html == "pure_text"
-  end
-
-  def html
-    HTML_TYPES[html_type.to_i]
-  end
-
-
-  def self.html_types
-    HTML_TYPES
   end
 
   def min_before_max_answers

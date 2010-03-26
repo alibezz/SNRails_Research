@@ -52,11 +52,15 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
   def test_should_post_create_successfully
     assert_equal 0, @survey.items.length
 
-    post :create, :item => {"position"=>"1", "info"=>"test1", "html_type"=> 0}, :survey_id => @survey.id
+    post :create, :item => { "info"=>"test1", "html_type"=> 0}, :survey_id => @survey.id
     @survey.reload 
     assert_equal 1, @survey.items.length
 
-    post :create, :item => {"position"=>"1", "info"=>"", "html_type"=> 0}, :survey_id => @survey.id
+    post :create, :item_type => "section", :item => {"info"=>"test1"}, :survey_id => @survey.id
+    @survey.reload
+    assert_equal @survey.items.last.html, "section"
+    
+    post :create, :item => {"info"=>"", "html_type"=> 0}, :survey_id => @survey.id
     assert_response :redirect
     assert_redirected_to new_survey_survey_item_path(@survey.id)
   end
