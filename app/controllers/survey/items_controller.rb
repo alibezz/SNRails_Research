@@ -25,12 +25,7 @@ class Survey::ItemsController < ResourceController::Base
     end
   end
 
-  show.before do
-    @item = Item.find(params[:id])
-  end
-
   edit.before do
-    @item = Item.find(params[:id])
     @item_type = params[:item_type].blank? ? "question" : params[:item_type]
   end
 
@@ -43,9 +38,8 @@ class Survey::ItemsController < ResourceController::Base
     end
   end
 
-  # Reorder the items definition according to user definition.
   def reorder_items
-    @survey ||= Survey.find(params[:survey_id]) #FIXME get the survey by user
+    @survey ||= Survey.find(params[:survey_id]) 
     params["list_items"].each_with_index do |item_id,position|
       item = @survey.items.find(item_id)
       item.position = position
@@ -57,9 +51,8 @@ class Survey::ItemsController < ResourceController::Base
     end
   end
 
-  # Reorder the pages how the user definition.
   def reorder_pages
-    @survey ||= Survey.find(params[:survey_id]) #FIXME put specific user
+    @survey ||= Survey.find(params[:survey_id])
     @survey.reorder_pages(params[:page_links])
     collection
     respond_to do |format|
@@ -73,22 +66,10 @@ class Survey::ItemsController < ResourceController::Base
     redirect_to :action => 'index'
   end
 
-#  # Put an item on a page.
-#  def set_item_to_page
-#    @survey ||= Survey.find(params[:survey_id]) #FIXME put specific user
-#    item = @survey.items.find(params[:id].split("_").last)
-#    @page_sent = params[:page_sent].split("_").last
-#    item.page_id = @page_sent
-#    item.save
-#    collection
-#    respond_to do |format|
-#      format.js 
-#    end
-#  end
+private 
 
-  private
   def parent_object
-    @object ||= Survey.find(params[:survey_id])
+    Survey.find(params[:survey_id])
   end
   
   def collection

@@ -138,7 +138,17 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
     assert_equal i3.page_id, 1
   end
 
- protected
+#destroy
+  
+  def test_should_destroy_item
+    i1 = create_item(:survey_id => @survey.id, :page_id => 1)
+    count = Item.find(:all).count
+
+    post :destroy, :survey_id => @survey.id, :id => i1.id
+    assert_equal count - 1, Item.find(:all).count
+  end
+
+protected
   
   def create_item_of_a_survey(survey)
      item = create_item(:survey_id => survey.id)

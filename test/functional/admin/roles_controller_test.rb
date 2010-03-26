@@ -20,6 +20,8 @@ class Admin::RolesControllerTest < ActionController::TestCase
   test "should get new" do
     get :new
     assert_response :success
+    assert_equal assigns(:perms).keys.count, 1 
+    assert_equal assigns(:perms).keys.first, "survey"
   end
   
   test "should create new role" do
