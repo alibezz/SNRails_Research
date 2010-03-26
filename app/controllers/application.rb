@@ -20,6 +20,10 @@ class ApplicationController < ActionController::Base
     @environment = Environment.default
   end
 
+  def load_survey_design
+    self.class.design :holder => 'survey'
+  end
+
   #FIXME make this test
   def load_survey
     id = params[:survey_id] || params[:public_id]

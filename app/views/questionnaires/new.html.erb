@@ -4,10 +4,13 @@
 <% form_for([:public, @questionnaire], :url => {:action => 'new', :page_id => @page }) do |f| %>
     
   <% @current_items.each do |item| %>
+  <div class="item">
     <%= render :partial => "items/#{item.html}", :locals => { :item => item } %>
+  </div>
   <% end %>
   <br>
 
+  <div class="submit">
   <% if @page > 0 %>
   <p>
     <%= submit_tag t(:back) %>
@@ -23,7 +26,8 @@
     <%= submit_tag t(:submit) %>
   </p>
   <% end %>
-
+  </div>
+    
 <% end %>
 
 <%= link_to t(:survey), public_path(@survey) %>

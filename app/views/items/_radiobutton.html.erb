@@ -1,5 +1,6 @@
 <h2><%= item.info %></h2>
 
+<div class="item_values">
 <% item.item_values.each do |item_value| %>
  
   <% if flash[:answers][item.id.to_s] and flash[:answers][item.id.to_s][item_value.id.to_s] %>
@@ -9,4 +10,4 @@
   <% end %>
 
 <% end %>
-
+</div>
