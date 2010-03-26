@@ -1,7 +1,9 @@
 <h2><%= item.info %></h2>
 
+<div class="item_values">
 <% if flash[:answers][item.id.to_s] %>
   <%= text_field("object_item_values[#{item.id}]", :info, :value => flash[:answers][item.id.to_s][:info]) %>
 <% else %>
   <%= text_field("object_item_values[#{item.id}]", :info) %>
 <% end %>
+</div>
