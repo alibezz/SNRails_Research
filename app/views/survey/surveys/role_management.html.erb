@@ -2,25 +2,25 @@
 <p><%= flash[:error] %></p>
 
 <% @members.each do |member| %>
-  <% form_for(@survey, :url => {:action => 'edit_member', :user_id => member.id},                                              :html => {:method => :put}) do %> 
-    <p><%= member.login %></p> 
-    <p><%= select("role", "id", Role.all.collect {|r| [ r.name, r.id ] },                                                                      {:selected => role_id(member, @survey)})%></p>
-    <p><%= submit_tag t(:update) %> </p>
+  <% form_for(@survey, :url => {:action => 'edit_member', :user_id => member.id},                                              :html => {:method => :put}) do %>
+    <ul><%= member.login %> 
+       <li><%= select("role", "id", Role.all.collect {|r| [ r.name, r.id ] },                                                                      {:selected => role_id(member, @survey)})%></li>
+       <li><%= submit_tag t(:update) %> </li>
   <% end %> 
-   <p><%= link_to t(:remove), {:action => "remove_member", :id => @survey.id , :user_id => member.id},                                         :confirm => t(:message_confirmation) %></p>
+       <li><%= link_to t(:remove), {:action => "remove_member", :id => @survey.id , :user_id => member.id},                                         :confirm => t(:message_confirmation) %></li>
+    </ul>
+    <br> 
 <% end %>
 
-<br>
+<br><br>
 <% form_tag new_member_survey_survey_path, :method => :put do %>
-  <p><%= label_tag t(:new_member) + ":" %>
-    <%= select("user", "id", @non_members.collect {|u| [ u.login, u.id ] }) %>
-  </p>
-
-  <p><%= label_tag t(:role) + ":" %>
-    <%= select("role", "id", Role.all.collect {|r| [ r.name, r.id ] }) %>
-  </p>
-  <%= submit_tag t(:add) %>
+  <ul><%= label_tag t(:new_member) + ":" %>
+     <li><%= select("user", "id", @non_members.collect {|u| [ u.login, u.id ] }) %></li>
+     <li><%= label_tag t(:role) + ":" %>
+          <%= select("role", "id", Role.all.collect {|r| [ r.name, r.id ] }) %></li>
+     <li><%= submit_tag t(:add) %></li>
+  </ul>
 <% end %>
 
-<br>
-<p><%= link_to t(:survey), survey_survey_path(@survey) %></p> 
+<br><br>
+<%= link_to t(:survey), survey_survey_path(@survey) %> 
