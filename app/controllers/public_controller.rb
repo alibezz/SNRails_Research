@@ -11,6 +11,6 @@ class PublicController < ResourceController::Base
   end
 
   def collection
-     @surveys = Survey.find(:all, :conditions => {:is_active => true})
+     @surveys = Survey.public_surveys
   end
 end

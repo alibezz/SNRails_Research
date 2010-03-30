@@ -249,6 +249,32 @@ class SurveyTest < Test::Unit::TestCase
     user3.reload
 
     assert_equal user3.role_assignments.first.role_id, role2.id 
- 
+  end
+
+  def test_should_order_items
+    r = create_survey
+    i1 = create_item(:survey_id => r.id, :page_id => 1, :position => 2)   
+    i2 = create_item(:survey_id => r.id, :page_id => 1, :position => 1)   
+    i3 = create_item(:survey_id => r.id, :page_id => 2, :position => 3)
+    r.reload
+
+    assert_equal r.ordered_items(1).first, i2
+    assert_equal r.ordered_items(1).last, i1
+    assert_equal r.ordered_items(1).count, r.items.find_all{|i| i.page_id == 1 }.count
+  end
+
+  def test_should_get_public_surveys
+    r1 = create_survey
+    i1 = create_item(:survey_id => r1.id, :type => "question")   
+    r1.save; r1.reload
+    r1.is_private = true; r1.is_active = true 
+    r1.save; r1.reload
+    assert_equal Survey.public_surveys.count, 0
+
+    r1.is_private = false
+    r1.save; r1.reload
+
+    assert_equal Survey.public_surveys.count, 1
+
   end
 end

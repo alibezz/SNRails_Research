@@ -119,6 +119,14 @@ class Survey < ActiveRecord::Base
     user.add_role(moderator_role, self)
   end 
 
+  def ordered_items(page)
+    self.items.find_all {|i| i.page_id == page}.sort {|a,b| a.position <=> b.position}
+  end
+
+  def self.public_surveys
+    Survey.find(:all, :conditions => {:is_active => true, :is_private => false})
+  end
+
 protected 
 
   def select_position(ind1, ind2, &block)

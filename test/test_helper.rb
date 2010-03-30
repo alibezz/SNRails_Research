@@ -58,7 +58,7 @@ class Test::Unit::TestCase
   def item_params(params = {})
     {
       :info => 'some survey',
-      :html_type => 2,
+      :html_type => Item.html_types.invert["pure_text"],
       :position => Item.count + 1
     }.merge(params)
   end
