@@ -19,6 +19,7 @@ class QuestionnairesControllerTest < Test::Unit::TestCase
     @ivalue1 = create_item_value(:item_id => @question2.id, :info => "info")
     @ivalue2 = create_item_value(:item_id => @question2.id, :info => "info2")
     @survey.reload; @question2.reload
+    @survey.is_active = true; @survey.save; @survey.reload 
   end
 
 #new

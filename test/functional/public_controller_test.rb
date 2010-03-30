@@ -39,6 +39,10 @@ class PublicControllerTest < ActionController::TestCase
 
   def test_should_show_survey
     r = create_survey
+    create_item(:survey_id => r, :type => "question")
+    r.save; r.reload
+    r.is_active = true; r.save; r.reload
+
     get :show, :id => r.id
     assert_response :success
   end

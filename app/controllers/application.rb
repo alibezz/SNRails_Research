@@ -58,6 +58,14 @@ class ApplicationController < ActionController::Base
   def load_roles
     @roles = Role.find(:all)
   end
+
+  def publication_required
+    load_survey
+    unless @survey.is_active and not @survey.is_private 
+      access_denied
+    end
+  end
+
 private
 
   def user

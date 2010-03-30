@@ -2,6 +2,7 @@ class QuestionnairesController < ResourceController::Base
   belongs_to :survey
   before_filter :load_survey
   before_filter :load_survey_design
+  before_filter :publication_required
 
   def new
     @questionnaire = Questionnaire.new
