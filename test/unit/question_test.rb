@@ -124,4 +124,8 @@ class QuestionTest < Test::Unit::TestCase
     assert_equal false, ss_question.validate_answers_presence("")
     assert_equal true, ss_question.validate_answers_presence("1")
   end
+
+  def test_should_load_html_types
+    assert_equal nil, Question.html_types.invert["section"]
+  end
 end
