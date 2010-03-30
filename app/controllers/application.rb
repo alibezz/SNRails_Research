@@ -24,7 +24,6 @@ class ApplicationController < ActionController::Base
     self.class.design :holder => 'survey'
   end
 
-  #FIXME make this test
   def load_survey
     id = params[:survey_id] || params[:public_id]
 
@@ -35,9 +34,9 @@ class ApplicationController < ActionController::Base
       @survey = id.nil? ? Survey.find(params[:id]) : Survey.find(id)
     end
     login_required if @survey.is_private?
+    @survey
   end
  
-  #FIXME make this test
   def load_item
     @item = Item.find(params[:item_id]||params[:question_id])
   end

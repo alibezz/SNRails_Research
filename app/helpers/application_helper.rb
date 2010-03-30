@@ -1,6 +1,7 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
+  #FIXME make this test
   def title(name)
     name
   end
@@ -17,11 +18,13 @@ module ApplicationHelper
     )
   end
 
+  #FIXME make this test
   def select_type
     @types = Question.html_types.invert.map
     select("item", "html_type", @types)
   end
 
+  #FIXME make this test
   def admin_bar
     content_tag(:ul,
       [
