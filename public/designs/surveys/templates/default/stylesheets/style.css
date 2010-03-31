@@ -61,6 +61,9 @@ form#new_questionnaire div.item {
     margin-bottom: 10px; }
   form#new_questionnaire div.item div.item_values {
     margin: 20px 20px 30px 10px; }
+  form#new_questionnaire div.item h2.section {
+    margin-bottom: 0px;
+    color: black; }
 
 p.title {
   font-size: 18px;
