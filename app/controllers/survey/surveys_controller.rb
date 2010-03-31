@@ -1,5 +1,7 @@
 class Survey::SurveysController < ResourceController::Base
 
+  uses_tiny_mce
+  
   before_filter :login_required
 
   before_filter :load_survey, :except => [:index, :new, :create]
