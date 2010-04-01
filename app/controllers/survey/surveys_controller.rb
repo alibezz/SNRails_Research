@@ -1,7 +1,13 @@
 class Survey::SurveysController < ResourceController::Base
 
-  uses_tiny_mce :options => { theme_advanced_toolbar_location : "top" }
-  
+  uses_tiny_mce :options => {
+    :theme => "advanced",
+    :theme_advanced_toolbar_location => "top",
+    :theme_advanced_buttons1 => "bold,italic,underline,strikethrough,removeformat,separator,forecolor,backcolor,separator,undo,redo",
+    :theme_advanced_buttons2 => "bullist,numlist,separator,outdent,indent,separator,image,link,unlink,cleanup,hr",
+    :theme_advanced_buttons3 => ""
+  }
+
   before_filter :login_required
 
   before_filter :load_survey, :except => [:index, :new, :create]
