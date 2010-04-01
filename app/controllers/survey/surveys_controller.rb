@@ -11,7 +11,8 @@ class Survey::SurveysController < ResourceController::Base
   before_filter :login_required
 
   before_filter :load_survey, :except => [:index, :new, :create]
-
+  before_filter :create_admin_tab
+  
   protect 'survey_viewing', :survey, :only => [:show]
   protect 'survey_editing', :survey, :only => [:edit, :update]
   protect 'survey_erasing', :survey, :only => [:destroy, :role_management, :new_member, :edit_member, :remove_member]

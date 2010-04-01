@@ -15,6 +15,20 @@ class ApplicationController < ActionController::Base
 
   design :holder => 'environment' 
 
+  uses_tabbed_navigation
+
+  def create_admin_tab
+    add_tab {
+      links_to :survey_surveys_path
+      highlights_on :controller => 'survey/surveys', :action => 'index'
+    }.named t(:see_all_surveys)
+
+    add_tab {
+      links_to :admin_roles_path
+      highlights_on :controller => 'admin/roles'
+    }.named t(:rules)
+  end
+
   def load_environment
     self.class.design :holder => 'environment' 
     @environment = Environment.default
