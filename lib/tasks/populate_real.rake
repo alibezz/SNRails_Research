@@ -144,6 +144,7 @@ namespace :db do
       end
       
       survey.is_active = true
+      survey.save
     end
 
 
