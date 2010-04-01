@@ -1,6 +1,6 @@
 class Survey::SurveysController < ResourceController::Base
 
-  uses_tiny_mce
+  uses_tiny_mce :options => { theme_advanced_toolbar_location : "top" }
   
   before_filter :login_required
 
