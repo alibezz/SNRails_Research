@@ -1,75 +1,116 @@
 ---
 pt-br:
-  false: ""
-  login: ""
-  survey: ""
-  max_answers: ""
-  add_new: ""
-  after: ""
-  message_confirmation: ""
-  activate_account: ""
-  items: ""
-  add_itemvalue: ""
-  update: ""
-  show: ""
-  html_type: ""
-  subtitle: ""
-  listing_sections: ""
-  true: ""
-  new_survey: ""
-  create: ""
-  title: ""
-  account_created: ""
-  edit: ""
-  back: ""
-  new_question: ""
-  confirm_password: ""
-  email: ""
-  listing_items: ""
-  info: ""
-  list_all: ""
-  username: ""
-  in_the_beginning: ""
-  min_answers: ""
-  editing_survey: ""
-  introduction: ""
-  information: ""
-  destroy: ""
-  is_private: ""
-  confirm: ""
-  New: ""
-  new_item: ""
-  add_section: ""
-  yes: ""
-  new_item_value: ""
-  logout: ""
-  account_activated: ""
-  listing_questions: ""
-  item_values: ""
-  add_question: ""
-  register: ""
-  logged_out: ""
-  moderators: ""
-  submit: ""
-  questionnaire_succesfully_saved: ""
-  successfully_removed: ""
-  next: ""
-  is_active: ""
-  sections: ""
-  couldnt_login: ""
-  is_optional: ""
-  position: ""
-  listing_surveys: ""
-  succesfully_saved: ""
-  password: ""
-  attribute_moderators: ""
-  subscribe_to_survey: ""
-  login_successful: ""
-  edit_item_value: ""
-  sign_up: ""
-  see_all_surveys: ""
-  no: ""
-  questions: ""
-  edit_moderators: ""
-  survey_moderators: ""
-  rails_survey: ""
+  New: Novo
+  accepts: Aceita
+  account_activated: sua conta foi ativada. Seja bem vindo!
+  account_created: Conta criada
+  activate_account: Visite esta URL para ativar a tua conta
+  active_survey_cant_receive_alternatives: Pesquisa ativa não pode receber alternativas
+  active_survey_cant_receive_questions: Pesquisa ativa não pode receber questões
+  add: Adicionar
+  add_itemvalue: Adicionar opções à questão 
+  add_new: Adicionar novo
+  add_question: Adicionar questão
+  add_section: Adicionar seção
+  after: depois
+  alternatives_survey_cant_be_active: alternativas, portanto a pesquisa não pode ser ativa
+  and: e
+  answers_maximum_but_only_has: respostas no máximo, porém existem apenas
+  attribute_moderators: Atribuir moderadores
+  back: Voltar
+  confirm: Confirmar
+  confirm_password: Confirmar senha
+  couldnt_login: "Não foi possível realizar o login como '{{login}}'"
+  create: Criar
+  destroy: Apagar
+  edit: Editar
+  edit_item_value: Editar questões e seções
+  edit_moderators: Editar moderadores
+  editing_item: Editar item
+  editing_survey: Editar pesquisa
+  email: Email
+  false: Não
+  html_type: Tipo da questão
+  in_the_beginning: No início
+  info: Informação
+  info_cant_be_blank: Informação não pode ser em branco
+  information: Informação
+  introduction: Introdução
+  is_active: É ativa?
+  is_obligatory: É obrigatória?
+  is_optional: É opcional?
+  is_private: É privada?
+  item: Item
+  item_value: Questão
+  item_values: Questões
+  items: Itens
+  list_all: Listar todos
+  listing_items: Listando itens
+  listing_questions: Listando questões
+  listing_sections: Listando seções
+  listing_surveys: Listando pesquisas
+  logged_out: Deslogado
+  login: Login
+  login_successful: O login ocorreu com sucesso
+  logout: Deslogar
+  manage: Gerenciar
+  max_answers: máximo de respostas
+  member_not_added: O membro não foi adicionado
+  member_not_removed: O membro não foi removido
+  message_confirmation: Tem certeza de que deseja apagar este item?
+  min_answers: mínimo de respostas
+  minimum_quantity_answers_must_be_smaller_than_maximum_expected:  a quantidade mínima de respostas deve ser menor que o máximo de respostas esperadas
+  moderators: Moderadores
+  must_be_answered: Deve ser respondida
+  must_be_between: deve estar entre
+  must_have_alternatives_survey_cant_be_active: deve ter alternativas, a pesquisa correspondente não pode ser ativada
+  new_item: Novo item
+  new_member: Novo membro
+  new_moderator: Novo moderador
+  new_question: Nova questão
+  new_role: Nova regra
+  new_section: Nova seção
+  new_survey: Nova pesquisa
+  next: próximo
+  no: não
+  no_answers: Sem respostas
+  number_of_answers_to: Número de respostas para
+  page: Página
+  password: Senha
+  permissions: Permissões
+  position: Posição
+  private: Privada
+  questionnaire_succesfully_saved: Questionário salvo com sucesso
+  questions: Questões
+  rails_survey: Sistema de Pesquisa
+  register: Registrar
+  remove: Remover
+  role: papel
+  role_management: Gerenciamento do papel
+  role_name: Nome do papel
+  role_not_updated: Papel não atualizada
+  roles_management: Gerenciamento de papéis
+  rules: regras
+  sections: Seções
+  see_all_surveys: Ver todas pesquisas 
+  select: Selecionar
+  show: Exibir
+  sign_up: Cadastrar
+  sign_up_as: Cadastrar como
+  submit: Submeter
+  subscribe_to_survey: Inscrever na pesquisa
+  subtitle: Sub-título
+  succesfully_saved: salvo com sucesso
+  successfully_removed: removido com sucesso
+  survey: Pesquisa
+  survey_doesnt_have_questions_it_cant_be_active: A pesquisa não possui questões, portanto não pode ser ativa
+  survey_editing: Editar pesquisas
+  survey_erasing: Apagar pesquisas
+  survey_moderators: Moderadores da pesquisa
+  survey_viewing: Visualizar pesquisa
+  system_roles: Papéis do sistema
+  title: Título
+  true: sim
+  update: Atualizar
+  username: Nome de usuário
+  yes: Sim

@@ -4,17 +4,17 @@
 <table id="roles_list">
   
   <tr>
-    <th><%= t(:label_role_name) %></th>
-    <th colspan="3"><%= t(:label_manage) %></th>
+    <th><%= t(:role_name) %></th>
+    <th colspan="3"><%= t(:manage) %></th>
   </tr>
 
   <% @roles.each do |r| %>
 
   <tr>
     <td><%= r.name %></td>
-    <td><%= link_to t(:label_show), admin_role_path(r) %></td>
-    <td><%= link_to t(:label_edit), edit_admin_role_path(r) %></td>
-    <td><%= link_to t(:label_destroy), { :action => "destroy", :id =>
+    <td><%= link_to t(:show), admin_role_path(r) %></td>
+    <td><%= link_to t(:edit), edit_admin_role_path(r) %></td>
+    <td><%= link_to t(:destroy), { :action => "destroy", :id =>
       r.id }, :confirm => t(:message_confirmation), :method => :delete %></td>
   </tr>
 
@@ -24,4 +24,4 @@
 
 <br />
 
-<p class="add"><%= link_to t(:label_new_role), new_admin_role_path %></p>
+<p class="add"><%= link_to t(:new_role), new_admin_role_path %></p>
