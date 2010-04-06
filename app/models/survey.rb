@@ -24,7 +24,7 @@ class Survey < ActiveRecord::Base
 
   def must_have_questions_to_be_active
     if self.questions.empty? and self.is_active
-      errors.add_to_base("#{t(:survey_doesnt_have_questions_it_cant_be_active)}")
+      errors.add_to_base(t(:survey_doesnt_have_questions_it_cant_be_active))
     end
   end
 
