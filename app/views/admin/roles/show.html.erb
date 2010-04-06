@@ -1,10 +1,14 @@
 <h1><%= @role.name %></h1>
 
-<h2> <%= t(:label_permissions) %> </h2>
+<h2> <%= t(:permissions) %> </h2>
 <ul>
   <% @role.permissions.each do |p| %>
     <li> <%= p %> </li> 
   <% end %>
 </ul>
 
+<<<<<<< HEAD:app/views/admin/roles/show.html.erb
 <%= link_to t(:back), collection_path %>
+=======
+<%= link_to t(:back), admin_roles_path %>
+>>>>>>> 793f6ed406df6198f71a36e4fdf6596dd721ab2e:app/views/admin/roles/show.html.erb

@@ -32,3 +32,9 @@
 [submodule "vendor/plugins/i18n_parser"]
 	path = vendor/plugins/i18n_parser
 	url = gitosis@projects.safernet.org.br:i18n_parser.git
+[submodule "vendor/plugins/tiny_mce"]
+	path = vendor/plugins/tiny_mce
+	url = gitosis@projects.safernet.org.br:tiny_mce
+[submodule "vendor/plugins/tabbed_navigation"]
+	path = vendor/plugins/tabbed_navigation
+	url = gitosis@projects.safernet.org.br:tabbed_navigation

@@ -1,9 +1,18 @@
 class Survey::SurveysController < ResourceController::Base
 
+  uses_tiny_mce :options => {
+    :theme => "advanced",
+    :theme_advanced_toolbar_location => "top",
+    :theme_advanced_buttons1 => "bold,italic,underline,strikethrough,removeformat,separator,forecolor,backcolor,separator,undo,redo",
+    :theme_advanced_buttons2 => "bullist,numlist,separator,outdent,indent,separator,image,link,unlink,cleanup,hr",
+    :theme_advanced_buttons3 => ""
+  }
+
   before_filter :login_required
 
   before_filter :load_survey, :except => [:index, :new, :create]
-
+  before_filter :create_admin_tab
+  
   protect 'survey_viewing', :survey, :only => [:show]
   protect 'survey_editing', :survey, :only => [:edit, :update]
   protect 'survey_erasing', :survey, :only => [:destroy, :role_management, :new_member, :edit_member, :remove_member]
