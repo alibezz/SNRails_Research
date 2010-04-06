@@ -17,7 +17,7 @@ class Survey::ItemsController < ResourceController::Base
     @item.define_position
     
     if request.post? and @item.save
-      redirect_to survey_survey_item_path(@survey, @item) 
+      redirect_to survey_survey_items_path(@survey, :page => @item.page_id) 
     else
       #TODO: error message
       redirect_to :action => "new", :item_type => params[:item_type]
@@ -31,7 +31,7 @@ class Survey::ItemsController < ResourceController::Base
   def update
     @item = Item.find(params[:id])
     if @item.update_attributes(params[:item])
-      redirect_to survey_survey_item_path(@survey, @item) 
+      redirect_to survey_survey_items_path(@survey, :page => @item.page_id) 
     else
       redirect_to :action => "edit", :item_type => @item.type.blank? ? "question" : @item.type.downcase
     end
