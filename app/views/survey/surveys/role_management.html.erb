@@ -3,7 +3,7 @@
 
 <% @members.each do |member| %>
   <% form_for(@survey, :url => {:action => 'edit_member', :user_id => member.id},                                              :html => {:method => :put}) do %>
-    <ul><%= member.login %> 
+    <ul><span class="heading"><%= member.login %></span>
        <li><%= select("role", "id", Role.all.collect {|r| [ r.name, r.id ] },                                                                      {:selected => role_id(member, @survey)})%></li>
        <li><%= submit_tag t(:update) %> </li>
   <% end %> 
@@ -14,7 +14,7 @@
 
 <br><br>
 <% form_tag new_member_survey_survey_path, :method => :put do %>
-  <ul><%= label_tag t(:new_member) + ":" %>
+  <ul><%= label_tag t(:new_member) + ":" , nil,  :class => :heading %>
      <li><%= select("user", "id", @non_members.collect {|u| [ u.login, u.id ] }) %></li>
      <li><%= label_tag t(:role) + ":" %>
           <%= select("role", "id", Role.all.collect {|r| [ r.name, r.id ] }) %></li>

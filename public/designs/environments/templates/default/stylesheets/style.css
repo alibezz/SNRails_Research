@@ -220,9 +220,20 @@ ul#page_links li {
   float: left;
   clear: left; }
 
+form.edit_survey ul {
+  clear: both; }
+  form.edit_survey ul li, form.edit_survey ul .heading {
+    display: inline;
+    float: left;
+    clear: none; }
+  form.edit_survey ul .heading {
+    margin-right: 20px; }
+
 ul#list_items li {
   float: left;
   clear: left; }
+  ul#list_items li ul.question {
+    clear: left; }
   ul#list_items li ul {
     display: block;
     float: right;
