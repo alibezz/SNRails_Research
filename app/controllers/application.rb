@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
     add_tab {
       links_to :admin_roles_path
       highlights_on :controller => 'admin/roles'
-    }.named t(:rules)
+    }.named t(:roles)
   end
 
   def load_environment

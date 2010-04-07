@@ -55,23 +55,18 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
     post :create, :item => { "info"=>"test1", "html_type"=> 0}, :survey_id => @survey.id
     @survey.reload 
     assert_equal 1, @survey.items.length
-
+    assert_response :redirect
+    assert_redirected_to survey_survey_items_path(@survey.id, :page => @survey.items.last.page_id)
+    
     post :create, :item_type => "section", :item => {"info"=>"test1"}, :survey_id => @survey.id
     @survey.reload
     assert_equal @survey.items.last.html, "section"
+    assert_response :redirect
+    assert_redirected_to survey_survey_items_path(@survey.id, :page => @survey.items.last.page_id)
     
     post :create, :item => {"info"=>"", "html_type"=> 0}, :survey_id => @survey.id
     assert_response :redirect
     assert_redirected_to new_survey_survey_item_path(@survey.id)
-  end
-
-#show
-
-  def test_should_get_show
-    i = create_item_of_a_survey(@survey)
-    get :show, :survey_id => i.survey_id, :id => i.id
-    assert_response :success
-    assert_template 'show'
   end
 
 #edit
@@ -96,13 +91,16 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
     i = create_item_of_a_survey(@survey); i.html_type = 0; i.save!
 
     position = i.position
+    page = i.page_id
 
-    post :update, :id => i.id, :survey_id => i.survey_id, :item => {:position => i.position + 1, :info => 'new info', 
-									:html_type => 1}
+    post :update, :id => i.id, :survey_id => i.survey_id, :item => {:position => i.position + 1, :info => 'new info',                                                                            :page_id => page + 1, :html_type => 1}
     i.reload
     assert_equal position + 1, i.position
+    assert_equal page + 1, i.page_id
     assert_equal 'new info', i.info
     assert_equal 1, i.html_type
+    assert_response :redirect
+    assert_redirected_to survey_survey_items_path(@survey.id, :page => i.page_id)
     
     post :update, :id => i.id, :survey_id => i.survey_id, :item => {:position => i.position + 1, :info => '',                                                                                    :html_type => nil}
     assert_response :redirect
