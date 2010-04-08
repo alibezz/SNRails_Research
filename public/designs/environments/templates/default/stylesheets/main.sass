@@ -27,6 +27,7 @@ body
   margin: 0 auto
   position: relative
   width: 50%
+  clear: both
 
 =diamond(!color=black)
   content: "\2666\a0"
@@ -149,6 +150,42 @@ a:active
         padding-right: 5px
         content: ""
 
+ul.tabs
+  list-style-type: none
+  float: left
+  display: block
+  text-align: center
+  font-size: 18px
+  margin: 0 auto 2px
+  border-width: 2px
+  border-style: solid
+  border-color = !secondaryb3
+  -moz-border-radius: 3px
+  background-color = !secondaryb5
+  li.tab_item
+    float: left
+    clear: none
+    padding: 2px 8px
+    a
+      display: block
+      float: left
+      clear: none
+      color = !secondaryb3
+      text-decoration: none
+    &:hover
+      background-color = !secondaryb3
+      color = !secondaryb5
+      a
+        background-color: inherit
+        color = !secondaryb5
+    a.active
+      text-decoration: underline
+      font-weight: bold
+
+a.toplink
+  float: left
+  clear: both
+
 #content
   margin-top: 34px !important
   _height: 1%
@@ -178,8 +215,9 @@ a:active
   height: 100%
   margin-bottom: 19px
   float: left
+  clear: none
   font-size: 110%
-  ul#admin_survey_menu
+  ul#survey_menu
     list-style-type: none
     margin-right: 20px
     border:
@@ -233,9 +271,22 @@ div.left
   float: left
   clear: left
 
-ul#page_links
-  li
-    +break-left
+#wrap_page_links
+  display: block
+  position: relative
+  margin: 2em auto 1em
+  background-color = !secondarya5
+  break: left
+  width: 70%
+  padding: 0.1em
+  height: 1.2em
+  #page_links
+    position: relative
+    display: block
+    width: 90%
+    li
+      display: inline
+      align: center
 
 form.edit_survey ul
   clear: both
@@ -247,17 +298,18 @@ form.edit_survey ul
     margin-right: 20px
 
 ul#list_items
+  width: 80%
+  margin-top: 1em
   li
-    +break-left
+    span.heading
+      float: left
     ul.question
       clear: left
     ul
       display: block
-      float: right
-      clear: both
+      position: relative
       li
         display: inline
-        float: left
         clear: none
         a.edit, a.item_value
           span
@@ -265,8 +317,7 @@ ul#list_items
         a.destroy
           width: 16px !important
           height: 16px !important
-          display: block
-          float: left
+          display: inline-block
           overflow: hidden !important
         a.edit:before
           content: url("../images/edit.png")

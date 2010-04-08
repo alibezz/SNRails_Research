@@ -24,14 +24,9 @@
         <div id="loginb">
           <%= login_bar %>
         </div>
-          <div id="all_surveys">
-            <% if !current_user.nil? and current_user.is_administrator? %>
-              <%= link_to t(:see_all_surveys), survey_surveys_url %>
-            <% else %>
-              <%= link_to t(:see_all_surveys), public_index_url %>
-            <% end %>
-          </div>
-
+        <div id="mainmenu">
+          <%= tabbed_navigation %>
+        </div>
         <div id="content">
 
         <div class="info">
