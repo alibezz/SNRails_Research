@@ -4,6 +4,7 @@ class QuestionnairesController < ResourceController::Base
   before_filter :publication_required
   #place this filter at the end
   before_filter :load_survey_design
+  layout 'survey'
 
   def new
     @questionnaire = Questionnaire.new
