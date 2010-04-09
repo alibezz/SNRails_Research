@@ -73,6 +73,10 @@ p.title {
 p.intro {
   font-align: justified; }
 
+div.intro {
+  margin-top: 1em;
+  margin-bottom: 1em; }
+
 div.title {
   font-size: 18px;
   color: #c9c9d0; }
