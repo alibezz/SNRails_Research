@@ -21,13 +21,13 @@ class SessionsControllerTest < ActionController::TestCase
     post :create, :login => user.login, :password => user.password
     assert session[:user_id]
     assert_response :redirect
-    assert_redirected_to survey_surveys_path
+    assert_redirected_to public_index_url
 
     user2 = create_user(:login => 'Susan', :administrator => true)
     post :create, :login => user2.login, :password => user2.password
     assert session[:user_id]
     assert_response :redirect
-    assert_redirected_to admin_roles_path
+    assert_redirected_to survey_surveys_path
 
 
   end

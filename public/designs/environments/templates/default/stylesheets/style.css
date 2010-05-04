@@ -26,6 +26,7 @@ h1 {
   margin: 0 auto;
   position: relative;
   width: 50%;
+  clear: both;
   padding-bottom: 5px; }
 
 h2 {
@@ -35,7 +36,8 @@ h2 {
   text-align: center;
   margin: 0 auto;
   position: relative;
-  width: 50%; }
+  width: 50%;
+  clear: both; }
 
 p.title {
   font-size: 18px;
@@ -137,6 +139,42 @@ a:active {
         padding-right: 5px;
         content: ""; }
 
+ul.tabs {
+  list-style-type: none;
+  float: left;
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  margin: 0 auto 2px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #004d32;
+  -moz-border-radius: 3px;
+  background-color: #e6fff6; }
+  ul.tabs li.tab_item {
+    float: left;
+    clear: none;
+    padding: 2px 8px; }
+    ul.tabs li.tab_item a {
+      display: block;
+      float: left;
+      clear: none;
+      color: #004d32;
+      text-decoration: none; }
+    ul.tabs li.tab_item:hover {
+      background-color: #004d32;
+      color: #e6fff6; }
+      ul.tabs li.tab_item:hover a {
+        background-color: inherit;
+        color: #e6fff6; }
+    ul.tabs li.tab_item a.active {
+      text-decoration: underline;
+      font-weight: bold; }
+
+a.toplink {
+  float: left;
+  clear: both; }
+
 #content {
   margin-top: 34px !important;
   _height: 1%;
@@ -166,27 +204,28 @@ a:active {
   height: 100%;
   margin-bottom: 19px;
   float: left;
+  clear: none;
   font-size: 110%; }
-  #column-1 ul#admin_survey_menu {
+  #column-1 ul#survey_menu {
     list-style-type: none;
     margin-right: 20px;
     border-style: solid;
     border-width: 0px 0px 2px;
     border-color: #407080; }
-    #column-1 ul#admin_survey_menu li {
+    #column-1 ul#survey_menu li {
       padding-left: 0;
       list-style-position: inside; }
-    #column-1 ul#admin_survey_menu a {
+    #column-1 ul#survey_menu a {
       border-style: solid;
       border-width: 2px 2px 0;
       border-color: #407080;
       padding: 2px 20px;
       display: block;
       text-decoration: none; }
-    #column-1 ul#admin_survey_menu a:link, #column-1 ul#admin_survey_menu a:visited {
+    #column-1 ul#survey_menu a:link, #column-1 ul#survey_menu a:visited {
       background-color: #80dfff;
       color: #00394d; }
-    #column-1 ul#admin_survey_menu a:hover {
+    #column-1 ul#survey_menu a:hover {
       background-color: #00394d;
       color: #e6f9ff; }
 
@@ -216,9 +255,22 @@ div.left {
   float: left;
   left: 0; }
 
-ul#page_links li {
-  float: left;
-  clear: left; }
+#wrap_page_links {
+  display: block;
+  position: relative;
+  margin: 2em auto 1em;
+  background-color: #e6efff;
+  break: left;
+  width: 70%;
+  padding: 0.1em;
+  height: 1.2em; }
+  #wrap_page_links #page_links {
+    position: relative;
+    display: block;
+    width: 90%; }
+    #wrap_page_links #page_links li {
+      display: inline;
+      align: center; }
 
 form.edit_survey ul {
   clear: both; }
@@ -229,26 +281,25 @@ form.edit_survey ul {
   form.edit_survey ul .heading {
     margin-right: 20px; }
 
-ul#list_items li {
-  float: left;
-  clear: left; }
+ul#list_items {
+  width: 80%;
+  margin-top: 1em; }
+  ul#list_items li span.heading {
+    float: left; }
   ul#list_items li ul.question {
     clear: left; }
   ul#list_items li ul {
     display: block;
-    float: right;
-    clear: both; }
+    position: relative; }
     ul#list_items li ul li {
       display: inline;
-      float: left;
       clear: none; }
       ul#list_items li ul li a.edit span, ul#list_items li ul li a.item_value span {
         display: none; }
       ul#list_items li ul li a.destroy {
         width: 16px !important;
         height: 16px !important;
-        display: block;
-        float: left;
+        display: inline-block;
         overflow: hidden !important; }
       ul#list_items li ul li a.edit:before {
         content: url("../images/edit.png"); }

@@ -2,8 +2,8 @@
 
 <h2><%= @survey.subtitle %></h2>
 
-<p>
-  <%=h @survey.introduction %>
-</p>
+<div class="intro">
+  <%= @survey.introduction %>
+</div>
 
 <%= link_to t(:subscribe_to_survey), new_public_questionnaire_path(@survey) %>

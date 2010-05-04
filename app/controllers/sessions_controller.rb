@@ -19,9 +19,9 @@ class SessionsController < ApplicationController
       new_cookie_flag = (params[:remember_me] == "1")
       handle_remember_cookie! new_cookie_flag
       if self.current_user.is_administrator?
-        redirect_to admin_roles_path
-      else
         redirect_to survey_surveys_path
+      else
+        redirect_to public_index_url
       end
       flash[:notice] = t(:login_successful)
     else
