@@ -2,8 +2,8 @@
   <% @item_values.each do |ivalue| %>
     <li id="item_value_<%= ivalue.id %>">
       <%= ivalue.info %>
-      <%= lightbox_link_to t(:edit), { :action => 'edit', :question_id => item.id, :id => ivalue.id } %>
-      <%= link_to t(:destroy), { :action => "destroy", :id => ivalue.id, :item_id => item.id },                                                               :confirm => t(:message_confirmation), :method => :delete %>
+      <%= lightbox_link_to t(:edit), { :action => 'edit', :question_id => @item.id, :id => ivalue.id } %>
+      <%= link_to t(:destroy), { :action => "destroy", :id => ivalue.id, :item_id => @item.id },                                                               :confirm => t(:message_confirmation), :method => :delete %>
 
     </li>
   <% end %>
@@ -12,7 +12,7 @@
 <%=
   sortable_element 'list_item_values',
         :complete => visual_effect(:highlight, 'list_item_values'),
-        :url => { :action => "reorder_item_values", :question_id => item.id},
+        :url => { :action => "reorder_item_values", :question_id => @item.id},
         :failure => "$('error').innerHTML= request.responseText",
         :constraint => false,
         :dropOnEmpty => true,

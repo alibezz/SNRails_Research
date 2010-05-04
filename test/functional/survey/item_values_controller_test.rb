@@ -105,24 +105,28 @@ class ItemValuesControllerTest < Test::Unit::TestCase
 
 #reorder_item_values
 #
-#  def test_should_reorder_item_values
-#    i1 = create_item_value(:item_id => @item.id, :position => 1)
-#    i2 = create_item_value(:item_id => @item.id, :position => 2)
-#    i3 = create_item_value(:item_id => @item.id, :position => 3)
-#    @item.reload
-#
-#    post :reorder_item_values, :list_item_values => ["3", "1", "2"], :survey_id => @item.survey_id,                               :question_id => @item.id
-#    @item.reload; i1.reload; i2.reload; i3.reload
-#    
-#    assert_equal i1.position, 2
-#    assert_equal i2.position, 3
-#    assert_equal i3.position, 1
-#
-#    post :reorder_item_values, :list_item_values => ["1", "2", "3"], :survey_id => @item.survey_id,                               :question_id => @item.id
-#    @item.reload; i1.reload; i2.reload; i3.reload
-#    assert_equal i1.position, 1
-#    assert_equal i2.position, 2
-#    assert_equal i3.position, 3
-#
-#  end
+  def test_should_reorder_item_values
+    #There's already an item_value
+    i1 = create_item_value(:item_id => @item.id, :position => 2)
+    i2 = create_item_value(:item_id => @item.id, :position => 3)
+    i3 = create_item_value(:item_id => @item.id, :position => 4)
+    @item.reload
+
+    post :reorder_item_values, :list_item_values => ["4", "1", "2", "3"], :survey_id => @item.survey_id,                               :question_id => @item.id
+    @item.reload; i1.reload; i2.reload; i3.reload
+
+    assert_equal i3.position, 0
+    assert_equal @item.item_values.find(1).position, 1
+    assert_equal i1.position, 2
+    assert_equal i2.position, 3
+
+    post :reorder_item_values, :list_item_values => ["1", "2", "3","4"], :survey_id => @item.survey_id,                               :question_id => @item.id
+    @item.reload; i1.reload; i2.reload; i3.reload
+    
+    assert_equal @item.item_values.find(1).position, 0
+    assert_equal i1.position, 1
+    assert_equal i2.position, 2
+    assert_equal i3.position, 3
+
+  end
 end

@@ -23,7 +23,6 @@ class Survey::ItemValuesController < ResourceController::Base
   end
 
   def reorder_item_values
-    item = Item.find(params[:question_id])
     params["list_item_values"].each_with_index do |ivalue_id,position|
       ivalue = @item.item_values.find(ivalue_id)
       ivalue.position = position
