@@ -65,6 +65,9 @@ class Survey::ItemsController < ResourceController::Base
     redirect_to :action => 'index'
   end
 
+  def dependencies
+  end
+
 private 
 
   def parent_object
