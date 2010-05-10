@@ -12,21 +12,35 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # :secret => '96e3e36e40be10cbdc44d00d4878b676'
 
   before_filter :load_environment
+  before_filter :create_admin_tab
 
   design :holder => 'environment' 
 
   uses_tabbed_navigation
 
   def create_admin_tab
-    add_tab {
+    is_admin = "!current_user.nil? and current_user.is_administrator?"
+    isnt_admin = "!(#{is_admin})"
+    tab = add_tab {
       links_to :survey_surveys_path
       highlights_on :controller => 'survey/surveys', :action => 'index'
-    }.named t(:see_all_surveys)
+    }
+    tab.named(t(:see_all_surveys))
+    tab.show_if(is_admin)
 
-    add_tab {
+    tab = add_tab {
+      links_to :public_index_url
+      highlights_on :controller => 'public', :action => 'index'
+    }
+    tab.named(t(:see_all_surveys))
+    tab.show_if(isnt_admin)
+
+    tab = add_tab {
       links_to :admin_roles_path
       highlights_on :controller => 'admin/roles'
-    }.named t(:roles)
+    }
+    tab.named(t(:roles))
+    tab.show_if(is_admin)
   end
 
   def load_environment
