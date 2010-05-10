@@ -7,6 +7,7 @@ class ItemValue < ActiveRecord::Base
   end
  
   belongs_to :item
+  has_and_belongs_to_many :conditionals, :class_name => "Question"
 
   before_save do |item_value|
     item_value.position ||= (item_value.max("item_id = ?" % item_value) || 0) + 1 unless item_value.item.nil?
