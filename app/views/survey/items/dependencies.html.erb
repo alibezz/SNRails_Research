@@ -1,0 +1,14 @@
+<h2><%= t(:dependencies) %></h2>
+<p><%= flash[:error] %></p>
+
+<% unless @questions.blank? %>
+  <%# form_for(:item, :url => {:action => 'filter'}, :html => {:method => :put}) do %>
+     <ul id="items" >
+     <%= select_tag "questions", options_from_collection_for_select(@questions, "id", "info")%>
+     <%= observe_item_select(@survey.id, @item.id) %>
+     </ul>
+  <%# end %>
+<% end %>
+
+<%= link_to t(:back), survey_survey_items_path(@survey, :page => @item.page_id) %>
+

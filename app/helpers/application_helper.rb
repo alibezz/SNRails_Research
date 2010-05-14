@@ -33,4 +33,14 @@ module ApplicationHelper
       :class => 'admin_bar', :id => 'admin_bar'
     )
   end
+
+   def observe_item_select(survey_id, item_id)
+    observe_field(
+                  :questions,
+                  :url => filter_survey_survey_item_path(survey_id, item_id),
+                  :with =>  "'value=' + value",
+                  :on => :onchange
+    )
+  end
+
 end
