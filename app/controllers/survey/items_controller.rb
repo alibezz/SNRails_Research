@@ -68,19 +68,15 @@ class Survey::ItemsController < ResourceController::Base
 
   def dependencies
     @item = Item.find(params[:id])
-    @ivalues = @item.item_values.find(:all)
-    @questions = Question.find(:all, :conditions => ["position < #{@item.position} AND survey_id = #{@item.survey_id}"])
+    @questions = @item.previous
   end
 
   def filter
-    require 'pp'
-    pp params
-
     @item = Item.find(params[:value])
     @ivalues = @item.item_values.find(:all)
 
     render :update do |page|
-      page.insert_html :bottom, "items", :partial => "alternatives", :locals => {:ivalues => @ivalues}
+      page.replace_html "ivalues", :partial => "alternatives", :locals => {:ivalues => @ivalues}
     end
 
   end

@@ -46,6 +46,11 @@ class Question < Item
     (self.is_text? and not answers["info"].blank?) or (not self.is_text?)   
   end
 
+  #TODO Make test
+  def previous
+     Question.find(:all, :conditions => ["position < #{self.position} AND survey_id = #{self.survey_id}"])
+  end
+
 protected
 
   def validate_text_content(text_answer)
