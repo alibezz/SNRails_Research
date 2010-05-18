@@ -66,6 +66,7 @@ class Survey::ItemsController < ResourceController::Base
   end
 
   def dependencies
+    #TODO Display conditionals that already exist  
     @item = Item.find(params[:id])
     @questions = @item.previous
   end
@@ -88,7 +89,7 @@ class Survey::ItemsController < ResourceController::Base
     @item.dependencies << @ivalue
     @ivalue.conditionals << @item
 
-    @item.save!; @ivalue.save! 
+    @item.save!; @ivalue.save!
     redirect_to :action => 'dependencies'
   end 
 

@@ -47,7 +47,7 @@ class Question < Item
   end
 
   def previous
-     Question.find(:all, :conditions => ["position < #{self.position} AND survey_id = #{self.survey_id}"])
+     Question.find(:all, :conditions => ["(page_id < #{self.page_id} OR (page_id == #{self.page_id} AND position < #{self.position}))  AND survey_id = #{self.survey_id}"])
   end
 
   #TODO Make test
