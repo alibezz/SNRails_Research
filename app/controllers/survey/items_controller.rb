@@ -72,15 +72,26 @@ class Survey::ItemsController < ResourceController::Base
 
   #TODO maketests
   def filter
-    @item = Item.find(params[:value])
-    @ivalues = @item.item_values.find(:all)
-
+    @item = Item.find(params[:id])
+    #ivalues = Item.find(params[:value]).item_values.find(:all)
+    ivalues = Item.find(params[:value]).free_alts(@item)
     render :update do |page|
-      page.replace_html "ivalues", :partial => "alternatives", :locals => {:ivalues => @ivalues}
+      page.replace_html "ivalues", :partial => "alternatives", :locals => {:item => @item, :survey => @survey,                                                  :ivalues => ivalues}
     end
-
   end
-  
+ 
+  #TODO maketests
+  def create_dependency
+    @item = Item.find(params[:id])
+    @ivalue = ItemValue.find(params[:item][:dependencies])
+
+    @item.dependencies << @ivalue
+    @ivalue.conditionals << @item
+
+    @item.save!; @ivalue.save! 
+    redirect_to :action => 'dependencies'
+  end 
+
 private 
 
   def parent_object
