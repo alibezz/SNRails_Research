@@ -7,12 +7,13 @@
 <%= render :partial => 'survey/surveys/survey_options' %>
 
 <div class="content">
-<p class="title"><%=  t(:items) %></p>
+  <p class="title"><%=  t(:items) %></p>
 
-<%= render :partial => 'items_options' %>
+  <%= render :partial => 'items_options' %>
 
+  <div class="wrap_right">
+    <%= render :partial => 'list_items' %>
 
-<%= render :partial => 'list_items' %>
-
-<div id="wrap_page_links"><%= render :partial => 'page_links' %></div>
+    <div id="wrap_page_links"><%= render :partial => 'page_links' %></div>
+  </div>
 </div>

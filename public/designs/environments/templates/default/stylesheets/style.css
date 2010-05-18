@@ -194,10 +194,8 @@ a.toplink {
   z-index: 1;
   margin-bottom: 8px; }
 
-#list_items {
-  margin-left: 160px !important; }
-
 #column-1 {
+  z-index: 2;
   position: relative;
   left: 0px;
   width: 170px;
@@ -256,12 +254,13 @@ div.left {
   left: 0; }
 
 #wrap_page_links {
+  z-index: 1;
   display: block;
   position: relative;
   margin: 2em auto 1em;
   background-color: #e6efff;
   break: left;
-  width: 70%;
+  width: 90%;
   padding: 0.1em;
   height: 1.2em; }
   #wrap_page_links #page_links {
@@ -281,29 +280,35 @@ form.edit_survey ul {
   form.edit_survey ul .heading {
     margin-right: 20px; }
 
-ul#list_items {
+div.wrap_right {
+  margin-left: 160px !important;
   width: 80%;
   margin-top: 1em; }
-  ul#list_items li span.heading {
+  div.wrap_right ul#list_items li.section {
+    background-color: #e6efff;
+    font-weight: bold; }
+  div.wrap_right ul#list_items li.question {
+    padding-left: 2em; }
+  div.wrap_right ul#list_items li span.heading {
     float: left; }
-  ul#list_items li ul.question {
+  div.wrap_right ul#list_items li ul.question {
     clear: left; }
-  ul#list_items li ul {
+  div.wrap_right ul#list_items li ul {
     display: block;
     position: relative; }
-    ul#list_items li ul li {
+    div.wrap_right ul#list_items li ul li {
       display: inline;
       clear: none; }
-      ul#list_items li ul li a.edit span, ul#list_items li ul li a.item_value span {
+      div.wrap_right ul#list_items li ul li a.edit span, div.wrap_right ul#list_items li ul li a.item_value span {
         display: none; }
-      ul#list_items li ul li a.destroy {
+      div.wrap_right ul#list_items li ul li a.destroy {
         width: 16px !important;
         height: 16px !important;
         display: inline-block;
         overflow: hidden !important; }
-      ul#list_items li ul li a.edit:before {
+      div.wrap_right ul#list_items li ul li a.edit:before {
         content: url("../images/edit.png"); }
-      ul#list_items li ul li a.item_value:before {
+      div.wrap_right ul#list_items li ul li a.item_value:before {
         content: url("../images/list-add.png"); }
-      ul#list_items li ul li a.destroy:before {
+      div.wrap_right ul#list_items li ul li a.destroy:before {
         content: url("../images/list-remove.png"); }

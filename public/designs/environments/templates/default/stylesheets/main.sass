@@ -205,10 +205,8 @@ a.toplink
   z-index: 1
   margin-bottom: 8px
 
-#list_items
-  margin-left: 160px !important
-
 #column-1
+  z-index: 2
   position: relative
   left: 0px
   width: 170px
@@ -272,12 +270,13 @@ div.left
   clear: left
 
 #wrap_page_links
+  z-index: 1
   display: block
   position: relative
   margin: 2em auto 1em
   background-color = !secondarya5
   break: left
-  width: 70%
+  width: 90%
   padding: 0.1em
   height: 1.2em
   #page_links
@@ -297,31 +296,38 @@ form.edit_survey ul
   .heading
     margin-right: 20px
 
-ul#list_items
+div.wrap_right
+  margin-left: 160px !important
   width: 80%
   margin-top: 1em
-  li
-    span.heading
-      float: left
-    ul.question
-      clear: left
-    ul
-      display: block
-      position: relative
-      li
-        display: inline
-        clear: none
-        a.edit, a.item_value
-          span
-            display: none
-        a.destroy
-          width: 16px !important
-          height: 16px !important
-          display: inline-block
-          overflow: hidden !important
-        a.edit:before
-          content: url("../images/edit.png")
-        a.item_value:before
-          content: url("../images/list-add.png")
-        a.destroy:before
-          content: url("../images/list-remove.png")
+  ul#list_items
+    li.section
+      background-color = !secondarya5
+      font-weight: bold
+    li.question
+      padding-left: 2em
+    li
+      span.heading
+        float: left
+      ul.question
+        clear: left
+      ul
+        display: block
+        position: relative
+        li
+          display: inline
+          clear: none
+          a.edit, a.item_value
+            span
+              display: none
+          a.destroy
+            width: 16px !important
+            height: 16px !important
+            display: inline-block
+            overflow: hidden !important
+          a.edit:before
+            content: url("../images/edit.png")
+          a.item_value:before
+            content: url("../images/list-add.png")
+          a.destroy:before
+            content: url("../images/list-remove.png")

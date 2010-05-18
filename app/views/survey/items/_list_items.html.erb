@@ -1,7 +1,7 @@
 
 <ul id="list_items">
   <% @items.each do |item| %>
-    <li id="item_<%= item.id %>"> 
+    <li id="item_<%= item.id %>" class="<%= item.class.to_s.downcase %>">
       <span class="heading"><%= item.info%></span>
       <ul>
         <% unless current_user.is_collaborator?(@survey) %>
@@ -28,4 +28,3 @@
         :dropOnEmpty => true,
         :containment =>  ['list_items']
 %>
-
