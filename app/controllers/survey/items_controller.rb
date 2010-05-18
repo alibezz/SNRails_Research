@@ -67,6 +67,8 @@ class Survey::ItemsController < ResourceController::Base
 
   def dependencies
     #TODO Display conditionals that already exist  
+    #FIXME Don't display anything if there aren't alternatives  
+    #FIXME Change the onchange and put a prompt on the questions select_tag  
     @item = Item.find(params[:id])
     @questions = @item.previous
   end
@@ -81,15 +83,12 @@ class Survey::ItemsController < ResourceController::Base
     end
   end
  
-  #TODO maketests
   def create_dependency
     @item = Item.find(params[:id])
     @ivalue = ItemValue.find(params[:item][:dependencies])
 
     @item.dependencies << @ivalue
-    @ivalue.conditionals << @item
-
-    @item.save!; @ivalue.save!
+    @item.save!
     redirect_to :action => 'dependencies'
   end 
 

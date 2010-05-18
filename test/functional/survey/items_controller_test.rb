@@ -161,6 +161,19 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
     assert_equal assigns(:questions), i2.previous
   end
 
+#create_dependency
+
+  def test_should_create_dependencies
+    i1 = create_item(:type => 'question', :survey_id => @survey.id, :page_id => 1)
+    i2 = create_item(:type => 'question', :survey_id => @survey.id, :page_id => 2)
+    alt1 = create_item_value(:item_id => i1.id)
+ 
+    post :create_dependency, :id => i2.id, :survey_id => @survey.id, :item => {:dependencies => alt1.id}
+    i2.reload; alt1.reload
+    assert_equal alt1.conditionals, [i2]
+    assert_equal i2.dependencies, [alt1]
+  end
+
 protected
   
   def create_item_of_a_survey(survey)

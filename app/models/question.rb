@@ -47,14 +47,16 @@ class Question < Item
   end
 
   def previous
-     Question.find(:all, :conditions => ["(page_id < #{self.page_id} OR (page_id == #{self.page_id} AND position < #{self.position}))  AND survey_id = #{self.survey_id}"])
+     cond1 = "page_id < #{self.page_id}"
+     cond2 =  "(page_id = #{self.page_id} AND position < #{self.position})"
+     cond3 = "survey_id = #{self.survey_id}"
+     Question.find(:all, :conditions => ["(#{cond1} OR #{cond2}) AND #{cond3}"])
   end
-
-  #TODO Make test
 
   def free_alts(item)
     self.item_values - item.dependencies
   end
+
 protected
 
   def validate_text_content(text_answer)
