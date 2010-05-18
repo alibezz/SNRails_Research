@@ -64,13 +64,13 @@ class Survey::ItemsController < ResourceController::Base
     @item.destroy
     redirect_to :action => 'index'
   end
-  #TODO maketests
 
   def dependencies
     @item = Item.find(params[:id])
     @questions = @item.previous
   end
 
+  #TODO maketests
   def filter
     @item = Item.find(params[:value])
     @ivalues = @item.item_values.find(:all)

@@ -150,6 +150,17 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
     assert_equal count - 1, Item.find(:all).count
   end
 
+#dependencies
+
+  def test_should_get_dependencies
+    i1 = create_item(:type => 'question', :survey_id => @survey.id, :page_id => 1)
+    i2 = create_item(:type => 'question', :survey_id => @survey.id, :page_id => 2)
+    get :dependencies, :survey_id => @survey.id, :id => i2.id
+
+    assert_response :success
+    assert_equal assigns(:questions), i2.previous
+  end
+
 protected
   
   def create_item_of_a_survey(survey)
