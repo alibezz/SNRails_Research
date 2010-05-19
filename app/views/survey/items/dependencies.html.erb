@@ -3,7 +3,7 @@
 
 <% unless @questions.blank? %>
      <div id="items" >
-       <%= select_tag "questions", options_from_collection_for_select(@questions, "id", "info")%>
+       <%= select_tag "questions",  "<option>-#{t(:select)}</option>" +                                                                                          options_from_collection_for_select(@questions, "id", "info")%>
        <%= observe_item_select(@survey.id, @item.id) %>
      </div>
      <div id="ivalues">

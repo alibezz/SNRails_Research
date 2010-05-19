@@ -76,7 +76,6 @@ class Survey::ItemsController < ResourceController::Base
   #TODO maketests
   def filter
     @item = Item.find(params[:id])
-    #ivalues = Item.find(params[:value]).item_values.find(:all)
     ivalues = Item.find(params[:value]).free_alts(@item)
     render :update do |page|
       page.replace_html "ivalues", :partial => "alternatives", :locals => {:item => @item, :survey => @survey,                                                  :ivalues => ivalues}
@@ -85,7 +84,7 @@ class Survey::ItemsController < ResourceController::Base
  
   def create_dependency
     @item = Item.find(params[:id])
-    @ivalue = ItemValue.find(params[:item][:dependencies])
+    @ivalue = ItemValue.find(params[:dependencies])
 
     @item.dependencies << @ivalue
     @item.save!

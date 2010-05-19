@@ -1,6 +1,6 @@
 <% form_for(:item, :url => create_dependency_survey_survey_item_url(survey, item), :html => {:method => :post}) do %>
   <p>
-    <%= select(:item, :dependencies, ivalues.collect {|i| [i.info, i.id]}) %>
+    <%= select_tag "dependencies",  "<option>-#{t(:select)}</option>" +                                                                          options_from_collection_for_select(ivalues, "id", "info") %>
   </p>  
   <%= submit_tag t(:update) %>
 <% end %>
