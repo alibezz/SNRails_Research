@@ -57,6 +57,12 @@ class Question < Item
     self.item_values - item.dependencies
   end
 
+  def remove_deps(deps)
+    deps.each do |dep|
+      self.dependencies.delete(ItemValue.find(dep.to_i))  
+    end
+  end
+
 protected
 
   def validate_text_content(text_answer)

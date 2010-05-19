@@ -148,8 +148,20 @@ class QuestionTest < Test::Unit::TestCase
     assert_equal i1.free_alts(i2), i1.item_values
     
     alt1.conditionals << i2
-    i2.dependencies << alt1
     alt1.save!; alt2.save!; alt2.reload
     assert_equal i1.free_alts(i2), [alt2]
+  end
+
+  def test_should_remove_dependencies
+    i1 = create_item(:type => 'question', :page_id => 1, :position => 4, :survey_id => @survey.id)
+    i2 = create_item(:type => 'question', :page_id => 2, :position => 1, :survey_id => @survey.id)
+    alt1 = create_item_value(:item_id => i1.id)
+    alt2 = create_item_value(:item_id => i1.id)
+    i2.dependencies << alt1; i2.dependencies << alt2
+    i2.reload
+    assert_equal i2.dependencies, [alt1, alt2]
+    
+    i2.remove_deps([alt1.id]); i2.reload
+    assert_equal i2.dependencies, [alt2]
   end 
 end

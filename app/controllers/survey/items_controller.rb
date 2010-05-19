@@ -71,6 +71,9 @@ class Survey::ItemsController < ResourceController::Base
     #FIXME Change the onchange and put a prompt on the questions select_tag  
     @item = Item.find(params[:id])
     @questions = @item.previous
+    if @questions.blank?
+      flash.now[:notice] = t(:no_previous_questions)
+    end
   end
 
   #TODO maketests
@@ -91,6 +94,12 @@ class Survey::ItemsController < ResourceController::Base
     redirect_to :action => 'dependencies'
   end 
 
+  #TODO maketests
+  def remove_dependency
+    @item = Item.find(params[:id])
+    @item.remove_deps(params[:deps])
+    redirect_to :action => 'dependencies'
+  end
 private 
 
   def parent_object
