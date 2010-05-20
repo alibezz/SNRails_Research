@@ -79,13 +79,16 @@ class Survey::ItemsController < ResourceController::Base
   #TODO maketests
   def filter
     @item = Item.find(params[:id])
+    ops = Conditional.operators
     ivalues = Item.find(params[:value]).free_alts(@item)
     render :update do |page|
-      page.replace_html "ivalues", :partial => "alternatives", :locals => {:item => @item, :survey => @survey,                                                  :ivalues => ivalues}
+      page.replace_html "ivalues", :partial => "alternatives", :locals => {:item => @item, :survey => @survey,                                                  :ivalues => ivalues, :ops => ops}
     end
   end
  
   def create_dependency
+    require 'pp'
+    pp params
     @item = Item.find(params[:id])
     @ivalue = ItemValue.find(params[:dependencies])
 

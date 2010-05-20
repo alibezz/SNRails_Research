@@ -3,11 +3,11 @@
 <% end %>
 
 <% unless @item.previous.blank? %>
-  <h2><%= t(:add_dependency) %></h2>
+  <b><%= t(:question) %> <%= @item.info %> <%= t(:must_be_answered_only_if) %></b>
 <% end %>
 <% unless @questions.blank? %>
      <div id="items" >
-       <%= select_tag "questions",  "<option>-#{t(:select)}</option>" +                                                                                          options_from_collection_for_select(@questions, "id", "info")%>
+       <%= t(:label_question) %> <%= select_tag "questions",  "<option>-#{t(:select)}</option>" +                                                                 options_from_collection_for_select(@questions, "id", "info")%>
        <%= observe_item_select(@survey.id, @item.id) %>
      </div>
      <div id="ivalues">
