@@ -174,6 +174,19 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
     assert_equal i2.dependencies, [alt1]
   end
 
+#remove_dependency
+
+  def test_remove_dependency
+    i1 = create_item(:type => 'question', :survey_id => @survey.id, :page_id => 1)
+    i2 = create_item(:type => 'question', :survey_id => @survey.id, :page_id => 2)
+    alt1 = create_item_value(:item_id => i1.id)
+    i2.dependencies << alt1
+    i2.reload
+    post :remove_dependency, :id => i2.id, :survey_id => @survey.id, :deps => [alt1.id]
+    i2.reload
+    assert_equal i2.dependencies, []
+  end
+
 protected
   
   def create_item_of_a_survey(survey)

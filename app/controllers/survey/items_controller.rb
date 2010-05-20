@@ -94,7 +94,6 @@ class Survey::ItemsController < ResourceController::Base
     redirect_to :action => 'dependencies'
   end 
 
-  #TODO maketests
   def remove_dependency
     @item = Item.find(params[:id])
     @item.remove_deps(params[:deps])
