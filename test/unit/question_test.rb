@@ -147,7 +147,7 @@ class QuestionTest < Test::Unit::TestCase
     
     assert_equal i1.free_alts(i2), i1.item_values
     
-    alt1.conditionals << i2
+    alt1.conds << i2
     alt1.save!; alt2.save!; i2.reload
     assert_equal i1.free_alts(i2), [alt2]
   end

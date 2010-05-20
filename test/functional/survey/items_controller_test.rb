@@ -170,7 +170,7 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
  
     post :create_dependency, :id => i2.id, :survey_id => @survey.id, :dependencies => alt1.id
     i2.reload; alt1.reload
-    assert_equal alt1.conditionals, [i2]
+    assert_equal alt1.conds, [i2]
     assert_equal i2.dependencies, [alt1]
   end
 
