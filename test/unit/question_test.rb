@@ -152,6 +152,25 @@ class QuestionTest < Test::Unit::TestCase
     assert_equal i1.free_alts(i2), [alt2]
   end
 
+  def test_should_create_dependency
+    i1 = create_item(:type => 'question', :page_id => 1, :position => 4, :survey_id => @survey.id)
+    i2 = create_item(:type => 'question', :page_id => 2, :position => 1, :survey_id => @survey.id)
+    alt1 = create_item_value(:item_id => i1.id)
+    alt2 = create_item_value(:item_id => i1.id)
+
+    i2.create_dependency(alt1, nil); i2.reload
+    assert_equal i2.dependencies, []
+    rels =  Conditional.hash_ops.keys
+    i2.create_dependency(nil,rels.first.to_s); i2.reload
+    assert_equal i2.dependencies, []
+    i2.create_dependency(alt1, rels.last.to_s.succ); i2.reload
+    assert_equal i2.dependencies, []
+    i2.create_dependency(alt1, rels.first.to_s); i2.reload
+    assert_equal i2.dependencies, [alt1]
+
+
+  end
+
   def test_should_remove_dependencies
     i1 = create_item(:type => 'question', :page_id => 1, :position => 4, :survey_id => @survey.id)
     i2 = create_item(:type => 'question', :page_id => 2, :position => 1, :survey_id => @survey.id)

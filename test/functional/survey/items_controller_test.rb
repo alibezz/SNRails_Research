@@ -168,7 +168,7 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
     i2 = create_item(:type => 'question', :survey_id => @survey.id, :page_id => 2)
     alt1 = create_item_value(:item_id => i1.id)
  
-    post :create_dependency, :id => i2.id, :survey_id => @survey.id, :dependencies => alt1.id
+    post :create_dependency, :id => i2.id, :survey_id => @survey.id, :dependencies => alt1.id,                                        :conditional => {:relation => Conditional.hash_ops.keys.first.to_s}
     i2.reload; alt1.reload
     assert_equal alt1.conds, [i2]
     assert_equal i2.dependencies, [alt1]
