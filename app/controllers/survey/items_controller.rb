@@ -90,7 +90,7 @@ class Survey::ItemsController < ResourceController::Base
     @item = Item.find(params[:id])
     @ivalue = ItemValue.find(params[:dependencies])
 
-    @item.dependencies << @ivalue
+    @item.create_dependency(@ivalue, params[:conditional][:relation])
     @item.save!
     redirect_to :action => 'dependencies'
   end 

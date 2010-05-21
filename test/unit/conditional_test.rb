@@ -1,8 +1,7 @@
-require 'test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
 
 class ConditionalTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  test "load_operators" do
+    assert_equal ActiveRecord::Base::Conditional::OPERATORS.invert.map, Conditional.operators
   end
 end

@@ -58,9 +58,19 @@ class Question < Item
     self.item_values - item.dependencies
   end
 
+  #TODO Make tests
+  def create_dependency(alt, relation)
+    unless alt.blank? or relation.blank?
+      self.dependencies << alt
+      cond = Conditional.find(:first, :conditions => {:question_id => self.id, :item_value_id => alt.id})
+      cond.relation = relation.to_i
+      cond.save
+    end
+  end
+
   def remove_deps(deps)
     deps.each do |dep|
-      self.dependencies.delete(ItemValue.find(dep.to_i))  
+      self.dependencies.delete(ItemValue.find(dep.to_i)) 
     end
   end
 

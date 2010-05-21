@@ -3,7 +3,7 @@
 <% form_for :item, :url => remove_dependency_survey_survey_item_url(survey, item), :html => {:method => :post} do %>
   <ul>
     <% item.dependencies.each do |dep| %>
-      <li><%= check_box_tag "deps[]", dep.id %><%= dep.info %></li>
+      <li><%= check_box_tag "deps[]", dep.id %><%= Conditional.stringify_relation(item, dep) %></li>
     <% end %>
   </ul>
   <%= submit_tag t(:remove) %>
