@@ -87,8 +87,6 @@ class Survey::ItemsController < ResourceController::Base
   end
  
   def create_dependency
-    require 'pp'
-    pp params
     @item = Item.find(params[:id])
     @ivalue = ItemValue.find(params[:dependencies])
 
