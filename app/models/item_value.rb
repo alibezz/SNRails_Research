@@ -17,7 +17,7 @@ class ItemValue < ActiveRecord::Base
   def has_info?
     unless self.item_id.nil?
       if not Item.find(self.item_id).is_text? and self.info and self.info.empty?
-        errors.add_to_base("#{t(:info_cant_be_blank)}")
+        errors.add_to_base("#{I18n.t(:info_cant_be_blank)}")
       end
     end
   end

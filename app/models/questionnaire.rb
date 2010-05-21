@@ -32,7 +32,7 @@ class Questionnaire < ActiveRecord::Base
       obligatory = questions.find_all { |question| question.is_optional == false }
       self.validate_obligatory_questions(obligatory, answers)
     else
-      errors.add_to_base("#{t(:no_answers)}")
+      errors.add_to_base("#{I18n.t(:no_answers)}")
     end
   end    
 
@@ -40,9 +40,9 @@ class Questionnaire < ActiveRecord::Base
     questions.each do |question|
       unless question.validate_answers(answers[question.id.to_s])
         if question.is_text?
-          errors.add_to_base("#{question.info} #{t(:must_be_answered)}")
+          errors.add_to_base("#{question.info} #{I18n.t(:must_be_answered)}")
         else 
-          errors.add_to_base("#{t(:number_of_answers_to)} #{question.info} #{t(:must_be_between)}                                                               #{question.min_answers.to_s} #{t(:and)} #{question.max_answers.to_s}")
+          errors.add_to_base("#{I18n.t(:number_of_answers_to)} #{question.info} #{I18n.t(:must_be_between)}                                                               #{question.min_answers.to_s} #{I18n.t(:and)} #{question.max_answers.to_s}")
         end
       end
     end
@@ -51,7 +51,7 @@ class Questionnaire < ActiveRecord::Base
   def validate_obligatory_questions(obligatory, answers)
     obligatory.each do |question|
       unless question.validate_answers_presence(answers[question.id.to_s]) 
-        errors.add_to_base("#{t(:question)} #{question.info} #{t(:is_obligatory)}")
+        errors.add_to_base("#{I18n.t(:question)} #{question.info} #{I18n.t(:is_obligatory)}")
       end
     end
   end

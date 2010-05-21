@@ -10,7 +10,7 @@ class Question < Item
     b.min_before_max_answers
   end
 
-  has_many :item_values, :foreign_key => :item_id, :before_add => [ Proc.new { |p,d| raise "#{t(:active_survey_cant_receive_alternatives)}" if Survey.find(p.survey_id).is_active } ], :order => "position"
+  has_many :item_values, :foreign_key => :item_id, :before_add => [ Proc.new { |p,d| raise "#{I18n.t(:active_survey_cant_receive_alternatives)}" if Survey.find(p.survey_id).is_active } ], :order => "position"
 
   has_many :conditionals
   has_many :dependencies, :class_name => "ItemValue", :through => :conditionals, :source => :item_value 
@@ -25,7 +25,7 @@ class Question < Item
 
   def min_before_max_answers
     if self.min_answers > self.max_answers
-      errors.add_to_base("#{t(:minimum_quantity_answers_must_be_smaller_than_maximum_expected)}")
+      errors.add_to_base("#{I18n.t(:minimum_quantity_answers_must_be_smaller_than_maximum_expected)}")
     end
   end
 
