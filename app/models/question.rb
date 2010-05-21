@@ -58,7 +58,6 @@ class Question < Item
     self.item_values - item.dependencies
   end
 
-  #TODO Make tests
   def create_dependency(alt, relation)
     unless alt.blank? or relation.blank? or not Conditional.has_key?(relation)
       self.dependencies << alt
