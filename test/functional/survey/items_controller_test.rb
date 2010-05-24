@@ -204,6 +204,26 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
     assert_equal i2.dependencies, []
   end
 
+#filter
+
+  def test_should_filter_alternatives
+    i1 = create_item(:type => 'question', :survey_id => @survey.id, :page_id => 1)
+    i2 = create_item(:type => 'question', :survey_id => @survey.id, :page_id => 2)
+    alt1 = create_item_value(:item_id => i1.id)
+    alt2 = create_item_value(:item_id => i2.id)
+
+    xhr :post, :filter, :survey_id => @survey.id, :id => i2.id, :value => i1.id
+    assert @response.body.index("\"conditional_relation\\") #operators
+
+    assert @response.body.index("select id=\\\"dependencies\\\" name=\\\"dependencies\\\"\\u003E\\u003Coption value=\\\"\\\"\\u003E-Select\\u003C/option\\u003E\\u003Coption value=\\\"#{alt1.id}\\") #alternatives
+    assert_nil @response.body.index("select id=\\\"dependencies\\\" name=\\\"dependencies\\\"\\u003E\\u003Coption value=\\\"\\\"\\u003E-Select\\u003C/option\\u003E\\u003Coption value=\\\"#{alt2.id}\\") 
+    
+    xhr :post, :filter, :survey_id => @survey.id, :id => i2.id, :value => nil # i1.id
+    assert @response.body.index("You are being") #redirection
+    xhr :post, :filter, :survey_id => @survey.id, :id => nil, :value => i1.id
+    assert @response.body.index("You are being") #redirection
+  end
+
 protected
   
   def create_item_of_a_survey(survey)

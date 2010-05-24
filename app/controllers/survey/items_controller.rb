@@ -76,7 +76,6 @@ class Survey::ItemsController < ResourceController::Base
     end
   end
 
-  #TODO maketests
   def filter
     redirect_to :action => "dependencies" and return if params[:id].blank? or params[:value].blank?
     @item = Item.find(params[:id])
