@@ -13,7 +13,7 @@ class Conditional < ActiveRecord::Base
   def self.stringify_relation(question, alt)
     rel = Conditional.find(:first, :conditions => {:question_id => question.id, :item_value_id => alt.id}).relation
     str = "#{Question.find(alt.item_id).info} #{I18n.t(:is)} " + OPERATORS[rel]
-    str += rel == 0 ? "of " : "to "; str += "#{alt.info}."
+    str += rel == 0 ? " of " : " to "; str += "#{alt.info}."
     str 
   end
 

@@ -167,11 +167,28 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
     i1 = create_item(:type => 'question', :survey_id => @survey.id, :page_id => 1)
     i2 = create_item(:type => 'question', :survey_id => @survey.id, :page_id => 2)
     alt1 = create_item_value(:item_id => i1.id)
+    alt2 = create_item_value(:item_id => i1.id)
  
     post :create_dependency, :id => i2.id, :survey_id => @survey.id, :dependencies => alt1.id,                                        :conditional => {:relation => Conditional.hash_ops.keys.first.to_s}
     i2.reload; alt1.reload
     assert_equal alt1.conds, [i2]
     assert_equal i2.dependencies, [alt1]
+
+    post :create_dependency, :id => i2.id, :survey_id => @survey.id, :dependencies => nil,                                        :conditional => {:relation => Conditional.hash_ops.keys.first.to_s}
+    assert_response :redirect
+    i2.reload
+    assert_equal i2.dependencies, [alt1] 
+ 
+    post :create_dependency, :id => i2.id, :survey_id => @survey.id, :dependencies => alt2.id,                                        :conditional => {:relation => nil}
+    assert_response :redirect
+    i2.reload
+    assert_equal i2.dependencies, [alt1]
+
+    post :create_dependency, :id => nil, :survey_id => @survey.id, :dependencies => alt1.id,                                        :conditional => {:relation => Conditional.hash_ops.keys.first.to_s}
+    assert_response :redirect
+    alt1.reload
+    assert_equal alt1.conds, [i2]
+
   end
 
 #remove_dependency

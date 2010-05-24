@@ -78,6 +78,7 @@ class Survey::ItemsController < ResourceController::Base
 
   #TODO maketests
   def filter
+    redirect_to :action => "dependencies" and return if params[:id].blank? or params[:value].blank?
     @item = Item.find(params[:id])
     ops = Conditional.operators
     ivalues = Item.find(params[:value]).free_alts(@item)
@@ -87,12 +88,13 @@ class Survey::ItemsController < ResourceController::Base
   end
  
   def create_dependency
+    redirect_to :action => "dependencies" and return if params[:id].blank? or params[:dependencies].blank?                                              or params[:conditional][:relation].blank?
     @item = Item.find(params[:id])
     @ivalue = ItemValue.find(params[:dependencies])
 
     @item.create_dependency(@ivalue, params[:conditional][:relation])
     @item.save!
-    redirect_to :action => 'dependencies'
+    redirect_to :action => "dependencies"
   end 
 
   def remove_dependency

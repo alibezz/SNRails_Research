@@ -3,7 +3,7 @@
    <%= t(:comparison_operator) %> <%= select("conditional", "relation", ops, {:prompt => "-#{t(:select)}"}) %>
   </p>
   <p>
-    <%= select_tag "dependencies",  "<option>-#{t(:select)}</option>" +                                                                          options_from_collection_for_select(ivalues, "id", "info") %>
+    <%= select_tag "dependencies",  "<option value=\"\">-#{t(:select)}</option>" +                                                                          options_from_collection_for_select(ivalues, "id", "info") %>
   </p>  
   <%= submit_tag t(:update) %>
 <% end %>
