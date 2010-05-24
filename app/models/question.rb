@@ -60,10 +60,7 @@ class Question < Item
 
   def create_dependency(alt, relation)
     unless alt.blank? or relation.blank? or not Conditional.has_key?(relation)
-      self.dependencies << alt
-      cond = Conditional.find(:first, :conditions => {:question_id => self.id, :item_value_id => alt.id})
-      cond.relation = relation.to_i
-      cond.save
+      Conditional.create(:relation => relation.to_i, :question_id => self.id, :item_value_id => alt.id) 
     end
   end
 

@@ -147,7 +147,7 @@ class QuestionTest < Test::Unit::TestCase
     
     assert_equal i1.free_alts(i2), i1.item_values
     
-    alt1.conds << i2
+    create_conditional(i2.id, alt1.id)
     alt1.save!; alt2.save!; i2.reload
     assert_equal i1.free_alts(i2), [alt2]
   end
@@ -176,8 +176,8 @@ class QuestionTest < Test::Unit::TestCase
     i2 = create_item(:type => 'question', :page_id => 2, :position => 1, :survey_id => @survey.id)
     alt1 = create_item_value(:item_id => i1.id)
     alt2 = create_item_value(:item_id => i1.id)
-    i2.dependencies << alt1; i2.dependencies << alt2
-    i2.reload
+    create_conditional(i2.id, alt1.id)
+    create_conditional(i2.id, alt2.id)
     assert_equal i2.dependencies, [alt1, alt2]
     
     i2.remove_deps([alt1.id]); i2.reload

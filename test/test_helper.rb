@@ -110,6 +110,10 @@ class Test::Unit::TestCase
     Role.create!({:name => "testrole"}.merge(params))
   end
 
+  def create_conditional(question_id, alt_id, relation=0)
+    Conditional.create(:relation => relation, :question_id => question_id, :item_value_id => alt_id)
+  end
+
   # Sets the current user in the session from the user fixtures.
   def login_as(login)
     user = User.find_by_login(login)
