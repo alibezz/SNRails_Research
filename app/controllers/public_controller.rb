@@ -5,7 +5,7 @@ class PublicController < ResourceController::Base
   #place this filter at the end
   before_filter :load_survey_design, :only => :show
 
-  layout 'survey', :only => :show
+  show.wants.html{ render :action => 'show', :layout => 'survey'}
 
   private
 

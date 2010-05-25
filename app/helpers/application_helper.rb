@@ -1,9 +1,12 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
-  #FIXME make this test
   def title(name)
-    name
+    content_tag(:h1, name, :class => 'title')
+  end
+ 
+  def subtitle(name)
+    content_tag(:h2, name, :class => 'subtitle')
   end
  
   #FIXME make this test
