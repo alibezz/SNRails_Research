@@ -150,6 +150,80 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
     assert_equal count - 1, Item.find(:all).count
   end
 
+#dependencies
+
+  def test_should_get_dependencies
+    i1 = create_item(:type => 'question', :survey_id => @survey.id, :page_id => 1)
+    i2 = create_item(:type => 'question', :survey_id => @survey.id, :page_id => 2)
+    get :dependencies, :survey_id => @survey.id, :id => i2.id
+
+    assert_response :success
+    assert_equal assigns(:questions), i2.previous
+  end
+
+#create_dependency
+
+  def test_should_create_dependencies
+    i1 = create_item(:type => 'question', :survey_id => @survey.id, :page_id => 1)
+    i2 = create_item(:type => 'question', :survey_id => @survey.id, :page_id => 2)
+    alt1 = create_item_value(:item_id => i1.id)
+    alt2 = create_item_value(:item_id => i1.id)
+ 
+    post :create_dependency, :id => i2.id, :survey_id => @survey.id, :dependencies => alt1.id,                                        :conditional => {:relation => Conditional.hash_ops.keys.first.to_s}
+    i2.reload; alt1.reload
+    assert_equal alt1.conds, [i2]
+    assert_equal i2.dependencies, [alt1]
+
+    post :create_dependency, :id => i2.id, :survey_id => @survey.id, :dependencies => nil,                                        :conditional => {:relation => Conditional.hash_ops.keys.first.to_s}
+    assert_response :redirect
+    i2.reload
+    assert_equal i2.dependencies, [alt1] 
+ 
+    post :create_dependency, :id => i2.id, :survey_id => @survey.id, :dependencies => alt2.id,                                        :conditional => {:relation => nil}
+    assert_response :redirect
+    i2.reload
+    assert_equal i2.dependencies, [alt1]
+
+    post :create_dependency, :id => nil, :survey_id => @survey.id, :dependencies => alt1.id,                                        :conditional => {:relation => Conditional.hash_ops.keys.first.to_s}
+    assert_response :redirect
+    alt1.reload
+    assert_equal alt1.conds, [i2]
+
+  end
+
+#remove_dependency
+
+  def test_remove_dependency
+    i1 = create_item(:type => 'question', :survey_id => @survey.id, :page_id => 1)
+    i2 = create_item(:type => 'question', :survey_id => @survey.id, :page_id => 2)
+    alt1 = create_item_value(:item_id => i1.id)
+    create_conditional(i2.id, alt1.id)
+    i2.reload
+    post :remove_dependency, :id => i2.id, :survey_id => @survey.id, :deps => [alt1.id]
+    i2.reload
+    assert_equal i2.dependencies, []
+  end
+
+#filter
+
+  def test_should_filter_alternatives
+    i1 = create_item(:type => 'question', :survey_id => @survey.id, :page_id => 1)
+    i2 = create_item(:type => 'question', :survey_id => @survey.id, :page_id => 2)
+    alt1 = create_item_value(:item_id => i1.id)
+    alt2 = create_item_value(:item_id => i2.id)
+
+    xhr :post, :filter, :survey_id => @survey.id, :id => i2.id, :value => i1.id
+    assert @response.body.index("\"conditional_relation\\") #operators
+
+    assert @response.body.index("select id=\\\"dependencies\\\" name=\\\"dependencies\\\"\\u003E\\u003Coption value=\\\"\\\"\\u003E-Select\\u003C/option\\u003E\\u003Coption value=\\\"#{alt1.id}\\") #alternatives
+    assert_nil @response.body.index("select id=\\\"dependencies\\\" name=\\\"dependencies\\\"\\u003E\\u003Coption value=\\\"\\\"\\u003E-Select\\u003C/option\\u003E\\u003Coption value=\\\"#{alt2.id}\\") 
+    
+    xhr :post, :filter, :survey_id => @survey.id, :id => i2.id, :value => nil # i1.id
+    assert @response.body.index("You are being") #redirection
+    xhr :post, :filter, :survey_id => @survey.id, :id => nil, :value => i1.id
+    assert @response.body.index("You are being") #redirection
+  end
+
 protected
   
   def create_item_of_a_survey(survey)

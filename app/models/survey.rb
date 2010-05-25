@@ -4,7 +4,7 @@ class Survey < ActiveRecord::Base
   validates_presence_of :introduction
   validates_uniqueness_of :title
 
-  has_many :items, :before_add => [ Proc.new { |p,d| raise "#{t(:active_survey_cant_receive_questions)}" if p.is_active } ], :order => "position"
+  has_many :items, :before_add => [ Proc.new { |p,d| raise "#{I18n.t(:active_survey_cant_receive_questions)}" if p.is_active } ], :order => "position"
   has_many :questions
   has_many :questionnaires
 
@@ -24,7 +24,7 @@ class Survey < ActiveRecord::Base
 
   def must_have_questions_to_be_active
     if self.questions.empty? and self.is_active
-      errors.add_to_base(t(:survey_doesnt_have_questions_it_cant_be_active))
+      errors.add_to_base("#{I18n.t(:survey_doesnt_have_questions_it_cant_be_active)}")
     end
   end
 
@@ -33,7 +33,7 @@ class Survey < ActiveRecord::Base
     if self.is_active
       questions.each do |question|
         if question.item_values.empty?
-          errors.add_to_base("#{question.info} #{t(:must_have_alternatives_survey_cant_be_active)}")        
+          errors.add_to_base("#{question.info} #{I18n.t(:must_have_alternatives_survey_cant_be_active)}")        
         end 
       end
     end
@@ -43,7 +43,7 @@ class Survey < ActiveRecord::Base
     if self.is_active
       self.questions.each do |question|
         if question.invalid_max_answers?
-          errors.add_to_base("#{question.info} #{t(:accepts)} #{question.max_answers.to_s} #{t(:answers_maximum_but_only_has)} #{question.item_values.count} #{t(:alternatives_survey_cant_be_active)}")
+          errors.add_to_base("#{question.info} #{I18n.t(:accepts)} #{question.max_answers.to_s} #{I18n.t(:answers_maximum_but_only_has)} #{question.item_values.count} #{I18n.t(:alternatives_survey_cant_be_active)}")
         end
       end
     end 

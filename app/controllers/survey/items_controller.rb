@@ -64,23 +64,43 @@ class Survey::ItemsController < ResourceController::Base
     @item.destroy
     redirect_to :action => 'index'
   end
-  #TODO maketests
 
   def dependencies
+    #TODO Display conditionals that already exist  
+    #FIXME Don't display anything if there aren't alternatives  
+    #FIXME Change the onchange and put a prompt on the questions select_tag  
     @item = Item.find(params[:id])
     @questions = @item.previous
+    if @questions.blank?
+      flash.now[:notice] = t(:no_previous_questions)
+    end
   end
 
   def filter
-    @item = Item.find(params[:value])
-    @ivalues = @item.item_values.find(:all)
-
+    redirect_to :action => "dependencies" and return if params[:id].blank? or params[:value].blank?
+    @item = Item.find(params[:id])
+    ops = Conditional.operators
+    ivalues = Item.find(params[:value]).free_alts(@item)
     render :update do |page|
-      page.replace_html "ivalues", :partial => "alternatives", :locals => {:ivalues => @ivalues}
+      page.replace_html "ivalues", :partial => "alternatives", :locals => {:item => @item, :survey => @survey,                                                  :ivalues => ivalues, :ops => ops}
     end
-
   end
-  
+ 
+  def create_dependency
+    redirect_to :action => "dependencies" and return if params[:id].blank? or params[:dependencies].blank?                                              or params[:conditional][:relation].blank?
+    @item = Item.find(params[:id])
+    @ivalue = ItemValue.find(params[:dependencies])
+
+    @item.create_dependency(@ivalue, params[:conditional][:relation])
+    @item.save!
+    redirect_to :action => "dependencies"
+  end 
+
+  def remove_dependency
+    @item = Item.find(params[:id])
+    @item.remove_deps(params[:deps])
+    redirect_to :action => 'dependencies'
+  end
 private 
 
   def parent_object

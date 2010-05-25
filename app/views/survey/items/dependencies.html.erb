@@ -1,9 +1,13 @@
-<h2><%= t(:dependencies) %></h2>
-<p><%= flash[:error] %></p>
+<% unless @item.dependencies.blank? %>
+  <%= render :partial => "remove_dependency", :locals => {:item => @item, :survey => @survey} %>
+<% end %>
 
+<% unless @item.previous.blank? %>
+  <h2><%= t(:question) %> <%= @item.info %> <%= t(:must_be_answered_only_if) %></h2>
+<% end %>
 <% unless @questions.blank? %>
      <div id="items" >
-       <%= select_tag "questions", options_from_collection_for_select(@questions, "id", "info")%>
+       <%= t(:label_question) %> <%= select_tag "questions",  "<option value=\"\">-#{t(:select)}</option>" +                                                 options_from_collection_for_select(@questions, "id", "info")%> <%= t(:is) %>
        <%= observe_item_select(@survey.id, @item.id) %>
      </div>
      <div id="ivalues">

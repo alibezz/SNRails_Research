@@ -23,7 +23,7 @@ module ApplicationHelper
     @types = Question.html_types.invert.map
     select("item", "html_type", @types)
   end
-
+  
   #FIXME make this test
   def admin_bar
     content_tag(:ul,

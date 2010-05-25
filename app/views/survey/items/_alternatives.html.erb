@@ -1,5 +1,5 @@
-<% ivalues.each do |ivalue| %>
-   <li>
-     <%= ivalue.info %>
-   </li>
+<% form_for(:item, :url => create_dependency_survey_survey_item_url(survey, item), :html => {:method => :post}) do %>
+   <%= select("conditional", "relation", ops, {:prompt => "-#{t(:select)}"}) %>
+    <%= select_tag "dependencies",  "<option value=\"\">-#{t(:select)}</option>" +                                                                          options_from_collection_for_select(ivalues, "id", "info") %>
+  <%= submit_tag t(:update) %>
 <% end %>

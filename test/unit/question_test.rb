@@ -128,4 +128,59 @@ class QuestionTest < Test::Unit::TestCase
   def test_should_load_html_types
     assert_equal nil, Question.html_types.invert["section"]
   end
+
+  def test_should_load_previous_questions
+    i1 = create_item(:type => 'question', :page_id => 1, :position => 4, :survey_id => @survey.id)
+    i2 = create_item(:type => 'question', :page_id => 2, :position => 1, :survey_id => @survey.id)
+    i3 = create_item(:type => 'question', :page_id => 2, :position => 2, :survey_id => @survey.id)
+
+    assert_equal i1.previous, []
+    assert_equal i2.previous, [i1]
+    assert_equal i3.previous, [i1, i2]
+  end
+
+  def test_should_load_only_free_alternatives
+    i1 = create_item(:type => 'question', :page_id => 1, :position => 4, :survey_id => @survey.id)
+    i2 = create_item(:type => 'question', :page_id => 2, :position => 1, :survey_id => @survey.id)
+    alt1 = create_item_value(:item_id => i1.id)
+    alt2 = create_item_value(:item_id => i1.id)
+    
+    assert_equal i1.free_alts(i2), i1.item_values
+    
+    create_conditional(i2.id, alt1.id)
+    alt1.save!; alt2.save!; i2.reload
+    assert_equal i1.free_alts(i2), [alt2]
+  end
+
+  def test_should_create_dependency
+    i1 = create_item(:type => 'question', :page_id => 1, :position => 4, :survey_id => @survey.id)
+    i2 = create_item(:type => 'question', :page_id => 2, :position => 1, :survey_id => @survey.id)
+    alt1 = create_item_value(:item_id => i1.id)
+    alt2 = create_item_value(:item_id => i1.id)
+
+    i2.create_dependency(alt1, nil); i2.reload
+    assert_equal i2.dependencies, []
+    rels =  Conditional.hash_ops.keys
+    i2.create_dependency(nil,rels.first.to_s); i2.reload
+    assert_equal i2.dependencies, []
+    i2.create_dependency(alt1, rels.last.to_s.succ); i2.reload
+    assert_equal i2.dependencies, []
+    i2.create_dependency(alt1, rels.first.to_s); i2.reload
+    assert_equal i2.dependencies, [alt1]
+
+
+  end
+
+  def test_should_remove_dependencies
+    i1 = create_item(:type => 'question', :page_id => 1, :position => 4, :survey_id => @survey.id)
+    i2 = create_item(:type => 'question', :page_id => 2, :position => 1, :survey_id => @survey.id)
+    alt1 = create_item_value(:item_id => i1.id)
+    alt2 = create_item_value(:item_id => i1.id)
+    create_conditional(i2.id, alt1.id)
+    create_conditional(i2.id, alt2.id)
+    assert_equal i2.dependencies, [alt1, alt2]
+    
+    i2.remove_deps([alt1.id]); i2.reload
+    assert_equal i2.dependencies, [alt2]
+  end 
 end

@@ -10,9 +10,10 @@ class Question < Item
     b.min_before_max_answers
   end
 
-  has_many :item_values, :foreign_key => :item_id, :before_add => [ Proc.new { |p,d| raise "#{t(:active_survey_cant_receive_alternatives)}" if Survey.find(p.survey_id).is_active } ], :order => "position"
+  has_many :item_values, :foreign_key => :item_id, :before_add => [ Proc.new { |p,d| raise "#{I18n.t(:active_survey_cant_receive_alternatives)}" if Survey.find(p.survey_id).is_active } ], :order => "position"
 
-  has_and_belongs_to_many :dependencies, :class_name => "ItemValue"
+  has_many :conditionals
+  has_many :dependencies, :class_name => "ItemValue", :through => :conditionals, :source => :item_value 
 
   def self.html_types
     Item.html_types.invert.delete_if {|key, value| key == "section"}.invert
@@ -24,7 +25,7 @@ class Question < Item
 
   def min_before_max_answers
     if self.min_answers > self.max_answers
-      errors.add_to_base("#{t(:minimum_quantity_answers_must_be_smaller_than_maximum_expected)}")
+      errors.add_to_base("#{I18n.t(:minimum_quantity_answers_must_be_smaller_than_maximum_expected)}")
     end
   end
 
@@ -46,9 +47,27 @@ class Question < Item
     (self.is_text? and not answers["info"].blank?) or (not self.is_text?)   
   end
 
-  #TODO Make test
   def previous
-     Question.find(:all, :conditions => ["position < #{self.position} AND survey_id = #{self.survey_id}"])
+     cond1 = "page_id < #{self.page_id}"
+     cond2 =  "(page_id = #{self.page_id} AND position < #{self.position})"
+     cond3 = "survey_id = #{self.survey_id}"
+     Question.find(:all, :conditions => ["(#{cond1} OR #{cond2}) AND #{cond3}"])
+  end
+
+  def free_alts(item)
+    self.item_values - item.dependencies
+  end
+
+  def create_dependency(alt, relation)
+    unless alt.blank? or relation.blank? or not Conditional.has_key?(relation)
+      Conditional.create(:relation => relation.to_i, :question_id => self.id, :item_value_id => alt.id) 
+    end
+  end
+
+  def remove_deps(deps)
+    deps.each do |dep|
+      self.dependencies.delete(ItemValue.find(dep.to_i)) 
+    end
   end
 
 protected
