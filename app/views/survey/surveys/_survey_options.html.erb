@@ -1,7 +1,5 @@
 <div id="column-1">
 <ul id="survey_menu">
-  <li> <%= link_to t(:list_all), survey_surveys_url %> </li>
-
   <% unless current_user.is_collaborator?(@survey) %>
     <li> <%= link_to t(:edit), edit_survey_survey_url(@survey) %> </li>
   <% end %>

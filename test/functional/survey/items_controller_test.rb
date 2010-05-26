@@ -26,7 +26,7 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
     assert_response :success
     assert_template 'index'
     assert_tag :tag => "ul", :descendant => { :tag => "li" }
-    assert_tag :tag => "ul", :attributes => { :id => "survey_menu" }     
+    assert_tag :tag => "ul", :attributes => { :id => "survey_menu" } 
     assert_tag :tag => "h1", :attributes => { :class => "title" }     
     assert_tag :tag => "h2", :attributes => { :class => "subtitle" }     
   end
