@@ -15,6 +15,9 @@ class Question < Item
   has_many :conditionals
   has_many :dependencies, :class_name => "ItemValue", :through => :conditionals, :source => :item_value 
 
+  named_scope :previous_pages, lambda { |p,s| {:conditions => ["page_id < ? AND survey_id = ?", p, s] }}
+  named_scope :previous_positions, lambda {|p,po,s| {:conditions =>                                                                        ["page_id = ? AND position < ? AND survey_id = ?", p, po,s] }} 
+
   def self.html_types
     Item.html_types.invert.delete_if {|key, value| key == "section"}.invert
   end
@@ -48,10 +51,7 @@ class Question < Item
   end
 
   def previous
-     cond1 = "page_id < #{self.page_id}"
-     cond2 =  "(page_id = #{self.page_id} AND position < #{self.position})"
-     cond3 = "survey_id = #{self.survey_id}"
-     Question.find(:all, :conditions => ["(#{cond1} OR #{cond2}) AND #{cond3}"])
+     Question.previous_pages(self.page_id, self.survey_id) +                                                                      Question.previous_positions(self.page_id, self.position, self.survey_id)
   end
 
   def free_alts(item)

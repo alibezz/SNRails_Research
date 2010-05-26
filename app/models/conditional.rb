@@ -2,7 +2,6 @@ class Conditional < ActiveRecord::Base
   belongs_to :question
   belongs_to :item_value
 
-  #TODO Make tests
   validates_presence_of :relation
   validates_uniqueness_of :item_value_id, :scope => :question_id
 
