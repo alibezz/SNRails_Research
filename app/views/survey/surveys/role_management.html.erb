@@ -1,5 +1,7 @@
-<h2><%= t(:role_management) %></h2>
+<h1><%= t(:role_management) %></h1>
 <p><%= flash[:error] %></p>
+
+<%= render :partial => 'survey_options', :locals => {:survey => @survey } %>
 
 <% @members.each do |member| %>
   <% form_for(@survey, :url => {:action => 'edit_member', :user_id => member.id},                                              :html => {:method => :put}) do %>

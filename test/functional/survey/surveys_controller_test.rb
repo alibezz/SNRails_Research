@@ -27,6 +27,9 @@ class Survey::SurveysControllerTest < ActionController::TestCase
     @user.add_role(@role, r)
     get :show, :id => r.id
     assert_response :success
+    assert_tag :tag => "ul", :attributes => {:id => "survey_menu" }
+    assert_tag :tag => "h1", :attributes => {:class => "title" }
+    assert_tag :tag => "h2", :attributes => {:class => "subtitle" }
   end
 
   def test_should_edit_survey
@@ -34,6 +37,7 @@ class Survey::SurveysControllerTest < ActionController::TestCase
     @user.add_role(@role, r)
     get :edit, :id => r.id
     assert_response :success
+    assert_tag :tag => "ul", :attributes => {:id => "survey_menu" }
   end
 
   def test_should_change_fields
@@ -76,6 +80,7 @@ class Survey::SurveysControllerTest < ActionController::TestCase
     assert_response :success
     assert assigns(:members)
     assert assigns(:non_members)
+    assert_tag :tag => "ul", :attributes => {:id => "survey_menu" }
   end
 
   def test_should_define_new_member

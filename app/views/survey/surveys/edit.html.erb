@@ -2,6 +2,8 @@
 
 <%= error_messages_for :survey %>
 
+<%= render :partial => 'survey_options', :locals => {:survey => @survey } %>
+
 <% form_for(:survey, :url => object_url, :html => { :method => :put }) do |f| %>
   <%= render :partial => "form", :locals => { :f => f } %>
   <p>
