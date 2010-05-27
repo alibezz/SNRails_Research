@@ -61,11 +61,11 @@ class User < ActiveRecord::Base
   end
 
   def is_collaborator?(survey)
-    self.has_role("Collaborator", survey)
+    survey.kind_of?(Integer) ? self.has_role("Collaborator", Survey.find(survey)) :                                                                         self.has_role("Collaborator", survey)
   end
 
   def is_moderator?(survey)
-    self.has_role("Moderator", survey)
+    survey.kind_of?(Integer) ? self.has_role("Moderator", Survey.find(survey)) :                                                                            self.has_role("Moderator", survey)
   end
 
 protected

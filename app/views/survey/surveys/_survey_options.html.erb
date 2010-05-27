@@ -1,13 +1,9 @@
 <div id="column-1">
 <ul id="survey_menu">
-  <% unless current_user.is_collaborator?(@survey) %>
-    <li> <%= link_to t(:edit), edit_survey_survey_url(@survey) %> </li>
-  <% end %>
 
-  <% if current_user.is_moderator?(@survey) or current_user.is_administrator? %>
-    <li> <%= link_to t(:destroy), { :action => "destroy", :id => @survey.id }, :confirm => t(:message_confirmation), :method => :delete %></li>
-    <li> <%= link_to t(:role_management), role_management_survey_survey_url(@survey) %> </li> 
-  <% end %>
+<% if current_user.is_moderator?(@survey) or current_user.is_administrator? %>
+  <li> <%= link_to t(:role_management), role_management_survey_survey_url(@survey) %> </li> 
+<% end %>
 
   <li> <%= link_to t(:items), survey_survey_items_url(@survey) %> </li>
 </ul>

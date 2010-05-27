@@ -1,4 +1,4 @@
-<h1><%= title t(:listing_surveys) %></h1>
+<%= title t(:listing_surveys) %> <%= link_to t(:new_survey), new_object_path %>
 
 <ul class="listing link">
   <%- @surveys.each do |survey| %>

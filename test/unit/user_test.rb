@@ -141,7 +141,9 @@ class UserTest < ActiveSupport::TestCase
     @user.reload
 
     assert @user.is_moderator?(r2)
+    assert @user.is_moderator?(r2.id)
     assert @user.is_collaborator?(r1)
+    assert @user.is_collaborator?(r1.id)
 
     r3 = create_survey(:title => "test3")
     assert !@user.is_moderator?(r1)

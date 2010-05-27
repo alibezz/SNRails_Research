@@ -1,5 +1,4 @@
-<%= title  @survey.title %>
-
+<%= title  @survey.title %> <%= survey_buttons @survey.id %> 
 <%= subtitle  @survey.subtitle %>
 
 <%= render :partial => 'survey_options', :locals => {:survey => @survey } %>
