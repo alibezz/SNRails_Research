@@ -277,4 +277,16 @@ class SurveyTest < Test::Unit::TestCase
     assert_equal Survey.public_surveys.count, 1
 
   end
+
+  def test_should_change_activation
+    r1 = create_survey
+    i1 = create_item(:survey_id => r1.id, :type => "question")
+    r1.save; r1.reload
+    
+    r1.change_activation
+    assert_equal r1.is_active, true
+
+    r1.change_activation
+    assert_equal r1.is_active, false
+  end
 end

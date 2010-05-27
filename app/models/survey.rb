@@ -127,6 +127,11 @@ class Survey < ActiveRecord::Base
     Survey.find(:all, :conditions => {:is_active => true, :is_private => false})
   end
 
+  def change_activation
+    self.is_active = self.is_active ? false : true
+    self.save; self.reload
+  end
+
 protected 
 
   def select_position(ind1, ind2, &block)

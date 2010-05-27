@@ -52,6 +52,11 @@ class Survey::SurveysController < ResourceController::Base
     redirect_to role_management_survey_survey_path(@survey)
   end
 
+  def activate
+    @survey.change_activation
+    render :action => 'show'
+  end
+
 private
   def collection
     @collection ||= current_user.my_surveys

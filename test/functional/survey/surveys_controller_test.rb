@@ -141,4 +141,20 @@ class Survey::SurveysControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to role_management_survey_survey_path(r)
   end
+
+  def test_should_activate_survey
+    s = create_survey
+    i = create_item(:survey_id => s.id, :type => "question")
+    s.save; s.reload
+
+    get :activate, :id => s.id
+    s.reload
+    assert_equal s.is_active, true
+    assert_response :success
+
+    get :activate, :id => s.id
+    s.reload
+    assert_equal s.is_active, false
+    assert_response :success
+  end
 end

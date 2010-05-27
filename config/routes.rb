@@ -17,7 +17,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # Route for survey
   map.namespace :survey do |survey|
-    survey.resources :surveys, :member => { :role_management => :get, :new_member => :put, :edit_member => :put, :remove_member => :get } do |surveys|
+    survey.resources :surveys, :member => { :role_management => :get, :new_member => :put, :edit_member => :put, :remove_member => :get, :activate => :get } do |surveys|
       surveys.resources :items, :collection => {:reorder_items => :post, :reorder_pages => :post,                                                                            :set_item_to_page => :post},                                                                         :member => {:dependencies => :get, :filter => :post, :create_dependency => :post,                                                        :remove_dependency => :post}
       surveys.resources :questions do |questions|
         questions.resources :item_values, :collection => {:reorder_item_values => :post}
