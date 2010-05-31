@@ -161,6 +161,10 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
 
     assert_response :success
     assert_equal assigns(:questions), i2.previous
+
+    get :dependencies, :survey_id => @survey.id, :id => i1.id
+    assert_response :success
+    assert flash[:notice]
   end
 
 #create_dependency

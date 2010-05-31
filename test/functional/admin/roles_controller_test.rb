@@ -57,4 +57,9 @@ class Admin::RolesControllerTest < ActionController::TestCase
     assert_redirected_to admin_roles_path
   end
 
+  test "should load permissions" do
+    get :new
+    assert assigns(:perms)
+    assert_equal assigns(:perms), ActiveRecord::Base::PERMISSIONS
+  end
 end
