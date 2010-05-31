@@ -59,4 +59,48 @@ module ApplicationHelper
     )
   end
 
+  #sncharts
+  def include_sncharts
+    scripts = "<!-- SNCharts Javascript -->\n"
+    %w(MochiKit excanvas PlotKit_Packed prototype custom sncharts).each do |js|
+      # The 'custom' is a JS view for the action
+      src = js == 'custom' ? url_for(:action => action_name, :format => 'js') : "/javascripts/sncharts/js/#{js}.js"
+      scripts += content_tag(:script, nil, :src => src, :type => "text/javascript") + "\n"
+    end
+    scripts += stylesheet_link_tag '/javascripts/sncharts/sncharts.css'
+  end
+
+  def include_sncharts_if_needed
+    include_sncharts unless @uses_sncharts.blank?
+  end
+
+  def sncharts_periods
+    content = []
+    content << t(:label_from)
+    content << calendar_date_select_tag('charts-from', @from, :name => random_string)
+    content << t(:label_to)
+    content << calendar_date_select_tag('charts-to', @to, :name => random_string)
+    content << link_to('[+]', 'javascript:addPeriod()', :id => 'charts-add-period')
+    content_tag(:p, content.join(' '), :id => 'charts-period')
+  end
+
+ #sncharts2
+  def include_sncharts2
+    content_tag :script, nil, :src => "/javascripts/sncharts2/sncharts2/install.js", :id => "sncharts2-script"
+	end
+
+  def include_sncharts2_if_needed
+	  include_sncharts2 unless @uses_sncharts2.blank?
+	end
+
+  def sncharts2_periods
+    content = []
+    content << t(:label_from)
+    content << calendar_date_select_tag('sncharts2-period-from', @from, :name => random_string)
+    content << t(:label_to)
+    content << calendar_date_select_tag('sncharts2-period-to', @to, :name => random_string)
+    content_tag(:span, content.join(' '), :id => 'sncharts2-period')
+  end
+
+   
 end

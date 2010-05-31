@@ -29,6 +29,7 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
   #  admin.resources :surveys, :member => { :role_management => :get, :new_member => :put, :edit_member => :put, :remove_member => :get }
     admin.resources :roles
+    admin.resources :charts
   end
  
    #Route for doc plugin

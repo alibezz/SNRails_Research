@@ -6,10 +6,11 @@ class Questionnaire < ActiveRecord::Base
   def prepare_to_save(answers, survey_id)
     self.validate_questions(answers, survey_id)
     return false unless self.errors.empty?
-    
+
     self.save 
     self.survey_id = survey_id
     self.associate(answers); self.incomplete = false
+    self.save
     true
   end
 
