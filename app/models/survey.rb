@@ -132,6 +132,14 @@ class Survey < ActiveRecord::Base
     self.save; self.reload
   end
 
+  def page_items(page)
+    if page.blank?
+      page = self.items.blank? ? 1 : self.items.minimum(:page_id)
+    end
+    self.items.find(:all, :conditions => {:page_id => page}, :order => :position)
+
+  end
+
 protected 
 
   def select_position(ind1, ind2, &block)

@@ -26,6 +26,11 @@ class Survey::SurveysController < ResourceController::Base
     end
   end
 
+
+  show.before do
+    @items = @survey.page_items(params[:page])
+  end
+
   def role_management
     @members = @survey.members(current_user)
     @non_members = @survey.non_members(current_user)
@@ -54,7 +59,7 @@ class Survey::SurveysController < ResourceController::Base
 
   def activate
     @survey.change_activation
-    render :action => 'show'
+    redirect_to :action => 'show'
   end
 
 private

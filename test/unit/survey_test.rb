@@ -289,4 +289,15 @@ class SurveyTest < Test::Unit::TestCase
     r1.change_activation
     assert_equal r1.is_active, false
   end
+
+  def test_should_select_items_per_page
+    s = create_survey
+    i0 = create_item(:survey_id => s.id, :page_id => 1, :position => 1)
+    i1 = create_item(:survey_id => s.id, :page_id => 1, :position => 2)
+    i2 = create_item(:survey_id => s.id, :page_id => 2, :position => 1)
+
+    assert_equal s.page_items(nil), [i0, i1]
+    assert_equal s.page_items(1), [i0, i1]
+    assert_equal s.page_items(2), [i2]
+  end
 end

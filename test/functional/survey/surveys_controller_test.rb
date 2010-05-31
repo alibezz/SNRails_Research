@@ -30,6 +30,7 @@ class Survey::SurveysControllerTest < ActionController::TestCase
     assert_tag :tag => "ul", :attributes => {:id => "survey_menu" }
     assert_tag :tag => "h1", :attributes => {:class => "title" }
     assert_tag :tag => "h2", :attributes => {:class => "subtitle" }
+    assert assigns(:items)
   end
 
   def test_should_edit_survey
@@ -150,11 +151,13 @@ class Survey::SurveysControllerTest < ActionController::TestCase
     get :activate, :id => s.id
     s.reload
     assert_equal s.is_active, true
-    assert_response :success
+    assert_response :redirect
+    assert_redirected_to survey_survey_path(s)
 
     get :activate, :id => s.id
     s.reload
     assert_equal s.is_active, false
-    assert_response :success
+    assert_response :redirect
+    assert_redirected_to survey_survey_path(s)
   end
 end
