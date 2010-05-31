@@ -37,16 +37,12 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
     get :new, :survey_id => @survey.id
     assert_response :success
     assert_template 'new'
+    assert_tag :tag => "ul", :attributes => {:id => "survey_menu" }
   end
 
   def test_new_should_have_form
     get :new, :survey_id => @survey.id
     assert_tag :tag => 'form', :attributes => { :method => 'post' }    
-  end
-
-  def test_new_should_have_back_link
-    get :new, :survey_id => @survey.id
-    assert_tag :tag => 'a', :attributes => { :href => survey_survey_items_url(@survey.id) }    
   end
 
 #create
@@ -78,7 +74,7 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
     get :edit, :survey_id => i.survey_id, :id => i.id
     assert_response :success
     assert_template 'edit'
-
+    assert_tag :tag => "ul", :attributes => {:id => "survey_menu" }
   end
 
   def test_edit_should_have_form
@@ -158,11 +154,13 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
     i1 = create_item(:type => 'question', :survey_id => @survey.id, :page_id => 1)
     i2 = create_item(:type => 'question', :survey_id => @survey.id, :page_id => 2)
     get :dependencies, :survey_id => @survey.id, :id => i2.id
+    assert_tag :tag => "ul", :attributes => {:id => "survey_menu" }
 
     assert_response :success
     assert_equal assigns(:questions), i2.previous
 
     get :dependencies, :survey_id => @survey.id, :id => i1.id
+    assert_tag :tag => "ul", :attributes => {:id => "survey_menu" }
     assert_response :success
     assert flash[:notice]
   end
