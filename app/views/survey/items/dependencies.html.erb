@@ -1,3 +1,4 @@
+<%= render :partial => 'survey/surveys/survey_options' %>
 <% unless @item.dependencies.blank? %>
   <%= render :partial => "remove_dependency", :locals => {:item => @item, :survey => @survey} %>
 <% end %>
@@ -14,6 +15,4 @@
        <!-- replace partial here -->
      </div>
 <% end %>
-
-<%= link_to t(:back), survey_survey_items_path(@survey, :page => @item.page_id) %>
 

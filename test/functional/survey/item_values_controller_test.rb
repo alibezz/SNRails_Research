@@ -26,7 +26,7 @@ class ItemValuesControllerTest < Test::Unit::TestCase
   def test_should_get_index
     get :index, :survey_id => @item.survey_id, :question_id => @item.id 
     assert_response :success
-    assert_template 'index'
+    assert_tag :tag => "ul", :attributes => {:id => "survey_menu" }
   end
 
 #create

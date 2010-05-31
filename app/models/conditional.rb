@@ -8,7 +8,6 @@ class Conditional < ActiveRecord::Base
   OPERATORS = { 0 => "#{I18n.t(:different)}",
                      1 => "#{I18n.t(:equals)}"}
 
-  #TODO Make tests
   def self.operators
     OPERATORS.invert.map
   end
@@ -20,12 +19,10 @@ class Conditional < ActiveRecord::Base
     str 
   end
 
-  #TODO Make tests
   def self.has_key?(relation)
     OPERATORS.has_key?(relation.to_i)
   end
  
-  #TODO Make tests
   def self.hash_ops
     OPERATORS
   end

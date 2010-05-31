@@ -1,7 +1,7 @@
 <h2><%= t(:item_values) %></h2>
 
 <%= error_messages_for :item_value %>
-
+<%= render :partial => 'survey/surveys/survey_options' %>
 <%= render :partial => "list_item_values", :locals => {:item => @item} %>
 
 <% form_for([:survey, @survey, @item, @item_value]) do |f| %>

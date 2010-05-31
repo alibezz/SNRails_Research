@@ -108,12 +108,7 @@ private
   end
   
   def collection
-    unless params[:page].blank?
-      page = params[:page]
-    else
-      page = @survey.items.blank? ? 1 : @survey.items.minimum(:page_id)
-    end  
-    @survey.items.find(:all, :conditions => {:page_id => page}, :order => :position)
+    @survey.page_items(params[:page])
   end
 
 end

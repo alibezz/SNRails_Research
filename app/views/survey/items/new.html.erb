@@ -1,6 +1,7 @@
 <h1><% t(:new_item) %></h1>
 
 <%= error_messages_for :item %>
+<%= render :partial => 'survey/surveys/survey_options' %>
 
 <% form_for(:item, :url => {:action => 'create', :item_type => @item_type } ) do |f| %>
   <%= render :partial => "#{@item_type}_form", :locals => { :f => f } %>
@@ -8,5 +9,3 @@
     <%= submit_tag "Create" %>
   </p>
 <% end %>
-<br/>
-<%= link_to t(:back), collection_url %>

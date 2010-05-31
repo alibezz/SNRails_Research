@@ -30,6 +30,7 @@ class Survey::SurveysControllerTest < ActionController::TestCase
     assert_tag :tag => "ul", :attributes => {:id => "survey_menu" }
     assert_tag :tag => "h1", :attributes => {:class => "title" }
     assert_tag :tag => "h2", :attributes => {:class => "subtitle" }
+    assert assigns(:items)
   end
 
   def test_should_edit_survey
@@ -140,5 +141,23 @@ class Survey::SurveysControllerTest < ActionController::TestCase
     assert flash[:error]
     assert_response :redirect
     assert_redirected_to role_management_survey_survey_path(r)
+  end
+
+  def test_should_activate_survey
+    s = create_survey
+    i = create_item(:survey_id => s.id, :type => "question")
+    s.save; s.reload
+
+    get :activate, :id => s.id
+    s.reload
+    assert_equal s.is_active, true
+    assert_response :redirect
+    assert_redirected_to survey_survey_path(s)
+
+    get :activate, :id => s.id
+    s.reload
+    assert_equal s.is_active, false
+    assert_response :redirect
+    assert_redirected_to survey_survey_path(s)
   end
 end

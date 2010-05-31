@@ -26,6 +26,11 @@ class Survey::SurveysController < ResourceController::Base
     end
   end
 
+
+  show.before do
+    @items = @survey.page_items(params[:page])
+  end
+
   def role_management
     @members = @survey.members(current_user)
     @non_members = @survey.non_members(current_user)
@@ -50,6 +55,11 @@ class Survey::SurveysController < ResourceController::Base
       flash[:error] = I18n.t(:member_not_removed)
     end
     redirect_to role_management_survey_survey_path(@survey)
+  end
+
+  def activate
+    @survey.change_activation
+    redirect_to :action => 'show'
   end
 
 private

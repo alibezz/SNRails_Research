@@ -35,4 +35,17 @@ class ConditionalTest < ActiveSupport::TestCase
     create_conditional(@q2.id, @alt1.id)
     assert_equal count + 1, Conditional.count
   end
+
+  test "should map operators" do
+    assert_equal Conditional.operators, Conditional::OPERATORS.invert.map
+  end
+
+  test "should get operators" do
+    assert_equal Conditional.hash_ops, Conditional::OPERATORS
+  end
+
+  test "should check if has key" do
+    assert Conditional.has_key?(Conditional::OPERATORS.keys.first)
+    assert !Conditional.has_key?(Conditional::OPERATORS.keys.last + 1)
+  end
 end

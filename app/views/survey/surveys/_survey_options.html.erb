@@ -2,10 +2,16 @@
 <ul id="survey_menu">
 
   <li> <%= link_to t(:survey), survey_survey_url(@survey) %> </li>
+
+<% if @survey.is_active %>
+  <li> <%= link_to t(:deactivate), activate_survey_survey_url(@survey) %></li>
+<% else %>
+  <li> <%= link_to t(:activate), activate_survey_survey_url(@survey) %></li>
+<% end %>
+
 <% if current_user.is_moderator?(@survey) or current_user.is_administrator? %>
   <li> <%= link_to t(:role_management), role_management_survey_survey_url(@survey) %> </li> 
 <% end %>
 
-  <li> <%= link_to t(:items), survey_survey_items_url(@survey) %> </li>
 </ul>
 </div>
