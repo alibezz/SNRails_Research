@@ -32,6 +32,10 @@ class Survey::SurveysController < ResourceController::Base
     @items = @survey.page_items(params[:page])
   end
 
+  update do
+    wants.html {redirect_to survey_survey_items_path(@survey)}
+  end
+
   def role_management
     @members = @survey.members(current_user)
     @non_members = @survey.non_members(current_user)
@@ -60,7 +64,7 @@ class Survey::SurveysController < ResourceController::Base
 
   def activate
     @survey.change_activation
-    redirect_to :action => 'show'
+    redirect_to survey_survey_items_path(@survey)
   end
 
 private

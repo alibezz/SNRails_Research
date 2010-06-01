@@ -49,6 +49,8 @@ class Survey::SurveysControllerTest < ActionController::TestCase
     assert_equal 'new subtitle', survey.subtitle
     assert_equal 'new title', survey.title
     assert_equal 'new introduction', survey.introduction
+    assert_response :redirect
+    assert_redirected_to survey_survey_items_path(survey)
   end
 
   def test_should_show_new
@@ -68,6 +70,7 @@ class Survey::SurveysControllerTest < ActionController::TestCase
     r = Survey.find(1)
     assert_equal r.role_assignments.first.accessor_id, @user.id
     assert_response :redirect
+    assert_redirected_to survey_survey_items_path(Survey.last)
 
     post :create, :survey => {:title => nil, :introduction => 'new introduction', :subtitle => 'new subtitle'}
     assert_equal 1, Survey.count
@@ -152,12 +155,12 @@ class Survey::SurveysControllerTest < ActionController::TestCase
     s.reload
     assert_equal s.is_active, true
     assert_response :redirect
-    assert_redirected_to survey_survey_path(s)
+    assert_redirected_to survey_survey_items_path(s)
 
     get :activate, :id => s.id
     s.reload
     assert_equal s.is_active, false
     assert_response :redirect
-    assert_redirected_to survey_survey_path(s)
+    assert_redirected_to survey_survey_items_path(s)
   end
 end
