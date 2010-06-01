@@ -1,4 +1,9 @@
 <%= render :partial => 'survey/surveys/basic_infos' %>
+<%= render :partial => 'survey/items/items_options' %>
+<br>
+<p class="introduction">
+  <%= @survey.introduction %>
+</p>
 <br>
 <%= render :partial => 'survey/surveys/survey_options' %>
 <%= render :partial => 'survey/items/questions_sections' %>

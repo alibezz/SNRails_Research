@@ -22,17 +22,6 @@ class Survey::SurveysControllerTest < ActionController::TestCase
     assert assigns(:surveys)
   end
 
-  def test_should_show_survey
-    r = create_survey
-    @user.add_role(@role, r)
-    get :show, :id => r.id
-    assert_response :success
-    assert_tag :tag => "ul", :attributes => {:id => "survey_menu" }
-    assert_tag :tag => "h1", :attributes => {:class => "title" }
-    assert_tag :tag => "h2", :attributes => {:class => "subtitle" }
-    assert assigns(:items)
-  end
-
   def test_should_edit_survey
     r = create_survey
     @user.add_role(@role, r)
