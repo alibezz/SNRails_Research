@@ -1,3 +1,12 @@
+class Object
+    def method_missing(symbol, *args, &block)
+    if I18n.respond_to? symbol
+      return I18n.send(symbol, *args, &block)
+    end
+    raise "No method error"
+  end
+end
+
 class Survey < ActiveRecord::Base
 
   validates_presence_of :title
