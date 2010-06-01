@@ -15,7 +15,7 @@ module ApplicationHelper
       content << content_tag(:a, link_to(t(:edit), edit_survey_survey_url(survey_id)))
     end
     if current_user.is_moderator?(survey_id) or current_user.is_administrator?
-      content << " " + content_tag(:a, link_to(t(:destroy), {:action => "destroy", :id => survey_id}, :confirm => t(:message_confirmation), :method => :delete))
+      content << " " + content_tag(:a, link_to(t(:destroy), {:action => "destroy", :controller => "survey/surveys", :id => survey_id}, :confirm => t(:message_confirmation), :method => :delete))
     end
     content 
   end

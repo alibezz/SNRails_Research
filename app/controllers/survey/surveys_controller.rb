@@ -19,8 +19,9 @@ class Survey::SurveysController < ResourceController::Base
   def create
     @survey = Survey.new(params[:survey])
     if @survey.save
+      #TODO Guarantee that no survey can be saved without a moderator
       @survey.set_moderator(current_user)
-      redirect_to object_path(@survey)
+      redirect_to survey_survey_items_path(@survey)
     else
       render :action => 'new'
     end

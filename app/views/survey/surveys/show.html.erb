@@ -1,11 +1,4 @@
-<%= error_messages_for :survey %>
-
-<%= title  @survey.title %> <%= survey_buttons @survey.id %> 
-<%= subtitle  @survey.subtitle %>
-<br>
-<p class="introduction">
-  <%= @survey.introduction %>
-</p>
+<%= render :partial => 'basic_infos' %>
 <br>
 <%= render :partial => 'survey_options' %>
 <%= render :partial => 'survey/items/questions_sections' %>

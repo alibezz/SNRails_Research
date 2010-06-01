@@ -1,6 +1,4 @@
-<%= title  @survey.title %> 
-
-<%= subtitle  @survey.subtitle %>
-
-<%= render :partial => 'survey/surveys/survey_options', :locals => {:items => @items} %>
+<%= render :partial => 'survey/surveys/basic_infos' %>
+<br>
+<%= render :partial => 'survey/surveys/survey_options' %>
 <%= render :partial => 'survey/items/questions_sections' %>

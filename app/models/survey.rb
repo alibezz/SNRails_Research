@@ -3,7 +3,6 @@ class Survey < ActiveRecord::Base
   validates_presence_of :title
   validates_presence_of :introduction
   validates_uniqueness_of :title
-
   has_many :items, :before_add => [ Proc.new { |p,d| raise "#{I18n.t(:active_survey_cant_receive_questions)}" if p.is_active } ], :order => "position"
   has_many :questions
   has_many :questionnaires
