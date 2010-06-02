@@ -53,7 +53,8 @@ class Survey::ItemsController < ResourceController::Base
   def reorder_pages
     @survey ||= Survey.find(params[:survey_id])
     @survey.reorder_pages(params[:page_links])
-    collection
+    @items = collection
+    @page = @survey.new_page(params[:page], params[:page_links])
     respond_to do |format|
       format.js 
     end

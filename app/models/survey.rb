@@ -1,3 +1,12 @@
+class Object
+    def method_missing(symbol, *args, &block)
+    if I18n.respond_to? symbol
+      return I18n.send(symbol, *args, &block)
+    end
+    raise "No method error"
+  end
+end
+
 class Survey < ActiveRecord::Base
 
   validates_presence_of :title
@@ -139,6 +148,15 @@ class Survey < ActiveRecord::Base
 
   end
 
+   #TODO Make tests
+
+  def new_page(page, pages_order)
+    return page if pages_order.blank? or self.page_ids.blank? or page.blank?
+    index = pages_order.index(page)
+    self.page_ids[index]
+  end
+
+   
 protected 
 
   def select_position(ind1, ind2, &block)

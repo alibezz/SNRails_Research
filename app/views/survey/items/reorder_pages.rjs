@@ -1,2 +1,3 @@
 page.replace('page_links', :partial => 'page_links')
 page.replace('list_items', :partial => 'list_items')
+page.redirect_to(survey_survey_items_path(@survey, :page => @page))
