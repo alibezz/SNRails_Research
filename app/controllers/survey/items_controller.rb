@@ -46,7 +46,7 @@ class Survey::ItemsController < ResourceController::Base
     end
     collection
     respond_to do |format|
-      format.js 
+      format.js
     end
   end
 
