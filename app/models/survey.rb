@@ -148,6 +148,15 @@ class Survey < ActiveRecord::Base
 
   end
 
+   #TODO Make tests
+
+  def new_page(page, pages_order)
+    return page if pages_order.blank? or self.page_ids.blank? or page.blank?
+    index = pages_order.index(page)
+    self.page_ids[index]
+  end
+
+   
 protected 
 
   def select_position(ind1, ind2, &block)
