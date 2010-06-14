@@ -193,7 +193,7 @@ protected unless Rails.env == 'test'
   
    #TODO Make tests
   def next_section(section1)
-    section2 = self.items.detect {|i| i.type == "Section" and i.position > section.position}
+    section2 = self.items.detect {|i| i.type == "Section" and i.position > section1.position                                                                   and i.page_id == section1.page_id}
     return section2.blank? ? self.last_page_question(section1) : section2
   end
 
