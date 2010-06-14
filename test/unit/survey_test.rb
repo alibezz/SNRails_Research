@@ -319,4 +319,19 @@ class SurveyTest < Test::Unit::TestCase
     assert_equal s.items, [i4, i3]
     assert_equal s2.items, [i5]
   end
+
+  def test_last_page_question
+    s = create_survey; s2 = create_survey(:title => "other title")
+    i0 = create_item(:type => "Section", :survey_id => s.id, :page_id => 1, :position => 1)
+    i1 = create_item(:type => "question", :survey_id => s.id, :page_id => 1, :position => 2)
+    i2 = create_item(:type => "question", :survey_id => s.id, :page_id => 1, :position => 3)
+    i3 = create_item(:type => "question", :survey_id => s.id, :page_id => 2, :position => 3)
+
+    i4 = create_item(:type => "Section", :survey_id => s2.id, :page_id => 1, :position => 1)
+
+    s.reload; s2.reload
+    assert_equal s.last_page_question(i0), i2
+    assert_equal s2.last_page_question(i4), i4
+    assert_equal s.last_page_question(i3), i3
+  end
 end

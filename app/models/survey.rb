@@ -194,13 +194,12 @@ protected unless Rails.env == 'test'
    #TODO Make tests
   def next_section(section1)
     section2 = self.items.detect {|i| i.type == "Section" and i.position > section.position}
-    return section2.blank? ? self.last_page_question(section1.page_id, section1) : section2
+    return section2.blank? ? self.last_page_question(section1) : section2
   end
 
-   #TODO Make tests
-  def last_page_question(page, section)
-    questions = self.items.find_all {|i| i.type == "Question" and i.page_id == page and i.position > section.position}
-    return questions.blank? ? section : questions.last
+  def last_page_question(item)
+    questions = self.items.find_all {|i| i.type == "Question" and i.page_id == item.page_id                                                                           and i.position > item.position}
+    return questions.blank? ? item : questions.last
   end
   
   def destroy_items(p1, p2, page)
