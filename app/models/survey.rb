@@ -11,6 +11,7 @@ class Survey < ActiveRecord::Base
 
   acts_as_accessible
 
+
   PERMISSIONS['survey'] = {                                                                                                    'survey_editing' => I18n.t(:survey_editing),
     'survey_viewing' => I18n.t(:survey_viewing),
     'survey_erasing' => I18n.t(:survey_erasing) } 
@@ -105,7 +106,6 @@ class Survey < ActiveRecord::Base
    
   def remove_member(user_id)
     user = User.find(user_id) unless user_id.blank?
-    
     unless user.blank?
       old_assignment = user.role_assignments.detect {|role| role.resource_id == self.id }
       old_role = Role.find(old_assignment.role_id) if old_assignment
@@ -136,7 +136,17 @@ class Survey < ActiveRecord::Base
       page = self.items.blank? ? 1 : self.items.minimum(:page_id)
     end
     self.items.find(:all, :conditions => {:page_id => page}, :order => :position)
+  end
 
+   #TODO Make tests
+  def remove_section_items(section_id)
+    section1 = self.items.detect{|i| i.id == section_id}
+    last_item = self.next_section(section1)
+    if last_item.kind_of?(Question) or last_item == section1
+      self.destroy_items(section1.position, last_item.position + 1, section1.page_id)
+    else
+      self.destroy_items(section1.position, last_item.position, section1.page_id)
+    end
   end
 
    #TODO Make tests
@@ -148,7 +158,7 @@ class Survey < ActiveRecord::Base
   end
 
    
-protected 
+protected unless Rails.env == 'test' 
 
   def select_position(ind1, ind2, &block)
     position = self.number_of_pages
@@ -180,5 +190,20 @@ protected
   def moderator_role
     Role.find_by_name("Moderator") || Role.find_by_name("moderator") ||                                                          Role.create!(:name => "Moderator", :permissions => PERMISSIONS['survey'].keys)
   end
-end 
+  
+   #TODO Make tests
+  def next_section(section1)
+    section2 = self.items.detect {|i| i.type == "Section" and i.position > section.position}
+    return section2.blank? ? self.last_page_question(section1.page_id, section1) : section2
+  end
 
+   #TODO Make tests
+  def last_page_question(page, section)
+    questions = self.items.find_all {|i| i.type == "Question" and i.page_id == page and i.position > section.position}
+    return questions.blank? ? section : questions.last
+  end
+  
+  def destroy_items(p1, p2, page)
+    Item.destroy_all("survey_id = #{self.id} AND position >= #{p1} AND position < #{p2} AND page_id = #{page}")
+  end
+end 

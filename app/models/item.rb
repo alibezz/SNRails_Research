@@ -5,7 +5,7 @@ class Item < ActiveRecord::Base
 
   after_save :update_survey_num_pages
   after_destroy :update_survey_num_pages
-
+  
   HTML_TYPES = { 0 => "multiple_selection",
     1 => "single_selection",
     2 => "pure_text",

@@ -300,4 +300,23 @@ class SurveyTest < Test::Unit::TestCase
     assert_equal s.page_items(1), [i0, i1]
     assert_equal s.page_items(2), [i2]
   end
+
+  def test_should_destroy_items
+    s = create_survey; s2 = create_survey(:title => "other title") 
+    i0 = create_item(:type => "Section", :survey_id => s.id, :page_id => 1, :position => 1)
+    i1 = create_item(:survey_id => s.id, :page_id => 1, :position => 2)
+    i2 = create_item(:survey_id => s.id, :page_id => 1, :position => 3)
+    i3 = create_item(:type => "Section", :survey_id => s.id, :page_id => 1, :position => 4)
+
+    i4 = create_item(:survey_id => s.id, :page_id => 2, :position => 1)
+    i5 = create_item(:survey_id => s2.id, :page_id => 1, :position => 1)
+
+    s.reload; s2.reload
+
+    s.destroy_items(i0.position, i3.position, 1)
+    s.reload; s2.reload
+
+    assert_equal s.items, [i4, i3]
+    assert_equal s2.items, [i5]
+  end
 end
