@@ -348,4 +348,19 @@ class SurveyTest < Test::Unit::TestCase
     assert_equal s.next_section(i0), i2
     assert_equal s.next_section(i3), i4 
   end
+
+  def test_remove_section_items
+    s = create_survey
+    i0 = create_item(:type => "section", :survey_id => s.id, :page_id => 1, :position => 1)
+    i1 = create_item(:type => "question", :survey_id => s.id, :page_id => 1, :position => 2)
+    i2 = create_item(:type => "section", :survey_id => s.id, :page_id => 1, :position => 3)
+    i3 = create_item(:type => "question", :survey_id => s.id, :page_id => 1, :position => 4)
+    i4 = create_item(:type => "question", :survey_id => s.id, :page_id => 1, :position => 5)
+ 
+    s.reload
+    s.remove_section_items(i0.id); s.reload
+    assert_equal s.items, [i2,i3,i4]
+    s.remove_section_items(i2.id); s.reload
+    assert s.items.blank?
+  end
 end

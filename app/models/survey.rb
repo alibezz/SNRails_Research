@@ -138,7 +138,6 @@ class Survey < ActiveRecord::Base
     self.items.find(:all, :conditions => {:page_id => page}, :order => :position)
   end
 
-   #TODO Make tests
   def remove_section_items(section_id)
     section1 = self.items.detect{|i| i.id == section_id}
     last_item = self.next_section(section1)
@@ -149,13 +148,13 @@ class Survey < ActiveRecord::Base
     end
   end
 
-   #TODO Make tests
+  # #TODO Make tests
 
-  def new_page(page, pages_order)
-    return page if pages_order.blank? or self.page_ids.blank? or page.blank?
-    index = pages_order.index(page)
-    self.page_ids[index]
-  end
+  #def new_page(page, pages_order)
+  #  return page if pages_order.blank? or self.page_ids.blank? or page.blank?
+  #  index = pages_order.index(page)
+  #  self.page_ids[index]
+  #end
 
    
 protected unless Rails.env == 'test' 
@@ -191,7 +190,6 @@ protected unless Rails.env == 'test'
     Role.find_by_name("Moderator") || Role.find_by_name("moderator") ||                                                          Role.create!(:name => "Moderator", :permissions => PERMISSIONS['survey'].keys)
   end
   
-   #TODO Make tests
   def next_section(section1)
     section2 = self.items.detect {|i| i.type == "Section" and i.position > section1.position                                                                   and i.page_id == section1.page_id}
     return section2.blank? ? self.last_page_question(section1) : section2
