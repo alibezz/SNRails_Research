@@ -228,6 +228,26 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
     assert @response.body.index("You are being") #redirection
   end
 
+#remove_items
+
+  def test_should_remove_section_items
+    i1 = create_item(:type => 'section', :survey_id => @survey.id)
+    i2 = create_item(:type => 'question', :survey_id => @survey.id)
+    page = i1.page_id
+
+    get :remove_items, :id => i2.id, :survey_id => @survey.id, :page => page
+    @survey.reload
+    assert_response :redirect
+    assert_redirected_to survey_survey_items_path(@survey, :page => page)
+    assert_equal @survey.items, [i1, i2]
+
+    get :remove_items, :id => i1.id, :survey_id => @survey.id, :page => page
+    @survey.reload
+    assert_response :redirect
+    assert_redirected_to survey_survey_items_path(@survey, :page => page)
+    assert @survey.items.blank?
+  end
+
 protected
   
   def create_item_of_a_survey(survey)
