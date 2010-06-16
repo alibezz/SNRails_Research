@@ -102,6 +102,13 @@ class Survey::ItemsController < ResourceController::Base
     @item.remove_deps(params[:deps])
     redirect_to :action => 'dependencies'
   end
+
+  #TODO Make test
+  def remove_items
+    @survey.remove_section_items(params[:id].to_i)
+    redirect_to survey_survey_items_path(@survey, :page => params[:page]) 
+  end
+
 private 
 
   def parent_object

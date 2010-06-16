@@ -5,6 +5,7 @@ class Survey < ActiveRecord::Base
   validates_uniqueness_of :title
   has_many :items, :before_add => [ Proc.new { |p,d| raise "#{I18n.t(:active_survey_cant_receive_questions)}" if p.is_active } ], :order => "position"
   has_many :questions
+  has_many :sections
   has_many :questionnaires
 
   acts_as_design :root => File.join('designs', 'surveys')
@@ -139,7 +140,8 @@ class Survey < ActiveRecord::Base
   end
 
   def remove_section_items(section_id)
-    section1 = self.items.detect{|i| i.id == section_id}
+    section1 = self.sections.detect{|i| i.id == section_id}
+    return unless section1
     last_item = self.next_section(section1)
     if last_item.kind_of?(Question) or last_item == section1
       self.destroy_items(section1.position, last_item.position + 1, section1.page_id)
@@ -150,11 +152,11 @@ class Survey < ActiveRecord::Base
 
   # #TODO Make tests
 
-  #def new_page(page, pages_order)
-  #  return page if pages_order.blank? or self.page_ids.blank? or page.blank?
-  #  index = pages_order.index(page)
-  #  self.page_ids[index]
-  #end
+  def new_page(page, pages_order)
+    return page if pages_order.blank? or self.page_ids.blank? or page.blank?
+    index = pages_order.index(page)
+    self.page_ids[index]
+  end
 
    
 protected unless Rails.env == 'test' 
@@ -191,12 +193,12 @@ protected unless Rails.env == 'test'
   end
   
   def next_section(section1)
-    section2 = self.items.detect {|i| i.type == "Section" and i.position > section1.position                                                                   and i.page_id == section1.page_id}
+    section2 = self.sections.detect {|i| i.position > section1.position  and i.page_id == section1.page_id}
     return section2.blank? ? self.last_page_question(section1) : section2
   end
 
   def last_page_question(item)
-    questions = self.items.find_all {|i| i.type == "Question" and i.page_id == item.page_id                                                                           and i.position > item.position}
+    questions = self.questions.find_all {|i| i.page_id == item.page_id and i.position > item.position}
     return questions.blank? ? item : questions.last
   end
   
