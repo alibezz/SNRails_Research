@@ -14,6 +14,7 @@ class Survey::ItemValuesController < ResourceController::Base
   end
 
   def create
+# FIXME See if this position code it's ok
     @item_value = ItemValue.new(params[:item_value].merge({:position => (@item.item_values.blank? ? 1 :                                        @item.item_values.maximum(:position) + 1)}))
     @item_value.item_id = params[:question_id]
     if @item_value.save
