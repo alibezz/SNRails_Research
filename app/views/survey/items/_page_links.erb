@@ -6,7 +6,8 @@
       :failure => "$('error').innerHTML= request.responseText",
       :constraint => false,
       :dropOnEmpty => true,
-      :complete => visual_effect(:highlight, 'page_links'), 
+      :loading => "$('mask').show(); $('loading').show();",
+      :complete => visual_effect(:highlight, 'page_links') + "$('mask').hide(); $('loading').hide();", 
       :containment =>  ['page_links']
 %>
 
