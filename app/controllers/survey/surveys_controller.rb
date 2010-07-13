@@ -62,7 +62,7 @@ class Survey::SurveysController < ResourceController::Base
   end
 
   def activate
-    @survey.change_activation
+    flash[:notice] = @survey.errors.full_messages unless @survey.change_activation
     redirect_to survey_survey_items_path(@survey)
   end
 

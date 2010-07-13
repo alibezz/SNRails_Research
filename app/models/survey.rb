@@ -136,7 +136,7 @@ class Survey < ActiveRecord::Base
 
   def change_activation
     self.is_active = self.is_active ? false : true
-    self.save; self.reload
+    self.save
   end
 
   def page_items(page)
