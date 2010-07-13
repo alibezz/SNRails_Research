@@ -35,6 +35,7 @@ namespace :db do
         survey.introduction = "As respostas que você fornecer são anônimas, o que significa que o seu nome não será identificado."
         survey.is_private = false
         survey.number_of_pages = 5 #TODO
+        survey.user_id = User.first.id #CREATOR
       end
       
       questions = [

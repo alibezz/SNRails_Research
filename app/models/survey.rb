@@ -2,16 +2,17 @@ class Survey < ActiveRecord::Base
 
   validates_presence_of :title
   validates_presence_of :introduction
+  validates_presence_of :user_id
   validates_uniqueness_of :title
   has_many :items, :before_add => [ Proc.new { |p,d| raise "#{I18n.t(:active_survey_cant_receive_questions)}" if p.is_active } ], :order => "position"
   has_many :questions
   has_many :sections
   has_many :questionnaires
-
+  belongs_to :user #creator
   acts_as_design :root => File.join('designs', 'surveys')
 
   acts_as_accessible
-
+  after_create :creator_moderates
 
   PERMISSIONS['survey'] = {                                                                                                    'survey_editing' => I18n.t(:survey_editing),
     'survey_viewing' => I18n.t(:survey_viewing),
@@ -80,34 +81,40 @@ class Survey < ActiveRecord::Base
   end
 
   def members(current_user=nil)
-    select_members("IN") { current_user.nil? ? self.role_assignments.map(&:accessor_id) :                                                               self.role_assignments.map(&:accessor_id) - [current_user.id]}
+    raw_members = select_members("IN") { current_user.nil? ? self.role_assignments.map(&:accessor_id) :                                                               self.role_assignments.map(&:accessor_id) - [current_user.id]}
+    raw_members - [User.find(self.user_id)]
   end
 
   def non_members(current_user=nil)
     select_members("NOT IN") {current_user.nil? ? self.role_assignments.map(&:accessor_id) :                                                               self.role_assignments.map(&:accessor_id) | [current_user.id]}
   end
 
+  #FIXME Change id params to object params
   def add_member(user_id, role_id)
     return false if user_id.blank? or role_id.blank?     
     role = Role.find(role_id); user = User.find(user_id)
     return user.add_role(role, self)
   end
 
+  #FIXME Change id params to object params
   def change_member_role(user_id, new_role_id)
-    return false if user_id.blank? or new_role_id.blank?  
+    return false if user_id.blank? or new_role_id.blank? or user_id == self.user_id 
     user = User.find(user_id)
-    old_assignment = user.role_assignments.detect {|role| role.resource_id == self.id }
-    old_role = Role.find(old_assignment.role_id) if old_assignment
+    unless user.id == self.user_id #can't change creator membership
+      old_assignment = user.role_assignments.detect {|role| role.resource_id == self.id }
+      old_role = Role.find(old_assignment.role_id) if old_assignment
 
-    #an user has only a single role over a survey
-    user.remove_role(old_role, self) if old_role; user.reload
-    new_role = Role.find(new_role_id)
-    return user.add_role(new_role, self)
+      #an user has only a single role over a survey
+      user.remove_role(old_role, self) if old_role; user.reload
+      new_role = Role.find(new_role_id)
+      return user.add_role(new_role, self)
+    end
   end
    
+  #FIXME Change id params to object params
   def remove_member(user_id)
     user = User.find(user_id) unless user_id.blank?
-    unless user.blank?
+    unless user.blank? or user.id == self.user_id
       old_assignment = user.role_assignments.detect {|role| role.resource_id == self.id }
       old_role = Role.find(old_assignment.role_id) if old_assignment
       return user.remove_role(old_role, self) unless old_role.blank?
@@ -160,6 +167,10 @@ class Survey < ActiveRecord::Base
 
    
 protected unless Rails.env == 'test' 
+
+  def creator_moderates
+    self.set_moderator(User.find(self.user_id))
+  end
 
   def select_position(ind1, ind2, &block)
     position = self.number_of_pages

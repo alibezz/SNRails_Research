@@ -158,15 +158,15 @@ class SurveyTest < Test::Unit::TestCase
   end
 
   def test_select_members_of_a_survey
-    r = create_survey
     User.destroy_all
-
+    role = create_role(:name => "Moderator", :permissions => ['survey_viewing', 'survey_editing', 'survey_erasing']) 
     user1 = create_user(:login => 'susan', :administrator => true)
+    r = create_survey(:user_id => user1.id)
+
     user2 = create_user(:login => 'julia', :administrator => false)
     user3 = create_user(:login => 'peter', :administrator => false)
     user4 = create_user(:login => 'samuel', :administrator => false)
 
-    role = create_role(:name => "Moderator",                                              :permissions => ['survey_viewing', 'survey_editing',                       'survey_erasing']) 
   
     user2.add_role(role, r); user2.reload; r.reload
 
@@ -177,35 +177,35 @@ class SurveyTest < Test::Unit::TestCase
   end
 
   def test_add_member
-    r = create_survey
     User.destroy_all
 
+    role = create_role(:name => "Moderator", :permissions => ['survey_viewing', 'survey_editing', 'survey_erasing']) 
     user1 = create_user(:login => 'julia', :administrator => false)
-
-    role = create_role(:name => "Moderator",                                              :permissions => ['survey_viewing', 'survey_editing',                       'survey_erasing']) 
+    r = create_survey(:user_id => user1.id)
   
-    assert r.add_member(user1.id, role.id)
     assert_equal false, r.add_member(user1.id, role.id)
     assert_equal false, r.add_member(nil, role.id)
     assert_equal false, r.add_member(user1.id, nil)
   end
 
   def test_change_member_role
-    r = create_survey
     User.destroy_all
-
+    role = create_role(:name => "Moderator", :permissions => ['survey_viewing', 'survey_editing', 'survey_erasing']) 
+    user1 = create_user
+    r = create_survey(:user_id => user1.id)
     user2 = create_user(:login => 'julia', :administrator => false)
     user3 = create_user(:login => 'peter', :administrator => false)
-
-    role = create_role(:name => "Moderator",                                              :permissions => ['survey_viewing', 'survey_editing',                       'survey_erasing']) 
     
-    role2 = create_role(:name => "Editor",                                                 :permissions => ['survey_viewing', 'survey_editing']) 
+    role2 = create_role(:name => "Editor", :permissions => ['survey_viewing', 'survey_editing']) 
     
     r.add_member(user2.id, role.id); r.reload; user2.reload
     assert r.change_member_role(user2.id, role2.id)
     assert_equal false, r.change_member_role(nil, role2.id)
     assert_equal false, r.change_member_role(user2.id, nil)
     assert r.change_member_role(user3.id, role.id)
+
+    r.change_member_role(user1.id, role2.id)
+    r.reload; user1.reload
   end
 
   def test_remove_member
@@ -362,5 +362,14 @@ class SurveyTest < Test::Unit::TestCase
     assert_equal s.items, [i2,i3,i4]
     s.remove_section_items(i2.id); s.reload
     assert s.items.blank?
+  end
+
+  def test_creator_moderates
+    user = create_user
+    s = create_survey(:user_id => user.id)
+    s.reload
+    assert_equal s.role_assignments.first.accessor_id, user.id
+    assert_equal s.role_assignments.first.id, Role.first.id
+    assert_equal Role.first.name, "Moderator"
   end
 end

@@ -6,6 +6,7 @@ class CreateSurveys < ActiveRecord::Migration
       t.text :introduction, :design_data
       t.boolean :is_private, :default => false
       t.boolean :is_active, :default => false
+      t.references :user
       t.timestamps
     end
   end

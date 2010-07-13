@@ -136,19 +136,20 @@ class UserTest < ActiveSupport::TestCase
     role = create_role(:name => "Collaborator", :permissions => ['survey_viewing'])
     role2 = create_role(:name => "Moderator", :permissions => ['survey_viewing', 'survey_editing', 'survey_erasing'])
     
-    @user.add_role(role, r1)
-    @user.add_role(role2, r2)
-    @user.reload
+    user = create_user
+    user.add_role(role, r1)
+    user.add_role(role2, r2)
+    user.reload
 
-    assert @user.is_moderator?(r2)
-    assert @user.is_moderator?(r2.id)
-    assert @user.is_collaborator?(r1)
-    assert @user.is_collaborator?(r1.id)
+    assert user.is_moderator?(r2)
+    assert user.is_moderator?(r2.id)
+    assert user.is_collaborator?(r1)
+    assert user.is_collaborator?(r1.id)
 
     r3 = create_survey(:title => "test3")
-    assert !@user.is_moderator?(r1)
-    assert !@user.is_collaborator?(r2)
-    assert !@user.is_moderator?(r3)
-    assert !@user.is_collaborator?(r3)
+    assert !user.is_moderator?(r1)
+    assert !user.is_collaborator?(r2)
+    assert !user.is_moderator?(r3)
+    assert !user.is_collaborator?(r3)
   end
 end

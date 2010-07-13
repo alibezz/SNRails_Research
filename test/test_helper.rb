@@ -36,14 +36,16 @@ class Test::Unit::TestCase
 
   # Add more helper methods to be used by all tests here...
   def create_survey(params = {})
-    Survey.create(survey_params(params))
+    s = Survey.create(survey_params(params))
   end
   
   def survey_params(params = {})
-    {
+   user = User.first || create_user
+   {
       :title => 'some survey',
       :introduction => 'some survey',
       :number_of_pages => 1,
+      :user_id => user.id
     }.merge(params)
   end
 
@@ -107,7 +109,7 @@ class Test::Unit::TestCase
   end
 
   def create_role(params = {})
-    Role.create!({:name => "testrole"}.merge(params))
+    Role.find_by_name(params[:name]) || Role.create({:name => "testrole"}.merge(params))
   end
 
   def create_conditional(question_id, alt_id, relation=0)

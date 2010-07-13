@@ -56,8 +56,8 @@ class Survey::SurveysControllerTest < ActionController::TestCase
     Survey.destroy_all
     post :create, :survey => {:title => 'new title', :introduction => 'new introduction', :subtitle => 'new subtitle'}
     assert_equal 1, Survey.count
-    r = Survey.find(1)
-    assert_equal r.role_assignments.first.accessor_id, @user.id
+
+    assert_equal Survey.first.role_assignments.first.accessor_id, @user.id
     assert_response :redirect
     assert_redirected_to survey_survey_items_path(Survey.last)
 
@@ -116,11 +116,11 @@ class Survey::SurveysControllerTest < ActionController::TestCase
 
   def test_should_remove_member
     r = create_survey
-    @user.add_role(@role, r); @user.reload; r.reload
-    
+    @user.add_role(@role, r)
+    @user.reload; r.reload
     count = r.role_assignments.count
     count_user = @user.role_assignments.count
-    assert_equal count_user, count
+    assert_equal count_user + 1, count
 
     put :remove_member, :id => r.id, :user_id => @user.id
 
