@@ -372,4 +372,25 @@ class SurveyTest < Test::Unit::TestCase
     assert_equal s.role_assignments.first.id, Role.first.id
     assert_equal Role.first.name, "Moderator"
   end
+
+  def test_section_items
+    s = create_survey
+    sec0 = create_item(:survey_id => s.id, :type => "section") 
+    sec1 = create_item(:survey_id => s.id, :type => "section") 
+    q1 = create_item(:survey_id => s.id, :type => "question") 
+    sec2 = create_item(:survey_id => s.id, :type => "section") 
+
+    assert_equal s.section_items(q1.id), []
+    assert_equal s.section_items(sec1.id), [sec1, q1]
+    assert_equal s.section_items(sec0.id), [sec0]
+    assert_equal s.section_items(sec2.id), [sec2]
+  end
+
+  def test_section
+    s = create_survey
+    sec = create_item(:survey_id => s.id, :type => "section")
+    assert !s.section(sec.id).blank?
+    assert_equal s.section(sec.id), sec
+    assert !s.section(sec.id + 1)
+  end
 end

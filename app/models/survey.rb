@@ -147,9 +147,9 @@ class Survey < ActiveRecord::Base
   end
 
   def remove_section_items(section_id)
-    section1 = self.sections.detect{|i| i.id == section_id}
-    return unless section1
-    last_item = self.next_section(section1)
+   section1 = self.section(section_id); return unless section1
+
+   last_item = self.next_section(section1)
     if last_item.kind_of?(Question) or last_item == section1
       self.destroy_items(section1.position, last_item.position + 1, section1.page_id)
     else
@@ -157,7 +157,14 @@ class Survey < ActiveRecord::Base
     end
   end
 
-  # #TODO Make tests
+  def section_items(section_id)
+    section1 = self.section(section_id); return [] unless section1
+    item = self.next_section(section1)
+    pos = (item.kind_of?(Section) and item != section1) ? item.position - 1 : item.position
+    return Item.within_section(section1.position, pos) 
+  end
+
+  #TODO Make tests
 
   def new_page(page, pages_order)
     return page if pages_order.blank? or self.page_ids.blank? or page.blank?
@@ -201,6 +208,11 @@ protected unless Rails.env == 'test'
 
   def moderator_role
     Role.find_by_name("Moderator") || Role.find_by_name("moderator") ||                                                          Role.create!(:name => "Moderator", :permissions => PERMISSIONS['survey'].keys)
+  end
+
+  def section(item_id)
+    section = self.sections.detect{|i| i.id == item_id}
+    return section
   end
   
   def next_section(section1)

@@ -4,5 +4,4 @@ class Section < Item
     super
     self.html_type = Section.html_types.invert["section"]
   end
-
 end

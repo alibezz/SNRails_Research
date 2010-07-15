@@ -59,4 +59,14 @@ class ItemTest < Test::Unit::TestCase
     assert_equal item.position, 1
     assert_equal item2.position, 2
   end
+
+   def test_within_section
+    s = create_survey
+    sec1 = create_item(:type => "section", :survey_id => s.id)
+    q1 = create_item(:type => "question", :survey_id => s.id)
+    q2 = create_item(:type => "question", :survey_id => s.id)
+
+    assert Section.within_section(sec1.position, q2.position), [sec1, q1, q2]
+  end
+
 end

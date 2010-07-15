@@ -15,7 +15,7 @@
 
          <li><%= link_to t(:destroy), { :action => "destroy", :id => item.id }, :confirm => t(:message_confirmation), :method => :delete, :class => "button destroy" %></li>
          <% if item.kind_of?(Section) %>
-           <li><%= link_to t(:remove_items), remove_items_survey_survey_item_path(@survey, item) , :confirm => t(:message_confirmation) %></li>
+           <li><%= link_to t(:remove_items), remove_items_survey_survey_item_path(@survey, item, :page => @page) %></li>
          <% end %>
         <% end %>
        </ul>

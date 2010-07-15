@@ -1,10 +1,16 @@
 class Survey::ItemsController < ResourceController::Base
 
+  #FIXME load_item MUST work!
+
   belongs_to :survey
   before_filter :load_survey
   
   protect 'survey_viewing', :survey, :only => [:index, :show]
   protect 'survey_editing', :survey, :only => [:new, :create, :edit, :update, :reorder_items, :reorder_pages, :destroy]
+
+  index.before do
+    @page = params[:page] || @survey.page_ids.first
+  end
 
   new_action.before do
     # @item_type is "question" by default
@@ -67,9 +73,6 @@ class Survey::ItemsController < ResourceController::Base
   end
 
   def dependencies
-    #TODO Display conditionals that already exist  
-    #FIXME Don't display anything if there aren't alternatives  
-    #FIXME Change the onchange and put a prompt on the questions select_tag  
     @item = Item.find(params[:id])
     @questions = @item.previous
     if @questions.blank?
@@ -103,10 +106,15 @@ class Survey::ItemsController < ResourceController::Base
     redirect_to :action => 'dependencies'
   end
 
-  #TODO Make test
   def remove_items
-    @survey.remove_section_items(params[:id].to_i)
-    redirect_to survey_survey_items_path(@survey, :page => params[:page]) 
+   @item = Item.find(params[:id])
+   @section_items = @survey.section_items(params[:id].to_i)
+   @page = params[:page]
+  end
+
+  def destroy_items
+   @survey.remove_section_items(params[:id].to_i)
+   redirect_to survey_survey_items_path(@survey, :page => params[:page]) 
   end
 
 private 

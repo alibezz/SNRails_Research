@@ -31,6 +31,14 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
     assert_tag :tag => "h2", :attributes => { :class => "subtitle" }     
   end
 
+  def test_index_should_load_current_page
+    q1 = create_item(:survey_id => @survey.id, :page_id => 2)
+    get :index, :survey_id => @survey.id
+    assert assigns(:page)
+    assert_equal assigns(:page), 2
+  end
+
+   
 #new
 
   def test_should_get_new
@@ -230,21 +238,26 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
 
 #remove_items
 
-  def test_should_remove_section_items
-    i1 = create_item(:type => 'section', :survey_id => @survey.id)
-    i2 = create_item(:type => 'question', :survey_id => @survey.id)
+  def test_should_get_remove_items
+    i1 = create_item(:type => 'section', :survey_id => @survey.id, :page_id => 1)
+    i2 = create_item(:type => 'question', :survey_id => @survey.id, :page_id => 1)
     page = i1.page_id
-
-    get :remove_items, :id => i2.id, :survey_id => @survey.id, :page => page
     @survey.reload
-    assert_response :redirect
-    assert_redirected_to survey_survey_items_path(@survey, :page => page)
-    assert_equal @survey.items, [i1, i2]
 
     get :remove_items, :id => i1.id, :survey_id => @survey.id, :page => page
-    @survey.reload
-    assert_response :redirect
-    assert_redirected_to survey_survey_items_path(@survey, :page => page)
+    assert_response :success
+    assert assigns(:section_items)
+    assert_equal assigns(:section_items), [i1, i2]
+    assert assigns(:page)
+    assert_equal assigns(:page), page.to_s
+  end
+
+#destroy_items
+
+  def test_should_destroy_section_items
+    i1 = create_item(:type => 'section', :survey_id => @survey.id)
+    i2 = create_item(:type => 'question', :survey_id => @survey.id) 
+    post :destroy_items, :id => i1.id, :page => i1.page_id
     assert @survey.items.blank?
   end
 
