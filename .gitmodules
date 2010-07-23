@@ -38,3 +38,9 @@
 [submodule "vendor/plugins/tabbed_navigation"]
 	path = vendor/plugins/tabbed_navigation
 	url = gitosis@projects.safernet.org.br:tabbed_navigation
+[submodule "vendor/plugins/calendar_date_select"]
+	path = vendor/plugins/calendar_date_select
+	url = gitosis@projects.safernet.org.br:calendar_date_select.git
+[submodule "public/javascripts/sncharts"]
+	path = public/javascripts/sncharts
+	url = gitosis@projects.safernet.org.br:sncharts.git

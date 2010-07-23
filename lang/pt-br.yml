@@ -130,3 +130,7 @@ pt-br:
   min_answers: "Mínimo de respostas"
   title: "Título"
   system_roles: "Papéis do sistema"
+  loading: "Carregando"
+  survey_charts: "Gráficos da pesquisa"
+  statistics: "Estatísticas"
+  charts: "Gráficos"

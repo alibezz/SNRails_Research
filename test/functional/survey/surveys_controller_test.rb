@@ -154,4 +154,38 @@ class Survey::SurveysControllerTest < ActionController::TestCase
     get :activate, :id => s2.id; s2.reload
     assert !flash[:notice].blank?
   end
+
+
+  #charts
+  def test_charts_default_from
+    s = create_survey
+    get :charts, :id => s.id
+    assert_kind_of String, assigns(:from)
+  end
+
+  def test_charts_default_to
+    s = create_survey
+    get :charts, :id => s.id
+    assert_kind_of String, assigns(:to)
+  end
+
+  def test_charts_return_js
+    s = create_survey
+    get :charts, :format => "js", :id => s.id
+    assert_response :success
+  end
+
+  def test_charts_return_json
+    s = create_survey
+    get :charts, :format => "json", :id => s.id
+    assert_response :success
+    assert_equal 'application/json; charset=utf-8', @response.headers['type']
+  end
+  
+  def test_charts_return_html
+    s = create_survey
+    get :charts, :format => "html", :id => s.id
+    assert_response :success
+  end
+  
 end

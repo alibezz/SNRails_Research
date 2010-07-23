@@ -66,6 +66,20 @@ class Survey::SurveysController < ResourceController::Base
     redirect_to survey_survey_items_path(@survey)
   end
 
+  def charts
+    @uses_sncharts = true
+    first = Survey.find(params[:id]).questionnaires.first
+    @from = first.nil? ? Time.now.beginning_of_month.last_month.strftime('%Y-%m-%d') : first.updated_at.strftime('%Y-%m-%d')
+    last = Survey.find(params[:id]).questionnaires.last
+    @to = last.nil? ? Time.now.beginning_of_month.strftime('%Y-%m-%d') : last.updated_at.strftime('%Y-%m-%d')
+
+    respond_to do |format|
+      format.html { render :template => 'survey/surveys/charts' } # Chart view
+      format.js { render :template => 'survey/surveys/charts' } # Chart configuration
+      format.json { render :json => Survey.statistics(params).to_json, :callback => params[:callback] } # Statistics in JSONP
+    end
+  end
+
 private
   def collection
     @collection ||= current_user.my_surveys

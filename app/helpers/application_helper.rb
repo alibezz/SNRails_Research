@@ -74,10 +74,7 @@ module ApplicationHelper
   def sncharts_periods
     content = []
     content << t(:label_from)
-    content << calendar_date_select_tag('charts-from', @from, :name => random_string)
     content << t(:label_to)
-    content << calendar_date_select_tag('charts-to', @to, :name => random_string)
-    content << link_to('[+]', 'javascript:addPeriod()', :id => 'charts-add-period')
     content_tag(:p, content.join(' '), :id => 'charts-period')
   end
 
@@ -93,11 +90,11 @@ module ApplicationHelper
   def sncharts2_periods
     content = []
     content << t(:label_from)
-    content << calendar_date_select_tag('sncharts2-period-from', @from, :name => random_string)
     content << t(:label_to)
-    content << calendar_date_select_tag('sncharts2-period-to', @to, :name => random_string)
     content_tag(:span, content.join(' '), :id => 'sncharts2-period')
   end
 
-   
+  def random_string
+    (0...10).map{  ('a'..'z').to_a.concat(('A'..'Z').to_a)[rand(52)] }.join + Time.now.to_i.to_s
+  end
 end

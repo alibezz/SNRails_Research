@@ -165,6 +165,44 @@ class Survey < ActiveRecord::Base
   end
 
   #TODO Make tests
+  def self.statistics(params)
+    data = { 'request' => params}
+    possibilities = {}
+    survey_condition = { :conditions => { :survey_id => params[:id] }}
+
+    from = params[:from].nil? ? Time.now.beginning_of_month.last_month.strftime('%Y-%m-%d') : Time.parse(params[:from])
+    to = params[:to].nil? ? Time.now.beginning_of_month.strftime('%Y-%m-%d') : Time.parse(params[:to])
+
+    Question.find(:all, survey_condition).each { |q|
+      next if q.item_values.empty?
+      # cache this latter, but have to update on adding questions
+      possibilities[q.info] = q.id
+    }
+
+    if params[:criteria].nil?
+      q = Question.find(:all, survey_condition).first
+    else
+      q = Question.find(params[:criteria])
+    end
+
+    answers = {}
+    unless q.nil?
+      q.item_values.each { |item|
+        answers[item.info] = { "quantidade" => 0 }
+      }
+      tmp = ObjectItemValue.count(:conditions => ["item_id = ?", q.id],
+                                  :group => "item_value_id")
+      tmp.each { |oit|
+        if oit[0] != 0
+          answers[ItemValue.find(oit[0]).info] = { "quantidade" => oit[1] }
+        end
+      }
+      data[q.info] = answers
+    end
+
+    data['possibilities'] = possibilities
+    return data
+  end
 
   def new_page(page, pages_order)
     return page if pages_order.blank? or self.page_ids.blank? or page.blank?

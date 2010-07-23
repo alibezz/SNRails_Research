@@ -126,3 +126,7 @@ en:
   min_answers: "Minimum number of answers"
   title: "Title"
   system_roles: "System roles"
+  loading: "Loading"
+  survey_charts: "Survey charts"
+  statistics: "Statistics"
+  charts: "Charts"
