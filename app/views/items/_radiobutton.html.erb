@@ -4,9 +4,9 @@
 <% item.item_values.each do |item_value| %>
  
   <% if flash[:answers][item.id.to_s] and flash[:answers][item.id.to_s][item_value.id.to_s] %>
-    <%= radio_button_tag "object_item_values[#{item.id}]", item_value.id, true %><%= item_value.info %><br>
+    <%= radio_button_tag "object_item_values[#{item.id}]", item_value.id, true, :onclick => "accomp(#{item_value.id},[#{item_value.dependants.join(',')}]);" %><%= item_value.info %><br>
   <% else %>
-    <%= radio_button_tag "object_item_values[#{item.id}]", item_value.id, false %><%= item_value.info %><br>
+	<%= radio_button_tag "object_item_values[#{item.id}]", item_value.id, false, :onclick => "accomp(#{item_value.id},[#{item_value.dependants.join(',')}]);" %><%= item_value.info %><br>
   <% end %>
 
 <% end %>

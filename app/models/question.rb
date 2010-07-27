@@ -70,6 +70,12 @@ class Question < Item
     end
   end
 
+  #TODO Make tests
+  def needed_answers
+    #FIXME Change relation == 1 to relation == 'equals to'
+    self.conditionals.find_all{|c| c.relation == 1}.map(&:item_value_id)  
+  end
+
 protected
 
   def validate_text_content(text_answer)

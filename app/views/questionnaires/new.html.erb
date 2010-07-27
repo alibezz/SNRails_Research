@@ -4,9 +4,12 @@
 <% form_for([:public, @questionnaire], :url => {:action => 'new', :page_id => @page }) do |f| %>
     
   <% @current_items.each do |item| %>
-  <div class="item">
-    <%= render :partial => "items/#{item.html}", :locals => { :item => item } %>
-  </div>
+    <% if item.kind_of?(Question) %>
+      <div style="display:none;" id="deps_<%= item.id %>"><%= item.needed_answers %></div>
+    <% end %>
+    <div class="item">
+      <%= render :partial => "items/#{item.html}", :locals => { :item => item } %>
+    </div>
   <% end %>
   <br>
 
