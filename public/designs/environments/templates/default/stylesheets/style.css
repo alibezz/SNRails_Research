@@ -55,6 +55,13 @@ li {
   padding-left: 18px;
   list-style-type: none; }
 
+#page_links {
+  padding-left: 30px;
+  padding-right: 30px; }
+  #page_links li {
+    padding-right: 18px;
+    margin: 0 18px; }
+
 a:link, a:visited {
   color: #ff8300; }
 
