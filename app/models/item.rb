@@ -35,4 +35,5 @@ class Item < ActiveRecord::Base
     r = Survey.find(self.survey_id)
     self.position = r.items.blank? ? 1 : r.items.maximum(:position) + 1 
   end
+
 end

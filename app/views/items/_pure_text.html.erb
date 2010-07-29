@@ -2,8 +2,11 @@
 
 <div class="item_values">
 <% if flash[:answers][item.id.to_s] %>
-  <%= text_field("object_item_values[#{item.id}]", :info, :value => flash[:answers][item.id.to_s][:info]) %>
+  <%= text_field("object_item_values[#{item.id}]", :info, 
+      {:value => flash[:answers][item.id.to_s][:info],
+      :onchange => "selectQuests(selectedAlts(getInputValues(this.parentNode)));"}) %>
 <% else %>
-  <%= text_field("object_item_values[#{item.id}]", :info) %>
+  <%= text_field("object_item_values[#{item.id}]", :info,
+      {:onchange => "selectQuests(selectedAlts(getInputValues(this.parentNode)));"}) %>
 <% end %>
 </div>

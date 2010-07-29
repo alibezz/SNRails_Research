@@ -2,9 +2,16 @@
 
 <div class="item_values">
 <% if flash[:answers][item.id.to_s] %>
+
+   <!-- #FIXME Deal with deselections -->
    <% flash[:answers][item.id.to_s] %>
-  <%= select_tag "object_item_values[#{item.id}]", options_from_collection_for_select(item.item_values, "id", "info",                          flash[:answers][item.id.to_s].collect!{|id| id.to_i}), :multiple => true %>
+  <%= select_tag "object_item_values[#{item.id}]",
+                 options_from_collection_for_select(item.item_values, "id", "info",
+                 flash[:answers][item.id.to_s].collect!{|id| id.to_i}), :multiple => true,
+                 :onchange => "selectQuests(selectedAlts(this.options));" %>
 <% else %>
-  <%= select_tag "object_item_values[#{item.id}]", options_from_collection_for_select(item.item_values, "id", "info"),                         :multiple => true %>
+  <%= select_tag "object_item_values[#{item.id}]",
+                 options_from_collection_for_select(item.item_values, "id", "info"), :multiple => true,
+                 :onchange => "selectQuests(selectedAlts(this.options));" %>
 <% end %>
 </div>
