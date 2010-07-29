@@ -4,10 +4,12 @@
   sortable_element 'page_links', 
       :url => { :action => 'reorder_pages', :page => params[:page]},
       :failure => "$('error').innerHTML= request.responseText",
-      :constraint => false,
-      :dropOnEmpty => true,
+      :constraint => :horizontal,
+      :dropOnEmpty => false,
       :loading => "$('mask').show(); $('loading').show();",
       :complete => visual_effect(:highlight, 'page_links') + "$('mask').hide(); $('loading').hide();", 
-      :containment =>  ['page_links']
+      :containment =>  ['page_links'],
+      :handles => "$$('#page_links li span')",
+      :elements => "$$('#page_links li')"
 %>
 
