@@ -70,6 +70,31 @@ class Question < Item
     end
   end
 
+  #TODO Make tests
+  def relations
+    self.conditionals.map{|c| [c.item_value_id, c.relation]}                           
+  end
+
+  #TODO Make tests
+  def needed_alts
+    #relation == 1 => equals to relation #FIXME Change it!
+    self.conditionals.find_all{|c| c.relation == 1}.map(&:item_value_id)
+  end
+
+#  #TODO Make tests
+#  def other_alts(alt)
+#    self.item_values.map(&:id) - [alt]
+#  end
+#
+#  #TODO Make tests
+#  def other_dep_quests(alt)
+#    dep_quests = []
+#    self.other_alts(alt).each do |a|
+#      dep_quests.push(ItemValue.find(a).conds.map(&:id))
+#    end
+#    dep_quests
+#  end
+
 protected
 
   def validate_text_content(text_answer)

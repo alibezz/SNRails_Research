@@ -3,9 +3,16 @@
 <div class="item_values">
   <% item.item_values.each do |item_value| %>
   <% if flash[:answers][item.id.to_s] %>
-    <%= check_box_tag "object_item_values[#{item.id}][]", item_value.id, flash[:answers][item.id.to_s].find{|a| a == item_value.id.to_s}  %><%= item_value.info %><br>
+
+    <!-- FIXME Deal with deselection -->
+    <%= check_box_tag "object_item_values[#{item.id}][]", item_value.id, flash[:answers][item.id.to_s].find{|a| a == item_value.id.to_s},
+     :onchange => "selectQuests(selectedAlts(getInputValues(this.parentNode)));"  %>
+    <%= item_value.info %><br>
+
   <% else %>
-    <%= check_box_tag "object_item_values[#{item.id}][]", item_value.id %><%= item_value.info %><br>
+    <%= check_box_tag "object_item_values[#{item.id}][]", item_value.id, false, 
+        :onchange => "selectQuests(selectedAlts(getInputValues(this.parentNode)));" %>
+    <%= item_value.info %><br>
   <% end %>
 <% end %>
 </div>
