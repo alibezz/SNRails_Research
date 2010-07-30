@@ -4,6 +4,7 @@ class Survey::ItemsController < ResourceController::Base
 
   belongs_to :survey
   before_filter :load_survey
+  edit.wants.html{ render :action => 'edit', :layout => 'box'}
   
   protect 'survey_viewing', :survey, :only => [:index, :show]
   protect 'survey_editing', :survey, :only => [:new, :create, :edit, :update, :reorder_items, :reorder_pages, :destroy]
