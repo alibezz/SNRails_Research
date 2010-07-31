@@ -41,7 +41,9 @@ class Survey::SurveysController < ResourceController::Base
   end
 
   def new_member
-    unless @survey.add_member(params[:user][:id], params[:role][:id])
+    if params[:user].nil?
+      flash[:error] = I18n.t(:no_member_to_add)
+    elsif !@survey.add_member(params[:user][:id], params[:role][:id])
       flash[:error] = I18n.t(:member_not_added)
     end
     redirect_to role_management_survey_survey_path(@survey)

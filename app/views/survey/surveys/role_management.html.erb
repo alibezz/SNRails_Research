@@ -3,6 +3,7 @@
 
 <%= render :partial => 'survey_options', :locals => {:survey => @survey } %>
 
+<div id="role_management">
 <% @members.each do |member| %>
   <% form_for(@survey, :url => {:action => 'edit_member', :user_id => member.id},                                              :html => {:method => :put}) do %>
     <ul><span class="heading"><%= member.login %></span>
@@ -13,7 +14,7 @@
     </ul>
     <br> 
 <% end %>
-
+    
 <br><br>
 <% form_tag new_member_survey_survey_path, :method => :put do %>
   <ul><%= label_tag t(:new_member) + ":" , nil,  :class => :heading %>
@@ -23,4 +24,5 @@
      <li><%= submit_tag t(:add) %></li>
   </ul>
 <% end %>
+</div>
 
