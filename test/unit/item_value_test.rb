@@ -45,4 +45,15 @@ class ItemValueTest < Test::Unit::TestCase
    assert_equal count + 1, item.item_values.length   
  end
 
+ def test_dependants
+   survey = create_survey
+   i1 = create_item(:type => "question", :survey_id => survey.id)
+   alt1 = create_item_value(:item_id => i1.id)
+   i2 = create_item(:type => "question", :survey_id => survey.id)
+   i3 = create_item(:type => "question", :survey_id => survey.id)
+   i2.create_dependency(alt1, Conditional.hash_ops.keys.first.to_s)
+   i3.create_dependency(alt1, Conditional.hash_ops.keys.last.to_s)
+   alt1.reload
+   assert_equal alt1.dependants, [[i2.id, Conditional.hash_ops.keys.first], [i3.id, Conditional.hash_ops.keys.last]]
+ end
 end

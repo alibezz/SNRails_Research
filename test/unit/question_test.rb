@@ -182,5 +182,26 @@ class QuestionTest < Test::Unit::TestCase
     
     i2.remove_deps([alt1.id]); i2.reload
     assert_equal i2.dependencies, [alt2]
+  end
+
+  def test_relations
+    i1 = create_item(:type => 'question', :survey_id => @survey.id)
+    i2 = create_item(:type => 'question', :survey_id => @survey.id)
+    alt1 = create_item_value(:item_id => i1.id)
+    alt2 = create_item_value(:item_id => i1.id)
+    i2.create_dependency(alt1, Conditional.hash_ops.keys.first.to_s); i2.reload
+
+    assert i2.relations, [[alt1.id, Conditional.first.id]]
+  end
+
+  def test_get_needed_alts
+    i1 = create_item(:type => 'question', :survey_id => @survey.id)
+    i2 = create_item(:type => 'question', :survey_id => @survey.id)
+    alt1 = create_item_value(:item_id => i1.id)
+    alt2 = create_item_value(:item_id => i1.id)
+    i2.create_dependency(alt1, Conditional.hash_ops.keys.first.to_s); i2.reload
+    i2.create_dependency(alt2, Conditional.hash_ops.keys.last.to_s); i2.reload
+
+    assert i2.needed_alts, [alt1.id]
   end 
 end

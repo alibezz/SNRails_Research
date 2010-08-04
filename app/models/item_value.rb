@@ -22,7 +22,6 @@ class ItemValue < ActiveRecord::Base
     end
   end
 
-  #TODO Make tests
   def dependants
     self.conditionals.map{|i| [i.question_id, i.relation]}
   end
