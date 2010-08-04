@@ -6,12 +6,14 @@
 
     <!-- FIXME Deal with deselection -->
     <%= check_box_tag "object_item_values[#{item.id}][]", item_value.id, flash[:answers][item.id.to_s].find{|a| a == item_value.id.to_s},
-     :onchange => "selectQuests(selectedAlts(getInputValues(this.parentNode)));"  %>
+     :onchange => "selectQuests(selectedAlts(getInputValues(this.parentNode), true), true);
+                   selectQuests(selectedAlts(getInputValues(this.parentNode), false), false);"  %>
     <%= item_value.info %><br>
 
   <% else %>
     <%= check_box_tag "object_item_values[#{item.id}][]", item_value.id, false, 
-        :onchange => "selectQuests(selectedAlts(getInputValues(this.parentNode)));" %>
+        :onchange => "selectQuests(selectedAlts(getInputValues(this.parentNode), true), true);
+                      selectQuests(selectedAlts(getInputValues(this.parentNode), false), false);"  %>
     <%= item_value.info %><br>
   <% end %>
 <% end %>
