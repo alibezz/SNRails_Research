@@ -1,3 +1,12 @@
+<style type="text/css">
+.item {
+  display: none;
+}
+
+.item[data-deps='[]'] {
+  display: block !important;
+}
+</style>
 
 <%= error_messages_for :questionnaire, :object_item_values %>
 
@@ -8,7 +17,7 @@
     <% if item.kind_of?(Section) %>
       <%= render :partial => "items/section", :locals => {:item => item} %>
     <% else %>
-      <div class="item" style="display:block;" data-relations="<%= item.relations.to_json %>"
+      <div class="item" data-relations="<%= item.relations.to_json %>"
          data-deps="<%= item.needed_alts.to_json %>" > 
         <%= render :partial => "items/#{item.html}", :locals => { :item => item } %>
       </div>

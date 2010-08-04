@@ -1,0 +1,12 @@
+<%= title t(:are_you_sure_you_want_to_remove_these_items) +": " %>
+
+<% form_for(:item, :url => destroy_items_survey_survey_item_path(@survey, @item, :page => @page)) do |f| %>
+  <ul><% @section_items.each do |s| %>
+        <li><%= s.info %></li><br>
+      <% end %>
+  </ul>
+
+  <p>
+    <%= submit_tag t(:yes) %> | <%= link_to t(:no), survey_survey_items_path(@survey, :page => @page) %>
+  </p>
+<% end %>
