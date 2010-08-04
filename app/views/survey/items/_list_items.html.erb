@@ -5,7 +5,7 @@
       <span class="heading"><%= item.info%></span>
       <ul>
         <% unless current_user.is_collaborator?(@survey) %>
-          <li> <%= design_display_button 'edit', t(:edit), edit_survey_survey_item_path(@survey, item, :item_type => item.class.to_s.downcase) %> </li>
+          <li> <%= lightbox_link_to content_tag(:span, t(:edit)), edit_survey_survey_item_path(@survey, item, :item_type => item.class.to_s.downcase), :class => "button edit" %> </li>
          <% if item.kind_of?(Question) and not item.is_text? %>
            <% unless @survey.is_active %> 
              <li> <%= design_display_button 'item_value', t(:item_values),                                                                         survey_survey_question_item_values_path(@survey, item) %> </li>

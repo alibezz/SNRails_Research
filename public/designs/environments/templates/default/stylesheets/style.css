@@ -278,14 +278,16 @@ div.left {
       display: inline;
       align: center; }
 
-form.edit_survey ul {
-  clear: both; }
-  form.edit_survey ul li, form.edit_survey ul .heading {
-    display: inline;
-    float: left;
-    clear: none; }
-  form.edit_survey ul .heading {
-    margin-right: 20px; }
+#role_management {
+  float: left; }
+  #role_management form ul {
+    clear: both; }
+    #role_management form ul li, #role_management form ul .heading {
+      display: inline;
+      float: left;
+      clear: none; }
+    #role_management form ul .heading {
+      margin-right: 20px; }
 
 div.wrap_right {
   margin-left: 160px !important;
