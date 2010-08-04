@@ -1,0 +1,40 @@
+<%= title  @survey.title %>
+<br>
+<%= subtitle t(:survey_charts) %>
+
+<p />
+
+
+<p />
+
+<p style="margin: 0;"><span class="loading" id="loading"><%= t(:loading) %></span>&nbsp;</p>
+
+<div id="wrapper"><!-- The chart will be plotted inside here --></div>
+
+<p />
+
+<script type="text/javascript">
+	noFiltersCache();
+	setFilters();
+  new statPlot({
+    'period' : [['<%= @from %>', '<%= @to %>']],
+    'type'   : 'bar',
+    'by'     : 'all'
+  });
+	var rowSelected = function(event) {
+	  var row = this;
+		// The last row can not be selected
+		if(!row.next()) {
+			return false;
+		}
+	  // Already selected
+	  if(row.hasClassName('selected-row')) {
+	  	row.removeClassName('selected-row');
+	  // Not selected yet
+	  } else {
+	  	row.addClassName('selected-row');
+	  }
+	}
+</script>
+
+<%= link_to t(:back), :back %>

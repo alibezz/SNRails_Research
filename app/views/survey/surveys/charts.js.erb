@@ -1,0 +1,152 @@
+// Error messages
+var errorMsg = {
+	error : '<%= t(:label_error) %>',
+	ajaxError : '<%= t(:label_ajax_error) %>',
+	noCanvas : '<%= t(:label_error_no_canvas) %>'
+}
+
+// Translate some strings
+var language = {
+
+	portuguese : {
+        period : 'Periodo',
+		from : 'de',
+		to : 'a',
+		and : 'e',
+		all : 'Todos',
+		variation : 'Variação',
+		others : 'Outros'
+	},
+
+	english : {
+        period : 'Period',
+		from : 'from',
+		to : 'to',
+		and : 'and',
+		all : 'All',
+		variation : 'Variation',
+		others : 'Others'
+	}
+}
+
+// Colors matrix. This example below just support eight names and four filters; add more colors if necessary
+var palette = [
+	// Lighter  Medium     Darker     Darkest
+	['#ef2929', '#cc0000', '#a40000', '#710000'], // Red
+	['#fce94f', '#edd400', '#c4a000', '#897002'], // Yellow
+	['#8ae234', '#73d216', '#4e9a06', '#2e5d01'], // Green
+	['#fcaf3e', '#f57900', '#ce5c00', '#883f04'], // Orange
+	['#729fcf', '#3465a4', '#204a87', '#0a2b5d'], // Blue
+	['#ad7fa8', '#75507b', '#5c3566', '#381842'], // Purple
+	['#e9b96e', '#c17d11', '#8f5902', '#573703'], // Brown
+	['#ffabfb', '#e647df', '#c337bc', '#9d2682']  // Pink
+]
+
+var config = {
+  userlang  : '<%= I18n.locale == "pt-br" ? "portuguese" : "english" %>',
+  wrapper   : 'wrapper',
+  loading   : 'loading',
+  size      : [350, 650],
+  pieRadius : 0.4,
+  bgColor   : '#f4f4f4',
+  lineColor : '#cccccc',
+  title     : '<%= t(:statistics) %>',
+  script    : '<%= url_for(:action => 'charts', :format => 'json', :only_path => false) %>',
+  params    : {},
+  period    : [],
+  values    : [],
+  names     : [],
+  filters   : {}
+}
+
+// Function to format a date
+var formatDate = function(d) {
+	return d
+}
+
+// Custom functions
+var number_of_periods = 1;
+
+// Type: pie, bar or line
+var graph_type = 'pie';
+
+var updateChart = function() {
+  var i;
+  var periods = [];
+  for(i = 1; i <= number_of_periods; i++) {
+    periods.push([$('charts-from-' + i).value, $('charts-to-' + i).value]);
+  }
+	setFilters();
+  new statPlot({
+    'period' : periods,
+    'type'   : graph_type,
+    'by'     : 'all'
+  });
+}
+
+var setFilters = function() {
+	var before = '?';
+	config['script'] = '<%= url_for(:action => 'charts', :format => 'json', :only_path => false) %>';
+	$$('#charts-filters .charts-filter').each( function(checkbox) {
+		if(checkbox.checked) {
+			config['script'] += before + 'filters[]=' + checkbox.readAttribute('title');
+			if(before == '?') before = '&';
+		}
+	});
+}
+
+var noFiltersCache = function() {
+	$$('#charts-filters .charts-filter').each( function(checkbox) {
+		checkbox.checked = true;
+	});
+}
+
+var joinRows = function() {
+	var rows = $$('.selected-row');
+	if(rows.length == 0) {
+		alert('<%= t(:error_charts_join_rows_none) %>');
+		return false;
+	}
+	var new_name = prompt('<%= t(:label_charts_join_row_name) %>', '<%= t(:label_joined) %>');
+	if(!new_name) return false;
+	var first = config.names[0];
+	var rows_names = [];
+	rows.each( function(tr) {
+		var name = tr.down().down().innerHTML;
+		rows_names.push(name);
+		config.names = config.names.without(name);
+	});
+	config.names.push(new_name);
+	config.values.each( function(v) {
+		v[new_name] = {};
+		for(filter in v[first]) {
+			if(typeof(v[first][filter]) == 'object') {
+				v[new_name][filter] = {};
+				for(f in v[first][filter]) {
+					v[new_name][filter][f] = 0;
+				}
+			} else {
+				v[new_name][filter] = 0;
+			}
+		}
+		for(key in v) {
+			if(rows_names.indexOf(key) > -1) {
+				for(filter in v[key]) {
+					if(typeof(v[key][filter]) == 'object') {
+						for(f in v[key][filter]) {
+							v[new_name][filter][f] += v[key][filter][f];
+						}
+					} else {
+						v[new_name][filter] += v[key][filter];
+					}
+				}
+				delete v[key];
+			}
+		}
+	});
+	new statPlot({
+		'period' : config.period,
+		'type'   : graph_type,
+		'by'     : 'all'
+	});
+}
