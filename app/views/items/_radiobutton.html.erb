@@ -6,14 +6,16 @@
   <% if flash[:answers][item.id.to_s] and flash[:answers][item.id.to_s][item_value.id.to_s] %>
     <%= radio_button_tag "object_item_values[#{item.id}]", item_value.id, true, 
         :onchange => "selectQuests(selectedAlts(getInputValues(this.parentNode), true), true);
-                      selectQuests(selectedAlts(getInputValues(this.parentNode), false), false);" %>
+                      selectQuests(selectedAlts(getInputValues(this.parentNode), false), false);
+                      deselectAltsFromInvisibleQuestions();" %>
     <%= item_value.info %><br>
   
   <% else %>
         <!-- #FIXME Deselect dependencies ! -->
 	<%= radio_button_tag "object_item_values[#{item.id}]", item_value.id, false, 
-            :onclick => "selectQuests(selectedAlts(getInputValues(this.parentNode), true), true);
-                         selectQuests(selectedAlts(getInputValues(this.parentNode), false), false);" %>
+            :onchange => "selectQuests(selectedAlts(getInputValues(this.parentNode), true), true);
+                         selectQuests(selectedAlts(getInputValues(this.parentNode), false), false);
+                         deselectAltsFromInvisibleQuestions();" %>
         <%= item_value.info %><br>
   <% end %>
 

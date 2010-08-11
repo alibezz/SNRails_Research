@@ -5,10 +5,12 @@
   <%= text_field("object_item_values[#{item.id}]", :info, 
       {:value => flash[:answers][item.id.to_s][:info],
       :onchange => "selectQuests(selectedAlts(getInputValues(this.parentNode), true), true);
-                    selectQuests(selectedAlts(getInputValues(this.parentNode), false), false);"}) %>
+                    selectQuests(selectedAlts(getInputValues(this.parentNode), false), false);
+                    deselectAltsFromInvisibleQuestions();"}) %>
 <% else %>
   <%= text_field("object_item_values[#{item.id}]", :info,
       {:onchange => "selectQuests(selectedAlts(getInputValues(this.parentNode), true), true);
-                     selectQuests(selectedAlts(getInputValues(this.parentNode), false), false);"}) %>
+                     selectQuests(selectedAlts(getInputValues(this.parentNode), false), false);
+                     deselectAltsFromInvisibleQuestions();"}) %>
 <% end %>
 </div>

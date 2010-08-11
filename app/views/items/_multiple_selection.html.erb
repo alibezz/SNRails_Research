@@ -9,11 +9,13 @@
                  options_from_collection_for_select(item.item_values, "id", "info",
                  flash[:answers][item.id.to_s].collect!{|id| id.to_i}), :multiple => true,
                  :onchange => "selectQuests(selectedAlts(this.options, true), true);
-                               selectQuests(selectedAlts(this.options, false), false);" %>
+                               selectQuests(selectedAlts(this.options, false), false);
+                               deselectAltsFromInvisibleQuestions();" %>
 <% else %>
   <%= select_tag "object_item_values[#{item.id}]",
                  options_from_collection_for_select(item.item_values, "id", "info"), :multiple => true,
                  :onchange => "selectQuests(selectedAlts(this.options, true), true);
-                               selectQuests(selectedAlts(this.options, false), false);" %>
+                               selectQuests(selectedAlts(this.options, false), false);
+                               deselectAltsFromInvisibleQuestions();" %>
 <% end %>
 </div>

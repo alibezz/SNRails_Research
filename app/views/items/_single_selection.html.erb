@@ -4,11 +4,13 @@
 <% if flash[:answers][item.id.to_s] %>
   <%= select_tag "object_item_values[#{item.id}]", "<option value=\"\">#{t(:select)}</option>" +                                     options_from_collection_for_select(item.item_values, "id", "info", flash[:answers][item.id.to_s].to_i),
         :onchange => "selectQuests(selectedAlts(this.options, true), true);
-                      selectQuests(selectedAlts(this.options, false), false);" %>
+                      selectQuests(selectedAlts(this.options, false), false);
+                      deselectAltsFromInvisibleQuestions();" %>
 <% else %>
   <%= select_tag "object_item_values[#{item.id}]", "<option value=\"\">#{t(:select)}</option>" +                                     options_from_collection_for_select(item.item_values, "id", "info"),
         :onchange => "selectQuests(selectedAlts(this.options, true), true);
-                      selectQuests(selectedAlts(this.options, false), false);" %>
+                      selectQuests(selectedAlts(this.options, false), false);
+                      deselectAltsFromInvisibleQuestions();" %>
 <% end %>
 </div>
 

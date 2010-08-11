@@ -42,7 +42,6 @@ function findRelation(alt, relations) {
   return -1; //the alternative is not a dependency
 }
 
-//#FIXME Refactoring is HIGHLY needed
 
 function selectedAlts(alts, isASelection) {
   var selAlts = [];
@@ -63,6 +62,7 @@ function deselectAlts(alts) {
       alts[i].selected = false;
     } else if(alts[i].checked) {
       alts[i].checked = false;
+      alts[i].onchange();
     }
   }
   return alts;
@@ -99,11 +99,21 @@ function selectQuests(alts, isSelection) {
       } else if (relation == 1) {
           quests[j].setAttribute("data-deps", "[" +funcB(alts[i], eval(quests[j].getAttribute("data-deps")))+"]");
       }
-/*      if(quests[j].getAttribute("data-deps") != "[]") {
-        //deselectAlts(alts);
-          var k = getElementsByClass(quests[j], "item_value");
-          alert(k.length);
-      } */
-    }
+    } 
   }
+}
+  
+function deselectAltsFromInvisibleQuestions() {
+  jQuery(".item").each( function() {
+    if (this.getAttribute("data-deps") != "[]") {
+      //FIXME Change the way you get ivalues and select tag
+      var ivalue = jQuery(this).children()[1];
+      var selectTag = jQuery(ivalue).children()[0];
+      if (!selectTag.options) {
+        deselectAlts(getInputValues(ivalue));
+      } else {
+        deselectAlts(selectTag.options);
+      }
+    } 
+  });
 }
