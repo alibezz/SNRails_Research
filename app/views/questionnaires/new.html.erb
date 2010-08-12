@@ -18,7 +18,7 @@
       <%= render :partial => "items/section", :locals => {:item => item} %>
     <% else %>
       <div class="item" data-relations="<%= item.relations.to_json %>"
-         data-deps="<%= item.needed_alts.to_json %>" > 
+         data-deps="<%= @data_deps[item.id].to_json %>" > 
         <%= render :partial => "items/#{item.html}", :locals => { :item => item } %>
       </div>
     <% end %>

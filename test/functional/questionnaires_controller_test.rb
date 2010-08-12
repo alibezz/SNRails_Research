@@ -60,4 +60,21 @@ class QuestionnairesControllerTest < Test::Unit::TestCase
 
   end
 
+#current_dependencies
+
+  def test_should_load_current_dependencies
+    i1 = create_item(:type => 'question', :survey_id => @survey.id)
+    i2 = create_item(:type => 'question', :survey_id => @survey.id)
+    i3 = create_item(:type => 'question', :survey_id => @survey.id)
+    alt1 = create_item_value(:item_id => i1.id)
+    alt2 = create_item_value(:item_id => i2.id)
+    i2.create_dependency(alt1, Conditional.hash_ops.keys.first.to_s)
+    i3.create_dependency(alt1, Conditional.hash_ops.keys.first.to_s)
+    i3.create_dependency(alt2, Conditional.hash_ops.keys.first.to_s)
+    i2.reload; i3.reload
+    
+    assert @controller.current_dependencies({}, [i1, i2]), {i2.id => [alt1.id], i3.id => [alt1.id, alt2.id]}
+    assert @controller.current_dependencies({i1.id => alt1.id}, [i1, i2]), {i2.id => [], i3.id => [alt2.id]}
+    assert @controller.current_dependencies({i1.id => alt1.id, i2.id => alt2.id}, [i1, i2]), {i2.id => [], i3.id => []}
+  end
 end

@@ -18,11 +18,14 @@ class QuestionnairesController < ResourceController::Base
     elsif /submit/i =~ params[:commit]
       @page = params[:page_id].to_i
     end 
-
+    
     flash[:answers] ||= {}  
     flash[:answers] = flash[:answers].merge(params[:object_item_values]) unless params[:object_item_values].nil?
 
-    @current_items = @survey.ordered_items(@survey.page_ids[@page]) 
+   @current_items = @survey.ordered_items(@survey.page_ids[@page])
+   #FIXME Second arg isn't necessary, but makes testing easier. Change it.
+   current_dependencies(flash[:answers], @current_items) 
+ 
    if request.post? and /submit/i =~ params[:commit]
       create
    end 
@@ -40,4 +43,18 @@ class QuestionnairesController < ResourceController::Base
     end
   end
 
+protected unless Rails.env == "test"
+
+  def current_dependencies(answers, items)
+    alts = []; @data_deps = {}
+    #FIXME Move the 3 lines below to a Module
+    answers.invert.keys.each {|a|
+      alts << a.to_i if a.kind_of?(String)
+    }
+
+    items.each { |item|
+      @data_deps.merge!({item.id => item.needed_alts - alts}) if item.kind_of?(Question)
+    }
+    @data_deps
+  end 
 end
