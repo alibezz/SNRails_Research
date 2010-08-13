@@ -82,7 +82,6 @@ class Survey::ItemsControllerTest < Test::Unit::TestCase
     get :edit, :survey_id => i.survey_id, :id => i.id
     assert_response :success
     assert_template 'edit'
-    assert_tag :tag => "ul", :attributes => {:id => "survey_menu" }
   end
 
   def test_edit_should_have_form
