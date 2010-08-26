@@ -1,7 +1,7 @@
 class CreateSurveys < ActiveRecord::Migration
   def self.up
     create_table :surveys, :force => true do |t|
-      t.string :title, :subtitle
+      t.text :title, :subtitle
       t.integer :number_of_pages, :default => 0
       t.text :introduction, :design_data
       t.boolean :is_private, :default => false

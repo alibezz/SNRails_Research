@@ -113,6 +113,8 @@ function deselectAltsFromInvisibleQuestions() {
         deselectAlts(getInputValues(ivalue));
       } else {
         deselectAlts(selectTag.options);
+        //FIXME The line below has a very bad performance.
+        // selectTag.onchange(); 
       }
     } 
   });

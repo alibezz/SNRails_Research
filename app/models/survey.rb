@@ -14,9 +14,11 @@ class Survey < ActiveRecord::Base
   acts_as_accessible
   after_create :creator_moderates
 
-  PERMISSIONS['survey'] = {                                                                                                    'survey_editing' => I18n.t(:survey_editing),
+  PERMISSIONS['survey'] = {
+    'survey_editing' => I18n.t(:survey_editing),
     'survey_viewing' => I18n.t(:survey_viewing),
-    'survey_erasing' => I18n.t(:survey_erasing) } 
+    'survey_erasing' => I18n.t(:survey_erasing) 
+  } 
  
   validate do |b|
     b.must_have_questions_to_be_active
