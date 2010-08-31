@@ -6,11 +6,13 @@
       <ul>
         <% unless current_user.is_collaborator?(@survey) %>
           <li> <%= lightbox_link_to content_tag(:span, t(:edit)), edit_survey_survey_item_path(@survey, item, :item_type => item.class.to_s.downcase), :class => "button edit" %> </li>
-         <% if item.kind_of?(Question) and not item.is_text? %>
-           <% unless @survey.is_active %> 
-             <li> <%= design_display_button 'item_value', t(:item_values),                                                                         survey_survey_question_item_values_path(@survey, item) %> </li>
-             <li> <%= design_display_button 'dependencies', t(:dependencies),                                                                      dependencies_survey_survey_item_path(@survey, item) %> </li>
+         <% if item.kind_of?(Question) and not @survey.is_active %>
+           <% unless item.is_text? %> 
+              <li> <%= design_display_button 'item_value', t(:item_values),  
+                       survey_survey_question_item_values_path(@survey, item) %> </li>
            <% end %>
+             <li> <%= design_display_button 'dependencies', t(:dependencies), 
+                      dependencies_survey_survey_item_path(@survey, item) %> </li>
          <% end %>
 
          <li><%= link_to t(:destroy), { :action => "destroy", :id => item.id }, :confirm => t(:message_confirmation), :method => :delete, :class => "button destroy" %></li>
