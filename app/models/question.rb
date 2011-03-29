@@ -16,7 +16,7 @@ class Question < Item
   has_many :dependencies, :class_name => "ItemValue", :through => :conditionals, :source => :item_value 
 
   named_scope :previous_pages, lambda { |p,s| {:conditions => ["page_id < ? AND survey_id = ?", p, s] }}
-  named_scope :previous_positions, lambda {|p,po,s| {:conditions =>                                                                        ["page_id = ? AND position < ? AND survey_id = ?", p, po,s] }} 
+  named_scope :previous_positions, lambda {|p,po,s| {:conditions => ["page_id = ? AND position < ? AND survey_id = ?", p, po,s] }} 
 
   def self.html_types
     Item.html_types.invert.delete_if {|key, value| key == "section"}.invert

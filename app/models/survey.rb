@@ -247,7 +247,7 @@ protected unless Rails.env == 'test'
   end
 
   def moderator_role
-    Role.find_by_name("Moderator") || Role.find_by_name("moderator") ||                                                          Role.create!(:name => "Moderator", :permissions => PERMISSIONS['survey'].keys)
+    Role.find_by_name("Moderator") || Role.find_by_name("moderator") || Role.create!(:name => "Moderator", :permissions => PERMISSIONS['survey'].keys)
   end
 
   def section(item_id)
