@@ -203,5 +203,17 @@ class QuestionTest < Test::Unit::TestCase
     i2.create_dependency(alt2, Conditional.hash_ops.keys.last.to_s); i2.reload
 
     assert i2.needed_alts, [alt1.id]
+  end
+
+  def test_checkboxes_should_always_have_a_single_answer
+    checkbox = create_item(:type => 'Question', :survey_id => @survey.id, :html_type => Question.html_types.invert["checkbox"])
+    assert_equal checkbox.min_answers, 1
+    assert_equal checkbox.max_answers, 1
+  end 
+
+  def test_single_selection_should_always_have_a_single_answer
+    single_selection = create_item(:type => 'Question', :survey_id => @survey.id, :html_type => Question.html_types.invert["single_selection"])
+    assert_equal single_selection.min_answers, 1
+    assert_equal single_selection.max_answers, 1
   end 
 end

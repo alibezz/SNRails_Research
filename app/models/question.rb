@@ -100,6 +100,8 @@ protected
     if self.html != "checkbox" and self.html != "multiple_selection"
       self.min_answers = self.is_text? ? 0 : 1
       self.max_answers = self.min_answers
+    elsif self.html == "checkbox" 
+      self.min_answers = self.max_answers = 1
     end
   end
 end
